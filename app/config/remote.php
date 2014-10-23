@@ -29,12 +29,12 @@ return array(
 	'connections' => array(
 
 		'production' => array(
-			'host'      => '',
-			'username'  => '',
-			'password'  => '',
+			'host'      => '104.131.66.171',
+			'username'  => 'prod',
+			'password'  => 'Landren0',
 			'key'       => '',
 			'keyphrase' => '',
-			'root'      => '/var/www',
+			'root'      => '/var/www/trajan-online',
 		),
 
 	),
