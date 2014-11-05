@@ -13,5 +13,5 @@
 
 Route::get('/', function()
 {
-		return DB::table('films')->get();
+		return "hello world";
 });
