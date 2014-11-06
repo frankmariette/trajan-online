@@ -1,7 +1,7 @@
 DROP SCHEMA IF EXISTS trajan CASCADE;
 CREATE SCHEMA trajan;
 
-SET search_path = trajan, public;
+SET search_path = trajan;
 
 DROP TABLE IF EXISTS trajan.users;
 CREATE TABLE users (
@@ -108,4 +108,3 @@ CREATE TABLE GameBoardTile (
 	bid Int REFERENCES GameBoard(gbid),
 	tileid Int REFERENCES TileType(typeid)
 );
-
