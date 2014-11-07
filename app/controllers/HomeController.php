@@ -59,4 +59,8 @@ class HomeController extends BaseController {
 		Redirect::to('login');
 	}
 
+	public function showSignup(){
+		return View::make('signup');
+	}
+
 }

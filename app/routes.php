@@ -19,3 +19,7 @@ Route::get('/', function()
 Route::get('/login', array('uses' => 'HomeController@showLogin'));
 Route::post('/login', array('uses' => 'HomeController@doLogin'));
 Route::get('/logout', array('uses' => 'HomeController@doLogout'));
+
+
+Route::get('/signup', array('uses' => 'HomeController@showSignup'));
+Route::post('/signup', array('uses'=> 'HomeController@doSignup'));
