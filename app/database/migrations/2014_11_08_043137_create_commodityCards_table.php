@@ -12,12 +12,12 @@ class CreateCommodityCardsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('commodityCards', function(Blueprint $table)
+		Schema::create('commodity_cards', function(Blueprint $table)
 		{
 			$table->increments('id');
 			$table->string('types', 50);
 			$table->integer('tileTypeId');
-			$table->foreign('tileTypeId')->references('typeid')->on('tileTypes');
+			$table->foreign('tileTypeId')->references('typeid')->on('tile_types');
 		});
 	}
 
@@ -28,7 +28,7 @@ class CreateCommodityCardsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('commodityCards');
+		Schema::drop('commodity_cards');
 	}
 
 }

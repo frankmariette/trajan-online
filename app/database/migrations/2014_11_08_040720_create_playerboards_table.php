@@ -14,6 +14,7 @@ class CreatePlayerboardsTable extends Migration {
 	{
 		Schema::create('playerboards', function(Blueprint $table)
 		{
+			$table->increments('id');
 			$table->integer('userid');
 			$table->foreign('userid')->references('id')->on('users');
 			$table->integer('navy_bonus');

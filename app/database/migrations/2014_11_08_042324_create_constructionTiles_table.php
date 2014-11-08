@@ -12,13 +12,13 @@ class CreateConstructionTilesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('constructionTiles', function(Blueprint $table)
+		Schema::create('construction_tiles', function(Blueprint $table)
 		{
 			$table->increments('id');
 			$table->integer('vp');
 			$table->string('types', 50);
 			$table->integer('tileTypeId');
-			$table->foreign('tileTypeId')->references('typeid')->on('tileTypes');
+			$table->foreign('tileTypeId')->references('typeid')->on('tile_types');
 		});
 	}
 
@@ -29,7 +29,7 @@ class CreateConstructionTilesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('constructionTiles');
+		Schema::drop('construction_tiles');
 	}
 
 }
