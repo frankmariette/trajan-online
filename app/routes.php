@@ -11,15 +11,12 @@
 |
 */
 
-Route::get('/', function()
-{
-		return "hello something";
-});
+Route::get('/', array('uses' => 'HomeController@index'));
 
-Route::get('/login', array('uses' => 'HomeController@showLogin'));
-Route::post('/login', array('uses' => 'HomeController@doLogin'));
-Route::get('/logout', array('uses' => 'HomeController@doLogout'));
+Route::get('/login', array('uses' => 'UserController@showLogin'));
+Route::post('/login', array('uses' => 'UserController@doLogin'));
+Route::get('/logout', array('uses' => 'UserController@doLogout'));
 
 
-Route::get('/signup', array('uses' => 'HomeController@showSignup'));
-Route::post('/signup', array('uses'=> 'HomeController@doSignup'));
+Route::get('/register', array('uses' => 'UserController@showRegister'));
+Route::post('/register', array('uses'=> 'UserController@doRegister'));
