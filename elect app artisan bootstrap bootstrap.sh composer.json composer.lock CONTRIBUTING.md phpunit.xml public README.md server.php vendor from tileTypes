@@ -1,0 +1,32 @@
+                    List of relations
+ Schema |           Name           |   Type   |   Owner   
+--------+--------------------------+----------+-----------
+ trajan | bonusCards               | table    | homestead
+ trajan | bonusCards_id_seq        | sequence | homestead
+ trajan | commodityCards           | table    | homestead
+ trajan | commodityCards_id_seq    | sequence | homestead
+ trajan | constructionTiles        | table    | homestead
+ trajan | constructionTiles_id_seq | sequence | homestead
+ trajan | forumTiles               | table    | homestead
+ trajan | forumTiles_id_seq        | sequence | homestead
+ trajan | gameBoardTiles           | table    | homestead
+ trajan | gameBoardTiles_id_seq    | sequence | homestead
+ trajan | gameBoards               | table    | homestead
+ trajan | gameBoards_id_seq        | sequence | homestead
+ trajan | migrations               | table    | homestead
+ trajan | playerBoardTiles         | table    | homestead
+ trajan | playerBoardTiles_id_seq  | sequence | homestead
+ trajan | playerboards             | table    | homestead
+ trajan | playerboards_id_seq      | sequence | homestead
+ trajan | records                  | table    | homestead
+ trajan | records_id_seq           | sequence | homestead
+ trajan | sessions                 | table    | homestead
+ trajan | sessions_id_seq          | sequence | homestead
+ trajan | tileTypes                | table    | homestead
+ trajan | tileTypes_id_seq         | sequence | homestead
+ trajan | trajanTiles              | table    | homestead
+ trajan | trajanTiles_id_seq       | sequence | homestead
+ trajan | users                    | table    | homestead
+ trajan | users_id_seq             | sequence | homestead
+(27 rows)
+
