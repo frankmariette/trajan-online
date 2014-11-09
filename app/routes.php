@@ -20,3 +20,11 @@ Route::get('/logout', array('uses' => 'UserController@doLogout'));
 
 Route::get('/register', array('uses' => 'UserController@showRegister'));
 Route::post('/register', array('uses'=> 'UserController@doRegister'));
+
+//Test Routes!
+Route::get('/welcome', array('uses'=> 'HomeController@welcome'));
+Route::get('/createPublic', array('uses'=> 'GameController@createPublic'));
+Route::post('/createPublic', array('uses'=> 'GameController@createPublic'));
+Route::get('/createPrivate', array('uses'=> 'GameController@createPrivate'));
+Route::post('/createPrivate', array('uses'=> 'GameController@createPrivate'));
+Route::get('/gamePage', array('uses'=> 'GameController@gamePage'));

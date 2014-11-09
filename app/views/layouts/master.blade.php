@@ -8,7 +8,15 @@
         body{
             padding-top: 70px;
         }
+        @section('style')
+
+        @show
     </style>
+
+    @section('js')
+
+    @show
+
 </head>
 <body>
 <div class="page">
