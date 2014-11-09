@@ -12,7 +12,7 @@ class CreateGameBoardsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('gameBoards', function(Blueprint $table)
+		Schema::create('game_boards', function(Blueprint $table)
 		{
 			$table->increments('id');
 			$table->integer('sid');
@@ -27,7 +27,7 @@ class CreateGameBoardsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('gameBoards');
+		Schema::drop('game_boards');
 	}
 
 }

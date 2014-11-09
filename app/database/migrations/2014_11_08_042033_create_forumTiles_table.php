@@ -12,12 +12,12 @@ class CreateForumTilesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('forumTiles', function(Blueprint $table)
+		Schema::create('forum_tiles', function(Blueprint $table)
 		{
 			$table->increments('id');
 			$table->string('action', 50);
 			$table->integer('tileTypeId');
-			$table->foreign('tileTypeId')->references('typeid')->on('tileTypes');
+			$table->foreign('tileTypeId')->references('typeid')->on('tile_types');
 		});
 	}
 
@@ -28,7 +28,7 @@ class CreateForumTilesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('forumTiles');
+		Schema::drop('forum_tiles');
 	}
 
 }

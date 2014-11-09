@@ -12,9 +12,10 @@ class CreateTileTypesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('tileTypes', function(Blueprint $table)
+		Schema::create('tile_types', function(Blueprint $table)
 		{
-			$table->increments('typeid');
+			$table->increments('id');
+			$table->integer('typeid')->unique();
 			$table->string('types', 50);
 		});
 	}
@@ -26,7 +27,7 @@ class CreateTileTypesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('tileTypes');
+		Schema::drop('tile_types');
 	}
 
 }

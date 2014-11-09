@@ -14,6 +14,7 @@ class CreateRecordsTable extends Migration {
 	{
 		Schema::create('records', function(Blueprint $table)
 		{
+			$table->increments('id');
 			$table->boolean('won_game');
 			$table->integer('sid');
 			$table->integer('userid');

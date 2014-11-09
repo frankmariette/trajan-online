@@ -12,7 +12,7 @@ class CreateTrajanTilesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('trajanTiles', function(Blueprint $table)
+		Schema::create('trajan_tiles', function(Blueprint $table)
 		{
 			$table->increments('id');
 			$table->string('action', 25);
@@ -20,7 +20,7 @@ class CreateTrajanTilesTable extends Migration {
 			$table->string('color2', 25);
 			$table->integer('vp');
 			$table->integer('tileTypeId');
-			$table->foreign('tileTypeId')->references('typeid')->on('tileTypes');
+			$table->foreign('tileTypeId')->references('typeid')->on('tile_types');
 		});
 	}
 
@@ -31,7 +31,7 @@ class CreateTrajanTilesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('trajanTiles');
+		Schema::drop('trajan_tiles');
 	}
 
 }

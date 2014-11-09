@@ -12,12 +12,13 @@ class CreateGameBoardTilesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('gameBoardTiles', function(Blueprint $table)
+		Schema::create('game_board_tiles', function(Blueprint $table)
 		{
+			$table->increments('id');
 			$table->integer('bid');
 			$table->integer('tileTypeId');
-			$table->foreign('bid')->references('id')->on('gameBoards');
-			$table->foreign('tileTypeId')->references('typeid')->on('tileTypes');
+			$table->foreign('bid')->references('id')->on('game_boards');
+			$table->foreign('tileTypeId')->references('typeid')->on('tile_types');
 		});
 	}
 
@@ -28,7 +29,7 @@ class CreateGameBoardTilesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('gameBoardTiles');
+		Schema::drop('game_board_tiles');
 	}
 
 }

@@ -12,12 +12,13 @@ class CreatePlayerBoardTilesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('playerBoardTiles', function(Blueprint $table)
+		Schema::create('player_board_tiles', function(Blueprint $table)
 		{
+			$table->increments('id');
 			$table->integer('userid');
 			$table->integer('tileTypeId');
 			$table->foreign('userid')->references('id')->on('users');
-			$table->foreign('tileTypeId')->references('typeid')->on('tileTypes');
+			$table->foreign('tileTypeId')->references('typeid')->on('tile_types');
 		});
 	}
 
@@ -28,7 +29,7 @@ class CreatePlayerBoardTilesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('playerBoardTiles');
+		Schema::drop('player_board_tiles');
 	}
 
 }
