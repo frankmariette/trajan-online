@@ -8,19 +8,13 @@
   </div>
 
   <div class="form-group col-md-7 col-md-offset-3">
-    {{ Form::radio('numPlayers', '3', true, array('class'=>'form-control')) }}
-    {{ Form::radio('numPlayers', '4', array('class'=>'form-control')) }}
+    {{Form::label('numPlayers-0', 'Select Number of Players 3')}}
+    {{ Form::radio('numPlayers', '3', array('class'=>'form-control', 'id'=>'numPlayers-0')) }}
   </div>
-  @if(numPlayers.value === 3)
-    <div class="form-group col-md-7 col-md-offset-3">
-      {{ Form::label('pTwo', 'Enter Username of Player to Invite') }}
-      {{ Form::text('pTwo', Input::old('pTwo'), array('placeholder' => 'trajan43', 'class' => 'form-control') )}}
-    </div>
-    <div class="form-group col-md-7 col-md-offset-3">
-      {{ Form::label('pThree', 'Enter Username of Next Player to Invite') }}
-      {{ Form::text('pThree', Input::old('pThree'), array('placeholder' => 'trajan43', 'class' => 'form-control') )}}
-    </div>
-  @else
+  <div class="form-group col-md-7 col-md-offset-3">
+    {{Form::label('numPlayers-1', 'Select Number of Players 4')}}
+    {{ Form::radio('numPlayers', '4', array('class'=>'form-control', 'id'=>'numPlayers-1')) }}
+  </div>
     <div class="form-group col-md-7 col-md-offset-3">
       {{ Form::label('pTwo', 'Enter Username of Player to Invite') }}
       {{ Form::text('pTwo', Input::old('pTwo'), array('placeholder' => 'trajan43', 'class' => 'form-control') )}}
@@ -33,7 +27,7 @@
       {{ Form::label('pFour', 'Enter Username of Final Player to Invite') }}
       {{ Form::text('pFour', Input::old('pFour'), array('placeholder' => 'trajan43', 'class' => 'form-control') )}}
     </div>
-  @endif
+
   <div class="form-group col-md-7 col-md-offset-3">
     {{ Form::submit('Submit', array('class'=>'btn btn-success pull-right')) }}
   </div>

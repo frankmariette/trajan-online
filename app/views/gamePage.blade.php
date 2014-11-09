@@ -25,24 +25,24 @@
 			scene.add( cube );
 
       var loader = new THREE.JSONLoader(true);
-      loader.load("/views/blender_scene/gameBoard.json", function(geometry){
-       mesh = new THREE.Mesh(geometry, new THREE.MeshNormalMaterial());
-      mesh.scale.set(10, 10, 10);
-      mesh.position.y = 150;
-      mesh.position.x = 0;
-      scene.add(mesh);
-    });
-			camera.position.z = 1000;
+      loader.load("/blender_scene/gameBoard.json", function(geometry, materials){
+        mesh = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial(materials));
+        mesh.scale.set(10, 10, 10);
+        mesh.position.y = 150;
+        mesh.position.x = 0;
+        scene.add(mesh);
+      });
+			camera.position.z = 5;
 
       document.body.appendChild( renderer.domElement );
-    }
+}
 
     function animate(){
 			var render = function () {
 				requestAnimationFrame( render );
 
-				mesh.rotation.x += 0.1;
-				mesh.rotation.y += 0.1;
+				mesh.position.y = 50;
+        mesh.position.x = 0;
 
 				renderer.render(scene, camera);
 			};

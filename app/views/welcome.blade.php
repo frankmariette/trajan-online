@@ -39,7 +39,7 @@
     font-size: 100px;
   }
   .blocks{
-    background-color: rgba(91, 91, 91, 0.56);
+    background-color: rgba(149, 147, 147, 0.72);
     padding: 10px;
     border: 1px solid black;
     border-radius: 10px;
