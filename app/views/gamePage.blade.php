@@ -13,10 +13,10 @@
     var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
 
     function preload() {
-    //  game.load.image('gameBoard', 'public/assets/gameBoardTexture.png');
-    //game.load.image('playerBoard', 'public/assets/pBoardTexture.png');
-      game.load.image('tile', 'public/assets/trajanTile00Texture.png');
-    //  game.load.image('card', 'public/assets/cCardWheatTexture.png');
+      game.load.image('gameBoard', 'public/assets/gameBoardTexture.png');
+      game.load.image('playerBoard', 'public/assets/pBoardTexture.png');
+      game.load.image('tile', 'assets/trajanTile00Texture.png');
+      game.load.image('card', 'public/assets/cCardWheatTexture.png');
     }
 
     function create() {
