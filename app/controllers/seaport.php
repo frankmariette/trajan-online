@@ -5,8 +5,13 @@ class Seaport{
 	public $discardOne;
 	public $discardTwo;
 	public function doAction(){}
-	public function shipCommodity(&$playerCards){
-			
+	public function shipCommodity(&$chosenCards){
+		if(seaportValidity($chosenCards)){
+			$vp = seaportValidity($chosenCards);
+			return $vp;
+		}
+		else
+			return $error;
 	}
 	public function drawTwo(&$faceDownCards, &$discardOne, &$discardTwo){
 		//add two random cards to player hand
@@ -27,7 +32,16 @@ class Seaport{
 			$playerCards[] = array_rand($discardTwo);
 	}
 	public function playCards(&$playerCards){
-	
+		if($playOne){
+			$display[] = $playerCards[$index];
+			unset($playerCards[$index]);
+		}
+		else{
+			$display[] = $playerCards[$choice1];
+			$display[] = $playerCards[$choice2];
+			unset($playerCards[$choice1]);
+			unset($playerCards[$choice2]);
+		}
 	}
 }
 ?>
