@@ -9,9 +9,22 @@ class MilitaryHelper {
   protected $enemyTroopCount
   protected $militaryTroopCount;
   protected $leaderLocation;
+  protected $provVPArray = array(0,5,3,6,10,6,3,6,6,10,10);
+  protected $troopLocationArray = array(
+    array(0,0,0,0,0,0,0,0,0,0,0),
+    array(0,0,0,0,0,0,0,0,0,0,0),
+    array(0,0,0,0,0,0,0,0,0,0,0),
+    array(0,0,0,0,0,0,0,0,0,0,0),
+  );
 
   public function __construct(){
       //instantiate the object to use the methods
+  }
+
+  public function moveTroopsToProvidence($playernum, $providence){
+    //moves one legionnaire from the military base to the selected providence
+    $troopLocationArray[$playernum][$providence] = $troopLocationArray[$playernum][$providence] + 1;
+    $troopLocationArray[$playernum][0] = $troopLocationArray[$playernum][0] - 1;
   }
 
   public function getMilitarySubAction(){
@@ -30,7 +43,7 @@ class MilitaryHelper {
       echo "You don't have any troops to move into the military camp!";
       getMilitarySubAction();
     }
-    else if($input == 3 && getNumTroopsInMilitaryCamp()<=0)
+    else if($input == 3 && getNumTroopsInMilitaryCamp($playernum)<=0)
     {
       //"move token from military camp to providence" action
       //if this loop is hit, it means there isnt any available troops in the military camp
@@ -42,6 +55,7 @@ class MilitaryHelper {
 
   }
 
+  //TODO
   public function grabTileOffProvidence($providence){
     //check if the providence has a tile, if so, grab it and place on playerboard mat
 
@@ -50,17 +64,30 @@ class MilitaryHelper {
     //IF YES, GRAB IT
   }
 
-  public function getEnemyCount($providence){
+  public function getEnemyCount($playernum,$providence){
     //get the number of enemy tokens in the providence
-    //not sure how to handle this yet
+    $enemyTokenCount = 0;
+    $arraySize = count($troopLocationArray);
+    for($i = 0;$i<$arraySize;$i++)
+    {
+        if($i!=$playernum){
+          if($troopLocationArray[i][$providence]>=0)
+          {
+            $enemyTokenCount = $enemyTokenCount + $troopLocationArray[i][$providence];
+          }
+        }
+
+    }
     return $enemyTokenCount;
   }
 
+  //these will need to be read in from another class, unless i set it in an array here?
   public function getTokenCount(){
     //grab token amount from gamestate
     return $tokenCount;
   }
 
+  //these will need to be read in from another class, unless i set it in an array here?
   public function setTokenCount($num){
     $tokenCount = $num;
   }
@@ -68,9 +95,10 @@ class MilitaryHelper {
   public function getProvidenceVP($pID){
     //grab the num of vp based on pID from gameboard
     //setup array with different vp values based on index
-    return $numVP;
+    return $provVPArray[$pid];
   }
 
+  //TODO?
   public function getNumActions(){
     //check if tiles are discarded for multiple actions
     //if so, add them up and return them
@@ -83,33 +111,27 @@ class MilitaryHelper {
     $numActions=$actionCount;
   }
 
+  //TODO
   public function moveNumVPPoints($vp){
     //move the gamestate the num of spaces to the input vp
   }
 
-  public function checkProvidence($pID){
-    //check the providence for allied troops
-    $legionnairePresent;
-    if($legionnairePresent)
-      return true;
-    else
-      return false;
-  }
-
-  public function getNumTroopsInMilitaryCamp()
+  public function getNumTroopsInMilitaryCamp($playernum)
   {
-    return $militaryTroopCount;
+    return $troopLocationArray[$playernum][0];
   }
 
-  public function setNumTroopsInMilitaryCamp($num)
+  public function setNumTroopsInMilitaryCamp($playernum,$num)
   {
-    $militaryTroopCount = $num;
+    $troopLocationArray[$playernum][0] = $num;
   }
 
+  //this might need to be set somehwere else as well
   public function getLeaderLocation(){
     return $leaderLocation;
   }
 
+  //this might need to be set somehwere else as well
   public function setLeaderLocation($pid)
   {
     $leaderLocation = $pid;

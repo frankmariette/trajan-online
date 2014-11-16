@@ -14,9 +14,12 @@ class MilitaryController extends BaseController {
 
   public function MilitaryAction()
   {
-    $milHelper= new MilitaryHelper();
+    //instantiate the helper in the main function;
+    //$milHelper= new MilitaryHelper();
     $numActions = $milHelper->getNumActions();
     $actionCount = 0;
+    $playernum; //the id of the player who is currently on his/her turn
+
     //have player select one of 3 options for Military Action
     $action = $milHelper->getMilitarySubAction();
     switch $action
@@ -26,19 +29,19 @@ class MilitaryController extends BaseController {
         * Relocate small player token to military camp
         */
 
-        //CHECK IF THEY HAVE TOKENS IN PLAYERBOARD MAT
+        //TODO CHECK IF THEY HAVE TOKENS IN PLAYERBOARD MAT
 
-        $milHelper->setNumTroopsInMilitaryCamp($getNumTroopsInMilitaryCamp() + 1);
+        $milHelper->setNumTroopsInMilitaryCamp($playernum, $getNumTroopsInMilitaryCamp($playernum) + 1);
         $milHelper->setTokenCount($getTokenCount() - 1);
         break;
       case 2:
         /*
         * move leader to adjacent province
         */
-        //check for adjacent providence
+        //TODO check for adjacent providence
         $selectedProvidence; //user input for a providence
 
-        //CHECK IF INPUT IS ADJACENT
+        //TODO CHECK IF INPUT IS ADJACENT
 
         $milHelper->setLeaderLocation($selectedProvidence);
         $milHelper->grabTileOffProvidence($providence);
@@ -47,26 +50,30 @@ class MilitaryController extends BaseController {
         /*
         * move legionnaire to current province of their leader
         */
+
         $leaderPos = $milHelper->getLeaderProvidence();
+
+        $milHelper->moveTroopsToProvidence($playernum, $leaderPos);
 
         //get the number of vp for a providence
         $numVP = $milHelper->getProvidenceVP($leaderPos);
 
         //get num of enemy tokens on space variable
-        $enemyTokenCount = $milHelper->getEnemyCount($leaderPos);
+        //playernum is the id of the current players turn
+        $enemyTokenCount = $milHelper->getEnemyCount($playernum, $leaderPos);
         $i = 0;
 
         //subtract 3 points for each enemy token on the providence
         if($enemyTokenCount>0)
         {
-          for($i =0;i<$enemyTokenCount;$i++)
+          $VPloss = 3*$enemyTokenCount;
+          if($numVP<$VPloss)
           {
-            $numVP = $numVP - 3;
-            if($numVP<=0)
-            {
-              $numVP = 0;
-              break;
-            }
+            $numVP = 0;
+          }
+          else
+          {
+            $numVP = $numVP - $VPloss;
           }
         }
         $milHelper->moveNumVPPoints($numVP);
