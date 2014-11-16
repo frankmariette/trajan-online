@@ -6,7 +6,6 @@ class MilitaryController extends BaseController {
 
   /**
    * Setup the logic for Military Actions
-   * setup the logic for the military action types
    * 1 == Relocate small player token to military camp
    * 2 == move leader to adjacent province
    * 3 == Move legionnaire to current province of their leader
@@ -18,67 +17,63 @@ class MilitaryController extends BaseController {
     $milHelper= new MilitaryHelper();
     $numActions = $milHelper->getNumActions();
     $actionCount = 0;
-    for($actionCount = 0; $actionCount<$numActions;$actionCount++)
+    //have player select one of 3 options for Military Action
+    $action = $milHelper->getMilitarySubAction();
+    switch $action
     {
-      //have player select one of 3 options for Military Action
-      $action = $milHelper->getMilitarySubAction();
-      switch $action
-      {
-        case 1:
-          /*
-          * Relocate small player token to military camp
-          */
-          $milHelper->MoveTokenToMilitaryBase();
-          break;
-        case 2:
-          /*
-          * move leader to adjacent province
-          */
-          //check for adjacent providence
-          $providence = $milHelper->MoveToAdjProvidence();
-          $numVP = $milHelper->getProvidenceVP($providence);
+      case 1:
+        /*
+        * Relocate small player token to military camp
+        */
 
-          //get num of enemy tokens on space variable
-          $enemyTokenCount = $milHelper->getEnemyCount($providence);
-          $i = 0;
+        //CHECK IF THEY HAVE TOKENS IN PLAYERBOARD MAT
 
-          //subtract 3 points for each enemy token on the providence
-          if($enemyTokenCount>0)
+        $milHelper->setNumTroopsInMilitaryCamp($getNumTroopsInMilitaryCamp() + 1);
+        $milHelper->setTokenCount($getTokenCount() - 1);
+        break;
+      case 2:
+        /*
+        * move leader to adjacent province
+        */
+        //check for adjacent providence
+        $selectedProvidence; //user input for a providence
+
+        //CHECK IF INPUT IS ADJACENT
+
+        $milHelper->setLeaderLocation($selectedProvidence);
+        $milHelper->grabTileOffProvidence($providence);
+        break;
+      case 3:
+        /*
+        * move legionnaire to current province of their leader
+        */
+        $leaderPos = $milHelper->getLeaderProvidence();
+
+        //get the number of vp for a providence
+        $numVP = $milHelper->getProvidenceVP($leaderPos);
+
+        //get num of enemy tokens on space variable
+        $enemyTokenCount = $milHelper->getEnemyCount($leaderPos);
+        $i = 0;
+
+        //subtract 3 points for each enemy token on the providence
+        if($enemyTokenCount>0)
+        {
+          for($i =0;i<$enemyTokenCount;$i++)
           {
-            for($i =0;i<$enemyTokenCount;$i++)
+            $numVP = $numVP - 3;
+            if($numVP<=0)
             {
-              $numVP = $numVP - 3;
-              if($numVP<=0)
-              {
-                $numVP = 0;
-              }
+              $numVP = 0;
+              break;
             }
           }
-          else
-          {
-            //grab any tiles on the providence
-            $milHelper->grabTilesOffProvidence($providence);
-          }
-          $milHelper->moveNumVPPoints($numVP);
-          break;
-        case 3:
-          /*
-          * move legionnaire to current province of their leader
-          */
-
-          if($milAction->checkProvidence($providence))
-          {
-            //move the legionnaire to this providence
-          }
-          else
-          {
-            echo "Illegal placement. Place on providence of Legionnaire";
-          }
-          break;
-        default:
-          echo "No military sub-action was selected. Something broke. (hit default case)";
-      }//end switch
-    }//end for loop
+        }
+        $milHelper->moveNumVPPoints($numVP);
+        break;
+      default:
+        echo "No military sub-action was selected. Something broke. (hit default case)";
+    }//end switch
   }//end constructor
 
 }
