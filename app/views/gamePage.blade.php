@@ -8,7 +8,7 @@
 
     var game = new Phaser.Game(1300, 1800, Phaser.AUTO, '', { preload: preload, create: create, update: update });
 
-    function preload() {
+    function preload() { //load images for each game piece
       game.load.image('gameBoard', '/assets/gameBoardFinal.png');
       game.load.image('playerBoard', '/assets/pBoard.png');
       game.load.image('tile', '/assets/cDoorTile.png');
@@ -17,13 +17,13 @@
       game.load.image('forum', '/assets/fTileGame.png')
       game.load.spritesheet('bonus', '/assets/bonus00.png', 100, 156);
     }
+      var cTiles, tTiles, bTiles, mTiles, fTiles;
 
-    function create() {
+    function create() { //initial positions of all pieces on gameBoard
       var background = game.add.sprite(150, 0, 'gameBoard');
 
       var player = game.add.sprite(275, game.world.height-500, 'playerBoard');
 
-      tiles = game.add.group();
 
       cTiles = game.add.group();
 
@@ -94,43 +94,27 @@
       var bTile0 = bTiles.create(850, game.world.height - 750, 'bonus');
       var bTile1 = bTiles.create(960, game.world.height - 750, 'bonus');
 
-      /*for each(var tile in tiles){
-        if(tile.pointerOver()){
-          var currentTile = tile;
-        }
-      }*/
 
-      var currentTile = cTile0; //get coordinates of user click, find tile and set it to curretTile/piece
-      currentTile.originalPosition = currentTile.position.clone();
-
-      currentTile.inputEnabled = true;
-      currentTile.input.enableDrag();
-      currentTile.events.onDragStart.add(startDrag, this);
-      currentTile.events.onDragStop.add(stopDrag, this);
-
-      function startDrag(currentTile){
-        currentTile.body.moves = false;
-      }
-      function stopDrag(currentTile){
-        currentTile.body.moves = true;
-        var area = new Phaser.Rectangle(600, game.world.height-1400, 100, 100);
-        if(area.contains(currentTile.x, currentTile.y)){ //THIS SHOULD CALL VALIDATOR IN CONTROLLER FOR VALID SPACE BASED ON TILE AND END POSITION
-          alert('yes');
-        }
-        else{
-          currentTile.position.copyFrom(currentTile.originalPosition);
-        }
-      }
 
     }
 
     function update() {
+      //check which tile is clicked
+      cTiles.forEach(makeActive, this, true);
+      bTiles.forEach(makeActive, this, true);
+      mTiles.forEach(makeActive, this, true);
+      tTiles.forEach(makeActive, this, true);
+      fTiles.forEach(makeActive, this, true);
 
+      function makeActive(currentTile){
+        currentTile.inputEnabled = true;
+        currentTile.events.onInputDown.add(listener, this);
 
-
-
-
-
+        function listener(tile){
+          tile.position.x = 0;
+          tile.position.y = 0;
+        }
+      }
 
     }
 
