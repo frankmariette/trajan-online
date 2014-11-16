@@ -1,6 +1,7 @@
 <?php
 use \models\MilitaryAction as MilitaryAction;
 use \helper\MilitaryHelper as MilitaryHelper;
+use \validators\MilitaryValidators as MilitaryValidators;
 
 class MilitaryController extends BaseController {
 
@@ -15,13 +16,16 @@ class MilitaryController extends BaseController {
   public function MilitaryAction()
   {
     //instantiate the helper in the main function;
-    //$milHelper= new MilitaryHelper();
+    $milHelper;
+    //instantiate the validator function in the main function;
+    $milValidator;
+
     $numActions = $milHelper->getNumActions();
     $actionCount = 0;
     $playernum; //the id of the player who is currently on his/her turn
 
-    //have player select one of 3 options for Military Action
-    $action = $milHelper->getMilitarySubAction();
+    //have player select one of 3 options for Military Action (this does checks)
+    $action = $milValidator->getMilitarySubAction($playernum);
     switch $action
     {
       case 1:
@@ -29,20 +33,20 @@ class MilitaryController extends BaseController {
         * Relocate small player token to military camp
         */
 
-        //TODO CHECK IF THEY HAVE TOKENS IN PLAYERBOARD MAT
-
         $milHelper->setNumTroopsInMilitaryCamp($playernum, $getNumTroopsInMilitaryCamp($playernum) + 1);
-        $milHelper->setTokenCount($getTokenCount() - 1);
+        $milHelper->setTokenCount($playernum, $getTokenCount($playernum) - 1);
         break;
       case 2:
         /*
         * move leader to adjacent province
         */
-        //TODO check for adjacent providence
-        $selectedProvidence; //user input for a providence
-
-        //TODO CHECK IF INPUT IS ADJACENT
-
+        $invariant = false;
+        $leaderLoc = $milHelper->getLeaderLocation();
+        while($invariant == false)
+        {
+          $selectedProvidence; //user input for a providence
+          $invariant = $milValidator->checkForAdjacentProvidences($leaderloc, $selectedProvidence);
+        }
         $milHelper->setLeaderLocation($selectedProvidence);
         $milHelper->grabTileOffProvidence($providence);
         break;
@@ -76,7 +80,7 @@ class MilitaryController extends BaseController {
             $numVP = $numVP - $VPloss;
           }
         }
-        $milHelper->moveNumVPPoints($numVP);
+        $milHelper->moveNumVPPoints($playernum, $numVP);
         break;
       default:
         echo "No military sub-action was selected. Something broke. (hit default case)";

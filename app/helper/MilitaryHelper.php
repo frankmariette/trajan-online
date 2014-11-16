@@ -5,9 +5,8 @@ class MilitaryHelper {
   /**
    * Helper function for Military Action
    */
-  protected $tokenCount = 15;
-  protected $enemyTroopCount
-  protected $militaryTroopCount;
+  protected $tokenCount = array(15,15,15,15);
+  protected $VPPointArray = array(0,0,0,0);
   protected $leaderLocation;
   protected $provVPArray = array(0,5,3,6,10,6,3,6,6,10,10);
   protected $troopLocationArray = array(
@@ -25,34 +24,6 @@ class MilitaryHelper {
     //moves one legionnaire from the military base to the selected providence
     $troopLocationArray[$playernum][$providence] = $troopLocationArray[$playernum][$providence] + 1;
     $troopLocationArray[$playernum][0] = $troopLocationArray[$playernum][0] - 1;
-  }
-
-  public function getMilitarySubAction(){
-    /*recursive function
-    * If its an invalid action selection, re-call this function
-    * and make them select again.
-    */
-    $input; //get user input for the sub action
-
-    //put this if else in the validator folder
-    if($input == 1 && getTokenCount()<=0)
-    {
-      //"move tokens from playerboard mat to military camp" action
-      //if this loop is hit, it means there isnt any available troops to move into
-      //the military camp
-      echo "You don't have any troops to move into the military camp!";
-      getMilitarySubAction();
-    }
-    else if($input == 3 && getNumTroopsInMilitaryCamp($playernum)<=0)
-    {
-      //"move token from military camp to providence" action
-      //if this loop is hit, it means there isnt any available troops in the military camp
-      echo "You don't have any troops in your military camp to move to your leader!";
-      getMilitarySubAction();
-    }
-
-    return $input;
-
   }
 
   //TODO
@@ -81,15 +52,15 @@ class MilitaryHelper {
     return $enemyTokenCount;
   }
 
-  //these will need to be read in from another class, unless i set it in an array here?
-  public function getTokenCount(){
+  //TODO these will need to be read in from another class, unless i set it in an array here?
+  public function getTokenCount($playernum){
     //grab token amount from gamestate
-    return $tokenCount;
+    return $tokenCount[$playernum];
   }
 
-  //these will need to be read in from another class, unless i set it in an array here?
-  public function setTokenCount($num){
-    $tokenCount = $num;
+  //TODO these will need to be read in from another class, unless i set it in an array here?
+  public function setTokenCount($playernum, $num){
+    $tokenCount[$playernum] = $num;
   }
 
   public function getProvidenceVP($pID){
@@ -111,9 +82,8 @@ class MilitaryHelper {
     $numActions=$actionCount;
   }
 
-  //TODO
-  public function moveNumVPPoints($vp){
-    //move the gamestate the num of spaces to the input vp
+  public function moveNumVPPoints($playernum, $vp){
+    $VPPointArray[$playernum] = $VPPointArray[$playernum] + $vp;
   }
 
   public function getNumTroopsInMilitaryCamp($playernum)
