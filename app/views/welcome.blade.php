@@ -72,13 +72,13 @@
         <th>Score</th>
       </tr>
       <tr>
-        <td>playerName</td>
-        <td>playerScore</td>
+        <td>{{{playerName}}}</td>
+        <td>{{{playerScore}}}</td>
       </tr>
     </table>
   </div>
   <div id="playerStats" class="blocks">
-    <h2>playerName's Info</h2>
+    <h2>{{{playerName}}}'s Info</h2>
     <div id="gamesStats">
       <p>In your last game you scored  Victory Points!</p>
       <p>Total Games Played: </p>
@@ -89,11 +89,11 @@
   <div id="lobby" class="blocks">
     <p>Games waiting for players...</p>
     <ul>
-      <li><a href="link_to_game">playerName's_game</a></li>
+      <li><a href="link_to_game">{{{playerName}}}'s game</a></li>
     </ul>
     <p>
-      <a href="http://dev.trajanonline.app/createPublic">Start a Public Game</a> or
-      <a href="http://dev.trajanonline.app/createPrivate">Start a Private Game</a> and add your friends!
+      <a href="http://dev.trajanonline.app/createpublic">Start a Public Game</a> or
+      <a href="http://dev.trajanonline.app/createprivate">Start a Private Game</a> and add your friends!
     </p>
   </div>
 </div>
