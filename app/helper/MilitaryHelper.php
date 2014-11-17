@@ -1,5 +1,5 @@
 <?php
-namespace MilitaryHelper;
+namespace Trajan\helper;
 
 class MilitaryHelper {
   /**
@@ -13,7 +13,7 @@ class MilitaryHelper {
     array(0,0,0,0,0,0,0,0,0,0,0),
     array(0,0,0,0,0,0,0,0,0,0,0),
     array(0,0,0,0,0,0,0,0,0,0,0),
-    array(0,0,0,0,0,0,0,0,0,0,0),
+    array(0,0,0,0,0,0,0,0,0,0,0)
   );
 
   public function __construct(){

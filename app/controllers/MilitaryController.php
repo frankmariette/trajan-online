@@ -1,7 +1,7 @@
 <?php
-use \models\MilitaryAction as MilitaryAction;
-use \helper\MilitaryHelper as MilitaryHelper;
-use \validators\MilitaryValidators as MilitaryValidators;
+
+use Trajan\helper\MilitaryHelper;
+use Trajan\validators\MilitaryValidators;
 
 class MilitaryController extends BaseController {
 
@@ -33,8 +33,8 @@ class MilitaryController extends BaseController {
         * Relocate small player token to military camp
         */
 
-        $milHelper->setNumTroopsInMilitaryCamp($playernum, $getNumTroopsInMilitaryCamp($playernum) + 1);
-        $milHelper->setTokenCount($playernum, $getTokenCount($playernum) - 1);
+        $milHelper->setNumTroopsInMilitaryCamp($playernum, $milHelper->$getNumTroopsInMilitaryCamp($playernum) + 1);
+        $milHelper->setTokenCount($playernum, $milHelper->$getTokenCount($playernum) - 1);
         break;
       case 2:
         /*
