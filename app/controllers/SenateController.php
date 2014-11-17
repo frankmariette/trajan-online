@@ -1,12 +1,17 @@
 <?php
 
-use actions\SenateAction;
+use Trajan\actions\SenateAction;
 
 
-class SenateController extends Controller {
+class SenateController extends BaseController {
 
   public function action(){
     $this->senate = new SenateAction(Input::get('location'));
-    return Response::json(array('senate' => $this->senate));
+    if ($this->senate->advanceTile()){
+      return Response::json(array('senate' => $this->senate->currentTileSpotPoints));
+    } else {
+      return 'false';
+    }
+
   }
 }

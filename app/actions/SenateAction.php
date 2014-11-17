@@ -1,17 +1,19 @@
-<?php namespace actions;
+<?php
+
+namespace Trajan\Actions;
 
 class SenateAction {
 
-  protected $currentTileSpotPoints;
+  public $currentTileSpotPoints;
   protected $player;
 
-  public function __construct($playerId, $currentTileSpotPoints){
-    $this->player = new User($playerId);
+  public function __construct($currentTileSpotPoints=null){
+    // $this->player = new User($playerId);
     $this->currentTileSpotPoints = $currentTileSpotPoints;
   }
 
   public function advanceTile(){
-    if ($this->checkCurrentTileSpace < 8){
+    if ($this->currentTileSpotPoints < 8){
       $nextSpacePoints = $this->getNextTilesVictoryPoints();
       $this->addVictoryPointsToPlayerScore($nextSpacePoints);
       return true;
