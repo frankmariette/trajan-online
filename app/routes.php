@@ -11,7 +11,7 @@
 |
 */
 
-// Route::get('/', array('uses' => 'HomeController@index'));
+Route::get('/', array('uses' => 'HomeController@index'));
 
 Route::get('/login', array('uses' => 'UserController@showLogin'));
 Route::post('/login', array('uses' => 'UserController@doLogin'));
@@ -22,7 +22,7 @@ Route::get('/register', array('uses' => 'UserController@showRegister'));
 Route::post('/register', array('uses'=> 'UserController@doRegister'));
 
 //Test Routes!
-Route::get('/', array('uses'=> 'HomeController@welcome'));
+// Route::get('/', array('uses'=> 'HomeController@welcome'));
 Route::get('/createpublic', array('uses'=> 'GameController@createPublic'));
 Route::get('/createprivate', array('uses'=> 'GameController@createPrivate'));
 Route::get('/gamepage', array('uses'=> 'GameController@gamePage'));

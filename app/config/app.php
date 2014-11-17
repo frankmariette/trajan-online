@@ -121,6 +121,7 @@ return array(
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
+		'BrainSocket\BrainSocketServiceProvider'
 
 	),
 
@@ -154,6 +155,7 @@ return array(
 		'Artisan'           => 'Illuminate\Support\Facades\Artisan',
 		'Auth'              => 'Illuminate\Support\Facades\Auth',
 		'Blade'             => 'Illuminate\Support\Facades\Blade',
+		'BrainSocket'    	  => 'BrainSocket\BrainSocketFacade',
 		'Cache'             => 'Illuminate\Support\Facades\Cache',
 		'ClassLoader'       => 'Illuminate\Support\ClassLoader',
 		'Config'            => 'Illuminate\Support\Facades\Config',
