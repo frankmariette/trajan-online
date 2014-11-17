@@ -12,6 +12,13 @@ class DatabaseSeeder extends Seeder {
 		Eloquent::unguard();
 
 		// $this->call('UserTableSeeder');
+		$this->call('TileTypeSeeder');
+		$this->call('BonusCardSeeder');
+		$this->call('CommodityCardSeeder');
+		$this->call('ConstructionTileSeeder');
+		$this->call('ForumTileSeeder');
+		$this->call('TrajanTileSeeder');
+
 	}
 
 }
