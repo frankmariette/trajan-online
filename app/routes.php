@@ -28,3 +28,4 @@ Route::post('/createPublic', array('uses'=> 'GameController@createPublic'));
 Route::get('/createPrivate', array('uses'=> 'GameController@createPrivate'));
 Route::post('/createPrivate', array('uses'=> 'GameController@createPrivate'));
 Route::get('/gamePage', array('uses'=> 'GameController@gamePage'));
+Route::post('/military', array('uses' => 'MilitaryController@action'));

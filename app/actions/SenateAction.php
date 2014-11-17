@@ -16,7 +16,7 @@ class SenateAction {
       $this->addVictoryPointsToPlayerScore($nextSpacePoints);
       return true;
     }
-
+    // If player is unable to advance
     return false;
   }
 
