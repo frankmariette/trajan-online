@@ -99,9 +99,9 @@
           console.log(msg);
           if(msg.client.data.user_id == user_id){
               $('#chat-log').append(
-                '<li class="self"><div class="avatar"><img src="{{Auth::user()->get_gravatar(Auth::user()->email)}}"/></div><div class="message"><p>'+msg.client.data.user_name+': ' +msg.client.data.message+' {{ date("H:i a", time()) }}</p></div></li>');
+                '<li class="self"><div class="avatar"><img src="{{Auth::user()->get_gravatar(Auth::user()->email)}}"/></div><div class="message"><p><strong>'+msg.client.data.user_name+'</strong>: ' +msg.client.data.message+'</p><p><i>{{ date("M d, H:ia") }}</i></p></div></li>');
           }else{
-              var str_test='<li class="other"><div class="avatar"><img class="avatar" src="'+msg.client.data.user_pic+'"/></div><div class="message"><p>'+msg.client.data.user_name+': '+msg.client.data.message+' {{ date("H:i a", time()) }}</p></div></li>';
+              var str_test='<li class="other"><div class="avatar"><img class="avatar" src="'+msg.client.data.user_pic+'"/></div><div class="message"><p><strong>'+msg.client.data.user_name+'</strong>: '+msg.client.data.message+' <i>{{ date("M d, H:ia") }}</i></p></div></li>';
               $('#chat-log').append(str_test);
           }
       });
