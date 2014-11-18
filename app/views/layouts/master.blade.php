@@ -66,7 +66,7 @@
     @yield('body')
 </div>
     @if (Auth::check())
-    <section class="module">
+    <section class="module pull-right">
       <header class="top-bar">
         <h1>Group Chat</h1>
       </header>
