@@ -6,10 +6,12 @@ class PlayerMat {
 	public $small_tokens;
 }
 class ActionCircle extends PlayerMat {
-	public $chosen_tray;
-	public $target_tray;
-	public $something = "HELLO!";
-	public $circle;
+	function __construct(){ 
+		$this->chosen_tray;
+		$this->target_tray;
+		$this->something = "HELLO!";
+		$this->circle;
+	}
 	public function randCircle(){
 		$color = array("pink", "orange", "yellow", "white", "green", "blue", "pink", "orange", "yellow", "white", "green", "blue",);
 		$i = 0;
@@ -24,21 +26,21 @@ class ActionCircle extends PlayerMat {
 				$i++;
 			}		
 		}
-		return $circle;
+		$this->circle =  $circle;
 	}
-	public function move(&$circle, $chosen_tray){//chosen tray
+	public function move($chosen_tray){//chosen tray
 		$k = 0;
-		$count = count($circle[$chosen_tray]);
+		$count = count($this->circle[$chosen_tray]);
 		while($k<$count){
 			$spot = $chosen_tray+$k+1;
 			if($spot>5){
 				$spot -= 6;
 			}
-			$circle[$spot][] = $circle[$chosen_tray][$k];
-			unset($circle[$chosen_tray][$k]);
+			$this->circle[$spot][] = $this->circle[$chosen_tray][$k];
+			unset($this->circle[$chosen_tray][$k]);
 			$k++;
 		}
-		return $spot;//target tray
+		$this->target_tray =  $spot;//target tray
 	}
 
 
