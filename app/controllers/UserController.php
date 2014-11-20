@@ -17,9 +17,7 @@
       $validator = Validator::make(Input::all(), $rules);
 
       if ($validator->fails()){
-        return Redirect::to('login')
-          ->withErrors($validator)
-          ->withInput(Input::except('password'));
+        return Redirect::to('login')->withErrors($validator)->withInput(Input::except('password'));
       } else {
 
         $userdata = array(
@@ -28,7 +26,7 @@
         );
 
         if (Auth::attempt($userdata)){
-          return Redirect::to('home');
+          return Redirect::to('/');
         }
         else {
           return Redirect::to('login');
@@ -38,7 +36,7 @@
 
     public function doLogout(){
       Auth::logout();
-      Redirect::to('login');
+      return Redirect::to('/');
     }
 
     public function showRegister(){
@@ -62,13 +60,14 @@
           ->withInput(Input::except('password','confirmation'));
       } else {
         $data = Input::only(['fname','lname','password', 'email']);
+        $data['password'] = Hash::make($data['password']);
         $newUser = User::create($data);
 
         if ($newUser){
           Auth::login($newUser);
           return Redirect::to('');
         } else{
-          return Redirect::to('register')-withInput();
+          return Redirect::to('register')->withInput();
         }
       }
 

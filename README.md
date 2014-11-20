@@ -16,3 +16,4 @@ Master will be used for working code and pull requests only.
 + Navigate to the url setup in homestead.
 + Follow the links for login/register.
 + View pages at <url>/welcome
++ Routes are listed in app/routes.php
