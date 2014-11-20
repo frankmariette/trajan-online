@@ -10,7 +10,7 @@ class ActionCircle extends PlayerMat {
 		$this->select_tray;
 		$this->target_tray;
 		$this->something = "HELLO!";
-		$this->circle;
+		$this->randCircle();
 	}
 	public function randCircle(){
 		$color = array("pink", "orange", "yellow", "white", "green", "blue", "pink", "orange", "yellow", "white", "green", "blue",);

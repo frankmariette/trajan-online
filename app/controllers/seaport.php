@@ -1,7 +1,7 @@
 <?php 
 class Seaport{
 	function __construct(){
-		$this->$playerCards;
+		$this->$playerCards = $cards;
 		$this->$display;
 	}
 	public $playerCards;
