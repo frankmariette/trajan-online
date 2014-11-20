@@ -2,120 +2,75 @@
 
 namespace Trajan\Actions;
 
-class SenateAction {
+class MilitaryAction {
 
-  protected $player;
-
-  public function __construct($currentTileSpotPoints=null){
-    // $this->player = new User($playerId);
-    $this->currentTileSpotPoints = $currentTileSpotPoints;
-  }
-
-/**
- * Helper function for Military Action
- */
-protected $tokenCount = array(15,15,15,15);
-protected $VPPointArray = array(0,0,0,0);
-protected $leaderLocation;
-protected $provVPArray = array(0,5,3,6,10,6,3,6,6,10,10);
-protected $troopLocationArray = array(
-  array(0,0,0,0,0,0,0,0,0,0,0),
-  array(0,0,0,0,0,0,0,0,0,0,0),
-  array(0,0,0,0,0,0,0,0,0,0,0),
-  array(0,0,0,0,0,0,0,0,0,0,0)
-);
-
-public function __construct(){
-    //instantiate the object to use the methods
-}
-
-public function moveTroopsToProvidence($playernum, $providence){
-  //moves one legionnaire from the military base to the selected providence
-  $troopLocationArray[$playernum][$providence] = $troopLocationArray[$playernum][$providence] + 1;
-  $troopLocationArray[$playernum][0] = $troopLocationArray[$playernum][0] - 1;
-}
-
-//TODO
-public function grabTileOffProvidence($providence){
-  //check if the providence has a tile, if so, grab it and place on playerboard mat
-
-  //CHECK IF PROVIDENCE HAS A TILE
-
-  //IF YES, GRAB IT
-}
-
-public function getEnemyCount($playernum,$providence){
-  //get the number of enemy tokens in the providence
-  $enemyTokenCount = 0;
-  $arraySize = count($troopLocationArray);
-  for($i = 0;$i<$arraySize;$i++)
+  /**
+   * Setup the logic for Military Actions
+   * 1 == Relocate small player token to military camp
+   * 2 == move leader to adjacent province
+   * 3 == Move legionnaire to current province of their leader
+   * @return void
+   */
+  public function __construct($playernum, $action)
   {
-      if($i!=$playernum){
-        if($troopLocationArray[i][$providence]>=0)
+    switch $action
+    {
+      case 1:
+        /*
+        * Relocate small player token to military camp
+        */
+
+        $this->milHelper->setNumTroopsInMilitaryCamp($playernum, $this->milHelper->$getNumTroopsInMilitaryCamp($playernum) + 1);
+        $this->milHelper->setTokenCount($playernum, $this->milHelper->$this->getTokenCount($playernum) - 1);
+        break;
+      case 2:
+        /*
+        * move leader to adjacent province
+        */
+        $invariant = false;
+        $this->leaderLoc = $this->milHelper->getLeaderLocation();
+        while($invariant == false)
         {
-          $enemyTokenCount = $enemyTokenCount + $troopLocationArray[i][$providence];
+          $selectedProvidence; //user input for a providence
+          $invariant = $this->milValidator->checkForAdjacentProvidences($leaderloc, $selectedProvidence);
         }
-      }
+        $this->milHelper->setLeaderLocation($selectedProvidence);
+        $this->milHelper->grabTileOffProvidence($providence);
+        break;
+      case 3:
+        /*
+        * move legionnaire to current province of their leader
+        */
 
-  }
-  return $enemyTokenCount;
-}
+        $leaderPos = $this->milHelper->getLeaderProvidence();
 
-//TODO these will need to be read in from another class, unless i set it in an array here?
-public function getTokenCount($playernum){
-  //grab token amount from gamestate
-  return $tokenCount[$playernum];
-}
+        $this->milHelper->moveTroopsToProvidence($playernum, $leaderPos);
 
-//TODO these will need to be read in from another class, unless i set it in an array here?
-public function setTokenCount($playernum, $num){
-  $tokenCount[$playernum] = $num;
-}
+        //get the number of vp for a providence
+        $numVP = $this->milHelper->getProvidenceVP($leaderPos);
 
-public function getProvidenceVP($pID){
-  //grab the num of vp based on pID from gameboard
-  //setup array with different vp values based on index
-  return $provVPArray[$pid];
-}
+        //get num of enemy tokens on space variable
+        //playernum is the id of the current players turn
+        $enemyTokenCount = $this->milHelper->getEnemyCount($playernum, $leaderPos);
+        $i = 0;
 
-//TODO?
-public function getNumActions(){
-  //check if tiles are discarded for multiple actions
-  //if so, add them up and return them
-  //this will be set outside of the military controller (before it is called)
-  return $numActions;
-}
-
-public function setNumActions($actionCount){
-  //this will be set outside of the military controller (before it is called)
-  $numActions=$actionCount;
-}
-
-public function moveNumVPPoints($playernum, $vp){
-  $VPPointArray[$playernum] = $VPPointArray[$playernum] + $vp;
-}
-
-public function getNumTroopsInMilitaryCamp($playernum)
-{
-  return $troopLocationArray[$playernum][0];
-}
-
-public function setNumTroopsInMilitaryCamp($playernum,$num)
-{
-  $troopLocationArray[$playernum][0] = $num;
-}
-
-//this might need to be set somehwere else as well
-public function getLeaderLocation(){
-  return $leaderLocation;
-}
-
-//this might need to be set somehwere else as well
-public function setLeaderLocation($pid)
-{
-  $leaderLocation = $pid;
-}
-  private function addVictoryPointsToPlayerScore($points){
-    $this->player->addVictoryPoints($points);
+        //subtract 3 points for each enemy token on the providence
+        if($enemyTokenCount>0)
+        {
+          $VPloss = 3*$enemyTokenCount;
+          if($numVP<$VPloss)
+          {
+            $numVP = 0;
+          }
+          else
+          {
+            $numVP = $numVP - $VPloss;
+          }
+        }
+        $this->milHelper->moveNumVPPoints($playernum, $numVP);
+        break;
+      default:
+        echo "No military sub-action was selected. Something broke. (hit default case)";
+    }//end switch
   }
 }
