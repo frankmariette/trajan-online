@@ -58,6 +58,9 @@ body {
   background: #e5e5e5;
   margin: 0;
   padding: 0 0 50px 0;
+  min-height:30vh;
+  height: 30%;
+  overflow: auto;
 }
 .discussion li {
   padding: 0.5rem;

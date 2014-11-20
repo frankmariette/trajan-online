@@ -37,11 +37,11 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
                         @if (Auth::check())
-                        <li><a href="/profile">{{ Auth::user()->email }}</a></li>
-                        <li><a href="/logout">Log Out</a></li>
+                        <li>{{ link_to('/', Auth::user()->email) }}</a></li>
+                        <li>{{ link_to('logout', 'Logout')}}</li>
                         @else
-                        <li><a href="/login">Login</a></li>
-                        <li><a href="/register">Sign Up</a></li>
+                        <li>{{ link_to('login', 'Login' )}}</li>
+                        <li>{{ link_to('register', 'Register')}}</li>
                         @endif
                     </ul>
 
@@ -65,6 +65,7 @@
 
     <!-- Chat box -->
     @if (Auth::check())
+    <div class="container">
     <div class="module pull-right" style="max-height: 10;overflow-y: scroll;margin-right:20px;">
       <header class="top-bar">
         <h1>Group Chat</h1>
@@ -80,6 +81,7 @@
               </div>
           </div>
       </div>
+    </div>
     </div>
   <script>
   $(function(){
@@ -134,6 +136,10 @@
           return event.keyCode != 13; }
       );
   });
+  </script>
+  <script>
+    var discussion = $('.discussion');
+    discussion.animate({ scrollTop: discussion.prop("scrollHeight") - discussion.height() }, 3000);
   </script>
   @endif
 @show

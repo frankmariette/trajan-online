@@ -36,7 +36,7 @@
 
     public function doLogout(){
       Auth::logout();
-      Redirect::to('login');
+      return Redirect::to('/');
     }
 
     public function showRegister(){
