@@ -148,6 +148,7 @@ body {
   margin-bottom:0;
 }
 
+
 .vertical-center {
   min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
   min-height: 100vh; /* These two lines are counted as one :-)       */
@@ -169,3 +170,5 @@ body {
   -webkit-justify-content : center;
   justify-content : center;
 }
+
+

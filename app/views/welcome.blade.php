@@ -1,17 +1,15 @@
 @extends('layouts.master')
-@section('body')
+@section('content')
   @if(Auth::check())
-  <div >
-    <h1 class="text-center">Trajan Online</h1>
-  </div>
-  <div class="container">
+  <div class="container-fluid">
+  <h1 class="text-center">Trajan Online</h1>
     <div class="row">
       <div class="col-md-3">
-        <div class="panel panel-default" style="margin-left:20px;">
+        <div class="panel panel-default">
           <div class="panel-header">
             <h2 class="text-center">Score</h2>
           </div>
-          <div class="panel-body" style="max-height: 10;overflow-y: scroll;">
+          <div class="panel-body">
             <table class="table">
               <tr>
                 <th>Player</th>
@@ -26,7 +24,7 @@
         </div>
       </div>
 
-      <div class="col-md-6">
+      <div class="col-md-5">
         <div class="panel panel-default">
           <div class="panel-heading">
             <h2 class="panel-title">Game setup</h2>
@@ -34,19 +32,19 @@
           <div class="panel-body">
             <ul>
               <li><a href="link_to_game">{{Auth::user()->fname}}'s game</a></li>
-              <li><a href="http://dev.trajanonline.app/createpublic">Start a Public Game</a></li>
+              <li>{{link_to('createpublic', 'Start a Public Game') }}</li>
               <li><a href="http://dev.trajanonline.app/createprivate">Start a Private Game</a></li>
             </ul>
           </div>
         </div>
       </div>
 
-      <div class="col-md-3">
-        <div class="panel panel-default" style="margin-right:20px">
+      <div class="col-md-4">
+        <div class="panel panel-default">
           <div class="panel-heading">
             <h2 class="panel-title">{{ Auth::user()->fname }}'s Info</h2>
           </div>
-          <div class="panel-body" style="max-height: 10;overflow-y: scroll;">
+          <div class="panel-body">
             <p>In your last game you scored  Victory Points!</p>
             <p>Total Games Played: </p>
             <p>Number of Games Won: </p>

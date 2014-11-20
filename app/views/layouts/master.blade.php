@@ -8,15 +8,6 @@
     {{HTML::script('http://maxcdn.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js')}}
     {{HTML::script('js/brain-socket.min.js')}}
     {{HTML::style('/css/custom.css')}}
-    <style>
-        @section('style')
-
-        @show
-    </style>
-
-    @section('js')
-
-    @show
 
 </head>
 <body>
@@ -37,7 +28,7 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
                         @if (Auth::check())
-                        <li>{{ link_to('/', Auth::user()->email) }}</a></li>
+                        <li>{{ link_to('/', Auth::user()->email) }}</li>
                         <li>{{ link_to('logout', 'Logout')}}</li>
                         @else
                         <li>{{ link_to('login', 'Login' )}}</li>
@@ -65,8 +56,8 @@
 
     <!-- Chat box -->
     @if (Auth::check())
-    <div class="container">
-    <div class="module pull-right" style="max-height: 10;overflow-y: scroll;margin-right:20px;">
+    <div class="container-fluid">
+    <div class="module pull-right">
       <header class="top-bar">
         <h1>Group Chat</h1>
       </header>
@@ -97,7 +88,6 @@
       );
 
       app.BrainSocket.Event.listen('generic.event',function(msg){
-          console.log(msg);
           if(msg.client.data.user_id == user_id){
               $('#chat-log').append(
                 '<li class="self"><div class="avatar"><img src="{{Auth::user()->get_gravatar(Auth::user()->email)}}"/></div><div class="message"><p><strong>'+msg.client.data.user_name+'</strong>: ' +msg.client.data.message+'</p><p><i>{{ date("M d, H:ia") }}</i></p></div></li>');
