@@ -28,7 +28,7 @@ class SenateAction {
 
   private function getNextTilesVictoryPoints(){
     // This function called doesnt exist. Estimation for how it would work.
-    return GameBoard::returnNextLocationVictoryPoints($this->currentTileSpot);
+    // return GameBoard::returnNextLocationVictoryPoints($this->currentTileSpot);
   }
 
 }
