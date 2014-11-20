@@ -42,11 +42,13 @@ class MilitaryController extends BaseController {
         */
         $invariant = false;
         $leaderLoc = $milHelper->getLeaderLocation();
+
         while($invariant == false)
         {
           $selectedProvidence; //user input for a providence
           $invariant = $milValidator->checkForAdjacentProvidences($leaderloc, $selectedProvidence);
         }
+
         $milHelper->setLeaderLocation($selectedProvidence);
         $milHelper->grabTileOffProvidence($providence);
         break;

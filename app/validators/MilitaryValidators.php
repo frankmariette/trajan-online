@@ -1,7 +1,7 @@
 <?php
-use \models\MilitaryAction as MilitaryAction;
-use \helper\MilitaryHelper as MilitaryHelper;
-use \validators\MilitaryValidators as MilitaryValidators;
+use Trajan\models\MilitaryAction as MilitaryAction;
+use Trajan\helper\MilitaryHelper as MilitaryHelper;
+use Trajan\validators\MilitaryValidators as MilitaryValidators;
 
 Class MilitaryValidators{
   /**
@@ -21,7 +21,7 @@ Class MilitaryValidators{
     array(6,8,9),
     array(7,9),
     array(5,6,7,8,10),
-    array(4,5,9),
+    array(4,5,9)
   );
 
   public function __construct(){
