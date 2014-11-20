@@ -1,5 +1,9 @@
 <?php 
 class Seaport{
+	function __construct(){
+		$this->$playerCards;
+		$this->$display;
+	}
 	public $playerCards;
 	public $faceDownCards;
 	public $discardOne;
@@ -13,34 +17,38 @@ class Seaport{
 		else
 			return $error;
 	}
+	/*input parameters are the facedown pile array and the two discard pile arrays*/
 	public function drawTwo(&$faceDownCards, &$discardOne, &$discardTwo){
-		//add two random cards to player hand
-		$playerCards[] = array_rand($faceDownCards);
-		$playerCards[] = array_rand($faceDownCards);
-		//discard one
+		//add two random cards from facedown pile to player hand
+		$draw = array_rand($faceDownCards);
+		$this->playerCards[] = $faceDownCards[$draw];
+		unset($faceDownCards[$draw]);
+		$draw = array_rand($faceDownCards);
+		$this->playerCards[] = $faceDownCards[$draw];
+		unset($faceDownCards[$draw]);
+		//discard one random
+		$disc_id = array_rand($this->playerCards);
 		$choose = rand(1,2);
 		if($choose == 1)
-			$discardOne = $playerCards[$disc_id];
+			$discardOne[] = $this->playerCards[$disc_id];
 		else
-			$discardTwo = $playerCards[$disc_id];
-		unset($playerCards[$disc_id]);
+			$discardTwo[] = $this->playerCards[$disc_id];
+		unset($this->playerCards[$disc_id]);
 	}
-	public function drawOne(&$discardOne, &$discardTwo){
-		if($choice == 1)
-			$playerCards[] = array_rand($discardOne);
-		else
-			$playerCards[] = array_rand($discardTwo);
+	public function drawOne(&$discardPile){
+			$this->playerCards[] = array_rand($discardPile);
 	}
-	public function playCards(&$playerCards){
-		if($playOne){
-			$display[] = $playerCards[$index];
-			unset($playerCards[$index]);
+	/*Second index is optional. */
+	public function playCards($index1, $index2=null){
+		if(!$index2){
+			$this->display[] = $this->playerCards[$index1];
+			unset($playerCards[$index1]);
 		}
 		else{
-			$display[] = $playerCards[$choice1];
-			$display[] = $playerCards[$choice2];
-			unset($playerCards[$choice1]);
-			unset($playerCards[$choice2]);
+			$this->display[] = $this->playerCards[$index1];
+			$this->display[] = $this->playerCards[$index2];
+			unset($playerCards[$index1]);
+			unset($playerCards[$index2]);
 		}
 	}
 }

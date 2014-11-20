@@ -7,7 +7,7 @@ class PlayerMat {
 }
 class ActionCircle extends PlayerMat {
 	function __construct(){ 
-		$this->chosen_tray;
+		$this->select_tray;
 		$this->target_tray;
 		$this->something = "HELLO!";
 		$this->circle;
@@ -28,16 +28,16 @@ class ActionCircle extends PlayerMat {
 		}
 		$this->circle =  $circle;
 	}
-	public function move($chosen_tray){//chosen tray
+	public function move(){//chosen tray
 		$k = 0;
-		$count = count($this->circle[$chosen_tray]);
+		$count = count($this->circle[$this->select_tray]);
 		while($k<$count){
-			$spot = $chosen_tray+$k+1;
+			$spot = $this->select_tray+$k+1;
 			if($spot>5){
 				$spot -= 6;
 			}
-			$this->circle[$spot][] = $this->circle[$chosen_tray][$k];
-			unset($this->circle[$chosen_tray][$k]);
+			$this->circle[$spot][] = $this->circle[$this->select_tray][$k];
+			unset($this->circle[$this->select_tray][$k]);
 			$k++;
 		}
 		$this->target_tray =  $spot;//target tray
