@@ -9,9 +9,6 @@
     {{HTML::script('js/brain-socket.min.js')}}
     {{HTML::style('/css/custom.css')}}
     <style>
-        body{
-            padding-top: 70px;
-        }
         @section('style')
 
         @show
@@ -65,8 +62,10 @@
     </div>
     @yield('body')
 </div>
+
+    <!-- Chat box -->
     @if (Auth::check())
-    <section class="module pull-right">
+    <div class="module pull-right" style="max-height: 10;overflow-y: scroll;margin-right:20px;">
       <header class="top-bar">
         <h1>Group Chat</h1>
       </header>
@@ -81,7 +80,7 @@
               </div>
           </div>
       </div>
-    </section>
+    </div>
   <script>
   $(function(){
 
