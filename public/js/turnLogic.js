@@ -28,6 +28,8 @@ function turnLogic(){
     select(tray6);
   }
 
+
+
   //check which tile is clicked
   cTiles.forEach(makeActive, this, true);
   bTiles.forEach(makeActive, this, true);
@@ -38,6 +40,7 @@ function turnLogic(){
 }
 
 function select(sourceTray){
+
   sourceTray.forEach(move, this, true);
 }
 
