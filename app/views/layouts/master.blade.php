@@ -51,8 +51,8 @@
             </div>
         </div>
     </div>
-    @yield('body')
-</div>
+    @yield('content')
+
 
     <!-- Chat box -->
     @if (Auth::check())
@@ -133,5 +133,6 @@
   </script>
   @endif
 @show
+</div>
 </body>
 </html>
