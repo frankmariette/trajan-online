@@ -3,10 +3,11 @@
 @section('body');
 
 
+
   <script src='//cdnjs.cloudflare.com/ajax/libs/phaser/2.1.2/phaser.min.js'></script>
   <script>
 
-    var game = new Phaser.Game(1300, 1800, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+  var game = new Phaser.Game(1300, 1800, Phaser.AUTO, '', {preload: preload, create: create, update: update});
 
     function preload() { //load images for each game piece
       game.load.image('gameBoard', '/assets/gameBoardFinal.png');
@@ -18,17 +19,17 @@
       game.load.spritesheet('bonus', '/assets/bonus00.png', 100, 156);
       game.load.image('actionMark', '/assets/actionMarkerOrange.png');
       game.load.image('tArch', '/assets/tArch.png');
-      game.load.image('playerMark', '/assets/playerMarkerGreen.png');
+      game.load.image('playerMark', '/assets/playerMarkGreen.png');
     }
       var cTiles, tTiles, bTiles, mTiles, fTiles, aMarks, pMarks, tray1, tray2, tray3, tray4, tray5, tray6, text;
-
+      var graphics;
     function create() { //initial positions of all pieces on gameBoard
       var background = game.add.sprite(150, 0, 'gameBoard');
 
       var player = game.add.sprite(275, game.world.height-500, 'playerBoard');
+      graphics = game.add.graphics(0, 0);
 
-      var graphics = game.add.graphics(0, 0);
-      text = game.add.text(1075, game.world.height - 1200, '', {fill : '#ffffff'});
+      text = game.add.text(350, game.world.height - 550, '', {fill : '#ffffff'});
 
       cTiles = game.add.group();
 
@@ -108,18 +109,27 @@
       tray6 = game.add.group();
 
       var aMark0 = aMarks.create(800, game.world.height-350, 'actionMark');
+
+      pMarks = game.add.group();
+
+      var pMarkGreen = pMarks.create(253, game.world.height-700, 'playerMark');
+
+
     }
+
     var t1, t2, t3, t4, t5, t6;
+
     function update() {
+
       //let user know what to do
       text.text = "Select a Tray";
 
       //Place Action Markers in correct tray group
       aMarks.forEach(inTray, this, true);
 
+      //senate stuff
+      pMarks.forEach(senateSpaces, this, true);
 
-      console.log(t1);
-      console.log("stuff");
       var x = game.input.activePointer.positionDown.x;
       var y = game.input.activePointer.positionDown.y;
 
@@ -131,6 +141,7 @@
       }
       else if(t3.contains(x,y)){
         select(tray3);
+        text.text = "IN TRAY 3";
       }
       else if(t4.contains(x,y)){
         select(tray4);
@@ -141,6 +152,59 @@
       else if(t6.contains(x,y)){
         select(tray6);
       }
+
+      function select(sourceTray){
+        sourceTray.forEach(move, this, true);
+      }
+
+      function move(marker){
+        marker.inputEnabled = true;
+        marker.input.enableDrag();
+        marker.events.onDragStop.add(stopDrag, this);
+      }
+      function stopDrag(marker){
+        marker.input.draggable = false;
+      }
+      function inTray(marker){
+        t1 = new Phaser.Circle(695, game.world.height-350, 50);
+        t2 = new Phaser.Circle(802, game.world.height-350, 50);
+        t3 = new Phaser.Circle(860, game.world.height-255, 50);
+        t4 = new Phaser.Circle(805, game.world.height-160, 50);
+        t5 = new Phaser.Circle(695, game.world.height-160, 50);
+        t6 = new Phaser.Circle(640, game.world.height-255, 50);
+
+        var x = marker.position.x;
+        var y = marker.position.y;
+        tray1.removeAll();
+        tray2.removeAll();
+        tray3.removeAll();
+        tray4.removeAll();
+        tray5.removeAll();
+        tray6.removeAll();
+
+        if(t1.contains(x,y)){
+          tray1.add(marker);
+          console.log("in tray 1");
+        }
+        else if(t2.contains(x,y)){
+          tray2.add(marker);
+          console.log("in tray 2");
+        }
+        else if(t3.contains(x,y)){
+          tray3.add(marker);
+        }
+        else if(t4.contains(x, y)){
+          tray4.add(marker);
+        }
+        else if(t5.contains(x,y)){
+          tray5.add(marker);
+        }
+        else{
+          tray6.add(marker);
+        }
+      }
+
+
       //check which tile is clicked
       cTiles.forEach(makeActive, this, true);
       bTiles.forEach(makeActive, this, true);
@@ -149,18 +213,7 @@
       fTiles.forEach(makeActive, this, true);
 
     }
-    function select(sourceTray){
-      sourceTray.forEach(move, this, true);
-    }
 
-    function move(marker){
-      marker.inputEnabled = true;
-      marker.input.enableDrag();
-      marker.events.onDragStop.add(stopDrag, this);
-    }
-    function stopDrag(marker){
-      marker.input.draggable = false;
-    }
     function makeActive(currentTile){
       currentTile.inputEnabled = true;
       currentTile.events.onInputDown.add(listener, this);
@@ -169,44 +222,48 @@
       tile.position.x = 0;
       tile.position.y = 0;
     }
-    function inTray(marker){
-      t1 = new Phaser.Circle(695, game.world.height-350, 50);
-      t2 = new Phaser.Circle(802, game.world.height-350, 50);
-      t3 = new Phaser.Circle(860, game.world.height-255, 50);
-      t4 = new Phaser.Circle(805, game.world.height-160, 50);
-      t5 = new Phaser.Circle(695, game.world.height-160, 50);
-      t6 = new Phaser.Circle(640, game.world.height-255, 50);
 
-      var x = marker.position.x;
-      var y = marker.position.y;
-      tray1.removeAll();
-      tray2.removeAll();
-      tray3.removeAll();
-      tray4.removeAll();
-      tray5.removeAll();
-      tray6.removeAll();
-
-      if(t1.contains(x,y)){
-        tray1.add(marker);
-        console.log("in tray 1");
+    function senateSpaces(currentPlayer){
+      var s2 = new Phaser.Circle(393, game.world.height-680, 25);
+      var s3 = new Phaser.Circle(456, game.world.height-680, 25);
+      var s4 = new Phaser.Circle(522, game.world.height-680, 25);
+      var s5 = new Phaser.Circle(585, game.world.height-680, 25);
+      var s6 = new Phaser.Circle(649, game.world.height-680, 25);
+      var s7 = new Phaser.Circle(715, game.world.height-680, 25);
+      var s8 = new Phaser.Circle(778, game.world.height-680, 25);
+      var x = currentPlayer.position.x;
+      var y = currentPlayer.position.y;
+      currentPlayer.inputEnabled = true;
+      currentPlayer.input.enableDrag();
+      if(s2.contains(x,y)){
+        console.log("2 VP");
       }
-      else if(t2.contains(x,y)){
-        tray2.add(marker);
-        console.log("in tray 2");
+      else if(s3.contains(x,y)){
+        console.log("3 VP");
       }
-      else if(t3.contains(x,y)){
-        tray3.add(marker);
+      else if(s4.contains(x,y)){
+        console.log("4 VP");
       }
-      else if(t4.contains(x, y)){
-        tray4.add(marker);
+      else if(s5.contains(x,y)){
+        console.log("5 VP");
       }
-      else if(t5.contains(x,y)){
-        tray5.add(marker);
+      else if(s6.contains(x,y)){
+        console.log("6 VP");
+      }
+      else if(s7.contains(x,y)){
+        console.log("7 VP");
+      }
+      else if(s8.contains(x,y)){
+        console.log("8 VP");
       }
       else{
-        tray6.add(marker);
+        console.log("NO VP");
       }
+
     }
+
+
+
 
   </script>
 
