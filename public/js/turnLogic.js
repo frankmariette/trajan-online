@@ -2,33 +2,46 @@ function turnLogic(){
   //let user know what to do
   text.text = "Select a Tray";
 
-  //Place Action Markers in correct tray group
-  aMarks.forEach(inTray, this, true);
-
   var x = game.input.activePointer.positionDown.x;
   var y = game.input.activePointer.positionDown.y;
 
+  tray1.removeAll();
+  tray2.removeAll();
+  tray3.removeAll();
+  tray4.removeAll();
+  tray5.removeAll();
+  tray6.removeAll();
+
+  graphics.lineStyle(2, 0xFFFF30, 1);
   if(t1.contains(x,y)){
+    graphics.drawCircle(695, game.world.height-350, 50);
+    //Place Action Markers in correct tray group
+    aMarks.forEach(inTray, this, true);
     select(tray1);
     text.text = "TRAY 1";
   }
   else if(t2.contains(x,y)){
+    graphics.drawCircle(802, game.world.height-350, 50);
+    //Place Action Markers in correct tray group
+    aMarks.forEach(inTray, this, true);
     select(tray2);
   }
   else if(t3.contains(x,y)){
-    select(tray3);
+    graphics.drawCircle(860, game.world.height-255, 50);
+    //select(tray3);
   }
   else if(t4.contains(x,y)){
-    select(tray4);
+    graphics.drawCircle(805, game.world.height-160, 50);
+    //select(tray4);
   }
   else if(t5.contains(x,y)){
-    select(tray5);
+    graphics.drawCircle(695, game.world.height-160, 50);
+    //select(tray5);
   }
   else if(t6.contains(x,y)){
-    select(tray6);
+    graphics.drawCircle(640, game.world.height-255, 50);
+    //select(tray6);
   }
-
-
 
   //check which tile is clicked
   cTiles.forEach(makeActive, this, true);
@@ -40,10 +53,13 @@ function turnLogic(){
 }
 
 function select(sourceTray){
-
-  sourceTray.forEach(move, this, true);
+  sourceTray.forEach(lineUp, this, true);
+  //sourceTray.forEach(move, this, true);
 }
-
+function lineUp(marker){
+  marker.position.x = 640;
+  marker.position.y = game.world.height-350;
+}
 function move(marker){
   marker.inputEnabled = true;
   marker.input.enableDrag();
@@ -54,34 +70,29 @@ function stopDrag(marker){
 }
 function inTray(marker){
 
-  var x = marker.position.x;
-  var y = marker.position.y;
-  tray1.removeAll();
-  tray2.removeAll();
-  tray3.removeAll();
-  tray4.removeAll();
-  tray5.removeAll();
-  tray6.removeAll();
+  var mx = marker.position.x;
+  var my = marker.position.y;
 
-  if(t1.contains(x,y)){
+
+  if(t1.contains(mx,my)){
     tray1.add(marker);
     console.log("in tray 1");
   }
-  else if(t2.contains(x,y)){
+  else if(t2.contains(mx,my)){
     tray2.add(marker);
     console.log("in tray 2");
   }
-  else if(t3.contains(x,y)){
-    tray3.add(marker);
+  else if(t3.contains(mx,my)){
+
   }
-  else if(t4.contains(x, y)){
-    tray4.add(marker);
+  else if(t4.contains(mx,my)){
+
   }
-  else if(t5.contains(x,y)){
-    tray5.add(marker);
+  else if(t5.contains(mx,my)){
+
   }
   else{
-    tray6.add(marker);
+
   }
 }
 
