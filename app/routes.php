@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', array('uses' => 'HomeController@index'));
+Route::get('/', array('uses' => 'HomeController@welcome'));
 
 Route::get('/login', array('uses' => 'UserController@showLogin'));
 Route::post('/login', array('uses' => 'UserController@doLogin'));
@@ -21,10 +21,12 @@ Route::get('/logout', array('uses' => 'UserController@doLogout'));
 Route::get('/register', array('uses' => 'UserController@showRegister'));
 Route::post('/register', array('uses'=> 'UserController@doRegister'));
 
-//Test Routes!
-Route::get('/welcome', array('uses'=> 'HomeController@welcome'));
-Route::get('/createPublic', array('uses'=> 'GameController@createPublic'));
-Route::get('/createPrivate', array('uses'=> 'GameController@createPrivate'));
-Route::get('/gamePage', array('uses'=> 'GameController@gamePage'));
-Route::get('/senate', array('uses' => 'SenateController@action'));
+// Game Routes
+// Route::get('/', array('uses'=> 'HomeController@welcome'));
+Route::get('/createpublic', array('uses'=> 'GameController@createPublic'));
+Route::get('/createprivate', array('uses'=> 'GameController@createPrivate'));
+Route::get('/gamepage', array('uses'=> 'GameController@gamePage'));
+
+
+// Routes for actions
 Route::post('/senate', array('uses' => 'SenateController@action'));
