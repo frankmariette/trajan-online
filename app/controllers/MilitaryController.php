@@ -18,12 +18,12 @@ class MilitaryController extends BaseController {
 
     if(Input::get('discardTile') == true)
     {
-      $this->military = new MilitaryAction(Input::get('subAction'), $playerNum);
+      $this->military2 = new MilitaryAction(Input::get('subAction'), $playerNum);
     }
     else if(Input::get('discard2Tiles') == true)
     {
-      $this->military = new MilitaryAction(Input::get('subAction'), $playerNum);
-      $this->military = new MilitaryAction(Input::get('subAction'), $playerNum);
+      $this->military2 = new MilitaryAction(Input::get('subAction'), $playerNum);
+      $this->military3 = new MilitaryAction(Input::get('subAction'), $playerNum);
     }
   }
 
