@@ -34,7 +34,9 @@
     }
 
     function update() {
-      turnLogic(); //do we need to send current player info?
+      // turnLogic(); //do we need to send current player info?
+      senateLogic();
+      game.paused = true;
     }
   </script>
 
