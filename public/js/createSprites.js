@@ -88,10 +88,11 @@ function createSprites(){
   //var aMark2 = aMarks.create(800, game.world.height-340, 'actionMarkG');
   //var aMark3 = aMarks.create(810, game.world.height-340, 'actionMarkG2');
 
-  pMarks = game.add.group();
+  senateGroup = game.add.group();
 
-  var pMarkGreen = pMarks.create(253, game.world.height-700, 'playerMark');
 
+  var senateMarkGreen = senateGroup.create(253, game.world.height-700, 'playerMark');
+  
   t1 = new Phaser.Circle(695, game.world.height-350, 50);
   t2 = new Phaser.Circle(802, game.world.height-350, 50);
   t3 = new Phaser.Circle(860, game.world.height-255, 50);

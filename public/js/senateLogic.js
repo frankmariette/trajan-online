@@ -1,19 +1,33 @@
-function senateLogic(){
-  //senate stuff
-  pMarks.forEach(senateSpaces, this, true);
+
+// Class Definition
+function Senate(){
+  this.s2 = new Phaser.Circle(393, game.world.height-680, 25);
+  this.s3 = new Phaser.Circle(456, game.world.height-680, 25);
+  this.s4 = new Phaser.Circle(522, game.world.height-680, 25);
+  this.s5 = new Phaser.Circle(585, game.world.height-680, 25);
+  this.s6 = new Phaser.Circle(649, game.world.height-680, 25);
+  this.s7 = new Phaser.Circle(715, game.world.height-680, 25);
+  this.s8 = new Phaser.Circle(778, game.world.height-680, 25);
+
 }
-function senateSpaces(currentPlayer){
-  var s2 = new Phaser.Circle(393, game.world.height-680, 25);
-  var s3 = new Phaser.Circle(456, game.world.height-680, 25);
-  var s4 = new Phaser.Circle(522, game.world.height-680, 25);
-  var s5 = new Phaser.Circle(585, game.world.height-680, 25);
-  var s6 = new Phaser.Circle(649, game.world.height-680, 25);
-  var s7 = new Phaser.Circle(715, game.world.height-680, 25);
-  var s8 = new Phaser.Circle(778, game.world.height-680, 25);
+
+Senate.prototype.playerVPGain = function(currentPlayer) {
   var x = currentPlayer.position.x;
   var y = currentPlayer.position.y;
   currentPlayer.inputEnabled = true;
   currentPlayer.input.enableDrag();
+}
+
+
+
+
+function senateLogic(){
+  //senate stuff
+  senateGroup.forEach(senateSpaces, this, true);
+}
+function senateSpaces(currentPlayer){
+  
+
   if(s2.contains(x,y)){
     console.log("2 VP");
   }
