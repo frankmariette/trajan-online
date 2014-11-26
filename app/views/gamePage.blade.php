@@ -21,7 +21,7 @@
   <script>
 
     var game = new Phaser.Game(1300, 1800, Phaser.AUTO, 'gameboard', {preload: preload, create: create, update: update});
-    // var game = new Phaser.Game('100', '100', Phaser.AUTO, 'gameboard', {preload: preload, create: create, update: update});
+    var turnState = new Phaser.State();
 
     function preload() { //load images for each game piece
       loadStuff();
