@@ -104,4 +104,11 @@ function createSprites(){
   t5 = new Phaser.Circle(695, game.world.height-160, 75);
   t6 = new Phaser.Circle(640, game.world.height-255, 75);
   markerBounds = new Phaser.Rectangle(630, game.world.height-510, 300, 30);
+
+  littlePeople = game.add.group();
+
+  var lp0 = littlePeople.create(925, game.world.height-390, 'actionMarkO'); //make this be a dude later
+  lpStartBox = new Phaser.Rectangle(890, game.world.height-475, 100, 180);
+  legionairreCamp = new Phaser.Rectangle(705,game.world.height-1520, 200, 100);
+  constructionCamp = new Phaser.Rectangle(500,game.world.height-1210, 200, 100);
 }

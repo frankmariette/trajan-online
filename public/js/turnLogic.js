@@ -11,7 +11,7 @@ function turnLogic(){
     text.text = "Move Cursor Over a Marker to Place it in the Next Tray";
     aMarks.forEach(placeMarkers, this, true);
   }
-  if(busy == 'senate'){
+  if(busy == 'seaport'){
     text.text = "Seaport Action";
     //call senate logic
   }
@@ -44,22 +44,12 @@ function turnLogic(){
   fTiles.forEach(makeActive, this, true);
 
 }
-/* Don't think I need these two
-function move(marker){
-  marker.inputEnabled = true;
-  marker.input.enableDrag();
-  marker.events.onDragStop.add(stopDrag, this);
-}
-function stopDrag(marker){
-  //marker.input.draggable = false;
-} */
 
 function makeActive(currentTile){
 currentTile.inputEnabled = true;
-currentTile.events.onInputDown.add(listener, this);
+currentTile.events.onInputDown.add(listener, this); //if this piece is clicked, move it
 }
-
-function listener(tile){
+function listener(tile){ //this is how you add a callback to move a piece!
 tile.position.x = 0;
 tile.position.y = 0;
 }
