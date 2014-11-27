@@ -8,19 +8,21 @@
   </style>
 
   <script src='//cdnjs.cloudflare.com/ajax/libs/phaser/2.1.2/phaser.min.js'></script>
-  <script src='/assets/loadGame.js'></script>
-  <script src='/assets/createSprites.js'></script>
-  <script src='/assets/turnLogic.js'></script>
-  <script src='/assets/seaportLogic.js'></script>
-  <script src='/assets/forumLogic.js'></script>
-  <script src='/assets/militaryLogic.js'></script>
-  <script src='/assets/senateLogic.js'></script>
-  <script src='/assets/trajanLogic.js'></script>
-  <script src='/assets/constructionLogic.js'></script>
+  <script src='/js/loadGame.js'></script>
+  <script src='/js/createSprites.js'></script>
+  <script src='/js/turnLogic.js'></script>
+  <script src='/js/seaportLogic.js'></script>
+  <script src='/js/forumLogic.js'></script>
+  <script src='/js/militaryLogic.js'></script>
+  <script src='/js/senateLogic.js'></script>
+  <script src='/js/trajanLogic.js'></script>
+  <script src='/js/constructionLogic.js'></script>
+  <script src='js/getTray.js'></script>
+  <script src='js/placeMarkers.js'></script>
   <script>
 
-    var game = new Phaser.Game('80', '80', Phaser.AUTO, '', {preload: preload, create: create, update: update});
-    // var game = new Phaser.Game('100', '100', Phaser.AUTO, 'gameboard', {preload: preload, create: create, update: update});
+    var game = new Phaser.Game(1300, 1800, Phaser.AUTO, 'gameboard', {preload: preload, create: create, update: update});
+    var turnState = new Phaser.State();
 
     function preload() { //load images for each game piece
       loadStuff();
