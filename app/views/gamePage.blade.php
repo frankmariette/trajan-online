@@ -6,7 +6,6 @@
     overflow: auto;
    }
   </style>
-  <div id="gameboard"></div>
 
   <script src='//cdnjs.cloudflare.com/ajax/libs/phaser/2.1.2/phaser.min.js'></script>
   <script src='/js/loadGame.js'></script>
@@ -23,7 +22,6 @@
   <script>
 
     var game = new Phaser.Game(1300, 1800, Phaser.AUTO, 'gameboard', {preload: preload, create: create, update: update});
-    var turnState = new Phaser.State();
 
     function preload() { //load images for each game piece
       loadStuff();
