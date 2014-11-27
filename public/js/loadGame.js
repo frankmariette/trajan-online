@@ -1,4 +1,4 @@
-  function loadStuff() { //load images for each game piece
+  function loadImages() { //load images for each game piece
     game.load.image('gameBoard', '/assets/gameBoardFinal.png');
     game.load.image('playerBoard', '/assets/pBoard.png');
     game.load.image('tile', '/assets/cDoorTile.png');
