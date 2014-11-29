@@ -9,7 +9,6 @@ class ActionCircle extends PlayerMat {
 	function __construct(){ 
 		$this->select_tray;
 		$this->target_tray;
-		$this->something = "HELLO!";
 		$this->randCircle();
 	}
 	public function randCircle(){
@@ -28,7 +27,7 @@ class ActionCircle extends PlayerMat {
 		}
 		$this->circle =  $circle;
 	}
-	public function move(){//chosen tray
+	public function move(){
 		$k = 0;
 		$count = count($this->circle[$this->select_tray]);
 		while($k<$count){
@@ -41,14 +40,6 @@ class ActionCircle extends PlayerMat {
 			$k++;
 		}
 		$this->target_tray =  $spot;//target tray
-	}
-
-
-	public function get(){
-	
-	}
-	public function set(){
-	
 	}
 }
 
@@ -82,7 +73,7 @@ function randTray(){
 /* It splits the pieces in the tray one by one to the next consecutive tray. */
 /* Returns target tray index.                                                */
 /*****************************************************************************/
-function move(&$tray, $tid){//chosen tray
+function move_marker(&$tray, $tid){//chosen tray
 	$k = 0;
 	$count = count($tray[$tid]);
 	while($k<$count){

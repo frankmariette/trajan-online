@@ -1,14 +1,12 @@
 <?php 
 class Seaport{
 	function __construct(){
-		$this->$playerCards = $cards;
-		$this->$display;
+		$this->playerCards;
+		$this->display;
 	}
-	public $playerCards;
-	public $faceDownCards;
-	public $discardOne;
-	public $discardTwo;
-	public function doAction(){}
+	public function fillHand(){
+		$this->playerCards = array(23, 24, 25, 26, 27);
+	}
 	public function shipCommodity(&$chosenCards){
 		if(seaportValidity($chosenCards)){
 			$vp = seaportValidity($chosenCards);
@@ -36,7 +34,9 @@ class Seaport{
 		unset($this->playerCards[$disc_id]);
 	}
 	public function drawOne(&$discardPile){
-			$this->playerCards[] = array_rand($discardPile);
+		$draw = array_rand($discardPile);	
+		$this->playerCards[] = $discardPile[$draw];
+		unset($discardPile[$draw]);
 	}
 	/*Second index is optional. */
 	public function playCards($index1, $index2=null){
