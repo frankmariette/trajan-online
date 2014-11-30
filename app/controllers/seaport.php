@@ -1,4 +1,4 @@
-<?php 
+<?php
 class Seaport{
 	function __construct(){
 		$this->playerCards;
@@ -15,7 +15,7 @@ class Seaport{
 		unset($faceDownCards[3]);
 	}
 	public function shipCommodity(&$chosenCards){
-		//determine all different 
+		//determine all different
 		if($comm == 1){
 			$correct;
 			for($j=0; $j<count($chosenCards); $j++){
@@ -25,7 +25,7 @@ class Seaport{
 			}
 
 		}
-		//determine all same
+		//determine all the same
 		if($comm == 2){
 			$correct;
 			for($j=0; $j<count($chosenCards); $j++){
@@ -60,7 +60,7 @@ class Seaport{
 		unset($this->playerCards[$disc_id]);
 	}
 	public function drawOne(&$discardPile){
-		$draw = array_rand($discardPile);	
+		$draw = array_rand($discardPile);
 		$this->playerCards[] = $discardPile[$draw];
 		unset($discardPile[$draw]);
 	}
