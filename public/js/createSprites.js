@@ -70,17 +70,20 @@ function createSprites(){
   var raetia = mTiles.create(780, game.world.height - 1614, 'forum');
   var noricum = mTiles.create(960, game.world.height - 1596, 'forum');
 
-  bTiles = game.add.group();
+  bTiles = game.add.group(); // gold things
 
   var bTile0 = bTiles.create(850, game.world.height - 750, 'bonus');
   var bTile1 = bTiles.create(960, game.world.height - 750, 'bonus');
 
   aMarks = game.add.group();
 
+  // Tray 2 markers
   var aMark0 = aMarks.create(775, game.world.height-375, 'actionMarkO');
   var aMark1 = aMarks.create(810, game.world.height-375, 'actionMarkO');
-  var aMark2 = aMarks.create(775, game.world.height-340, 'actionMarkG');
-  var aMark3 = aMarks.create(810, game.world.height-340, 'actionMarkG');
+  // var aMark2 = aMarks.create(775, game.world.height-340, 'actionMarkG');
+  // var aMark3 = aMarks.create(810, game.world.height-340, 'actionMarkG');
+
+  // Tray 1 markers
   var aMark4 = aMarks.create(675, game.world.height-375, 'actionMarkO');
   var aMark5 = aMarks.create(675, game.world.height-345, 'actionMarkG');
   var aMark6 = aMarks.create(705, game.world.height-375, 'actionMarkO');
@@ -89,20 +92,21 @@ function createSprites(){
   pMarks = game.add.group();
 
   var pMarkGreen = pMarks.create(253, game.world.height-700, 'playerMark');
+  var pMarkRed = pMarks.create(303, game.world.height-700, 'playerMark');
 
-  tray1 = game.add.group();
-  tray2 = game.add.group();
-  tray3 = game.add.group();
-  tray4 = game.add.group();
-  tray5 = game.add.group();
-  tray6 = game.add.group();
+  seaportTrayGroup = game.add.group();
+  forumTrayGroup = game.add.group();
+  militaryTrayGroup = game.add.group();
+  senateTrayGroup = game.add.group();
+  trajanTrayGroup = game.add.group();
+  constructionTrayGroup = game.add.group();
 
-  t1 = new Phaser.Circle(695, game.world.height-350, 75);
-  t2 = new Phaser.Circle(802, game.world.height-350, 75);
-  t3 = new Phaser.Circle(860, game.world.height-255, 75);
-  t4 = new Phaser.Circle(805, game.world.height-160, 75);
-  t5 = new Phaser.Circle(695, game.world.height-160, 75);
-  t6 = new Phaser.Circle(640, game.world.height-255, 75);
+  seaportTray = new Phaser.Circle(695, game.world.height-350, 75);
+  forumTray = new Phaser.Circle(802, game.world.height-350, 75);
+  militaryTray = new Phaser.Circle(860, game.world.height-255, 75);
+  senateTray = new Phaser.Circle(805, game.world.height-160, 75);
+  trajanTray = new Phaser.Circle(695, game.world.height-160, 75);
+  constructionTray = new Phaser.Circle(640, game.world.height-255, 75);
   markerBounds = new Phaser.Rectangle(630, game.world.height-510, 300, 30);
 
   littlePeople = game.add.group();
