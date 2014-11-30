@@ -32,10 +32,12 @@
 
     function create() { //initial positions of all pieces on gameBoard
       createSprites();
+      trajanLogic();
     }
 
     function update() {
       turnLogic(); //do we need to send current player info?
+//      game.paused = true;
     }
   </script>
 

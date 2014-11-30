@@ -1,5 +1,5 @@
 var linespot = 640;
-var busy = 'selectTray';
+var busy = 'trajan';
 function turnLogic(){
 
   if(busy == 'selectTray'){
@@ -29,7 +29,6 @@ function turnLogic(){
   }
   if(busy == 'trajan'){
     text.text = "Trajan Action";
-    //call trajan logic
   }
   if(busy == 'construction'){
     text.text = "Construction Action";
