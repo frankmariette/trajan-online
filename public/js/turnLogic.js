@@ -1,31 +1,39 @@
+var linespot = 640;
+var busy = 'selectTray';
 function turnLogic(){
-  //let user know what to do
-  text.text = "Select a Tray";
 
-  //Place Action Markers in correct tray group
-  aMarks.forEach(inTray, this, true);
-
-  var x = game.input.activePointer.positionDown.x;
-  var y = game.input.activePointer.positionDown.y;
-
-  if(t1.contains(x,y)){
-    select(tray1);
-    text.text = "TRAY 1";
+  if(busy == 'selectTray'){
+    //let user know what to do
+    text.text = "Select a Tray";
   }
-  else if(t2.contains(x,y)){
-    select(tray2);
+  game.input.onUp.add(getTray);
+  if(busy == 'placeMarkers'){
+    text.text = "Move Cursor Over a Marker to Place it in the Next Tray";
+    aMarks.forEach(placeMarkers, this, true);
   }
-  else if(t3.contains(x,y)){
-    select(tray3);
+  if(busy == 'seaport'){
+    text.text = "Seaport Action";
+    //call senate logic
   }
-  else if(t4.contains(x,y)){
-    select(tray4);
+  if(busy == 'forum'){
+    text.text = "Forum Action";
+    //call forum logic
   }
-  else if(t5.contains(x,y)){
-    select(tray5);
+  if(busy == 'military'){
+    text.text = "Military Action";
+    //call mil logic
   }
-  else if(t6.contains(x,y)){
-    select(tray6);
+  if(busy == 'senate'){
+    text.text = "Senate Action";
+    //call senate logic
+  }
+  if(busy == 'trajan'){
+    text.text = "Trajan Action";
+    //call trajan logic
+  }
+  if(busy == 'construction'){
+    text.text = "Construction Action";
+    //call construct logic
   }
 
   //check which tile is clicked
@@ -37,57 +45,11 @@ function turnLogic(){
 
 }
 
-function select(sourceTray){
-  sourceTray.forEach(move, this, true);
-}
-
-function move(marker){
-  marker.inputEnabled = true;
-  marker.input.enableDrag();
-  marker.events.onDragStop.add(stopDrag, this);
-}
-function stopDrag(marker){
-  marker.input.draggable = false;
-}
-function inTray(marker){
-
-  var x = marker.position.x;
-  var y = marker.position.y;
-  tray1.removeAll();
-  tray2.removeAll();
-  tray3.removeAll();
-  tray4.removeAll();
-  tray5.removeAll();
-  tray6.removeAll();
-
-  if(t1.contains(x,y)){
-    tray1.add(marker);
-    console.log("in tray 1");
-  }
-  else if(t2.contains(x,y)){
-    tray2.add(marker);
-    console.log("in tray 2");
-  }
-  else if(t3.contains(x,y)){
-    tray3.add(marker);
-  }
-  else if(t4.contains(x, y)){
-    tray4.add(marker);
-  }
-  else if(t5.contains(x,y)){
-    tray5.add(marker);
-  }
-  else{
-    tray6.add(marker);
-  }
-}
-
 function makeActive(currentTile){
 currentTile.inputEnabled = true;
-currentTile.events.onInputDown.add(listener, this);
+currentTile.events.onInputDown.add(listener, this); //if this piece is clicked, move it
 }
-
-function listener(tile){
+function listener(tile){ //this is how you add a callback to move a piece!
 tile.position.x = 0;
 tile.position.y = 0;
 }
