@@ -18,24 +18,24 @@ function turnLogic(){
 }
 
 function ifPlacedInTray(x,y){
-  if(t1.contains(x,y)){
-    select(tray1);
-    text.text = "TRAY 1";
+  if(seaportTray.contains(x,y)){
+    select(seaportTrayGroup);
+    text.text = "Seaport Tray";
   }
-  else if(t2.contains(x,y)){
-    select(tray2);
+  else if(forumnTray.contains(x,y)){
+    select(forumnTrayGroup);
   }
-  else if(t3.contains(x,y)){
-    select(tray3);
+  else if(militaryTray.contains(x,y)){
+    select(militaryTrayGroup);
   }
-  else if(t4.contains(x,y)){
-    select(tray4);
+  else if(senateTray.contains(x,y)){
+    select(senateTrayGroup);
   }
-  else if(t5.contains(x,y)){
-    select(tray5);
+  else if(trajanTray.contains(x,y)){
+    select(trajanTrayGroup);
   }
-  else if(t6.contains(x,y)){
-    select(tray6);
+  else if(constructionTray.contains(x,y)){
+    select(constructionTrayGroup);
   }
 }
 
@@ -62,25 +62,25 @@ function inTray(marker){
   trajanTray.removeAll();
   constructionTray.removeAll();
 
-  if(t1.contains(x,y)){
-    tray1.add(marker);
-    console.log("in tray 1");
+  if(seaportTray.contains(x,y)){
+    seaportTrayGroup.add(marker);
+    console.log("in seaport tray");
   }
-  else if(t2.contains(x,y)){
-    tray2.add(marker);
-    console.log("in tray 2");
+  else if(forumnTray.contains(x,y)){
+    forumnTray.add(marker);
+    console.log("in forum tray");
   }
-  else if(t3.contains(x,y)){
-    tray3.add(marker);
+  else if(militaryTray.contains(x,y)){
+    militaryTrayGroup.add(marker);
   }
-  else if(t4.contains(x, y)){
-    tray4.add(marker);
+  else if(senateTray.contains(x, y)){
+    senateTrayGroup.add(marker);
   }
-  else if(t5.contains(x,y)){
-    tray5.add(marker);
+  else if(trajanTray.contains(x,y)){
+    trajanTrayGroup.add(marker);
   }
-  else{
-    tray6.add(marker);
+  else if(constructionTray.contains(x,y){
+    constructionTrayGroup.add(marker);
   }
 }
 
