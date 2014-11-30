@@ -5,7 +5,11 @@ class Seaport{
 		$this->display;
 	}
 	public function fillHand(){
-		$this->playerCards = array(23, 24, 25, 26, 27);
+		$this->playerCards[] = $faceDownCards[0];
+		$this->playerCards[] = $faceDownCards[1];
+		$this->playerCards[] = $faceDownCards[2];
+		$this->playerCards[] = $faceDownCards[3];
+		unset($faceDownCards[0]);
 	}
 	public function shipCommodity(&$chosenCards){
 		if(seaportValidity($chosenCards)){
