@@ -1,6 +1,6 @@
 function createSprites(){
   var background = game.add.sprite(150, 0, 'gameBoard');
-
+  
   var player = game.add.sprite(275, game.world.height-500, 'playerBoard');
   graphics = game.add.graphics(0, 0);
 
