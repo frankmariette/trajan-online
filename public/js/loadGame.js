@@ -3,7 +3,7 @@
     game.load.image('playerBoard', '/assets/pBoard.png');
     game.load.image('tile', '/assets/cDoorTile.png');
     game.load.image('card', '/assets/cCardWheat.png');
-    game.load.image('trajan', '/assets/trajanTile00.png')
+    game.load.image('trajan', '/assets/tTile01.png')
     game.load.image('forum', '/assets/fTileGame.png')
     game.load.spritesheet('bonus', '/assets/bonus00.png', 100, 156);
     game.load.spritesheet('bonus2', '/assets/bonus01.png', 100, 156);
