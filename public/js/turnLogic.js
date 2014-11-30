@@ -1,6 +1,7 @@
+
+var linespot = 640;
+var busy = 'selectTray';
 function turnLogic(){
-  //let user know what to do
-  text.text = "Select a Tray";
 
   //Place Action Markers in correct tray group
   aMarks.forEach(inTray, this, true);
@@ -41,12 +42,14 @@ function select(sourceTray){
   sourceTray.forEach(move, this, true);
 }
 
+/* Don't think I need these two
 function move(marker){
   marker.inputEnabled = true;
   marker.input.enableDrag();
   marker.events.onDragStop.add(stopDrag, this);
 }
 function stopDrag(marker){
+
   marker.input.draggable = false;
 }
 function inTray(marker){
@@ -81,6 +84,9 @@ function inTray(marker){
     tray6.add(marker);
   }
 }
+  //marker.input.draggable = false;
+} */
+
 
 function makeActive(currentTile){
 currentTile.inputEnabled = true;

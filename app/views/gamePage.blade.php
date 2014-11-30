@@ -17,6 +17,8 @@
   <script src='/js/senateLogic.js'></script>
   <script src='/js/trajanLogic.js'></script>
   <script src='/js/constructionLogic.js'></script>
+  <script src='js/getTray.js'></script>
+  <script src='js/placeMarkers.js'></script>
   <script>
 
     var game = new Phaser.Game(1300, 1800, Phaser.AUTO, 'gameboard', {preload: preload, create: create, update: update});
