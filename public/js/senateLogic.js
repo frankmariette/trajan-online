@@ -3,6 +3,7 @@ function senateLogic(){
   pMarks.forEach(senateSpaces, this, true);
 }
 function senateSpaces(currentPlayer){
+
   var s2 = new Phaser.Circle(393, game.world.height-680, 25);
   var s3 = new Phaser.Circle(456, game.world.height-680, 25);
   var s4 = new Phaser.Circle(522, game.world.height-680, 25);

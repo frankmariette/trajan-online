@@ -73,7 +73,7 @@ function createSprites(){
   bTiles = game.add.group();
 
   var bTile0 = bTiles.create(850, game.world.height - 750, 'bonus');
-  var bTile1 = bTiles.create(960, game.world.height - 750, 'bonus');
+  var bTile1 = bTiles.create(960, game.world.height - 750, 'bonus2');
 
   ships = game.add.group();
 
@@ -82,13 +82,23 @@ function createSprites(){
   aMarks = game.add.group();
 
   var aMark0 = aMarks.create(775, game.world.height-375, 'actionMarkO');
-  var aMark1 = aMarks.create(810, game.world.height-375, 'actionMarkO');
-  var aMark2 = aMarks.create(775, game.world.height-340, 'actionMarkG');
+  var aMark1 = aMarks.create(810, game.world.height-175, 'actionMarkO');
+  var aMark2 = aMarks.create(660, game.world.height-175, 'actionMarkG');
   var aMark3 = aMarks.create(810, game.world.height-340, 'actionMarkG');
-  var aMark4 = aMarks.create(675, game.world.height-375, 'actionMarkO');
-  var aMark5 = aMarks.create(675, game.world.height-345, 'actionMarkG');
-  var aMark6 = aMarks.create(705, game.world.height-375, 'actionMarkO');
-  var aMark6 = aMarks.create(705, game.world.height-345, 'actionMarkG');
+  var aMark4 = aMarks.create(675, game.world.height-375, 'actionMarkY');
+  var aMark5 = aMarks.create(775, game.world.height-175, 'actionMarkY');
+  var aMark6 = aMarks.create(705, game.world.height-375, 'actionMarkB');
+  var aMark7 = aMarks.create(705, game.world.height-175, 'actionMarkB');
+  var aMark8 = aMarks.create(825, game.world.height-260, 'actionMarkW');
+  var aMark9 = aMarks.create(645, game.world.height-280, 'actionMarkW');
+  var aMark10 = aMarks.create(620, game.world.height-280, 'actionMarkP');
+  var aMark11 = aMarks.create(845, game.world.height-280, 'actionMarkP');
+
+  cards = game.add.group();
+
+  var cCard0 = cards.create(1000, game.world.height-500, 'card');
+  var cCard1 = cards.create(1125, game.world.height-500, 'card');
+  var cCard2 = cards.create(1250, game.world.height-500, 'card');
 
   pMarks = game.add.group();
 
@@ -115,6 +125,9 @@ function createSprites(){
   lpStartBox = new Phaser.Rectangle(890, game.world.height-475, 100, 180);
   legionairreCamp = new Phaser.Rectangle(705,game.world.height-1520, 200, 100);
   constructionCamp = new Phaser.Rectangle(500,game.world.height-1210, 200, 100);
+
+  leader = game.add.group();
+  var bigTree = leader.create(725, game.world.height - 1520, 'bigTree');
 
   trajan = game.add.group();
   var arch = trajan.create(605, game.world.height-435, 'tArch');

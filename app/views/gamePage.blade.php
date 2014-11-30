@@ -21,13 +21,13 @@
   <script src='js/placeMarkers.js'></script>
   <script>
 
-    var game = new Phaser.Game(1300, 1800, Phaser.AUTO, 'gameboard', {preload: preload, create: create, update: update});
+    var game = new Phaser.Game(1600, 1800, Phaser.AUTO, 'gameboard', {preload: preload, create: create, update: update});
 
     function preload() { //load images for each game piece
       loadStuff();
     }
 
-    var cTiles, tTiles, bTiles, mTiles, fTiles, aMarks, pMarks, littlePeople, tray1, tray2, tray3, tray4, tray5, tray6, text, ships, trajan;
+    var cTiles, tTiles, bTiles, mTiles, fTiles, aMarks, pMarks, littlePeople, tray1, tray2, tray3, tray4, tray5, tray6, text, ships, trajan, leader, cards;
     var graphics, t1, t2, t3, t4, t5, t6;
 
     function create() { //initial positions of all pieces on gameBoard

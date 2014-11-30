@@ -1,4 +1,5 @@
 var currentTray;
+var i = 0;
 function placeMarkers(marker){
   if(busy != 'placeMarkers'){
     return;
@@ -13,35 +14,36 @@ function placeMarkers(marker){
     if(marker.input.pointerOver()){ //get if pointer is over marker
       if(markerBounds.contains(mx, my)){ //make sure marker is part of source tray group
         if(currentTray == t1){ //add marker to next tray
-          marker.position.x = t2.x;
-          marker.position.y = t2.y;
+          marker.position.x = t2.x + i;
+          marker.position.y = t2.y + i;
           currentTray = t2;
         }
         else if(currentTray == t2){
-          marker.position.x = t3.x;
-          marker.position.y = t3.y;
+          marker.position.x = t3.x + i;
+          marker.position.y = t3.y + i;
           currentTray = t3;
         }
         else if(currentTray == t3){
-          marker.position.x = t4.x;
-          marker.position.y = t4.y;
+          marker.position.x = t4.x + i;
+          marker.position.y = t4.y + i;
           currentTray = t4;
         }
         else if(currentTray == t4){
-          marker.position.x = t5.x;
-          marker.position.y = t5.y;
+          marker.position.x = t5.x + i;
+          marker.position.y = t5.y + i;
           currentTray = t5;
         }
         else if(currentTray == t5){
-          marker.position.x = t6.x;
-          marker.position.y = t6.y;
+          marker.position.x = t6.x + i;
+          marker.position.y = t6.y + i;
           currentTray = t6;
         }
         else{
-          marker.position.x = t1.x;
-          marker.position.y = t1.y;
+          marker.position.x = t1.x + i;
+          marker.position.y = t1.y + i;
           currentTray = t1;
         }
+        i += 5;
       }
     }
   }
