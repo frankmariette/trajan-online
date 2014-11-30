@@ -108,6 +108,8 @@ function createSprites(){
   littlePeople = game.add.group();
 
   var lp0 = littlePeople.create(925, game.world.height-390, 'actionMarkO'); //make this be a dude later
+  var lp1 = littlePeople.create(925, game.world.height-410, 'actionMarkO'); //make this be a dude later
+  var lp2 = littlePeople.create(925, game.world.height-370, 'actionMarkO'); //make this be a dude later
   lpStartBox = new Phaser.Rectangle(890, game.world.height-475, 100, 180);
   legionairreCamp = new Phaser.Rectangle(705,game.world.height-1520, 200, 100);
   constructionCamp = new Phaser.Rectangle(500,game.world.height-1210, 200, 100);

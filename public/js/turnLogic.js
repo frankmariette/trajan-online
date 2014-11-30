@@ -43,6 +43,8 @@ function turnLogic(){
   tTiles.forEach(makeActive, this, true);
   fTiles.forEach(makeActive, this, true);
 
+  littlePeople.forEach(makeActive, this, true);
+
 }
 
 function makeActive(currentTile){
@@ -50,6 +52,6 @@ currentTile.inputEnabled = true;
 currentTile.events.onInputDown.add(listener, this); //if this piece is clicked, move it
 }
 function listener(tile){ //this is how you add a callback to move a piece!
-tile.position.x = 0;
-tile.position.y = 0;
+tile.position.x = 580;
+tile.position.y = 600;
 }
