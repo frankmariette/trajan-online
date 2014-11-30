@@ -36,6 +36,7 @@
 
     function update() {
       turnLogic(); //do we need to send current player info?
+      console.log(game.input.activePointer.positionDown.x, game.input.activePointer.positionDown.y);
     }
   </script>
 
