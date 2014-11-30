@@ -22,30 +22,15 @@ function turnLogic(){
   }
   if(busy == 'military'){
     //game.paused = true;
-    text.text = "Military Action";
-    text.text= text.text + "\nLeft- Move Token to Camp \nUp- Move Troop to Leader \nRight- Move leader to Adj Providence";
-    var action=0;
-    keys = game.input.keyboard.createCursorKeys();
-    keys.start;
-    if(keys.left.isDown)
-    {
-      action=1;
-    }
-    else if(keys.up.isDown)
-    {
-      action=2;
-    }
-    else if(keys.right.isDown)
-    {
-      action=3;
-    }
-    console.log(action);
+    //var action=0;
+
+    //console.log(action);
     //call mil logic
-    militaryLogic(action);
+    militaryLogic();
     //busy = 'selectTray';
     //game.paused = true;
     //game.paused = false;
-    busy='selectTray';
+    //busy='selectTray';
   }
   if(busy == 'senate'){
     busy = 'selectTray'
