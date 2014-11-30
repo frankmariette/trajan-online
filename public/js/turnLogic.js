@@ -1,6 +1,5 @@
 var linespot = 640;
 var busy = 'selectTray';
-var senateAction = new Senate();
 
 function turnLogic(){
 
@@ -26,8 +25,10 @@ function turnLogic(){
     //call mil logic
   }
   if(busy == 'senate'){
-    text.text = "Senate Action";
-    //call senate logic
+    busy = 'selectTray'
+    text.text = "Click your senate marker";
+    var senate = senateLogic();
+    pMarks.forEach(senateListener, senate, true);
   }
   if(busy == 'trajan'){
     text.text = "Trajan Action";
@@ -49,7 +50,12 @@ function turnLogic(){
 
 function makeActive(currentTile){
   currentTile.inputEnabled = true;
-  currentTile.events.onInputDown.add(listener, this); //if this piece is clicked, move it
+  currentTile.events.onInputDown.addOnce(listener, this); //if this piece is clicked, move it
+}
+
+function senateListener(senateTile){
+  senateTile.inputEnabled = true;
+  senateTile.events.onInputDown.add(this.senateSpaces, this);
 }
 function listener(tile){ //this is how you add a callback to move a piece!
   tile.position.x = 0;

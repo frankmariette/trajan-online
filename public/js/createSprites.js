@@ -92,6 +92,7 @@ function createSprites(){
   pMarks = game.add.group();
 
   var pMarkGreen = pMarks.create(253, game.world.height-700, 'playerMark');
+  var pMarkRed = pMarks.create(303, game.world.height-700, 'playerMark');
 
   seaportTrayGroup = game.add.group();
   forumTrayGroup = game.add.group();
