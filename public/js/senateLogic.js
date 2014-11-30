@@ -2,6 +2,7 @@
 // Class Definition
 function Senate(){
   this.victory_points = 0;
+  this.votes = 0;
 
   this.senate_spaces = [ 
     new Phaser.Circle(393, game.world.height-680, 25),
@@ -30,6 +31,7 @@ function senateLogic(){
   //senate stuff
   var senate = new Senate();
   senate.playerVPGain({ "x":391, "y":1120 });
+  console.log("something")
   console.log(senate.victory_points);
   // senateGroup.forEach(senateSpaces, this, true);
 }
