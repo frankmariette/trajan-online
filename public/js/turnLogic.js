@@ -45,11 +45,16 @@ function turnLogic(){
   mTiles.forEach(makeActive, this, true);
   tTiles.forEach(makeActive, this, true);
   fTiles.forEach(makeActive, this, true);
+
+  ship = game.add.sprite(0, 0, "ship1", 0);
+  ship.animations.add("flip");
+  makeActive("ship1");
 }
 
 function makeActive(currentTile){
   currentTile.inputEnabled = true;
-  currentTile.events.onInputDown.addOnce(listener, this); //if this piece is clicked, move it
+  console.log("hello")
+  currentTile.events.onInputUp.addOnce(seaportListener, this); //if this piece is clicked, move it
 }
 
 function senateListener(senateTile){
@@ -58,8 +63,8 @@ function senateListener(senateTile){
 }
 
 function seaportListener(ship){
-  ship.inputEnabled = true;
-  ship;
+  console.log("hello");
+  ship.play("flip", 1, false);
 }
 function listener(tile){ //this is how you add a callback to move a piece!
   tile.position.x = 0;
