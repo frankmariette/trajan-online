@@ -10,8 +10,30 @@ class Seaport{
 		$this->playerCards[] = $faceDownCards[2];
 		$this->playerCards[] = $faceDownCards[3];
 		unset($faceDownCards[0]);
+		unset($faceDownCards[1]);
+		unset($faceDownCards[2]);
+		unset($faceDownCards[3]);
 	}
 	public function shipCommodity(&$chosenCards){
+		//determine all different 
+		if($comm == 1){
+			$correct;
+			for($j=0; $j<count($chosenCards); $j++){
+				if($chosenCards[$j]==$chosenCards[$j+1]){
+					$correct = false;
+				}
+			}
+
+		}
+		//determine all same
+		if($comm == 2){
+			$correct;
+			for($j=0; $j<count($chosenCards); $j++){
+				if($chosenCards[$j]!=$chosenCards[$j+1]){
+					$correct = false;
+				}
+			}
+		}
 		if(seaportValidity($chosenCards)){
 			$vp = seaportValidity($chosenCards);
 			return $vp;
