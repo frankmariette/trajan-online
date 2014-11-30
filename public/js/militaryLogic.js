@@ -1,6 +1,18 @@
 function Military(){
 
   console.log(5);
+  var baseSq= new Phaser.Rectangle(615,248,350,120);
+  var noricumSq= new Phaser.Rectangle(885,210,150,100);
+  var raetiaSq= new Phaser.Rectangle(682,155,240,125);
+  var germaniaSupSq= new Phaser.Rectangle(713,108,250,80);
+  var germaniaInfSq= new Phaser.Rectangle(643,24,210,110);
+  var belgicaSq= new Phaser.Rectangle(465,73,300,150);
+  var lugudunensisSq= new Phaser.Rectangle(325,94,220,200);
+  var britanniaSq= new Phaser.Rectangle(220,2,420,125);
+  var aquitaniaSq= new Phaser.Rectangle(150,162,160,110);
+  var narbonensisSq= new Phaser.Rectangle(202,236,250,120);
+  var aepesSq= new Phaser.Rectangle(440,194,280,130);
+
   incX = 0;
   incY = 0;
   incX2 = 0;
