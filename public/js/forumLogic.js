@@ -1,26 +1,25 @@
 function makeActive(currentTile){
-$tilesType = "games"; 
 currentTile.inputEnabled = true;
 
-if($tilesType == "games")
+if(currentTile.tileType == "games")
 	currentTile.events.onInputDown.add(gamesMovement, this);
 
-else if($tilesType == "bread")
+else if(currentTile.tileType == "bread")
 	currentTile.events.onInputDown.add(breadMovement, this);
 
-else if($tilesType == "religion")
+else if(currentTile.tileType == "religion")
 	currentTile.events.onInputDown.add(religionMovement, this);
 
-else if($tilesType == "yellow")
+else if(currentTile.tileType == "yellow")
 	currentTile.events.onInputDown.add(yellowWildMovement, this);
 
-else if($tilesType == "orange")
+else if(currentTile.tileType == "orange")
 	currentTile.events.onInputDown.add(orangeWildMovement, this);
 
-else if($tilesType == "green")
+else if(currentTile.tileType == "green")
 	currentTile.events.onInputDown.add(greenWildMovement, this);
 
-else if($tilesType == "red")
+else if(currentTile.tileType == "red")
 	currentTile.events.onInputDown.add(redWildMovement, this);
 }
 

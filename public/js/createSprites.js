@@ -41,21 +41,52 @@ function createSprites(){
 
   fTiles = game.add.group();
 
+  var tileTypes = ["bread", "religion","yellow","orange","green","red"];
+
   var fTile0 = fTiles.create(708, game.world.height - 1035, 'forum');
+      fTile0.tileType = tileTypes[Math.floor(Math.random()*(7))];
+      
   var fTile1 = fTiles.create(778, game.world.height - 1035, 'forum');
+      fTile1.tileType = tileTypes[Math.floor(Math.random()*(7))];
+
   var fTile2 = fTiles.create(843, game.world.height - 1035, 'forum');
+      fTile2.tileType = tileTypes[Math.floor(Math.random()*(7))];
+
   var fTile3 = fTiles.create(910, game.world.height - 1035, 'forum');
+      fTile3.tileType = tileTypes[Math.floor(Math.random()*(7))];
+
   var fTile4 = fTiles.create(977, game.world.height - 1035, 'forum');
+      fTile4.tileType = tileTypes[Math.floor(Math.random()*(7))];
+
   var fTile5 = fTiles.create(708, game.world.height - 968, 'forum');
+      fTile5.tileType = tileTypes[Math.floor(Math.random()*(7))];
+
   var fTile6 = fTiles.create(778, game.world.height - 968, 'forum');
+      fTile6.tileType = tileTypes[Math.floor(Math.random()*(7))];
+
   var fTile7 = fTiles.create(843, game.world.height - 968, 'forum');
+      fTile7.tileType = tileTypes[Math.floor(Math.random()*(7))];
+
   var fTile8 = fTiles.create(910, game.world.height - 968, 'forum');
+      fTile8.tileType = tileTypes[Math.floor(Math.random()*(7))];
+
   var fTile9 = fTiles.create(977, game.world.height - 968, 'forum');
+      fTile9.tileType = tileTypes[Math.floor(Math.random()*(7))];
+
   var fTile10 = fTiles.create(708, game.world.height - 901, 'forum');
+      fTile10.tileType = tileTypes[Math.floor(Math.random()*(7))];
+
   var fTile11 = fTiles.create(778, game.world.height - 901, 'forum');
+      fTile11.tileType = tileTypes[Math.floor(Math.random()*(7))];
+
   var fTile12 = fTiles.create(843, game.world.height - 901, 'forum');
+      fTile12.tileType = tileTypes[Math.floor(Math.random()*(7))];
+
   var fTile13 = fTiles.create(910, game.world.height - 901, 'forum');
+      fTile13.tileType = tileTypes[Math.floor(Math.random()*(7))];
+
   var fTile14 = fTiles.create(977, game.world.height - 901, 'forum');
+      fTile14.tileType = tileTypes[Math.floor(Math.random()*(7))];
 
   mTiles = game.add.group();
 
