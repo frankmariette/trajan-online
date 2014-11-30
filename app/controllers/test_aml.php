@@ -2,10 +2,10 @@
 include 'action_marker_logic.php';
 
 $test = new ActionCircle();
-$test->randCircle();
 var_dump($test->circle);
-
-$test->move(3);
-var_dump($test->target_tray);
+$tray = 2;
+$test->select_tray = $tray;
+$test->move();
+echo $test->target_tray . "\n";
 var_dump($test->circle);
 ?>
