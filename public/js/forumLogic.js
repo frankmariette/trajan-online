@@ -1,5 +1,5 @@
-function makeActive(currentTile){
-$tilesType = "games"; 
+function forumActive(currentTile){
+$tilesType = "games";
 currentTile.inputEnabled = true;
 
 if($tilesType == "games")
