@@ -1,4 +1,5 @@
 var currentTray;
+var i = 0;
 function placeMarkers(marker){
   if(busy != 'placeMarkers'){
     return;
@@ -42,6 +43,7 @@ function placeMarkers(marker){
           marker.position.y = seaportTray.y;
           currentTray = seaportTray;
         }
+        i += 5;
       }
     }
   }

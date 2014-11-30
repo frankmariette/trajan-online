@@ -39,6 +39,7 @@ function turnLogic(){
     //call construct logic
   }
 
+
   //check which tile is clicked
   cTiles.forEach(makeActive, this, true);
   bTiles.forEach(makeActive, this, true);
