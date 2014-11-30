@@ -37,8 +37,6 @@
 
     function update() {
       turnLogic(); //do we need to send current player info?
-
-      console.log(game.input.activePointer.positionDown.x, game.input.activePointer.positionDown.y);
       // use this line to print out mouse coords. Useful for placement
       // console.log(game.input.activePointer.positionDown.x, game.input.activePointer.positionDown.y);
     }
