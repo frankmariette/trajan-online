@@ -58,8 +58,8 @@ function militaryLogic()
         if(legionairreCamp.contains(littlePeople.getAt(i).position.x,littlePeople.getAt(i).position.y))
         {
           //console.log("x position thing is " + this.incX2 + " y position thing is " + this.incY2);
-          littlePeople.getAt(i).position.x = bigTree.x+this.incX2;
-          littlePeople.getAt(i).position.y = bigTree.y+this.incY2;
+          littlePeople.getAt(i).position.x = leader.getAt(0).position.x+this.incX2;
+          littlePeople.getAt(i).position.y = leader.getAt(0).position.y+this.incY2;
           //game.world.bringToTop(littlePeople.getAt(i));
           this.incX2 = this.incX2+10;
           if(this.incX2>40)
@@ -78,7 +78,8 @@ function militaryLogic()
       //move your leader to an adjacent space
       //possible overlap function?
       //this.moveLeader();
-      busy='selectTray';
+
+      //busy='selectTray';
       //game.paused = false;
       break;
     default:
