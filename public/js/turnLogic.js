@@ -32,9 +32,15 @@ function turnLogic(){
     //call trajan logic
   }
   if(busy == 'construction'){
-    text.text = "Construction Action";
-    //call construct logic
+    text.text = "Construction Action \n Press left arrow to move to constructioncamp\n Press right arrow to choose a tile";
+    keys = this.game.input.keyboard.createCursorKeys();
+    if (keys.left.isDown){
+      constructionLogic(0);
+    } else if (keys.right.isDown){
+      constructionLogic(1);
+    }
   }
+    //call construct logic
 
   //check which tile is clicked
   cTiles.forEach(makeActive, this, true);
@@ -52,6 +58,6 @@ currentTile.inputEnabled = true;
 currentTile.events.onInputDown.add(listener, this); //if this piece is clicked, move it
 }
 function listener(tile){ //this is how you add a callback to move a piece!
-tile.position.x = 580;
-tile.position.y = 600;
+tile.position.x = 380;
+tile.position.y = 1500;
 }

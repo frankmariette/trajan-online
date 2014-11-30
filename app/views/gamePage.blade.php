@@ -31,6 +31,7 @@
     var graphics, t1, t2, t3, t4, t5, t6;
 
     function create() { //initial positions of all pieces on gameBoard
+      Construction();
       createSprites();
     }
 
