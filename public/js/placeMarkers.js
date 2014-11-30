@@ -47,7 +47,7 @@ function placeMarkers(marker){
   }
   var boxEmpty = true;
   aMarks.forEach(function(current){
-    if(markerBounds.contains(current.position.x, current.position.y)){ //check that box is empty 
+    if(markerBounds.contains(current.position.x, current.position.y)){ //check that box is empty
       boxEmpty = false;
     }
   }, this, true);

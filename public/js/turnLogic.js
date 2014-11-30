@@ -3,7 +3,7 @@ function turnLogic(){
   text.text = "Select a Tray";
 
   //Place Action Markers in correct tray group
-  aMarks.forEach(inTray, this, true);
+//   aMarks.forEach(inTray, this, true);
 
   var x = game.input.activePointer.positionDown.x;
   var y = game.input.activePointer.positionDown.y;
