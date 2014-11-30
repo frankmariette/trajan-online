@@ -13,7 +13,7 @@ function turnLogic(){
     aMarks.forEach(placeMarkers, this, true);
   }
   if(busy == 'seaport'){
-    text.text = "Seaport Action";
+    text.text = "Click a draw pile or Click a ship";
     //call senate logic
   }
   if(busy == 'forum'){

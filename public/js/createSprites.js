@@ -88,11 +88,11 @@ function createSprites(){
   // var aMark3 = aMarks.create(810, game.world.height-340, 'actionMarkG');
 
   // Tray 1 markers
-  var aMark4 = aMarks.create(675, game.world.height-375, 'actionMarkO');
+  /*var aMark4 = aMarks.create(675, game.world.height-375, 'actionMarkO');
   var aMark5 = aMarks.create(675, game.world.height-345, 'actionMarkG');
   var aMark6 = aMarks.create(705, game.world.height-375, 'actionMarkO');
   var aMark6 = aMarks.create(705, game.world.height-345, 'actionMarkG');
-
+*/
   pMarks = game.add.group();
 
   var pMarkGreen = pMarks.create(253, game.world.height-700, 'playerMark');
