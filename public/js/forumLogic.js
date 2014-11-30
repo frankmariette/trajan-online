@@ -1,11 +1,32 @@
 function makeActive(currentTile){
+$tilesType = "red"; 
 currentTile.inputEnabled = true;
-//if(/*tile == gamesTile*/)
-	currentTile.events.onInputDown.add(orangeWildMovement, this); //if this piece is clicked, move it
-//else if()
-//	currentTile.events.onInputDown.add(breadMovement, this);
-//else if()
-//	currentTile.events.onInputDown.add(religionMovement, this);
+if($tilesType == "games")
+	currentTile.events.onInputDown.add(gamesMovement, this);
+
+else if($tilesType == "bread")
+	currentTile.events.onInputDown.add(breadMovement, this);
+
+else if($tilesType == "religion")
+	currentTile.events.onInputDown.add(religionMovement, this);
+
+else if($tilesType == "yellow")
+	currentTile.events.onInputDown.add(yellowWildMovement, this);
+
+else if($tilesType == "orange")
+	currentTile.events.onInputDown.add(orangeWildMovement, this);
+
+else if($tilesType == "green")
+	currentTile.events.onInputDown.add(greenWildMovement, this);
+
+else if($tilesType == "red")
+	currentTile.events.onInputDown.add(redWildMovement, this);
+}
+
+/////////////////////////////////   STACK TILES
+
+function stackTiles(tile){
+	tile.position.y += 10;
 }
 
 

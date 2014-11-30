@@ -51,5 +51,5 @@ currentTile.events.onInputDown.add(listener, this); //if this piece is clicked, 
 }
 function listener(tile){ //this is how you add a callback to move a piece!
 tile.position.x = 0;
-tile.position.y = 1502;
+tile.position.y = 0;
 }
