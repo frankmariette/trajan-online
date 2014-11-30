@@ -14,6 +14,8 @@ function turnLogic(){
   }
   if(busy == 'seaport'){
     text.text = "Click a draw pile or Click a ship";
+    ships.forEach(shipsActive, this, true);
+    busy = 'selectTray';
     //call senate logic
   }
   if(busy == 'forum'){

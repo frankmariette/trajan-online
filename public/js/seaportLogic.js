@@ -13,8 +13,6 @@ function shipsActive(ship){
 var $side = "color"; //tracks which side is face up..sometimes
 function flip(ship){
   ship.play("flip");
-  ship.inputEnabled = false;
-  busy = 'selectTray';
   if($side == "color"){
     $side = "grey";
     vp += 5;
