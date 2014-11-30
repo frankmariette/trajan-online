@@ -31,7 +31,6 @@ function senateLogic(){
   //senate stuff
   var senate = new Senate();
   senate.playerVPGain({ "x":391, "y":1120 });
-  console.log("something")
   console.log(senate.victory_points);
   // senateGroup.forEach(senateSpaces, this, true);
 }

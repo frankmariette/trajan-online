@@ -81,22 +81,34 @@ function createSprites(){
   var aMark1 = aMarks.create(810, game.world.height-375, 'actionMarkO');
   var aMark2 = aMarks.create(775, game.world.height-340, 'actionMarkG');
   var aMark3 = aMarks.create(810, game.world.height-340, 'actionMarkG');
+  var aMark4 = aMarks.create(675, game.world.height-375, 'actionMarkO');
+  var aMark5 = aMarks.create(675, game.world.height-345, 'actionMarkG');
+  var aMark6 = aMarks.create(705, game.world.height-375, 'actionMarkO');
+  var aMark6 = aMarks.create(705, game.world.height-345, 'actionMarkG');
 
   pMarks = game.add.group();
 
   var pMarkGreen = pMarks.create(253, game.world.height-700, 'playerMark');
 
-  tray1 = game.add.group();
-  tray2 = game.add.group();
-  tray3 = game.add.group();
-  tray4 = game.add.group();
-  tray5 = game.add.group();
-  tray6 = game.add.group();
+  seaportTrayGroup      = game.add.group();
+  forumTrayGroup        = game.add.group();
+  miltaryTrayGroup      = game.add.group();
+  senateTrayGroup       = game.add.group();
+  trajanTrayGroup       = game.add.group();
+  constructionTrayGroup = game.add.group();
 
-  t1 = new Phaser.Circle(695, game.world.height-350, 50);
-  t2 = new Phaser.Circle(802, game.world.height-350, 50);
-  t3 = new Phaser.Circle(860, game.world.height-255, 50);
-  t4 = new Phaser.Circle(805, game.world.height-160, 50);
-  t5 = new Phaser.Circle(695, game.world.height-160, 50);
-  t6 = new Phaser.Circle(640, game.world.height-255, 50);
+  seportTray       = new Phaser.Circle(695, game.world.height-350, 75);
+  forumTray        = new Phaser.Circle(802, game.world.height-350, 75);
+  miltaryTray      = new Phaser.Circle(860, game.world.height-255, 75);
+  senateTray       = new Phaser.Circle(805, game.world.height-160, 75);
+  trajanTray       = new Phaser.Circle(695, game.world.height-160, 75);
+  constructionTray = new Phaser.Circle(640, game.world.height-255, 75);
+  markerBounds     = new Phaser.Rectangle(630, game.world.height-510, 300, 30);
+
+  littlePeople = game.add.group();
+
+  var lp0 = littlePeople.create(925, game.world.height-390, 'actionMarkO'); //make this be a dude later
+  lpStartBox = new Phaser.Rectangle(890, game.world.height-475, 100, 180);
+  legionairreCamp = new Phaser.Rectangle(705,game.world.height-1520, 200, 100);
+  constructionCamp = new Phaser.Rectangle(500,game.world.height-1210, 200, 100);
 }

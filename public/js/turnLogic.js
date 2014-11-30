@@ -5,9 +5,19 @@ function turnLogic(){
   //Place Action Markers in correct tray group
   aMarks.forEach(inTray, this, true);
 
-  var x = game.input.activePointer.positionDown.x;
-  var y = game.input.activePointer.positionDown.y;
+  var x = game.input.activePointer.positionUp.x;
+  var y = game.input.activePointer.positionUp.y;
 
+  //check which tile is clicked
+  cTiles.forEach(makeActive, this, true);
+  bTiles.forEach(makeActive, this, true);
+  mTiles.forEach(makeActive, this, true);
+  tTiles.forEach(makeActive, this, true);
+  fTiles.forEach(makeActive, this, true);
+
+}
+
+function ifPlacedInTray(x,y){
   if(t1.contains(x,y)){
     select(tray1);
     text.text = "TRAY 1";
@@ -27,14 +37,6 @@ function turnLogic(){
   else if(t6.contains(x,y)){
     select(tray6);
   }
-
-  //check which tile is clicked
-  cTiles.forEach(makeActive, this, true);
-  bTiles.forEach(makeActive, this, true);
-  mTiles.forEach(makeActive, this, true);
-  tTiles.forEach(makeActive, this, true);
-  fTiles.forEach(makeActive, this, true);
-
 }
 
 function select(sourceTray){
@@ -53,12 +55,12 @@ function inTray(marker){
 
   var x = marker.position.x;
   var y = marker.position.y;
-  tray1.removeAll();
-  tray2.removeAll();
-  tray3.removeAll();
-  tray4.removeAll();
-  tray5.removeAll();
-  tray6.removeAll();
+  seaportTray.removeAll();
+  forumnTray.removeAll();
+  militaryTray.removeAll();
+  senateTray.removeAll();
+  trajanTray.removeAll();
+  constructionTray.removeAll();
 
   if(t1.contains(x,y)){
     tray1.add(marker);
@@ -83,11 +85,11 @@ function inTray(marker){
 }
 
 function makeActive(currentTile){
-currentTile.inputEnabled = true;
-currentTile.events.onInputDown.add(listener, this);
+  currentTile.inputEnabled = true;
+  currentTile.events.onInputDown.add(listener, this);
 }
 
 function listener(tile){
-tile.position.x = 0;
-tile.position.y = 0;
+  tile.position.x = 0;
+  tile.position.y = 0;
 }
