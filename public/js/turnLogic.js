@@ -21,16 +21,8 @@ function turnLogic(){
     //call forum logic
   }
   if(busy == 'military'){
-    //game.paused = true;
-    //var action=0;
-
-    //console.log(action);
     //call mil logic
     militaryLogic();
-    //busy = 'selectTray';
-    //game.paused = true;
-    //game.paused = false;
-    //busy='selectTray';
   }
   if(busy == 'senate'){
     busy = 'selectTray'

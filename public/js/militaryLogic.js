@@ -1,52 +1,36 @@
 function Military(){
 
   console.log(5);
+  incX = 0;
+  incY = 0;
+  incX2 = 0;
+  incY2 = 0;
 }
 
 function militaryLogic()
 {
-  actionInput = 0;
-  var boolCheck = false;
+  var victory_points = 0;
+  var actionInput = 0;
   console.log("military logic call");
   text.text = "Military Action";
   text.text= text.text + "\nLeft- Move Token to Camp \nUp- Move Troop to Leader \nRight- Move leader to Adj Providence";
   keys = game.input.keyboard.createCursorKeys();
-  //keys.start;
-  // while(boolCheck == false)
-  // {
-    //console.log("Military Logic while loop = " + actionInput)
-    if(keys.left.isDown)
-    {
-      actionInput=1;
-      boolCheck=true;
-    }
-    else if(keys.up.isDown)
-    {
-      actionInput=2;
-      boolCheck=true;
-    }
-    else if(keys.right.isDown)
-    {
-      actionInput=3;
-      boolCheck=true;
-    }
-    console.log("Military Logic while loop = " + actionInput)
-  //}
-  var victory_points = 0;
+  if(keys.left.isDown)
+  {
+    actionInput=1;
+  }
+  else if(keys.up.isDown)
+  {
+    actionInput=2;
+  }
+  else if(keys.right.isDown)
+  {
+    actionInput=3;
+  }
   switch (actionInput){
     case 1:
       console.log("Military Sub action 1")
-      //add a token to the military camp
-      for(i=0;i<littlePeople.length;i++)
-      {
-        if(lpStartBox.contains(littlePeople.getAt(i).position.x,littlePeople.getAt(i).position.y))
-        {
-          littlePeople.getAt(i).position.x = 800;
-          littlePeople.getAt(i).position.y = 300;
-          break;
-        }
-      }
-      //this.moveTokenToMilitaryCamp();
+      this.moveTokenToMilitaryCamp();
       busy='selectTray';
       //game.paused = false;
       break;
@@ -73,17 +57,52 @@ function militaryLogic()
     return victory_points;
 }
 
-Military.prototype.moveTokenToMilitaryCamp = function(currentPlayer) {
+Military.prototype.moveTokenToMilitaryCamp = function() {
   //TODO move tokens from player's token board to the military camp
-
+    //add a token to the military camp
+  for(i=0;i<littlePeople.length;i++)
+  {
+    if(lpStartBox.contains(littlePeople.getAt(i).position.x,littlePeople.getAt(i).position.y))
+    {
+      littlePeople.getAt(i).position.x = 750+this.incX;
+      littlePeople.getAt(i).position.y = 280+this.incY;
+      //game.world.bringToTop(littlePeople.getAt(i));
+      this.incX=this.incX+10;
+      if(this.incX>40)
+      {
+        console.log("I hit the if statement thing");
+        this.incX=0;
+        this.incY=this.incY+10;
+      }
+      break;
+    }
+  }
 }
 
-Military.prototype.moveTokenToLeader = function(currentPlayer) {
-  //TODO move a token from the military camp to the current leader's position
 
-}
-
-Military.prototype.moveLeader = function(currentPlayer) {
+Military.prototype.moveLeader = function() {
   //TODO move the current player's leader to an adjacent space
 
+
+}
+
+Military.prototype.moveTokenToLeader = function() {
+  //TODO move a token from the military camp to the current leader's position
+  for(i=0;i<littlePeople.length;i++)
+  {
+    if(legionairreCamp.contains(littlePeople.getAt(i).position.x,littlePeople.getAt(i).position.y))
+    {
+      console.log("x position thing is " + this.incX2 + " y position thing is " + this.incY2);
+      littlePeople.getAt(i).position.x = bigTree.x+this.incX2;
+      littlePeople.getAt(i).position.y = bigTree.y+this.incY2;
+      //game.world.bringToTop(littlePeople.getAt(i));
+      this.incX2 = this.incX2+10;
+      if(this.incX2>40)
+      {
+        this.incX2=0;
+        this.incY2=this.incY2+15;
+      }
+      break;
+    }
+  }
 }
