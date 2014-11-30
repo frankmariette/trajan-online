@@ -75,6 +75,10 @@ function createSprites(){
   var bTile0 = bTiles.create(850, game.world.height - 750, 'bonus');
   var bTile1 = bTiles.create(960, game.world.height - 750, 'bonus');
 
+  ships = game.add.group();
+
+  var ship0 = ships.create(290, game.world.height - 1310, 'ship1');
+
   aMarks = game.add.group();
 
   var aMark0 = aMarks.create(775, game.world.height-375, 'actionMarkO');
@@ -111,4 +115,8 @@ function createSprites(){
   lpStartBox = new Phaser.Rectangle(890, game.world.height-475, 100, 180);
   legionairreCamp = new Phaser.Rectangle(705,game.world.height-1520, 200, 100);
   constructionCamp = new Phaser.Rectangle(500,game.world.height-1210, 200, 100);
+
+  trajan = game.add.group();
+  var arch = trajan.create(605, game.world.height-435, 'tArch');
+  arch.angle = -28;
 }

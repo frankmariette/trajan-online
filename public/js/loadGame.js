@@ -6,6 +6,7 @@
     game.load.image('trajan', '/assets/trajanTile00.png')
     game.load.image('forum', '/assets/fTileGame.png')
     game.load.spritesheet('bonus', '/assets/bonus00.png', 100, 156);
+    game.load.spritesheet('ship1', '/assets/ship01.png', 174, 116);
     game.load.image('actionMarkO', '/assets/actionMarkerOrange.png');
     game.load.image('actionMarkO2', '/assets/actionMarkerOrange2.png');
     game.load.image('actionMarkG', '/assets/actionMarkerGreen.png');
