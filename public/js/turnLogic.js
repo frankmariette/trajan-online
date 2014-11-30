@@ -56,6 +56,11 @@ function senateListener(senateTile){
   senateTile.inputEnabled = true;
   senateTile.events.onInputDown.add(this.senateSpaces, this);
 }
+
+function seaportListener(ship){
+  ship.inputEnabled = true;
+  ship;
+}
 function listener(tile){ //this is how you add a callback to move a piece!
   tile.position.x = 0;
   tile.position.y = 0;
