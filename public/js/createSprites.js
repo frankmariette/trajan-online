@@ -111,7 +111,22 @@ function createSprites(){
 
   littlePeople = game.add.group();
 
-  var lp0 = littlePeople.create(925, game.world.height-390, 'actionMarkO'); //make this be a dude later
+  var lp0 = littlePeople.create(925, game.world.height-450, 'actionMarkG'); //make this be a dude later
+  var lp1 = littlePeople.create(925, game.world.height-430, 'actionMarkG'); //make this be a dude later
+  var lp2 = littlePeople.create(925, game.world.height-410, 'actionMarkG'); //make this be a dude later
+  var lp3 = littlePeople.create(925, game.world.height-390, 'actionMarkG'); //make this be a dude later
+  var lp4 = littlePeople.create(925, game.world.height-370, 'actionMarkG'); //make this be a dude later
+  var lp5 = littlePeople.create(925, game.world.height-350, 'actionMarkG'); //make this be a dude later
+  var lp6 = littlePeople.create(945, game.world.height-450, 'actionMarkG'); //make this be a dude later
+  var lp7 = littlePeople.create(945, game.world.height-430, 'actionMarkG'); //make this be a dude later
+  var lp8 = littlePeople.create(945, game.world.height-410, 'actionMarkG'); //make this be a dude later
+  var lp9 = littlePeople.create(945, game.world.height-390, 'actionMarkG'); //make this be a dude later
+  var lp10 = littlePeople.create(945, game.world.height-370, 'actionMarkG'); //make this be a dude later
+  var lp11 = littlePeople.create(945, game.world.height-350, 'actionMarkG'); //make this be a dude later
+  var lp12 = littlePeople.create(905, game.world.height-410, 'actionMarkG'); //make this be a dude later
+  var lp13 = littlePeople.create(905, game.world.height-390, 'actionMarkG'); //make this be a dude later
+  var lp14 = littlePeople.create(905, game.world.height-370, 'actionMarkG'); //make this be a dude later
+
   lpStartBox = new Phaser.Rectangle(890, game.world.height-475, 100, 180);
   legionairreCamp = new Phaser.Rectangle(705,game.world.height-1520, 200, 100);
   constructionCamp = new Phaser.Rectangle(500,game.world.height-1210, 200, 100);

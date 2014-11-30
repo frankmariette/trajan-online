@@ -28,14 +28,16 @@
     }
 
     var cTiles, tTiles, bTiles, mTiles, fTiles, aMarks, pMarks, littlePeople, tray1, tray2, tray3, tray4, tray5, tray6, text;
-    var graphics, seaportTray, forumTray, militaryTray, senateTray, trajanTile, constructionTray;
+    var graphics, seaportTray, forumTray, militaryTray, senateTray, trajanTile, constructionTray, lpStartBox, legionairreCamp;
 
     function create() { //initial positions of all pieces on gameBoard
+      Military();
       createSprites();
     }
 
     function update() {
       turnLogic(); //do we need to send current player info?
+      game.pause = true;
 
       // use this line to print out mouse coords. Useful for placement
       // console.log(game.input.activePointer.positionDown.x, game.input.activePointer.positionDown.y);
