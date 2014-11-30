@@ -42,7 +42,6 @@ function turnLogic(){
   mTiles.forEach(makeActive, this, true);
   tTiles.forEach(makeActive, this, true);
   fTiles.forEach(makeActive, this, true);
-
 }
 
 function makeActive(currentTile){

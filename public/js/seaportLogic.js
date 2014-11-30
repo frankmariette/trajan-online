@@ -1,5 +1,5 @@
 function seaportLogic(){
-
+  
 }
 //ship sprites go at 165, 600; 450, 430; 305, 520
 function makeActive(currentTile){
