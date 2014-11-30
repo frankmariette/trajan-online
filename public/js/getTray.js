@@ -9,35 +9,35 @@ function getTray(){
     var y = game.input.activePointer.positionDown.y;
     //Get which tray the user selected!
 
-    if(t1.contains(x,y)){
+    if(seaportTray.contains(x,y)){
       //Place Action Markers from tray to top!
-      aMarks.forEach(lineUp, this, true, t1);
-      currentTray = t1;
+      aMarks.forEach(lineUp, this, true, seaportTray);
+      currentTray = seaportTray;
     }
-    else if(t2.contains(x,y)){
+    else if(forumTray.contains(x,y)){
       //Place Action Markers from tray to top!
-      aMarks.forEach(lineUp, this, true, t2);
-      currentTray = t2;
+      aMarks.forEach(lineUp, this, true, forumTray);
+      currentTray = forumTray;
     }
-    else if(t3.contains(x,y)){
+    else if(militaryTray.contains(x,y)){
       //Place Action Markers from tray to top!
-      aMarks.forEach(lineUp, this, true, t3);
-      currentTray = t3;
+      aMarks.forEach(lineUp, this, true, militaryTray);
+      currentTray = militaryTray;
     }
-    else if(t4.contains(x,y)){
+    else if(senateTray.contains(x,y)){
       //Place Action Markers from tray to top!
-      aMarks.forEach(lineUp, this, true, t4);
-      currentTray = t4;
+      aMarks.forEach(lineUp, this, true, senateTray);
+      currentTray = senateTray;
     }
-    else if(t5.contains(x,y)){
+    else if(trajanTray.contains(x,y)){
       //Place Action Markers from tray to top!
-      aMarks.forEach(lineUp, this, true, t5);
-      currentTray = t5;
+      aMarks.forEach(lineUp, this, true, trajanTray);
+      currentTray = trajanTray;
     }
-    else if(t6.contains(x,y)){
+    else if(constructionTray.contains(x,y)){
       //Place Action Markers from tray to top!
-      aMarks.forEach(lineUp, this, true, t6);
-      currentTray = t6;
+      aMarks.forEach(lineUp, this, true, constructionTray);
+      currentTray = constructionTray;
     }
   }
 }
