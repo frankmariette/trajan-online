@@ -3,7 +3,7 @@
 function Senate(){
   this.victory_points = 0;
 
-  this.senate_spaces = [ 
+  this.senate_spaces = [
     new Phaser.Circle(393, game.world.height-680, 25),
     new Phaser.Circle(456, game.world.height-680, 25),
     new Phaser.Circle(522, game.world.height-680, 25),
@@ -12,7 +12,7 @@ function Senate(){
     new Phaser.Circle(715, game.world.height-680, 25),
     new Phaser.Circle(778, game.world.height-680, 25)
   ]
-  
+
 
 }
 
