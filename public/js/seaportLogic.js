@@ -7,12 +7,11 @@ function shipsActive(ship){
   ship.animations.add("flip", 0, false);
   ship.events.onInputDown.add(flip, this); //if this piece is clicked, flip
 }
-var $side = "color";
+var $side = "color"; //tracks which side is face up..sometimes
 function flip(ship){
   ship.play("flip");
   if($side == "color")
     $side = "grey";
   else
     $side = "color";
-  console.log($side);
 }
