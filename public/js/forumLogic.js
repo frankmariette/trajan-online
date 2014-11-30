@@ -1,6 +1,7 @@
 function makeActive(currentTile){
-$tilesType = "red"; 
+$tilesType = "games"; 
 currentTile.inputEnabled = true;
+
 if($tilesType == "games")
 	currentTile.events.onInputDown.add(gamesMovement, this);
 
@@ -24,7 +25,6 @@ else if($tilesType == "red")
 }
 
 /////////////////////////////////   STACK TILES
-
 function stackTiles(tile){
 	tile.position.y += 10;
 }
@@ -66,10 +66,3 @@ function redWildMovement(tile){
 tile.position.x = 448;
 tile.position.y = 1545;
 }
-
-function forumLogic(){
-
-}
-
-//religion, games, bread
-//
