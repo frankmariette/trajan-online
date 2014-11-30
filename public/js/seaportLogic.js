@@ -1,9 +1,6 @@
 function SeaportShip(){
   this.vp = 0;
-
 }
-
-//ship sprites go at 165, 600; 450, 430; 305, 520
 function shipsActive(ship){
   if(busy != 'seaport'){
     return;
@@ -15,13 +12,16 @@ function shipsActive(ship){
 var $side = "color"; //tracks which side is face up..sometimes
 function flip(ship){
   ship.play("flip");
+  ship.inputEnabled = false;
+  busy = 'selectTray';
   if($side == "color"){
     $side = "grey";
-    this.vp += 5;
-    console.log(this.vp)
+    vp += 5;
+    console.log(vp);
   }
   else{
     $side = "color";
-    this.vp += 2;
+    vp += 2;
+    console.log(vp);
   }
 }

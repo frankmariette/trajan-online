@@ -81,15 +81,15 @@ function createSprites(){
 
   cards = game.add.group();
 
-  var card0 = cards.create(900, game.world.height - 1080, 'tile');
-  var card1 = cards.create(900, game.world.height - 1070, 'tile');
-  var card2 = cards.create(900, game.world.height - 1060, 'tile');
-  var card3 = cards.create(900, game.world.height - 1050, 'tile');
-  var card4 = cards.create(900, game.world.height - 1040, 'tile');
-  var card5 = cards.create(900, game.world.height - 1030, 'tile');
-  var card6 = cards.create(900, game.world.height - 1020, 'tile');
-  var card7 = cards.create(900, game.world.height - 1010, 'tile');
-  var card8 = cards.create(900, game.world.height - 1000, 'tile');
+  var card0 = cards.create(1100, game.world.height - 460, 'tile');
+  var card1 = cards.create(1100, game.world.height - 440, 'tile');
+  var card2 = cards.create(1100, game.world.height - 420, 'tile');
+  var card3 = cards.create(1100, game.world.height - 400, 'tile');
+  var card4 = cards.create(1100, game.world.height - 380, 'tile');
+  var card5 = cards.create(1100, game.world.height - 360, 'tile');
+  var card6 = cards.create(1100, game.world.height - 340, 'tile');
+  var card7 = cards.create(1100, game.world.height - 320, 'tile');
+  var card8 = cards.create(1100, game.world.height - 300, 'tile');
 
   aMarks = game.add.group();
 

@@ -1,4 +1,7 @@
 function forumActive(currentTile){
+if(busy != "forum"){
+	return;
+}
 $tilesType = "games";
 currentTile.inputEnabled = true;
 
