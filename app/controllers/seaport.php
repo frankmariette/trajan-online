@@ -17,7 +17,7 @@ class Seaport{
 		//add two random cards to player hand
 		$playerCards[] = array_rand($faceDownCards);
 		$playerCards[] = array_rand($faceDownCards);
-		//discard one
+		//discard one random
 		$choose = rand(1,2);
 		if($choose == 1)
 			$discardOne = $playerCards[$disc_id];
