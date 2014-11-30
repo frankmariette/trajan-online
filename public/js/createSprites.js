@@ -112,7 +112,7 @@ function createSprites(){
   legionairreCamp = new Phaser.Rectangle(705,game.world.height-1520, 200, 100);
   constructionCamp = new Phaser.Rectangle(500,game.world.height-1210, 200, 100);
   
-  var trajan = game.add.group();
+  trajan = game.add.group();
   var arch = trajan.create(605, game.world.height-435, 'tArch');
   arch.angle = -28;
 

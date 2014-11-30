@@ -29,6 +29,8 @@ function turnLogic(){
   }
   if(busy == 'trajan'){
     text.text = "Trajan Action";
+    tTiles.forEach(trajanMakeActive, this, trajan.getAt(0), true);
+    
   }
   if(busy == 'construction'){
     text.text = "Construction Action";
@@ -39,7 +41,7 @@ function turnLogic(){
   cTiles.forEach(makeActive, this, true);
   bTiles.forEach(makeActive, this, true);
   mTiles.forEach(makeActive, this, true);
-  tTiles.forEach(makeActive, this, true);
+//  tTiles.forEach(makeActive, this, true);
   fTiles.forEach(makeActive, this, true);
 
 }
@@ -52,3 +54,9 @@ function listener(tile){ //this is how you add a callback to move a piece!
 tile.position.x = 0;
 tile.position.y = 0;
 }
+
+function trajanMakeActive(currentTile, arch){
+	currentTile.inputEnabled = true;
+	currentTile.events.onInputDown.add(trajanLogic, this, arch);
+}
+
