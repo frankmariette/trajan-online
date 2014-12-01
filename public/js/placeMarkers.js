@@ -1,4 +1,5 @@
 var currentTray;
+var i = 0;
 function placeMarkers(marker){
   if(busy != 'placeMarkers'){
     return;
@@ -12,6 +13,7 @@ function placeMarkers(marker){
 
     if(marker.input.pointerOver()){ //get if pointer is over marker
       if(markerBounds.contains(mx, my)){ //make sure marker is part of source tray group
+
         if(currentTray == seaportTray){ //add marker to next tray
           marker.position.x = forumTray.x;
           marker.position.y = forumTray.y;
@@ -42,6 +44,7 @@ function placeMarkers(marker){
           marker.position.y = seaportTray.y;
           currentTray = seaportTray;
         }
+        i += 5;
       }
     }
   }
@@ -67,7 +70,7 @@ function placeMarkers(marker){
     else if(currentTray == trajanTray){
       busy = 'trajan';
     }
-    else{
+    else if(currentTray == t6){
       busy = 'construction';
     }
   }
