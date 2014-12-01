@@ -14,10 +14,16 @@ function Military(){
    new Phaser.Rectangle(202,236,250,120), //narbonensis
    new Phaser.Rectangle(440,194,280,130) //aepes
   ]
+
+  this.vpPts = [
+    0,5,3,6,10,6,6,10,10,6,3
+  ]
+
   incX = 0;
   incY = 0;
   incX2 = 0;
   incY2 = 0;
+  leaderLocVPPts = 0;
   leaderLoc = countries[0];
   actionInput = 0;
   milCheck = false;
@@ -107,6 +113,7 @@ function moveTokenToLeader() {
       //console.log("x position thing is " + this.incX2 + " y position thing is " + this.incY2);
       littlePeople.getAt(i).position.x = leader.getAt(0).position.x+this.incX2;
       littlePeople.getAt(i).position.y = leader.getAt(0).position.y+this.incY2;
+      console.log("You get "+leaderLocVPPts + " Vp Points!");
       //game.world.bringToTop(littlePeople.getAt(i));
       this.incX2 = this.incX2+10;
       if(this.incX2>40)
@@ -133,6 +140,7 @@ function checkAdj(){
   var xInput = game.input.activePointer.positionDown.x;
   var yInput = game.input.activePointer.positionDown.y;
   //console.log("clicked at location: " + xInput + ", "+yInput);
+  leader.inputEnabled=true;
   for(i=0;i<this.countries.length;i++)
     {
       if(this.countries[i].contains(xInput,yInput))
@@ -140,15 +148,19 @@ function checkAdj(){
         console.log("your click has found a square");
         if(Phaser.Rectangle.intersects(leaderLoc,countries[i]))
         {
-          console.log("your click is adjacent to current leader providence");
-          console.log("Country is located at coordinates " + countries[i].x+", "+countries[i].y);
-          console.log("leader is located at coordinates " + leader.getAt(0).position.x+", "+leader.getAt(0).position.y);
+          //console.log("your click is adjacent to current leader providence");
+          //console.log("Country is located at coordinates " + countries[i].x+", "+countries[i].y);
+          //console.log("leader is located at coordinates " + leader.getAt(0).position.x+", "+leader.getAt(0).position.y);
 
           leader.getAt(0).position.x = countries[i].x + 100;
           leader.getAt(0).position.y = countries[i].y -50;
+          this.incX = 0;
+          this.incY = 0;
           leaderLoc = countries[i];
-          milCheck = true;
+          leaderLocVPPts = this.vpPts[i];
+          milCheck = false;
           busy='selectTray';
+          leader.inputEnabled=false;
         }
       }
     }
