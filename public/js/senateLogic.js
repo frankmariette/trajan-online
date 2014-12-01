@@ -29,6 +29,7 @@ function senateLogic(){
   return new Senate();
   // senateGroup.forEach(senateSpaces, this, true);
 }
+
 Senate.prototype.senateSpaces = function(currentPlayer){
   for (var i = 0; i < this.senate_spaces.length-1; i++) {
     if (this.senate_spaces[i].contains(currentPlayer.x, currentPlayer.y)) {
