@@ -1,7 +1,7 @@
 function Military(){
 
   console.log(5);
-  this.countires = [
+  this.countries = [
    new Phaser.Rectangle(615,248,350,120), //base
    new Phaser.Rectangle(885,210,150,100), //noricum
    new Phaser.Rectangle(682,155,240,125), //raetia
@@ -13,13 +13,14 @@ function Military(){
    new Phaser.Rectangle(150,162,160,110), //aquitania
    new Phaser.Rectangle(202,236,250,120), //narbonensis
    new Phaser.Rectangle(440,194,280,130) //aepes
-
   ]
   incX = 0;
   incY = 0;
   incX2 = 0;
   incY2 = 0;
-  actionInput = 0;
+  leaderLoc = countries[0]
+;  actionInput = 0;
+  milCheck = false;
 }
 
 function militaryLogic()
@@ -28,8 +29,11 @@ function militaryLogic()
   var victory_points = 0;
   var actionInput = 0;
   console.log("military logic call");
-  text.text = "Military Action";
-  text.text= text.text + "\nLeft- Move Token to Camp \nUp- Move Troop to Leader \nRight- Move leader to Adj Providence";
+  if(milCheck==false)
+  {
+    text.text = "Military Action";
+    text.text= text.text + "\nLeft- Move Token to Camp \nUp- Move Troop to Leader \nRight- Move leader to Adj Providence";
+  }
   keys = game.input.keyboard.createCursorKeys();
   if(keys.left.isDown)
   {
@@ -54,7 +58,7 @@ function militaryLogic()
       console.log("Military Sub action 2")
       //move a token to the leader's location
       var victory_points = 0;
-
+      this.moveTokenToLeader();
       busy='selectTray';
       //game.paused = false;
       break;
@@ -113,12 +117,36 @@ function moveTokenToLeader() {
       break;
     }
   }
-  return 5;
 }
 
-function moveLeader(leader) {
+function moveLeader() {
   //move the current player's leader to an adjacent
-  text.text="Select an adjacent providence to move your leader.";
-  game.paused = true;
-  victory_points = this.moveTokenToLeader();
+  milCheck = true;
+  text.text="Select an adjacent providence to move your leader. (click the middle)";
+  //game.paused = true;
+
+  game.input.onUp.add(checkAdj);
+}
+
+function checkAdj(){
+  //console.log("hit the checkAdj function");
+  var xInput = game.input.activePointer.positionDown.x;
+  var yInput = game.input.activePointer.positionDown.y;
+  console.log("clicked at location: " + xInput + ", "+yInput);
+  for(i=0;i<this.countries.length;i++)
+    {
+      if(this.countries[i].contains(xInput,yInput))
+      {
+        console.log("your click has found a square");
+        if(Phaser.Line.intersects(leaderLoc,countries[i]))
+        {
+          console.log("your click is adjacent to current leader providence");
+          leader.position.x = countries[i].x;
+          leader.position.y = countries[i].y;
+          leaderLoc = countries[i];
+          milCheck = true;
+          busy='selectTray';
+        }
+      }
+    }
 }
