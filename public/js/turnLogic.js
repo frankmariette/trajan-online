@@ -1,5 +1,5 @@
 var linespot = 640;
-var busy = 'trajan';
+var busy = 'selectTray';
 function turnLogic(){
 
   if(busy == 'selectTray'){
