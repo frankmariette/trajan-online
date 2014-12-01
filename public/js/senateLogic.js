@@ -29,7 +29,7 @@ function senateLogic(){
   return new Senate();
   // senateGroup.forEach(senateSpaces, this, true);
 }
-/*<<<<<<< HEAD
+
 Senate.prototype.senateSpaces = function(currentPlayer){
   for (var i = 0; i < this.senate_spaces.length-1; i++) {
     if (this.senate_spaces[i].contains(currentPlayer.x, currentPlayer.y)) {
@@ -38,8 +38,8 @@ Senate.prototype.senateSpaces = function(currentPlayer){
       break;
     };
   };
-=======*/
-function senateSpaces(currentPlayer){
+
+/*function senateSpaces(currentPlayer){
 
   var s2 = new Phaser.Circle(393, game.world.height-680, 25);
   var s3 = new Phaser.Circle(456, game.world.height-680, 25);
@@ -77,5 +77,5 @@ function senateSpaces(currentPlayer){
     console.log("NO VP");
   }
 >>>>>>> 57d84519443828cc439792bd3bde77319cb2cca5
-
+*/
 }

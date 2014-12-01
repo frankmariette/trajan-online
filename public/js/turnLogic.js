@@ -1,6 +1,6 @@
 var linespot = 640;
 var busy = 'selectTray';
-
+//var vp = 0;
 function turnLogic(){
 
   if(busy == 'selectTray'){
@@ -15,6 +15,7 @@ function turnLogic(){
   if(busy == 'seaport'){
     text.text = "Click a draw pile or Click a ship";
     ships.forEach(shipsActive, this, true);
+    cards.forEach(cardsActive, this, true);
     busy = 'selectTray';
     //call senate logic
   }
@@ -48,8 +49,6 @@ function turnLogic(){
   mTiles.forEach(makeActive, this, true);
   tTiles.forEach(makeActive, this, true);
   fTiles.forEach(forumActive, this, true);
-  var vp=0;
-  ships.forEach(shipsActive, this, true);
 
 }
 

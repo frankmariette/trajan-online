@@ -1,5 +1,32 @@
-function SeaportShip(){
-  this.vp = 0;
+function cardsActive(card){
+  if(busy != 'seaport'){return;}
+  card.inputEnabled = true;
+  card.events.onInputDown.add(move, this);
+
+}
+function move(card){
+  if(hand[0]){
+    card.position.x = 125;
+    card.position.y = 1300;
+    hand[0] = false;
+    console.log("yessir");
+  }
+  else if(hand[1]){
+    card.position.x = 125;
+    card.position.y = 1500;
+    hand[1] = false;
+  }
+  else if(hand[2]){
+    card.position.x = 125;
+    card.position.y = 1700;
+    hand[2] = false;
+  }
+  else if(hand[3]){
+    card.position.x = 125;
+    card.position.y = 1900;
+    hand[3] = false;
+  }
+
 }
 function shipsActive(ship){
   if(busy != 'seaport'){

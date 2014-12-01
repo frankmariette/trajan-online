@@ -28,8 +28,9 @@
     }
 
     var cTiles, tTiles, bTiles, mTiles, fTiles, aMarks, pMarks, littlePeople, tray1, tray2, tray3, tray4, tray5, tray6, text;
-    var graphics, seaportTray, forumTray, militaryTray, senateTray, trajanTile, constructionTray;
-
+    var graphics, seaportTray, forumTray, militaryTray, senateTray, trajanTile, constructionTray, hand01;
+    var vp = 0;
+    var  hand[true, true, true, true];
     function create() { //initial positions of all pieces on gameBoard
       createSprites();
     }

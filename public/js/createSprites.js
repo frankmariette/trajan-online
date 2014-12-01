@@ -79,7 +79,7 @@ function createSprites(){
 
   var ship0 = ships.create(290, game.world.height - 1310, 'ship1');
 
-  cards = game.add.group();
+  /*cards = game.add.group();
 
   var card0 = cards.create(1100, game.world.height - 460, 'tile');
   var card1 = cards.create(1100, game.world.height - 440, 'tile');
@@ -90,7 +90,7 @@ function createSprites(){
   var card6 = cards.create(1100, game.world.height - 340, 'tile');
   var card7 = cards.create(1100, game.world.height - 320, 'tile');
   var card8 = cards.create(1100, game.world.height - 300, 'tile');
-
+*/
   aMarks = game.add.group();
 
   // Tray 2 markers
@@ -112,6 +112,8 @@ function createSprites(){
   var cCard0 = cards.create(1000, game.world.height-500, 'card');
   var cCard1 = cards.create(1125, game.world.height-500, 'card');
   var cCard2 = cards.create(1250, game.world.height-500, 'card');
+
+  hand01 = new Phaser.Rectangle(120, 1290, 200, 500);
 
   pMarks = game.add.group();
 
