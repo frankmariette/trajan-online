@@ -32,12 +32,12 @@ function createSprites(){
 
   tTiles = game.add.group();
 
-  var tTile0 = tTiles.create(253, game.world.height - 1058, 'trajan');
-  var tTile1 = tTiles.create(422, game.world.height - 1058, 'trajan');
-  var tTile2 = tTiles.create(253, game.world.height - 958, 'trajan');
-  var tTile3 = tTiles.create(422, game.world.height - 958, 'trajan');
-  var tTile4 = tTiles.create(253, game.world.height - 858, 'trajan');
-  var tTile5 = tTiles.create(422, game.world.height - 858, 'trajan');
+  var tTile0 = tTiles.create(253, game.world.height - 1058, 'tt_VP_yellow_white');
+  var tTile1 = tTiles.create(422, game.world.height - 1058, 'tt_two_cards_pink_green');
+  var tTile2 = tTiles.create(253, game.world.height - 958, 'tt_two_cards_blue_orange');
+  var tTile3 = tTiles.create(422, game.world.height - 958, 'tt_move_military_blue_blue');
+  var tTile4 = tTiles.create(253, game.world.height - 858, 'tt_plus_two_pink_white');
+  var tTile5 = tTiles.create(422, game.world.height - 858, 'tt_VP_orange_white');
 
   fTiles = game.add.group();
 
