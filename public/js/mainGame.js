@@ -6,7 +6,24 @@ function Game(){
 		this.turn = 0;
 		this.quarter = 0;
 		this.pause = false;
-		this.Phaser = new Phaser.Game(1600, 1800, Phaser.AUTO, 'gameboard', {preload: preload, create: create, update: update});
+
+		// Phaser bootstrapping
+		this.Phaser = new Phaser.Game(1600, 1800, Phaser.AUTO, 'gameboard', {preload: phaserPreload, create: phaserCreate, update: phaserUpdate});
+
+
 	}
 	
+}
+
+
+Game.prototype.phaserPreload = function() {
+	loadImages();
+}
+
+Game.prototype.phaserUpdate = function() {
+	// Stuff goes down here
+}
+
+Game.prototype.methodName = function(arguments) {
+	// body...
 }
