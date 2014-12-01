@@ -18,8 +18,8 @@ function Military(){
   incY = 0;
   incX2 = 0;
   incY2 = 0;
-  leaderLoc = countries[0]
-;  actionInput = 0;
+  leaderLoc = countries[0];
+  actionInput = 0;
   milCheck = false;
 }
 
@@ -28,7 +28,7 @@ function militaryLogic()
   //game.paused=true;
   var victory_points = 0;
   var actionInput = 0;
-  console.log("military logic call");
+  //console.log("military logic call");
   if(milCheck==false)
   {
     text.text = "Military Action";
@@ -133,16 +133,20 @@ function checkAdj(){
   var xInput = game.input.activePointer.positionDown.x;
   var yInput = game.input.activePointer.positionDown.y;
   console.log("clicked at location: " + xInput + ", "+yInput);
+  console.log("Noricum is located at coordinates " + countries[1].x+", "+countries[1].y);
   for(i=0;i<this.countries.length;i++)
     {
       if(this.countries[i].contains(xInput,yInput))
       {
         console.log("your click has found a square");
-        if(Phaser.Line.intersects(leaderLoc,countries[i]))
+        if(Phaser.Rectangle.intersects(leaderLoc,countries[i]))
         {
           console.log("your click is adjacent to current leader providence");
-          leader.position.x = countries[i].x;
-          leader.position.y = countries[i].y;
+          console.log("Country is located at coordinates " + countries[i].x+", "+countries[i].y);
+          console.log("leader is located at coordinates " + leader.getAt(0).position.x+", "+leader.getAt(0).position.y);
+
+          leader.getAt(0).position.x = countries[i].x;
+          leader.getAt(0).position.y = countries[i].y;
           leaderLoc = countries[i];
           milCheck = true;
           busy='selectTray';
