@@ -132,8 +132,7 @@ function checkAdj(){
   //console.log("hit the checkAdj function");
   var xInput = game.input.activePointer.positionDown.x;
   var yInput = game.input.activePointer.positionDown.y;
-  console.log("clicked at location: " + xInput + ", "+yInput);
-  console.log("Noricum is located at coordinates " + countries[1].x+", "+countries[1].y);
+  //console.log("clicked at location: " + xInput + ", "+yInput);
   for(i=0;i<this.countries.length;i++)
     {
       if(this.countries[i].contains(xInput,yInput))
@@ -145,8 +144,8 @@ function checkAdj(){
           console.log("Country is located at coordinates " + countries[i].x+", "+countries[i].y);
           console.log("leader is located at coordinates " + leader.getAt(0).position.x+", "+leader.getAt(0).position.y);
 
-          leader.getAt(0).position.x = countries[i].x;
-          leader.getAt(0).position.y = countries[i].y;
+          leader.getAt(0).position.x = countries[i].x + 100;
+          leader.getAt(0).position.y = countries[i].y -50;
           leaderLoc = countries[i];
           milCheck = true;
           busy='selectTray';
