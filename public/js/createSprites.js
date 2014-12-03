@@ -113,8 +113,6 @@ function createSprites(){
   var cCard1 = cards.create(1125, game.world.height-500, 'card');
   var cCard2 = cards.create(1250, game.world.height-500, 'card');
 
-  hand01 = new Phaser.Rectangle(120, 1290, 200, 500);
-
   pMarks = game.add.group();
 
   var pMarkGreen = pMarks.create(253, game.world.height-700, 'playerMark');
