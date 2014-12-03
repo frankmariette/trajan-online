@@ -6,26 +6,29 @@ function Game(){
 	this.quarter = 0;
 	this.pause = false;
 
-	this.cTiles; 
-	this.tTiles; 
-	this.bTiles; 
-	this.mTiles; 
-	this.fTiles; 
-	this.aMarks; 
-	this.pMarks; 
-	this.littlePeople; 
-	this.tray1; 
-	this.tray2; 
-	this.tray3; 
-	this.tray4; 
-	this.tray5; 
-	this.tray6; 
-	this.text; 
-	this.ships; 
-	this.trajan; 
-	this.leader; 
+	this.cTiles;
+	this.tTiles;
+	this.bTiles;
+	this.mTiles;
+	this.fTiles;
+	this.aMarks;
+	this.pMarks;
+	this.littlePeople;
+	this.tray1;
+	this.tray2;
+	this.tray3;
+	this.tray4;
+	this.tray5;
+	this.tray6;
+	this.textAction;
+	this.ships;
+	this.trajan;
+	this.leader;
 	this.card;
 	this.senate_spaces = [];
+	this.gameState;
+	this.linespot;
+	this.currentTray;
 
 	// Phaser bootstrapping
 	this.phaser = new Phaser.Game(1600, 1800, Phaser.AUTO, 'gameboard', {preload: this.phaserPreload, create: this.phaserCreate, update: this.phaserUpdate});
@@ -88,7 +91,7 @@ Game.prototype.phaserPreload = function() {
     G.phaser.load.image('tt_move_construct_white_orange', '/assets/tTile49.png');
     G.phaser.load.image('tt_plus_two_pink_white', '/assets/tTile50.png');
     G.phaser.load.image('tt_VP_pink_pink', '/assets/tTile51.png');
-    
+
     // Other random shitakis
     G.phaser.load.image('forum', '/assets/fTileGame.png');
     G.phaser.load.spritesheet('bonus', '/assets/bonus00.png', 100, 156);
@@ -121,107 +124,107 @@ Game.prototype.phaserCreate = function() {
   var player = G.phaser.add.sprite(275, G.phaser.world.height-500, 'playerBoard');
   graphics = G.phaser.add.graphics(0, 0);
 
-  text = G.phaser.add.text(350, G.phaser.world.height - 550, '', {fill : '#ffffff'});
+  G.phaser.textAction = G.phaser.add.text(350, G.phaser.world.height - 550, '', {fill : '#ffffff'});
+	G.phaser.textAction.text = "stuff";
+  G.phaser.cTiles = G.phaser.add.group();
 
-  this.cTiles = G.phaser.add.group();
 
+  var cTile0 = G.phaser.cTiles.create(710, G.phaser.world.height - 1395, 'tile');
+  var cTile1 = G.phaser.cTiles.create(790, G.phaser.world.height - 1395, 'tile');
+  var cTile2 = G.phaser.cTiles.create(865, G.phaser.world.height - 1395, 'tile');
+  var cTile3 = G.phaser.cTiles.create(945, G.phaser.world.height - 1395, 'tile');
+  var cTile4 = G.phaser.cTiles.create(1020, G.phaser.world.height - 1395, 'tile');
+  var cTile5 = G.phaser.cTiles.create(710, G.phaser.world.height - 1318, 'tile');
+  var cTile6 = G.phaser.cTiles.create(790, G.phaser.world.height - 1318, 'tile');
+  var cTile7 = G.phaser.cTiles.create(865, G.phaser.world.height - 1318, 'tile');
+  var cTile8 = G.phaser.cTiles.create(945, G.phaser.world.height - 1318, 'tile');
+  var cTile9 = G.phaser.cTiles.create(1020, G.phaser.world.height - 1318, 'tile');
+  var cTile10 = G.phaser.cTiles.create(710, G.phaser.world.height - 1241, 'tile');
+  var cTile11 = G.phaser.cTiles.create(790, G.phaser.world.height - 1241, 'tile');
+  var cTile12 = G.phaser.cTiles.create(865, G.phaser.world.height - 1241, 'tile');
+  var cTile13 = G.phaser.cTiles.create(945, G.phaser.world.height - 1241, 'tile');
+  var cTile14 = G.phaser.cTiles.create(1020, G.phaser.world.height - 1241, 'tile');
+  var cTile15 = G.phaser.cTiles.create(710, G.phaser.world.height - 1166, 'tile');
+  var cTile16 = G.phaser.cTiles.create(790, G.phaser.world.height - 1166, 'tile');
+  var cTile17 = G.phaser.cTiles.create(865, G.phaser.world.height - 1166, 'tile');
+  var cTile18 = G.phaser.cTiles.create(945, G.phaser.world.height - 1166, 'tile');
+  var cTile19 = G.phaser.cTiles.create(1020, G.phaser.world.height - 1166, 'tile');
 
-  var cTile0 = this.cTiles.create(710, G.phaser.world.height - 1395, 'tile');
-  var cTile1 = this.cTiles.create(790, G.phaser.world.height - 1395, 'tile');
-  var cTile2 = this.cTiles.create(865, G.phaser.world.height - 1395, 'tile');
-  var cTile3 = this.cTiles.create(945, G.phaser.world.height - 1395, 'tile');
-  var cTile4 = this.cTiles.create(1020, G.phaser.world.height - 1395, 'tile');
-  var cTile5 = this.cTiles.create(710, G.phaser.world.height - 1318, 'tile');
-  var cTile6 = this.cTiles.create(790, G.phaser.world.height - 1318, 'tile');
-  var cTile7 = this.cTiles.create(865, G.phaser.world.height - 1318, 'tile');
-  var cTile8 = this.cTiles.create(945, G.phaser.world.height - 1318, 'tile');
-  var cTile9 = this.cTiles.create(1020, G.phaser.world.height - 1318, 'tile');
-  var cTile10 = this.cTiles.create(710, G.phaser.world.height - 1241, 'tile');
-  var cTile11 = this.cTiles.create(790, G.phaser.world.height - 1241, 'tile');
-  var cTile12 = this.cTiles.create(865, G.phaser.world.height - 1241, 'tile');
-  var cTile13 = this.cTiles.create(945, G.phaser.world.height - 1241, 'tile');
-  var cTile14 = this.cTiles.create(1020, G.phaser.world.height - 1241, 'tile');
-  var cTile15 = this.cTiles.create(710, G.phaser.world.height - 1166, 'tile');
-  var cTile16 = this.cTiles.create(790, G.phaser.world.height - 1166, 'tile');
-  var cTile17 = this.cTiles.create(865, G.phaser.world.height - 1166, 'tile');
-  var cTile18 = this.cTiles.create(945, G.phaser.world.height - 1166, 'tile');
-  var cTile19 = this.cTiles.create(1020, G.phaser.world.height - 1166, 'tile');
+  G.phaser.tTiles = G.phaser.add.group();
 
-  this.tTiles = G.phaser.add.group();
+  var tTile0 = G.phaser.tTiles.create(253, G.phaser.world.height - 1058, 'tt_VP_yellow_white');
+  var tTile1 = G.phaser.tTiles.create(422, G.phaser.world.height - 1058, 'tt_two_cards_pink_green');
+  var tTile2 = G.phaser.tTiles.create(253, G.phaser.world.height - 958, 'tt_two_cards_blue_orange');
+  var tTile3 = G.phaser.tTiles.create(422, G.phaser.world.height - 958, 'tt_move_military_blue_blue');
+  var tTile4 = G.phaser.tTiles.create(253, G.phaser.world.height - 858, 'tt_plus_two_pink_white');
+  var tTile5 = G.phaser.tTiles.create(422, G.phaser.world.height - 858, 'tt_VP_orange_white');
 
-  var tTile0 = this.tTiles.create(253, G.phaser.world.height - 1058, 'tt_VP_yellow_white');
-  var tTile1 = this.tTiles.create(422, G.phaser.world.height - 1058, 'tt_two_cards_pink_green');
-  var tTile2 = this.tTiles.create(253, G.phaser.world.height - 958, 'tt_two_cards_blue_orange');
-  var tTile3 = this.tTiles.create(422, G.phaser.world.height - 958, 'tt_move_military_blue_blue');
-  var tTile4 = this.tTiles.create(253, G.phaser.world.height - 858, 'tt_plus_two_pink_white');
-  var tTile5 = this.tTiles.create(422, G.phaser.world.height - 858, 'tt_VP_orange_white');
+  G.phaser.fTiles = G.phaser.add.group();
 
-  this.fTiles = G.phaser.add.group();
+  var fTile0 = G.phaser.fTiles.create(708, G.phaser.world.height - 1035, 'forum');
+  var fTile1 = G.phaser.fTiles.create(778, G.phaser.world.height - 1035, 'forum');
+  var fTile2 = G.phaser.fTiles.create(843, G.phaser.world.height - 1035, 'forum');
+  var fTile3 = G.phaser.fTiles.create(910, G.phaser.world.height - 1035, 'forum');
+  var fTile4 = G.phaser.fTiles.create(977, G.phaser.world.height - 1035, 'forum');
+  var fTile5 = G.phaser.fTiles.create(708, G.phaser.world.height - 968, 'forum');
+  var fTile6 = G.phaser.fTiles.create(778, G.phaser.world.height - 968, 'forum');
+  var fTile7 = G.phaser.fTiles.create(843, G.phaser.world.height - 968, 'forum');
+  var fTile8 = G.phaser.fTiles.create(910, G.phaser.world.height - 968, 'forum');
+  var fTile9 = G.phaser.fTiles.create(977, G.phaser.world.height - 968, 'forum');
+  var fTile10 = G.phaser.fTiles.create(708, G.phaser.world.height - 901, 'forum');
+  var fTile11 = G.phaser.fTiles.create(778, G.phaser.world.height - 901, 'forum');
+  var fTile12 = G.phaser.fTiles.create(843, G.phaser.world.height - 901, 'forum');
+  var fTile13 = G.phaser.fTiles.create(910, G.phaser.world.height - 901, 'forum');
+  var fTile14 = G.phaser.fTiles.create(977, G.phaser.world.height - 901, 'forum');
 
-  var fTile0 = this.fTiles.create(708, G.phaser.world.height - 1035, 'forum');
-  var fTile1 = this.fTiles.create(778, G.phaser.world.height - 1035, 'forum');
-  var fTile2 = this.fTiles.create(843, G.phaser.world.height - 1035, 'forum');
-  var fTile3 = this.fTiles.create(910, G.phaser.world.height - 1035, 'forum');
-  var fTile4 = this.fTiles.create(977, G.phaser.world.height - 1035, 'forum');
-  var fTile5 = this.fTiles.create(708, G.phaser.world.height - 968, 'forum');
-  var fTile6 = this.fTiles.create(778, G.phaser.world.height - 968, 'forum');
-  var fTile7 = this.fTiles.create(843, G.phaser.world.height - 968, 'forum');
-  var fTile8 = this.fTiles.create(910, G.phaser.world.height - 968, 'forum');
-  var fTile9 = this.fTiles.create(977, G.phaser.world.height - 968, 'forum');
-  var fTile10 = this.fTiles.create(708, G.phaser.world.height - 901, 'forum');
-  var fTile11 = this.fTiles.create(778, G.phaser.world.height - 901, 'forum');
-  var fTile12 = this.fTiles.create(843, G.phaser.world.height - 901, 'forum');
-  var fTile13 = this.fTiles.create(910, G.phaser.world.height - 901, 'forum');
-  var fTile14 = this.fTiles.create(977, G.phaser.world.height - 901, 'forum');
+  G.phaser.mTiles = G.phaser.add.group();
 
-  this.mTiles = G.phaser.add.group();
+  var britannia = G.phaser.mTiles.create(380, G.phaser.world.height - 1783, 'forum');
+  var germaniaInferior = G.phaser.mTiles.create(725, G.phaser.world.height - 1735, 'forum');
+  var germaniaSuperior = G.phaser.mTiles.create(910, G.phaser.world.height - 1700, 'forum');
+  var belgica = G.phaser.mTiles.create(553, G.phaser.world.height - 1676, 'forum');
+  var lugudunensis = G.phaser.mTiles.create(388, G.phaser.world.height - 1650, 'forum');
+  var aquitania = G.phaser.mTiles.create(220, G.phaser.world.height - 1598, 'forum');
+  var narbonensis = G.phaser.mTiles.create(280, G.phaser.world.height - 1485, 'forum');
+  var alpes = G.phaser.mTiles.create(490, G.phaser.world.height - 1555, 'forum');
+  var raetia = G.phaser.mTiles.create(780, G.phaser.world.height - 1614, 'forum');
+  var noricum = G.phaser.mTiles.create(960, G.phaser.world.height - 1596, 'forum');
 
-  var britannia = this.mTiles.create(380, G.phaser.world.height - 1783, 'forum');
-  var germaniaInferior = this.mTiles.create(725, G.phaser.world.height - 1735, 'forum');
-  var germaniaSuperior = this.mTiles.create(910, G.phaser.world.height - 1700, 'forum');
-  var belgica = this.mTiles.create(553, G.phaser.world.height - 1676, 'forum');
-  var lugudunensis = this.mTiles.create(388, G.phaser.world.height - 1650, 'forum');
-  var aquitania = this.mTiles.create(220, G.phaser.world.height - 1598, 'forum');
-  var narbonensis = this.mTiles.create(280, G.phaser.world.height - 1485, 'forum');
-  var alpes = this.mTiles.create(490, G.phaser.world.height - 1555, 'forum');
-  var raetia = this.mTiles.create(780, G.phaser.world.height - 1614, 'forum');
-  var noricum = this.mTiles.create(960, G.phaser.world.height - 1596, 'forum');
+  G.phaser.bTiles = G.phaser.add.group(); // gold things
 
-  this.bTiles = G.phaser.add.group(); // gold things
-
-  var bTile0 = this.bTiles.create(850, G.phaser.world.height - 750, 'bonus');
-  var bTile1 = this.bTiles.create(960, G.phaser.world.height - 750, 'bonus2');
+  var bTile0 = G.phaser.bTiles.create(850, G.phaser.world.height - 750, 'bonus');
+  var bTile1 = G.phaser.bTiles.create(960, G.phaser.world.height - 750, 'bonus2');
 
   ships = G.phaser.add.group();
 
   var ship0 = ships.create(290, G.phaser.world.height - 1310, 'ship1');
 
-  this.aMarks = G.phaser.add.group();
+  G.phaser.aMarks = G.phaser.add.group();
 
   // Tray 2 markers
-  var aMark0 = this.aMarks.create(775, G.phaser.world.height-375, 'actionMarkO');
-  var aMark1 = this.aMarks.create(810, G.phaser.world.height-175, 'actionMarkO');
-  var aMark2 = this.aMarks.create(660, G.phaser.world.height-175, 'actionMarkG');
-  var aMark3 = this.aMarks.create(810, G.phaser.world.height-340, 'actionMarkG');
-  var aMark4 = this.aMarks.create(675, G.phaser.world.height-375, 'actionMarkY');
-  var aMark5 = this.aMarks.create(775, G.phaser.world.height-175, 'actionMarkY');
-  var aMark6 = this.aMarks.create(705, G.phaser.world.height-375, 'actionMarkB');
-  var aMark7 = this.aMarks.create(705, G.phaser.world.height-175, 'actionMarkB');
-  var aMark8 = this.aMarks.create(825, G.phaser.world.height-260, 'actionMarkW');
-  var aMark9 = this.aMarks.create(645, G.phaser.world.height-280, 'actionMarkW');
-  var aMark10 = this.aMarks.create(620, G.phaser.world.height-280, 'actionMarkP');
-  var aMark11 = this.aMarks.create(845, G.phaser.world.height-280, 'actionMarkP');
+  var aMark0 = G.phaser.aMarks.create(775, G.phaser.world.height-375, 'actionMarkO');
+  var aMark1 = G.phaser.aMarks.create(810, G.phaser.world.height-175, 'actionMarkO');
+  var aMark2 = G.phaser.aMarks.create(660, G.phaser.world.height-175, 'actionMarkG');
+  var aMark3 = G.phaser.aMarks.create(810, G.phaser.world.height-340, 'actionMarkG');
+  var aMark4 = G.phaser.aMarks.create(675, G.phaser.world.height-375, 'actionMarkY');
+  var aMark5 = G.phaser.aMarks.create(775, G.phaser.world.height-175, 'actionMarkY');
+  var aMark6 = G.phaser.aMarks.create(705, G.phaser.world.height-375, 'actionMarkB');
+  var aMark7 = G.phaser.aMarks.create(705, G.phaser.world.height-175, 'actionMarkB');
+  var aMark8 = G.phaser.aMarks.create(825, G.phaser.world.height-260, 'actionMarkW');
+  var aMark9 = G.phaser.aMarks.create(645, G.phaser.world.height-280, 'actionMarkW');
+  var aMark10 = G.phaser.aMarks.create(620, G.phaser.world.height-280, 'actionMarkP');
+  var aMark11 = G.phaser.aMarks.create(845, G.phaser.world.height-280, 'actionMarkP');
 
-  this.cards = G.phaser.add.group();
+  G.phaser.cards = G.phaser.add.group();
 
-  var cCard0 = this.cards.create(1000, G.phaser.world.height-500, 'card');
-  var cCard1 = this.cards.create(1125, G.phaser.world.height-500, 'card');
-  var cCard2 = this.cards.create(1250, G.phaser.world.height-500, 'card');
+  var cCard0 = G.phaser.cards.create(1000, G.phaser.world.height-500, 'card');
+  var cCard1 = G.phaser.cards.create(1125, G.phaser.world.height-500, 'card');
+  var cCard2 = G.phaser.cards.create(1250, G.phaser.world.height-500, 'card');
 
-  this.pMarks = G.phaser.add.group();
+  G.phaser.pMarks = G.phaser.add.group();
 
-  var pMarkGreen = this.pMarks.create(253, G.phaser.world.height-700, 'playerMark');
-  var pMarkRed = this.pMarks.create(303, G.phaser.world.height-700, 'playerMark');
+  var pMarkGreen = G.phaser.pMarks.create(253, G.phaser.world.height-700, 'playerMark');
+  var pMarkRed = G.phaser.pMarks.create(303, G.phaser.world.height-700, 'playerMark');
 
   seaportTray = new Phaser.Circle(695, G.phaser.world.height-350, 75);
   forumTray = new Phaser.Circle(802, G.phaser.world.height-350, 75);
@@ -232,125 +235,156 @@ Game.prototype.phaserCreate = function() {
   markerBounds = new Phaser.Rectangle(630, G.phaser.world.height-510, 300, 30);
 
   // Al about that village lyfe
-  this.littlePeople = G.phaser.add.group();
+  G.phaser.littlePeople = G.phaser.add.group();
 
-  var lp0 = this.littlePeople.create(925, G.phaser.world.height-390, 'actionMarkO'); //make this be a dude later
-  this.lpStartBox = new Phaser.Rectangle(890, G.phaser.world.height-475, 100, 180);
-  this.legionairreCamp = new Phaser.Rectangle(705,G.phaser.world.height-1520, 200, 100);
-  this.constructionCamp = new Phaser.Rectangle(500,G.phaser.world.height-1210, 200, 100);
+  var lp0 = G.phaser.littlePeople.create(925, G.phaser.world.height-390, 'actionMarkO'); //make this be a dude later
+  G.phaser.lpStartBox = new Phaser.Rectangle(890, G.phaser.world.height-475, 100, 180);
+  G.phaser.legionairreCamp = new Phaser.Rectangle(705,G.phaser.world.height-1520, 200, 100);
+  G.phaser.constructionCamp = new Phaser.Rectangle(500,G.phaser.world.height-1210, 200, 100);
 
-  this.leader = G.phaser.add.group();
-  var bigTree = this.leader.create(725, G.phaser.world.height - 1520, 'bigTree');
+  G.phaser.leader = G.phaser.add.group();
+  var bigTree = G.phaser.leader.create(725, G.phaser.world.height - 1520, 'bigTree');
 
-  this.trajan = G.phaser.add.group();
-  var arch = this.trajan.create(605, G.phaser.world.height-435, 'tArch');
+  G.phaser.trajan = G.phaser.add.group();
+  var arch = G.phaser.trajan.create(605, G.phaser.world.height-435, 'tArch');
   arch.angle = -28;
+
+	G.phaser.gameState = "selectTray";
+	G.phaser.linespot = 640;
+
 }
 
 Game.prototype.phaserUpdate = function() {
-	
+
 }
 
 Game.prototype.turnLogic = function() {
-  G.phaser.text.text = "Select a Tray";
-  G.phaser.input.onUp.add(G.getTray());
-  this.text.text = "Move Cursor Over a Marker to Place it in the Next Tray";
-  this.aMarks.forEach(placeMarkers, this, true);
+	if(G.phaser.gameState == "selectTray"){
+  	G.phaser.textAction.text = "Select a Tray";
+  	G.phaser.input.onUp.add(G.getTray);
+	}
+
+}
+
+Game.prototype.sleep = function(milliseconds){
+	console.log("sleep");
+	var start = new Date().getTime();
+	for(var i = 0; i< 1e7; i++){
+		if((new Date().getTime() - start) > milliseconds){
+			break;
+		}
+	}
 }
 
 Game.prototype.getTray = function(){
+
 	var x = G.phaser.input.activePointer.positionDown.x;
     var y = G.phaser.input.activePointer.positionDown.y;
     //Get which tray the user selected!
-
     if(seaportTray.contains(x,y)){
       //Place Action Markers from tray to top!
-      this.aMarks.forEach(lineUp, this, true, seaportTray);
-      this.currentTray = this.seaportTray;
+      G.phaser.aMarks.forEach(G.lineUp, this, true, seaportTray);
+      G.phaser.currentTray = seaportTray;
     }
     else if(forumTray.contains(x,y)){
       //Place Action Markers from tray to top!
-      this.aMarks.forEach(lineUp, this, true, forumTray);
-      this.currentTray = this.forumTray;
+      G.phaser.aMarks.forEach(G.lineUp, this, true, forumTray);
+      G.phaser.currentTray = forumTray;
     }
     else if(militaryTray.contains(x,y)){
       //Place Action Markers from tray to top!
-      this.aMarks.forEach(lineUp, this, true, militaryTray);
-      this.currentTray = this.militaryTray;
+      G.phaser.aMarks.forEach(G.lineUp, this, true, militaryTray);
+      G.phaser.currentTray = militaryTray;
     }
     else if(senateTray.contains(x,y)){
       //Place Action Markers from tray to top!
-      this.aMarks.forEach(lineUp, this, true, senateTray);
-      this.currentTray = this.senateTray;
+      G.phaser.aMarks.forEach(G.lineUp, this, true, senateTray);
+      G.phaser.currentTray = senateTray;
     }
     else if(trajanTray.contains(x,y)){
       //Place Action Markers from tray to top!
-      this.aMarks.forEach(lineUp, this, true, trajanTray);
-      this.currentTray = this.trajanTray;
+      G.phaser.aMarks.forEach(G.lineUp, this, true, trajanTray);
+      G.phaser.currentTray = trajanTray;
     }
     else if(constructionTray.contains(x,y)){
       //Place Action Markers from tray to top!
-      this.aMarks.forEach(lineUp, this, true, constructionTray);
-      this.currentTray = this.constructionTray;
+      G.phaser.aMarks.forEach(G.lineUp, this, true, constructionTray);
+      G.phaser.currentTray = constructionTray;
     }
+
+		G.phaser.input.destroy();
+		G.phaser.gameState = "placeMarker";
+		if(G.phaser.gameState == "placeMarker"){
+			G.phaser.textAction.text = "Move Cursor Over a Marker to Place it in the Next Tray";
+			G.phaser.aMarks.forEach(G.placeMarkers, this, true);
+		}
 }
 
 Game.prototype.lineUp = function(marker, sourceTray) {
   var mx = marker.position.x;
   var my = marker.position.y;
-  var linespot = 640;
+
   if(sourceTray.contains(mx, my)){
-    marker.position.x = this.linespot;
+    marker.position.x = G.phaser.linespot;
     marker.position.y = G.phaser.world.height-500;
-    linespot += 35;
+    G.phaser.linespot += 35;
   }
 }
 
 Game.prototype.placeMarkers = function(marker){
+	//console.log(G.phaser.currentTray);
 	//get position of maker
     var mx = marker.position.x;
     var my = marker.position.y;
-    var currentTray;
-	var i = 0;
+		var i = 0;
+		var flag = false;
 
     marker.inputEnabled = true;
-
-    if(marker.input.pointerOver()){ //get if pointer is over marker
+		//while(flag == false){
+			console.log("run");
+    if(marker.input.pointerOver()){//get if pointer is over marker
       if(markerBounds.contains(mx, my)){ //make sure marker is part of source tray group
 
-        if(currentTray == this.seaportTray){ //add marker to next tray
-          marker.position.x = this.forumTray.x;
-          marker.position.y = this.forumTray.y;
-          currentTray = this.forumTray;
+        if(G.phaser.currentTray == G.phaser.seaportTray){ //add marker to next tray
+          marker.position.x = G.phaser.forumTray.x;
+          marker.position.y = G.phaser.forumTray.y;
+          G.phaser.currentTray = G.phaser.forumTray;
+					flag = true;
         }
-        else if(currentTray == this.forumTray){
-          marker.position.x = this.militaryTray.x;
-          marker.position.y = this.militaryTray.y;
-          currentTray = this.militaryTray;
+        else if(G.phaser.currentTray == G.phaser.forumTray){
+          marker.position.x = G.phaser.militaryTray.x;
+          marker.position.y = G.phaser.militaryTray.y;
+          G.phaser.currentTray = G.phaser.militaryTray;
+					flag = true;
         }
-        else if(currentTray == this.militaryTray){
-          marker.position.x = this.senateTray.x;
-          marker.position.y = this.senateTray.y;
-          currentTray = this.senateTray;
+        else if(G.phaser.currentTray == G.phaser.militaryTray){
+          marker.position.x = G.phaser.senateTray.x;
+          marker.position.y = G.phaser.senateTray.y;
+          G.phaser.currentTray = G.phaser.senateTray;
+					flag = true;
         }
-        else if(currentTray == this.senateTray){
-          marker.position.x = this.trajanTray.x;
-          marker.position.y = this.trajanTray.y;
-          currentTray = this.trajanTray;
+        else if(G.phaser.currentTray == G.phaser.senateTray){
+          marker.position.x = G.phaser.trajanTray.x;
+          marker.position.y = G.phaser.trajanTray.y;
+          G.phaser.currentTray = G.phaser.trajanTray;
+					flag = true;
         }
-        else if(currentTray == this.trajanTray){
-          marker.position.x = this.constructionTray.x;
-          marker.position.y = this.constructionTray.y;
-          currentTray = this.constructionTray;
+        else if(G.phaser.currentTray == G.phaser.trajanTray){
+          marker.position.x = G.phaser.constructionTray.x;
+          marker.position.y = G.phaser.constructionTray.y;
+          G.phaser.currentTray = G.phaser.constructionTray;
+					flag = true;
         }
         else{
-          marker.position.x = this.seaportTray.x;
-          marker.position.y = this.seaportTray.y;
-          currentTray = this.seaportTray;
+          marker.position.x = G.phaser.seaportTray.x;
+          marker.position.y = G.phaser.seaportTray.y;
+          G.phaser.currentTray = G.phaser.seaportTray;
+					flag = true;
         }
         i += 5;
       }
     }
+//	}
 }
 
 // var boxEmpty = true;
@@ -398,6 +432,3 @@ Game.prototype.senateSpaces = function(currentPlayer){
     };
   };
 }
-
-
-

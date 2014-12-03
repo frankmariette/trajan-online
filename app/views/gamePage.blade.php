@@ -11,9 +11,9 @@
   <script src="js/mainGame.js"></script>
   <script type="text/javascript">
     var G = new Game();
-    G.turnLogic();
-    
-    
+    setTimeout(G.turnLogic, 5000);
+
+
   </script>
 
   <script>
