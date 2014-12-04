@@ -20,7 +20,7 @@ function Game(){
 	this.tray4; 
 	this.tray5; 
 	this.tray6; 
-	this.text; 
+	this.actionText; 
 	this.ships; 
 	this.trajan; 
 	this.leader; 
@@ -121,8 +121,8 @@ Game.prototype.phaserCreate = function() {
   var player = G.phaser.add.sprite(275, G.phaser.world.height-500, 'playerBoard');
   graphics = G.phaser.add.graphics(0, 0);
 
-  text = G.phaser.add.text(350, G.phaser.world.height - 550, '', {fill : '#ffffff'});
-
+  G.phaser.actionText = G.phaser.add.text(350, G.phaser.world.height - 550, '', {fill : '#ffffff'});
+  G.phaser.actionText.text = "Original fucking text!";
   this.cTiles = G.phaser.add.group();
 
 
@@ -252,9 +252,9 @@ Game.prototype.phaserUpdate = function() {
 }
 
 Game.prototype.turnLogic = function() {
-  G.phaser.text.text = "Select a Tray";
-  G.phaser.input.onUp.add(G.getTray());
-  this.text.text = "Move Cursor Over a Marker to Place it in the Next Tray";
+  console.log(this.phaser);
+  this.input.onUp.add(G.getTray());
+  // this.text.text = "Move Cursor Over a Marker to Place it in the Next Tray";
   this.aMarks.forEach(placeMarkers, this, true);
 }
 
