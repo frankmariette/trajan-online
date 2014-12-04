@@ -14,12 +14,12 @@ function Game(){
 	this.aMarks;
 	this.pMarks;
 	this.littlePeople;
-	this.tray1;
-	this.tray2;
-	this.tray3;
-	this.tray4;
-	this.tray5;
-	this.tray6;
+	this.seaportTray;
+	this.forumTray;
+	this.militaryTray;
+	this.senateTray;
+	this.constructionTray;
+	this.trajanTray;
 	this.textAction;
 	this.ships;
 	this.trajan;
@@ -29,6 +29,7 @@ function Game(){
 	this.gameState;
 	this.linespot;
 	this.currentTray;
+	this.displace;
 
 	// Phaser bootstrapping
 	this.phaser = new Phaser.Game(1600, 1800, Phaser.AUTO, 'gameboard', {preload: this.phaserPreload, create: this.phaserCreate, update: this.phaserUpdate});
@@ -251,6 +252,7 @@ Game.prototype.phaserCreate = function() {
 
 	G.phaser.gameState = "selectTray";
 	G.phaser.linespot = 640;
+	G.phaser.displace = 0;
 
 }
 
@@ -259,9 +261,10 @@ Game.prototype.phaserUpdate = function() {
 }
 
 Game.prototype.turnLogic = function() {
+	//console.log("turn logic function");
 	if(G.phaser.gameState == "selectTray"){
   	G.phaser.textAction.text = "Select a Tray";
-  	G.phaser.input.onUp.add(G.getTray);
+  	G.phaser.input.onUp.addOnce(G.getTray);
 	}
 
 }
@@ -284,39 +287,43 @@ Game.prototype.getTray = function(){
     if(seaportTray.contains(x,y)){
       //Place Action Markers from tray to top!
       G.phaser.aMarks.forEach(G.lineUp, this, true, seaportTray);
-      G.phaser.currentTray = seaportTray;
+      currentTray = seaportTray;
+			G.phaser.gameState = "placeMarker";
     }
     else if(forumTray.contains(x,y)){
       //Place Action Markers from tray to top!
       G.phaser.aMarks.forEach(G.lineUp, this, true, forumTray);
-      G.phaser.currentTray = forumTray;
+      currentTray = forumTray;
+			G.phaser.gameState = "placeMarker";
     }
     else if(militaryTray.contains(x,y)){
       //Place Action Markers from tray to top!
       G.phaser.aMarks.forEach(G.lineUp, this, true, militaryTray);
-      G.phaser.currentTray = militaryTray;
+      currentTray = militaryTray;
+			G.phaser.gameState = "placeMarker";
     }
     else if(senateTray.contains(x,y)){
       //Place Action Markers from tray to top!
       G.phaser.aMarks.forEach(G.lineUp, this, true, senateTray);
-      G.phaser.currentTray = senateTray;
+      currentTray = senateTray;
+			G.phaser.gameState = "placeMarker";
     }
     else if(trajanTray.contains(x,y)){
       //Place Action Markers from tray to top!
       G.phaser.aMarks.forEach(G.lineUp, this, true, trajanTray);
-      G.phaser.currentTray = trajanTray;
+      currentTray = trajanTray;
+			G.phaser.gameState = "placeMarker";
     }
     else if(constructionTray.contains(x,y)){
       //Place Action Markers from tray to top!
       G.phaser.aMarks.forEach(G.lineUp, this, true, constructionTray);
-      G.phaser.currentTray = constructionTray;
+      currentTray = constructionTray;
+			G.phaser.gameState = "placeMarker";
     }
 
-		G.phaser.input.destroy();
-		G.phaser.gameState = "placeMarker";
 		if(G.phaser.gameState == "placeMarker"){
-			G.phaser.textAction.text = "Move Cursor Over a Marker to Place it in the Next Tray";
-			G.phaser.aMarks.forEach(G.placeMarkers, this, true);
+			G.phaser.textAction.text = "Click on a Marker to Place it in the Next Tray";
+			G.phaser.aMarks.forEach(G.clickMarker, this, true);
 		}
 }
 
@@ -331,89 +338,79 @@ Game.prototype.lineUp = function(marker, sourceTray) {
   }
 }
 
-Game.prototype.placeMarkers = function(marker){
-	//console.log(G.phaser.currentTray);
-	//get position of maker
-    var mx = marker.position.x;
-    var my = marker.position.y;
-		var i = 0;
-		var flag = false;
-
-    marker.inputEnabled = true;
-		//while(flag == false){
-			console.log("run");
-    if(marker.input.pointerOver()){//get if pointer is over marker
-      if(markerBounds.contains(mx, my)){ //make sure marker is part of source tray group
-
-        if(G.phaser.currentTray == G.phaser.seaportTray){ //add marker to next tray
-          marker.position.x = G.phaser.forumTray.x;
-          marker.position.y = G.phaser.forumTray.y;
-          G.phaser.currentTray = G.phaser.forumTray;
-					flag = true;
-        }
-        else if(G.phaser.currentTray == G.phaser.forumTray){
-          marker.position.x = G.phaser.militaryTray.x;
-          marker.position.y = G.phaser.militaryTray.y;
-          G.phaser.currentTray = G.phaser.militaryTray;
-					flag = true;
-        }
-        else if(G.phaser.currentTray == G.phaser.militaryTray){
-          marker.position.x = G.phaser.senateTray.x;
-          marker.position.y = G.phaser.senateTray.y;
-          G.phaser.currentTray = G.phaser.senateTray;
-					flag = true;
-        }
-        else if(G.phaser.currentTray == G.phaser.senateTray){
-          marker.position.x = G.phaser.trajanTray.x;
-          marker.position.y = G.phaser.trajanTray.y;
-          G.phaser.currentTray = G.phaser.trajanTray;
-					flag = true;
-        }
-        else if(G.phaser.currentTray == G.phaser.trajanTray){
-          marker.position.x = G.phaser.constructionTray.x;
-          marker.position.y = G.phaser.constructionTray.y;
-          G.phaser.currentTray = G.phaser.constructionTray;
-					flag = true;
-        }
-        else{
-          marker.position.x = G.phaser.seaportTray.x;
-          marker.position.y = G.phaser.seaportTray.y;
-          G.phaser.currentTray = G.phaser.seaportTray;
-					flag = true;
-        }
-        i += 5;
-      }
-    }
-//	}
+Game.prototype.clickMarker = function(actionMarker){
+	var mx = actionMarker.position.x;
+	var my = actionMarker.position.y;
+	actionMarker.inputEnabled = true;
+	if(markerBounds.contains(mx, my)){
+		actionMarker.events.onInputDown.addOnce(G.placeMarkers, this);
+	}
 }
 
-// var boxEmpty = true;
-//   this.aMarks.forEach(function(current){
-//     if(markerBounds.contains(current.position.x, current.position.y)){ //check that box is empty
-//       boxEmpty = false;
-//     }
-//   }, this, true);
-//   if(boxEmpty){ //set game state to correct action for next phase of turn logic
-//     if(currentTray == seaportTray){
-//       busy = 'seaport';
-//     }
-//     else if(currentTray == forumTray){
-//       busy = 'forum';
-//     }
-//     else if(currentTray == militaryTray){
-//       busy = 'military';
-//     }
-//     else if(currentTray == senateTray){
-//       busy = 'senate';
-//     }
-//     else if(currentTray == trajanTray){
-//       busy = 'trajan';
-//     }
-//     else if(currentTray == t6){
-//       busy = 'construction';
-//     }
-//   }
-// }
+Game.prototype.placeMarkers = function(marker){
+  if(currentTray == seaportTray){ //add marker to next tray
+		marker.position.x = forumTray.x + G.phaser.displace;
+		marker.position.y = forumTray.y + G.phaser.displace;
+		currentTray = forumTray;
+	}
+	else if(currentTray == forumTray){
+		marker.position.x = militaryTray.x + G.phaser.displace;
+		marker.position.y = militaryTray.y + G.phaser.displace;
+		currentTray = militaryTray;
+	}
+	else if(currentTray == militaryTray){
+		marker.position.x = senateTray.x + G.phaser.displace;
+		marker.position.y = senateTray.y + G.phaser.displace;
+		currentTray = senateTray;
+	}
+	else if(currentTray == senateTray){
+		marker.position.x = trajanTray.x + G.phaser.displace;
+		marker.position.y = trajanTray.y + G.phaser.displace;
+		currentTray = trajanTray;
+	}
+	else if(currentTray == trajanTray){
+		marker.position.x = constructionTray.x + G.phaser.displace;
+		marker.position.y = constructionTray.y + G.phaser.displace;
+		currentTray = constructionTray;
+	}
+	else{
+		marker.position.x = seaportTray.x + G.phaser.displace;
+		marker.position.y = seaportTray.y + G.phaser.displace;
+		currentTray = seaportTray;
+	}
+	G.phaser.displace +=5;
+	G.getAction();
+}
+
+Game.prototype.getAction = function(){
+	var boxEmpty = true;
+		G.phaser.aMarks.forEach(function(current){
+			if(markerBounds.contains(current.position.x, current.position.y)){ //check that box is empty
+				boxEmpty = false;
+			}
+		}, this, true);
+		if(boxEmpty){ //set game state to correct action for next phase of turn logic
+			if(currentTray == seaportTray){
+				G.phaser.gameState = 'seaport';
+			}
+			else if(currentTray == forumTray){
+				G.phaser.gameState = 'forum';
+			}
+			else if(currentTray == militaryTray){
+				G.phaser.gameState = 'military';
+			}
+			else if(currentTray == senateTray){
+				G.phaser.gameState = 'senate';
+			}
+			else if(currentTray == trajanTray){
+				G.phaser.gameState = 'trajan';
+			}
+			else if(currentTray == t6){
+				G.phaser.gameState = 'construction';
+			}
+		}
+		console.log(G.phaser.gameState);
+	}
 
 
 Game.prototype.movePlayerSenatePiece = function(currentPlayer, nextSpace) {
