@@ -28,7 +28,7 @@
     }
 
     var cTiles, tTiles, bTiles, mTiles, fTiles, aMarks, pMarks, littlePeople, tray1, tray2, tray3, tray4, tray5, tray6, text, ships, trajan, leader, cards;
-    var graphics, t1, t2, t3, t4, t5, t6;
+    var graphics, seaportTray, forumTray, militaryTray, senateTray, trajanTile, constructionTray;
 
     function create() { //initial positions of all pieces on gameBoard
       Military();
