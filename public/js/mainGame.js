@@ -30,6 +30,8 @@ function Game(){
 	this.linespot;
 	this.currentTray;
 	this.displace;
+	this.currentPlayerMarker;
+	this.graphics;
 
 	// Phaser bootstrapping
 	this.phaser = new Phaser.Game(1600, 1800, Phaser.AUTO, 'gameboard', {preload: this.phaserPreload, create: this.phaserCreate, update: this.phaserUpdate});
@@ -226,6 +228,7 @@ Game.prototype.phaserCreate = function() {
 
   var pMarkGreen = G.phaser.pMarks.create(253, G.phaser.world.height-700, 'playerMark');
   var pMarkRed = G.phaser.pMarks.create(303, G.phaser.world.height-700, 'playerMark');
+	G.phaser.currentPlayerMarker = pMarkGreen;
 
   seaportTray = new Phaser.Circle(695, G.phaser.world.height-350, 75);
   forumTray = new Phaser.Circle(802, G.phaser.world.height-350, 75);
@@ -401,30 +404,40 @@ Game.prototype.getAction = function(){
 			}
 			else if(currentTray == senateTray){
 				G.phaser.gameState = 'senate';
+				G.senateSpaces(G.phaser.currentPlayerMarker); //NEEDS TO CHANGE TO BE ACTIVE PLAYER
 			}
 			else if(currentTray == trajanTray){
 				G.phaser.gameState = 'trajan';
 			}
-			else if(currentTray == t6){
+			else if(currentTray == constructionTray){
 				G.phaser.gameState = 'construction';
 			}
 		}
-		console.log(G.phaser.gameState);
-	}
+}
 
 
 Game.prototype.movePlayerSenatePiece = function(currentPlayer, nextSpace) {
-  currentPlayer.x = nextSpace.x;
-  currentPlayer.y = nextSpace.y;
-  // console.log(currentPlayer);
+  currentPlayer.x = nextSpace.x -20;
+  currentPlayer.y = nextSpace.y -20;
   return currentPlayer;
 }
 
 Game.prototype.senateSpaces = function(currentPlayer){
-  for (var i = 0; i < this.senate_spaces.length-1; i++) {
-    if (this.senate_spaces[i].contains(currentPlayer.x, currentPlayer.y)) {
-      currentPlayer = this.movePlayerSenatePiece(currentPlayer, this.senate_spaces[i+1]);
-      this.victory_points = i+2;
+	var senate_spaces = [
+		new Phaser.Circle(300, G.phaser.world.height-680, 175),
+		new Phaser.Circle(393, G.phaser.world.height-680, 25),
+		new Phaser.Circle(456, G.phaser.world.height-680, 25),
+		new Phaser.Circle(522, G.phaser.world.height-680, 25),
+		new Phaser.Circle(585, G.phaser.world.height-680, 25),
+		new Phaser.Circle(649, G.phaser.world.height-680, 25),
+		new Phaser.Circle(715, G.phaser.world.height-680, 25),
+		new Phaser.Circle(778, G.phaser.world.height-680, 25)
+	]
+
+  for (var i = 0; i < senate_spaces.length-1; i++) {
+    if (senate_spaces[i].contains(currentPlayer.x-10, currentPlayer.y-10)) {
+      currentPlayer = G.movePlayerSenatePiece(currentPlayer, senate_spaces[i+1]);
+      victory_points = i+2;
       break;
     };
   };
