@@ -24,8 +24,8 @@ function turnLogic(){
     //call forum logic
   }
   if(busy == 'military'){
-    text.text = "Military Action";
     //call mil logic
+    militaryLogic();
   }
   if(busy == 'senate'){
     busy = 'selectTray'
@@ -35,7 +35,8 @@ function turnLogic(){
   }
   if(busy == 'trajan'){
     text.text = "Trajan Action";
-    //call trajan logic
+    tTiles.forEach(trajanMakeActive, this, trajan.getAt(0), true);
+    
   }
   if(busy == 'construction'){
     text.text = "Construction Action";
@@ -47,6 +48,8 @@ function turnLogic(){
   cTiles.forEach(makeActive, this, true);
   bTiles.forEach(makeActive, this, true);
   mTiles.forEach(makeActive, this, true);
+//  tTiles.forEach(makeActive, this, true);
+  //mTiles.forEach(makeActive, this, true);
   tTiles.forEach(makeActive, this, true);
   fTiles.forEach(forumActive, this, true);
 
@@ -63,6 +66,12 @@ function senateListener(senateTile){
 }
 
 function listener(tile){ //this is how you add a callback to move a piece!
-  tile.position.x = 0;
-  tile.position.y = 0;
+  tile.position.x = 800;
+  tile.position.y = 300;
 }
+
+function trajanMakeActive(currentTile, arch){
+	currentTile.inputEnabled = true;
+	currentTile.events.onInputDown.add(trajanLogic, this, arch);
+}
+
