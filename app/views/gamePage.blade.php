@@ -17,7 +17,6 @@
   </script>
 
   <script>
-
     // function update() {
     //   turnLogic(); //do we need to send current player info?
 

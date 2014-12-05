@@ -79,12 +79,24 @@ function createSprites(){
 
   var ship0 = ships.create(290, game.world.height - 1310, 'ship1');
 
+  /*cards = game.add.group();
+
+  var card0 = cards.create(1100, game.world.height - 460, 'tile');
+  var card1 = cards.create(1100, game.world.height - 440, 'tile');
+  var card2 = cards.create(1100, game.world.height - 420, 'tile');
+  var card3 = cards.create(1100, game.world.height - 400, 'tile');
+  var card4 = cards.create(1100, game.world.height - 380, 'tile');
+  var card5 = cards.create(1100, game.world.height - 360, 'tile');
+  var card6 = cards.create(1100, game.world.height - 340, 'tile');
+  var card7 = cards.create(1100, game.world.height - 320, 'tile');
+  var card8 = cards.create(1100, game.world.height - 300, 'tile');
+*/
   aMarks = game.add.group();
 
   // Tray 2 markers
   var aMark0 = aMarks.create(775, game.world.height-375, 'actionMarkO');
   var aMark1 = aMarks.create(810, game.world.height-175, 'actionMarkO');
-  var aMark2 = aMarks.create(660, game.world.height-175, 'actionMarkG');
+  var aMark2 = aMarks.create(670, game.world.height-175, 'actionMarkG');
   var aMark3 = aMarks.create(810, game.world.height-340, 'actionMarkG');
   var aMark4 = aMarks.create(675, game.world.height-375, 'actionMarkY');
   var aMark5 = aMarks.create(775, game.world.height-175, 'actionMarkY');
