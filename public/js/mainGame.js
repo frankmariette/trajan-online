@@ -267,9 +267,8 @@ Game.prototype.turnLogic = function() {
 	//console.log("turn logic function");
 	if(G.phaser.gameState == "selectTray"){
   	G.phaser.textAction.text = "Select a Tray";
-  	G.phaser.input.onUp.addOnce(G.getTray);
+  	G.phaser.input.onUp.add(G.getTray);
 	}
-
 }
 
 Game.prototype.sleep = function(milliseconds){
@@ -283,7 +282,10 @@ Game.prototype.sleep = function(milliseconds){
 }
 
 Game.prototype.getTray = function(){
-
+	if(G.phaser.gameState != "selectTray"){
+		return;
+	}
+	G.phaser.displace = 0;
 	var x = G.phaser.input.activePointer.positionDown.x;
     var y = G.phaser.input.activePointer.positionDown.y;
     //Get which tray the user selected!
@@ -398,13 +400,14 @@ Game.prototype.getAction = function(){
 			}
 			else if(currentTray == forumTray){
 				G.phaser.gameState = 'forum';
+				//G.phaser.fTiles.forEach.addOnce(G.forumAction, this, true);
 			}
 			else if(currentTray == militaryTray){
 				G.phaser.gameState = 'military';
 			}
 			else if(currentTray == senateTray){
 				G.phaser.gameState = 'senate';
-				G.senateSpaces(G.phaser.currentPlayerMarker); //NEEDS TO CHANGE TO BE ACTIVE PLAYER
+				G.senateSpaces(G.phaser.currentPlayerMarker);
 			}
 			else if(currentTray == trajanTray){
 				G.phaser.gameState = 'trajan';
@@ -419,6 +422,7 @@ Game.prototype.getAction = function(){
 Game.prototype.movePlayerSenatePiece = function(currentPlayer, nextSpace) {
   currentPlayer.x = nextSpace.x -20;
   currentPlayer.y = nextSpace.y -20;
+	G.bonusAction();
   return currentPlayer;
 }
 
@@ -441,4 +445,80 @@ Game.prototype.senateSpaces = function(currentPlayer){
       break;
     };
   };
+}
+
+Game.prototype.bonusAction = function(){
+	G.phaser.textAction.text = "Click on Bonus Action Tile to repeat this action or click HERE to end turn";
+	G.phaser.gameState = "selectTray";
+	G.turnLogic();
+}
+
+Game.prototype.forumAction = function(currentTile){
+	G.phaser.textAction.text = "Select a Forum Tile";
+	var tilesType = "games";
+	currentTile.inputEnabled = true;
+
+	if(tilesType == "games")
+		currentTile.events.onInputDown.add(G.gamesMovement, this);
+
+	else if(tilesType == "bread")
+		currentTile.events.onInputDown.add(G.breadMovement, this);
+
+	else if(tilesType == "religion")
+		currentTile.events.onInputDown.add(G.religionMovement, this);
+
+	else if(tilesType == "yellow")
+		currentTile.events.onInputDown.add(G.yellowWildMovement, this);
+
+	else if(tilesType == "orange")
+		currentTile.events.onInputDown.add(G.orangeWildMovement, this);
+
+	else if(tilesType == "green")
+		currentTile.events.onInputDown.add(G.greenWildMovement, this);
+
+	else if(tilesType == "red")
+		currentTile.events.onInputDown.add(G.redWildMovement, this);
+}
+
+	/////////////////////////////////   STACK TILES
+Game.prototype.stackTiles = function(tile){
+	tile.position.y += 10;
+}
+
+
+	/////////////////////////////////   RESOURCES MOVEMENT
+Game.prototype.gamesMovement = function(tile){
+	tile.position.x = 530;
+	tile.position.y = 1402;
+}
+
+Game.prototype.breadMovement = function(tile){
+	tile.position.x = 375;
+	tile.position.y = 1402;
+}
+
+Game.prototype.religionMovement = function(tile){
+	tile.position.x = 452;
+	tile.position.y = 1402;
+}
+
+	//////////////////////////////////////   WILD CARD MOVEMENT
+Game.prototype.yellowWildMovement = function(tile){
+	tile.position.x = 382;
+	tile.position.y = 1482;
+}
+
+Game.prototype.orangeWildMovement = function(tile){
+	tile.position.x = 448;
+	tile.position.y = 1482;
+}
+
+Game.prototype.greenWildMovement = function(tile){
+	tile.position.x = 382;
+	tile.position.y = 1545;
+}
+
+Game.prototype.redWildMovement = function(tile){
+	tile.position.x = 448;
+	tile.position.y = 1545;
 }
