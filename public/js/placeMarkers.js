@@ -69,7 +69,7 @@ function placeMarkers(marker){
     else if(currentTray == trajanTray){
       busy = 'trajan';
     }
-    else if(currentTray == t6){
+    else if(currentTray == constructionTray){
       busy = 'construction';
     }
   }

@@ -8,27 +8,14 @@
   </style>
 
   <script src='//cdnjs.cloudflare.com/ajax/libs/phaser/2.1.2/phaser.min.js'></script>
-  <script src='/js/loadGame.js'></script>
-  <script src='/js/createSprites.js'></script>
-  <script src='/js/turnLogic.js'></script>
-  <script src='/js/seaportLogic.js'></script>
-  <script src='/js/forumLogic.js'></script>
-  <script src='/js/militaryLogic.js'></script>
-  <script src='/js/senateLogic.js'></script>
-  <script src='/js/trajanLogic.js'></script>
-  <script src='/js/constructionLogic.js'></script>
-  <script src='js/getTray.js'></script>
-  <script src='js/placeMarkers.js'></script>
-  <script>
+  <script src="js/mainGame.js"></script>
+  <script type="text/javascript">
+    var G = new Game();
+    setTimeout(G.turnLogic, 5000);
 
-    var game = new Phaser.Game(1600, 1800, Phaser.AUTO, 'gameboard', {preload: preload, create: create, update: update});
 
-    function preload() { //load images for each game piece
-      loadStuff();
-    }
 
-    var cTiles, tTiles, bTiles, mTiles, fTiles, aMarks, pMarks, littlePeople, tray1, tray2, tray3, tray4, tray5, tray6, text, ships, trajan, leader, cards;
-    var graphics, seaportTray, forumTray, militaryTray, senateTray, trajanTile, constructionTray;
+
 
     function create() { //initial positions of all pieces on gameBoard
       Military();
