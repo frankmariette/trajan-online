@@ -19,8 +19,9 @@
 
     function create() { //initial positions of all pieces on gameBoard
       Military();
+      Construction();
       createSprites();
-      
+
     }
 
     function update() {
