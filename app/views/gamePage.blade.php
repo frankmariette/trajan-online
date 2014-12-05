@@ -21,24 +21,24 @@
   <script src='js/placeMarkers.js'></script>
   <script>
 
-    var game = new Phaser.Game(1300, 1800, Phaser.AUTO, 'gameboard', {preload: preload, create: create, update: update});
+    var game = new Phaser.Game(1600, 1800, Phaser.AUTO, 'gameboard', {preload: preload, create: create, update: update});
 
     function preload() { //load images for each game piece
       loadStuff();
     }
 
-    var cTiles, tTiles, bTiles, mTiles, fTiles, aMarks, pMarks, littlePeople, tray1, tray2, tray3, tray4, tray5, tray6, text;
+    var cTiles, tTiles, bTiles, mTiles, fTiles, aMarks, pMarks, littlePeople, tray1, tray2, tray3, tray4, tray5, tray6, text, ships, trajan, leader, cards;
     var graphics, seaportTray, forumTray, militaryTray, senateTray, trajanTile, constructionTray;
 
     function create() { //initial positions of all pieces on gameBoard
+      Military();
       createSprites();
     }
 
     function update() {
       turnLogic(); //do we need to send current player info?
-
       // use this line to print out mouse coords. Useful for placement
-      // console.log(game.input.activePointer.positionDown.x, game.input.activePointer.positionDown.y);
+      console.log(game.input.activePointer.positionDown.x, game.input.activePointer.positionDown.y);
     }
   </script>
 
