@@ -13,7 +13,6 @@ function placeMarkers(marker){
 
     if(marker.input.pointerOver()){ //get if pointer is over marker
       if(markerBounds.contains(mx, my)){ //make sure marker is part of source tray group
-
         if(currentTray == seaportTray){ //add marker to next tray
           marker.position.x = forumTray.x;
           marker.position.y = forumTray.y;

@@ -241,7 +241,21 @@ Game.prototype.phaserCreate = function() {
   // Al about that village lyfe
   G.phaser.littlePeople = G.phaser.add.group();
 
-  var lp0 = G.phaser.littlePeople.create(925, G.phaser.world.height-390, 'actionMarkO'); //make this be a dude later
+  var lp0 = G.phaser.littlePeople.create(925, G.phaser.world.height-450, 'actionMarkG'); //make this be a dude later
+	var lp1 = G.phaser.littlePeople.create(925, G.phaser.world.height-430, 'actionMarkG'); //make this be a dude later
+	var lp2 = G.phaser.littlePeople.create(925, G.phaser.world.height-410, 'actionMarkG'); //make this be a dude later
+	var lp3 = G.phaser.littlePeople.create(925, G.phaser.world.height-390, 'actionMarkG'); //make this be a dude later
+	var lp4 = G.phaser.littlePeople.create(925, G.phaser.world.height-370, 'actionMarkG'); //make this be a dude later
+	var lp5 = G.phaser.littlePeople.create(925, G.phaser.world.height-350, 'actionMarkG'); //make this be a dude later
+	var lp6 = G.phaser.littlePeople.create(945, G.phaser.world.height-450, 'actionMarkG'); //make this be a dude later
+	var lp7 = G.phaser.littlePeople.create(945, G.phaser.world.height-430, 'actionMarkG'); //make this be a dude later
+	var lp8 = G.phaser.littlePeople.create(945, G.phaser.world.height-410, 'actionMarkG'); //make this be a dude later
+	var lp9 = G.phaser.littlePeople.create(945, G.phaser.world.height-390, 'actionMarkG'); //make this be a dude later
+	var lp10 = G.phaser.littlePeople.create(945, G.phaser.world.height-370, 'actionMarkG'); //make this be a dude later
+	var lp11 = G.phaser.littlePeople.create(945, G.phaser.world.height-350, 'actionMarkG'); //make this be a dude later
+	var lp12 = G.phaser.littlePeople.create(905, G.phaser.world.height-410, 'actionMarkG'); //make this be a dude later
+	var lp13 = G.phaser.littlePeople.create(905, G.phaser.world.height-390, 'actionMarkG'); //make this be a dude later
+	var lp14 = G.phaser.littlePeople.create(905, G.phaser.world.height-370, 'actionMarkG');
   G.phaser.lpStartBox = new Phaser.Rectangle(890, G.phaser.world.height-475, 100, 180);
   G.phaser.legionairreCamp = new Phaser.Rectangle(705,G.phaser.world.height-1520, 200, 100);
   G.phaser.constructionCamp = new Phaser.Rectangle(500,G.phaser.world.height-1210, 200, 100);
@@ -404,6 +418,7 @@ Game.prototype.getAction = function(){
 			}
 			else if(currentTray == militaryTray){
 				G.phaser.gameState = 'military';
+				G.militaryLogic();
 			}
 			else if(currentTray == senateTray){
 				G.phaser.gameState = 'senate';
@@ -521,4 +536,120 @@ Game.prototype.greenWildMovement = function(tile){
 Game.prototype.redWildMovement = function(tile){
 	tile.position.x = 448;
 	tile.position.y = 1545;
+}
+
+Game.prototype.militaryLogic = function()
+{
+	//game.paused=true;
+	var victory_points = 0;
+	var actionInput = 0;
+	//console.log("military logic call");
+	if(G.phaser.gameState == "military")
+	{
+		G.phaser.textAction.text = "Military Action";
+		G.phaser.textAction.text= G.phaser.textAction.text + "\nLeft- Move Token to Camp \nUp- Move Troop to Leader \nRight- Move leader to Adj Providence";
+	}
+	var keys = G.phaser.input.keyboard.createCursorKeys();
+	keys.left.onPressCallback = G.moveTokenToMilitaryCamp;
+	keys.up.onPressCallback = G.moveTokenToLeader;	//move a token to the leader's location
+	keys.right.onPressCallback = G.moveLeader;	//move your leader to an adjacent space
+	return victory_points;
+}
+
+Game.prototype.moveTokenToMilitaryCamp = function() {
+	console.log("hit");
+	var incX = 0;
+	var incY = 0;
+	//move tokens from player's token board to the military camp
+	//add a token to the military camp
+	for(i=0;i<littlePeople.length;i++)
+	{
+		if(lpStartBox.contains(littlePeople.getAt(i).position.x,littlePeople.getAt(i).position.y))
+		{
+			littlePeople.getAt(i).position.x = 750+incX;
+			littlePeople.getAt(i).position.y = 280+incY;
+			//game.world.bringToTop(littlePeople.getAt(i));
+			incX=incX+10;
+			if(incX>40)
+			{
+				incX=0;
+				incY=incY+10;
+			}
+			break;
+		}
+	}
+}
+
+Game.prototype.moveTokenToLeader = function() {
+	var incX2 = 0;
+	var incY2 = 0;
+	//move a token from the military camp to the current leader's position
+	for(i=0;i<littlePeople.length;i++)
+	{
+		if(legionairreCamp.contains(littlePeople.getAt(i).position.x,littlePeople.getAt(i).position.y))
+		{
+			littlePeople.getAt(i).position.x = leader.getAt(0).position.x+incX2;
+			littlePeople.getAt(i).position.y = leader.getAt(0).position.y+incY2;
+			console.log("You get "+leaderLocVPPts + " Vp Points!");
+			//game.world.bringToTop(littlePeople.getAt(i));
+			incX2 = incX2+10;
+			if(incX2>40)
+			{
+				incX2=0;
+				incY2=incY2+15;
+			}
+			break;
+		}
+	}
+}
+
+Game.prototype.moveLeader = function() {
+	//move the current player's leader to an adjacent
+	//milCheck = true;
+	G.phaser.textAction.text="Select an adjacent providence to move your leader. (click the middle)";
+	//game.paused = true;
+
+	G.phaser.input.onUp.add(checkAdj);
+}
+
+Game.prototype.checkAdj = function(){
+	var countries = [
+	new Phaser.Rectangle(615,248,350,120), //base
+	new Phaser.Rectangle(885,210,150,100), //noricum
+	new Phaser.Rectangle(682,155,240,125), //raetia
+	new Phaser.Rectangle(713,108,250,80), //germaniaSup
+	new Phaser.Rectangle(643,24,210,110), //germaniaInf
+	new Phaser.Rectangle(465,73,300,150), //belgica
+	new Phaser.Rectangle(325,94,220,200), //lugudunensis
+	new Phaser.Rectangle(220,2,420,125), //britannia
+	new Phaser.Rectangle(150,162,160,110), //aquitania
+	new Phaser.Rectangle(202,236,250,120), //narbonensis
+	new Phaser.Rectangle(440,194,280,130) //aepes
+	]
+	var vpPts = [
+		0,5,3,6,10,6,6,10,10,6,3
+	]
+	var leaderLoc = countries[0]
+	var leaderLocVPPts = 0;
+	var xInput = G.phaser.input.activePointer.positionDown.x;
+	var yInput = G.phaser.input.activePointer.positionDown.y;
+
+	leader.inputEnabled=true;
+	for(i=0;i<countries.length;i++)
+		{
+			if(countries[i].contains(xInput,yInput))
+			{
+				if(leaderLoc.intersects(countries[i]))
+				{
+					leader.getAt(0).position.x = countries[i].x + 100;
+					leader.getAt(0).position.y = countries[i].y -50;
+					incX = 0;
+					incY = 0;
+					leaderLoc = countries[i];
+					leaderLocVPPts = vpPts[i];
+					milCheck = false;
+					leader.inputEnabled=false;
+				}
+			}
+		}
 }

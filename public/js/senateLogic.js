@@ -13,7 +13,7 @@ function Senate(){
     new Phaser.Circle(715, game.world.height-680, 25),
     new Phaser.Circle(778, game.world.height-680, 25)
   ]
-  
+
 
 }
 
