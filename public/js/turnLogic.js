@@ -21,8 +21,8 @@ function turnLogic(){
     //call forum logic
   }
   if(busy == 'military'){
-    text.text = "Military Action";
     //call mil logic
+    militaryLogic();
   }
   if(busy == 'senate'){
     busy = 'selectTray'
@@ -43,7 +43,7 @@ function turnLogic(){
   //check which tile is clicked
   cTiles.forEach(makeActive, this, true);
   bTiles.forEach(makeActive, this, true);
-  mTiles.forEach(makeActive, this, true);
+  //mTiles.forEach(makeActive, this, true);
   tTiles.forEach(makeActive, this, true);
   fTiles.forEach(makeActive, this, true);
 
@@ -59,6 +59,6 @@ function senateListener(senateTile){
   senateTile.events.onInputDown.add(this.senateSpaces, this);
 }
 function listener(tile){ //this is how you add a callback to move a piece!
-  tile.position.x = 0;
-  tile.position.y = 0;
+  tile.position.x = 800;
+  tile.position.y = 300;
 }
