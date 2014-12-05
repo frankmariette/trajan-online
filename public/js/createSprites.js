@@ -1,6 +1,6 @@
 function createSprites(){
   var background = game.add.sprite(150, 0, 'gameBoard');
-
+  
   var player = game.add.sprite(275, game.world.height-500, 'playerBoard');
   graphics = game.add.graphics(0, 0);
 
@@ -79,12 +79,24 @@ function createSprites(){
 
   var ship0 = ships.create(290, game.world.height - 1310, 'ship1');
 
+  /*cards = game.add.group();
+
+  var card0 = cards.create(1100, game.world.height - 460, 'tile');
+  var card1 = cards.create(1100, game.world.height - 440, 'tile');
+  var card2 = cards.create(1100, game.world.height - 420, 'tile');
+  var card3 = cards.create(1100, game.world.height - 400, 'tile');
+  var card4 = cards.create(1100, game.world.height - 380, 'tile');
+  var card5 = cards.create(1100, game.world.height - 360, 'tile');
+  var card6 = cards.create(1100, game.world.height - 340, 'tile');
+  var card7 = cards.create(1100, game.world.height - 320, 'tile');
+  var card8 = cards.create(1100, game.world.height - 300, 'tile');
+*/
   aMarks = game.add.group();
 
   // Tray 2 markers
   var aMark0 = aMarks.create(775, game.world.height-375, 'actionMarkO');
   var aMark1 = aMarks.create(810, game.world.height-175, 'actionMarkO');
-  var aMark2 = aMarks.create(660, game.world.height-175, 'actionMarkG');
+  var aMark2 = aMarks.create(670, game.world.height-175, 'actionMarkG');
   var aMark3 = aMarks.create(810, game.world.height-340, 'actionMarkG');
   var aMark4 = aMarks.create(675, game.world.height-375, 'actionMarkY');
   var aMark5 = aMarks.create(775, game.world.height-175, 'actionMarkY');
@@ -123,6 +135,7 @@ function createSprites(){
 
   littlePeople = game.add.group();
 
+<<<<<<< HEAD
   var lp0 = littlePeople.create(925, game.world.height-450, 'actionMarkG'); //make this be a dude later
   var lp1 = littlePeople.create(925, game.world.height-430, 'actionMarkG'); //make this be a dude later
   var lp2 = littlePeople.create(925, game.world.height-410, 'actionMarkG'); //make this be a dude later
@@ -139,9 +152,15 @@ function createSprites(){
   var lp13 = littlePeople.create(905, game.world.height-390, 'actionMarkG'); //make this be a dude later
   var lp14 = littlePeople.create(905, game.world.height-370, 'actionMarkG'); //make this be a dude later
 
+=======
+  var lp0 = littlePeople.create(925, game.world.height-390, 'actionMarkO'); //make this be a dude later
+  var lp1 = littlePeople.create(925, game.world.height-410, 'actionMarkO'); //make this be a dude later
+  var lp2 = littlePeople.create(925, game.world.height-370, 'actionMarkO'); //make this be a dude later
+>>>>>>> mcbdn2/sprint3
   lpStartBox = new Phaser.Rectangle(890, game.world.height-475, 100, 180);
   legionairreCamp = new Phaser.Rectangle(705,game.world.height-1520, 200, 100);
   constructionCamp = new Phaser.Rectangle(500,game.world.height-1210, 200, 100);
+
 
   leader = game.add.group();
   var bigTree = leader.create(725, game.world.height - 1520, 'bigTree');

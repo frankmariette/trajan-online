@@ -32,6 +32,8 @@ function Game(){
 	this.displace;
 	this.currentPlayerMarker;
 	this.graphics;
+	this.lastPositionX;
+	this.lastPositionY;
 
 	// Phaser bootstrapping
 	this.phaser = new Phaser.Game(1600, 1800, Phaser.AUTO, 'gameboard', {preload: this.phaserPreload, create: this.phaserCreate, update: this.phaserUpdate});
@@ -39,11 +41,13 @@ function Game(){
 
 
 Game.prototype.phaserPreload = function() {
-	// Trajan Tiles
-	G.phaser.load.image('gameBoard', '/assets/gameBoardFinal.png');
+		//GAME BOARD
+		G.phaser.load.image('gameBoard', '/assets/gameBoardFinal.png');
     G.phaser.load.image('playerBoard', '/assets/pBoard.png');
+
     G.phaser.load.image('tile', '/assets/cDoorTile.png');
     G.phaser.load.image('card', '/assets/cCardWheat.png');
+		//TRAJAN TILES
     G.phaser.load.image('tt_VP_yellow_white', '/assets/tTile00.png');
     G.phaser.load.image('tt_move_two_military_yellow_white', '/assets/tTile01.png');
     G.phaser.load.image('tt_move_military_green_blue', '/assets/tTile02.png');
@@ -94,9 +98,32 @@ Game.prototype.phaserPreload = function() {
     G.phaser.load.image('tt_move_construct_white_orange', '/assets/tTile49.png');
     G.phaser.load.image('tt_plus_two_pink_white', '/assets/tTile50.png');
     G.phaser.load.image('tt_VP_pink_pink', '/assets/tTile51.png');
+		//CONSTRUCTION TILES
+		G.phaser.load.image('cDoorTile', '/assets/cDoorTile.png');
+		G.phaser.load.image('cTileRoof2', '/assets/cTileRoof2.png');
+		G.phaser.load.image('cTileRoof3', '/assets/cTileRoof3.png');
+		G.phaser.load.image('cTileRoof4', '/assets/cTileRoof4.png');
+		G.phaser.load.image('cTileRoof5', '/assets/cTileRoof5.png');
+
+		//FORUM TILES
+		G.phaser.load.image('ftBread', '/assets/forumTiles/breadForumTile.png');
+		G.phaser.load.image('ftComWC','/assets/forumTiles/commodityWildCard.png');
+		G.phaser.load.image('ftConstBonus','/assets/forumTiles/constructionForumTile.png');
+		G.phaser.load.image('ftDoubleWC','/assets/forumTiles/doubleActionWildCard.png');
+		G.phaser.load.image('ftForumBonus','/assets/forumTiles/forumForumTile.png');
+		G.phaser.load.image('ftGames','/assets/forumTiles/gamesForumTile.png');
+		G.phaser.load.image('ftMilitaryBonus','/assets/forumTiles/militaryForumTile.png');
+		G.phaser.load.image('ftReligion','/assets/forumTiles/religionForumTile.png');
+		G.phaser.load.image('ftResourceWC','/assets/forumTiles/resourceWildCard.png');
+		G.phaser.load.image('ftSeaBonus','/assets/forumTiles/seaportForumTile.png');
+		G.phaser.load.image('ftSenatePlus2','/assets/forumTiles/senateForum2.png');
+		G.phaser.load.image('ftSenatePlus3','/assets/forumTiles/senateForum3.png');
+		G.phaser.load.image('ftSenatePlus4','/assets/forumTiles/senateForum4.png');
+		G.phaser.load.image('ftSenatePlus5','/assets/forumTiles/senateForum5.png');
+		G.phaser.load.image('ftSenateBonus','/assets/forumTiles/senateForumTile.png');
+		G.phaser.load.image('ftTrajanBonus','/assets/forumTiles/trajanForumTile.png');
 
     // Other random shitakis
-    G.phaser.load.image('forum', '/assets/fTileGame.png');
     G.phaser.load.spritesheet('bonus', '/assets/bonus00.png', 100, 156);
     G.phaser.load.spritesheet('bonus2', '/assets/bonus01.png', 100, 156);
     G.phaser.load.spritesheet('ship1', '/assets/ship01.png', 174, 116);
@@ -132,26 +159,46 @@ Game.prototype.phaserCreate = function() {
   G.phaser.cTiles = G.phaser.add.group();
 
 
-  var cTile0 = G.phaser.cTiles.create(710, G.phaser.world.height - 1395, 'tile');
-  var cTile1 = G.phaser.cTiles.create(790, G.phaser.world.height - 1395, 'tile');
-  var cTile2 = G.phaser.cTiles.create(865, G.phaser.world.height - 1395, 'tile');
-  var cTile3 = G.phaser.cTiles.create(945, G.phaser.world.height - 1395, 'tile');
-  var cTile4 = G.phaser.cTiles.create(1020, G.phaser.world.height - 1395, 'tile');
-  var cTile5 = G.phaser.cTiles.create(710, G.phaser.world.height - 1318, 'tile');
-  var cTile6 = G.phaser.cTiles.create(790, G.phaser.world.height - 1318, 'tile');
-  var cTile7 = G.phaser.cTiles.create(865, G.phaser.world.height - 1318, 'tile');
-  var cTile8 = G.phaser.cTiles.create(945, G.phaser.world.height - 1318, 'tile');
-  var cTile9 = G.phaser.cTiles.create(1020, G.phaser.world.height - 1318, 'tile');
-  var cTile10 = G.phaser.cTiles.create(710, G.phaser.world.height - 1241, 'tile');
-  var cTile11 = G.phaser.cTiles.create(790, G.phaser.world.height - 1241, 'tile');
-  var cTile12 = G.phaser.cTiles.create(865, G.phaser.world.height - 1241, 'tile');
-  var cTile13 = G.phaser.cTiles.create(945, G.phaser.world.height - 1241, 'tile');
-  var cTile14 = G.phaser.cTiles.create(1020, G.phaser.world.height - 1241, 'tile');
-  var cTile15 = G.phaser.cTiles.create(710, G.phaser.world.height - 1166, 'tile');
-  var cTile16 = G.phaser.cTiles.create(790, G.phaser.world.height - 1166, 'tile');
-  var cTile17 = G.phaser.cTiles.create(865, G.phaser.world.height - 1166, 'tile');
-  var cTile18 = G.phaser.cTiles.create(945, G.phaser.world.height - 1166, 'tile');
-  var cTile19 = G.phaser.cTiles.create(1020, G.phaser.world.height - 1166, 'tile');
+  var cTile0 = G.phaser.cTiles.create(710, G.phaser.world.height - 1395, 'cDoorTile');
+	cTile0.type = "Door";
+  var cTile1 = G.phaser.cTiles.create(790, G.phaser.world.height - 1395, 'cDoorTile');
+	cTile1.type = "Door";
+  var cTile2 = G.phaser.cTiles.create(865, G.phaser.world.height - 1395, 'cDoorTile');
+	cTile2.type = "Door";
+  var cTile3 = G.phaser.cTiles.create(945, G.phaser.world.height - 1395, 'cDoorTile');
+	cTile3.type = "Door";
+  var cTile4 = G.phaser.cTiles.create(1020, G.phaser.world.height - 1395, 'cTileRoof5');
+	cTile4.type = "Roof";
+  var cTile5 = G.phaser.cTiles.create(710, G.phaser.world.height - 1318, 'cTileRoof4');
+	cTile5.type = "Roof";
+  var cTile6 = G.phaser.cTiles.create(790, G.phaser.world.height - 1318, 'cTileRoof5');
+	cTile6.type = "Roof";
+  var cTile7 = G.phaser.cTiles.create(865, G.phaser.world.height - 1318, 'cTileRoof3');
+	cTile7.type = "Roof";
+  var cTile8 = G.phaser.cTiles.create(945, G.phaser.world.height - 1318, 'cTileRoof4');
+	cTile8.type = "Roof";
+  var cTile9 = G.phaser.cTiles.create(1020, G.phaser.world.height - 1318, 'cTileRoof5');
+	cTile9.type = "Roof";
+  var cTile10 = G.phaser.cTiles.create(710, G.phaser.world.height - 1241, 'cTileRoof3');
+	cTile10.type = "Roof";
+  var cTile11 = G.phaser.cTiles.create(790, G.phaser.world.height - 1241, 'cTileRoof2');
+	cTile11.type = "Roof";
+  var cTile12 = G.phaser.cTiles.create(865, G.phaser.world.height - 1241, 'cTileRoof5');
+	cTile12.type = "Roof";
+  var cTile13 = G.phaser.cTiles.create(945, G.phaser.world.height - 1241, 'cTileRoof4');
+	cTile13.type = "Roof";
+  var cTile14 = G.phaser.cTiles.create(1020, G.phaser.world.height - 1241, 'cTileRoof5');
+	cTile14.type = "Roof";
+  var cTile15 = G.phaser.cTiles.create(710, G.phaser.world.height - 1166, 'cTileRoof5');
+	cTile15.type = "Roof";
+  var cTile16 = G.phaser.cTiles.create(790, G.phaser.world.height - 1166, 'cTileRoof3');
+	cTile16.type = "Roof";
+  var cTile17 = G.phaser.cTiles.create(865, G.phaser.world.height - 1166, 'cTileRoof2');
+	cTile17.type = "Roof";
+  var cTile18 = G.phaser.cTiles.create(945, G.phaser.world.height - 1166, 'cTileRoof3');
+	cTile18.type = "Roof";
+  var cTile19 = G.phaser.cTiles.create(1020, G.phaser.world.height - 1166, 'cTileRoof5');
+	cTile19.type = "Roof";
 
   G.phaser.tTiles = G.phaser.add.group();
 
@@ -164,34 +211,49 @@ Game.prototype.phaserCreate = function() {
 
   G.phaser.fTiles = G.phaser.add.group();
 
-  var fTile0 = G.phaser.fTiles.create(708, G.phaser.world.height - 1035, 'forum');
-  var fTile1 = G.phaser.fTiles.create(778, G.phaser.world.height - 1035, 'forum');
-  var fTile2 = G.phaser.fTiles.create(843, G.phaser.world.height - 1035, 'forum');
-  var fTile3 = G.phaser.fTiles.create(910, G.phaser.world.height - 1035, 'forum');
-  var fTile4 = G.phaser.fTiles.create(977, G.phaser.world.height - 1035, 'forum');
-  var fTile5 = G.phaser.fTiles.create(708, G.phaser.world.height - 968, 'forum');
-  var fTile6 = G.phaser.fTiles.create(778, G.phaser.world.height - 968, 'forum');
-  var fTile7 = G.phaser.fTiles.create(843, G.phaser.world.height - 968, 'forum');
-  var fTile8 = G.phaser.fTiles.create(910, G.phaser.world.height - 968, 'forum');
-  var fTile9 = G.phaser.fTiles.create(977, G.phaser.world.height - 968, 'forum');
-  var fTile10 = G.phaser.fTiles.create(708, G.phaser.world.height - 901, 'forum');
-  var fTile11 = G.phaser.fTiles.create(778, G.phaser.world.height - 901, 'forum');
-  var fTile12 = G.phaser.fTiles.create(843, G.phaser.world.height - 901, 'forum');
-  var fTile13 = G.phaser.fTiles.create(910, G.phaser.world.height - 901, 'forum');
-  var fTile14 = G.phaser.fTiles.create(977, G.phaser.world.height - 901, 'forum');
+  var fTile0 = G.phaser.fTiles.create(708, G.phaser.world.height - 1035, 'ftGames');
+	fTile0.type = "games";
+  var fTile1 = G.phaser.fTiles.create(778, G.phaser.world.height - 1035, 'ftComWC');
+	fTile1.type = "orange";
+  var fTile2 = G.phaser.fTiles.create(843, G.phaser.world.height - 1035, 'ftSeaBonus');
+	fTile2.type = "seaBonus";
+  var fTile3 = G.phaser.fTiles.create(910, G.phaser.world.height - 1035, 'ftForumBonus');
+	fTile3.type = "forumBonus";
+  var fTile4 = G.phaser.fTiles.create(977, G.phaser.world.height - 1035, 'ftSenateBonus');
+	fTile4.type = "senateBonus";
+  var fTile5 = G.phaser.fTiles.create(708, G.phaser.world.height - 968, 'ftResourceWC');
+	fTile5.type = "green";
+  var fTile6 = G.phaser.fTiles.create(778, G.phaser.world.height - 968, 'ftBread');
+	fTile6.type = "bread";
+  var fTile7 = G.phaser.fTiles.create(843, G.phaser.world.height - 968, 'ftConstBonus');
+	fTile7.type = "conBonus";
+  var fTile8 = G.phaser.fTiles.create(910, G.phaser.world.height - 968, 'ftSenatePlus2');
+	fTile8.type = "sPlus2";
+  var fTile9 = G.phaser.fTiles.create(977, G.phaser.world.height - 968, 'ftMilitaryBonus');
+	fTile9.type = "militaryBonus";
+  var fTile10 = G.phaser.fTiles.create(708, G.phaser.world.height - 901, 'ftSenatePlus4');
+	fTile10.type = "sPlus4";
+  var fTile11 = G.phaser.fTiles.create(778, G.phaser.world.height - 901, 'ftDoubleWC');
+	fTile11.type = "yellow";
+  var fTile12 = G.phaser.fTiles.create(843, G.phaser.world.height - 901, 'ftTrajanBonus');
+	fTile12.type = "trajanBonus";
+  var fTile13 = G.phaser.fTiles.create(910, G.phaser.world.height - 901, 'ftSenatePlus3');
+	fTile13.type = "sPlus3";
+  var fTile14 = G.phaser.fTiles.create(977, G.phaser.world.height - 901, 'ftReligion');
+	fTile14.type = "religion";
 
   G.phaser.mTiles = G.phaser.add.group();
 
-  var britannia = G.phaser.mTiles.create(380, G.phaser.world.height - 1783, 'forum');
-  var germaniaInferior = G.phaser.mTiles.create(725, G.phaser.world.height - 1735, 'forum');
-  var germaniaSuperior = G.phaser.mTiles.create(910, G.phaser.world.height - 1700, 'forum');
-  var belgica = G.phaser.mTiles.create(553, G.phaser.world.height - 1676, 'forum');
-  var lugudunensis = G.phaser.mTiles.create(388, G.phaser.world.height - 1650, 'forum');
-  var aquitania = G.phaser.mTiles.create(220, G.phaser.world.height - 1598, 'forum');
-  var narbonensis = G.phaser.mTiles.create(280, G.phaser.world.height - 1485, 'forum');
-  var alpes = G.phaser.mTiles.create(490, G.phaser.world.height - 1555, 'forum');
-  var raetia = G.phaser.mTiles.create(780, G.phaser.world.height - 1614, 'forum');
-  var noricum = G.phaser.mTiles.create(960, G.phaser.world.height - 1596, 'forum');
+  var britannia = G.phaser.mTiles.create(380, G.phaser.world.height - 1783, 'ftGames');
+  var germaniaInferior = G.phaser.mTiles.create(725, G.phaser.world.height - 1735, 'ftGames');
+  var germaniaSuperior = G.phaser.mTiles.create(910, G.phaser.world.height - 1700, 'ftGames');
+  var belgica = G.phaser.mTiles.create(553, G.phaser.world.height - 1676, 'ftGames');
+  var lugudunensis = G.phaser.mTiles.create(388, G.phaser.world.height - 1650, 'ftGames');
+  var aquitania = G.phaser.mTiles.create(220, G.phaser.world.height - 1598, 'ftGames');
+  var narbonensis = G.phaser.mTiles.create(280, G.phaser.world.height - 1485, 'ftGames');
+  var alpes = G.phaser.mTiles.create(490, G.phaser.world.height - 1555, 'ftGames');
+  var raetia = G.phaser.mTiles.create(780, G.phaser.world.height - 1614, 'ftGames');
+  var noricum = G.phaser.mTiles.create(960, G.phaser.world.height - 1596, 'ftGames');
 
   G.phaser.bTiles = G.phaser.add.group(); // gold things
 
@@ -240,7 +302,7 @@ Game.prototype.phaserCreate = function() {
 
   // Al about that village lyfe
   G.phaser.littlePeople = G.phaser.add.group();
-
+	var lp00 = G.phaser.littlePeople.create(580, 600, 'actionMarkG');
   var lp0 = G.phaser.littlePeople.create(925, G.phaser.world.height-450, 'actionMarkG'); //make this be a dude later
 	var lp1 = G.phaser.littlePeople.create(925, G.phaser.world.height-430, 'actionMarkG'); //make this be a dude later
 	var lp2 = G.phaser.littlePeople.create(925, G.phaser.world.height-410, 'actionMarkG'); //make this be a dude later
@@ -270,11 +332,13 @@ Game.prototype.phaserCreate = function() {
 	G.phaser.gameState = "selectTray";
 	G.phaser.linespot = 640;
 	G.phaser.displace = 0;
+	G.phaser.lastPositionX =580;
+	G.phaser.lastPositionY=600;
 
 }
 
 Game.prototype.phaserUpdate = function() {
-
+	console.log(G.phaser.input.activePointer.positionDown.x, G.phaser.input.activePointer.positionDown.y);
 }
 
 Game.prototype.turnLogic = function() {
@@ -414,7 +478,7 @@ Game.prototype.getAction = function(){
 			}
 			else if(currentTray == forumTray){
 				G.phaser.gameState = 'forum';
-				//G.phaser.fTiles.forEach.addOnce(G.forumAction, this, true);
+				G.getForumTile();
 			}
 			else if(currentTray == militaryTray){
 				G.phaser.gameState = 'military';
@@ -429,6 +493,7 @@ Game.prototype.getAction = function(){
 			}
 			else if(currentTray == constructionTray){
 				G.phaser.gameState = 'construction';
+				G.constructionAction();
 			}
 		}
 }
@@ -468,40 +533,99 @@ Game.prototype.bonusAction = function(){
 	G.turnLogic();
 }
 
-Game.prototype.forumAction = function(currentTile){
+Game.prototype.getForumTile = function(){
 	G.phaser.textAction.text = "Select a Forum Tile";
-	var tilesType = "games";
-	currentTile.inputEnabled = true;
-
-	if(tilesType == "games")
-		currentTile.events.onInputDown.add(G.gamesMovement, this);
-
-	else if(tilesType == "bread")
-		currentTile.events.onInputDown.add(G.breadMovement, this);
-
-	else if(tilesType == "religion")
-		currentTile.events.onInputDown.add(G.religionMovement, this);
-
-	else if(tilesType == "yellow")
-		currentTile.events.onInputDown.add(G.yellowWildMovement, this);
-
-	else if(tilesType == "orange")
-		currentTile.events.onInputDown.add(G.orangeWildMovement, this);
-
-	else if(tilesType == "green")
-		currentTile.events.onInputDown.add(G.greenWildMovement, this);
-
-	else if(tilesType == "red")
-		currentTile.events.onInputDown.add(G.redWildMovement, this);
+	G.phaser.fTiles.forEach(G.forumAction, this, true);
 }
 
-	/////////////////////////////////   STACK TILES
+Game.prototype.forumAction = function(currentTile){
+	currentTile.inputEnabled = true;
+	if(currentTile.type == "games")
+		currentTile.events.onInputDown.add(G.gamesMovement, this);
+	else if(currentTile.type == "bread")
+		currentTile.events.onInputDown.add(G.breadMovement, this);
+	else if(currentTile.type == "religion")
+		currentTile.events.onInputDown.add(G.religionMovement, this);
+	else if(currentTile.type == "yellow")
+		currentTile.events.onInputDown.add(G.yellowWildMovement, this);
+	else if(currentTile.type == "orange")
+		currentTile.events.onInputDown.add(G.orangeWildMovement, this);
+	else if(currentTile.type == "green")
+		currentTile.events.onInputDown.add(G.greenWildMovement, this);
+	else if(currentTile.type == "red")
+		currentTile.events.onInputDown.add(G.redWildMovement, this);
+	else if(currentTile.type == "seaBonus")
+		currentTile.events.onInputDown.add(G.seaBonusMovement, this);
+	else if(currentTile.type == "forumBonus")
+		currentTile.events.onInputDown.add(G.forumBonusMovement, this);
+	else if(currentTile.type == "militaryBonus")
+		currentTile.events.onInputDown.add(G.militaryBonusMovement, this);
+	else if(currentTile.type == "trajanBonus")
+		currentTile.events.onInputDown.add(G.trajanBonusMovement, this);
+	else if(currentTile.type == "senateBonus")
+		currentTile.events.onInputDown.add(G.senateBonusMovement, this);
+	else if(currentTile.type == "conBonus")
+		currentTile.events.onInputDown.add(G.constructionBonusMovement, this);
+	else if(currentTile.type == "sPlus2" || currentTile.type == "sPlus3" || currentTile.type == "sPlus4" || currentTile.type == "sPlus5")
+		currentTile.events.onInputDown.add(G.sPlusMovement, this);
+}
+	//STACK TILES
 Game.prototype.stackTiles = function(tile){
 	tile.position.y += 10;
 }
+  //SENATE BONUS MOVEMENT
+Game.prototype.sPlusMovement = function(tile){
+	var firstSpotTaken = false;
+	var secSpotTaken = false;
+	G.phaser.fTiles.forEach(function(allTiles){
+		if(allTiles.position.x == 935 && allTiles.position.y == 1601){
+			firstSpotTaken = true;
+		}
+		if(allTiles.position.x == 935 && allTiles.position.y == 1654){
+			secSpotTaken = true;
+		}
+	}, this, true);
+	if(firstSpotTaken == false){
+		tile.position.x = 935;
+		tile.position.y = 1601;
+	}
+	else if(secSpotTaken == false){
+		tile.position.x = 935;
+		tile.position.y = 1654;
+	}
+	else{
+		tile.position.x = 935;
+		tile.position.y = 1710;
+	}
+}
 
+	//EXTRA ACTION TILE MOVEMENT
+Game.prototype.seaBonusMovement = function(tile){
+	tile.position.x = 293;
+	tile.position.y = 1657;
+}
+Game.prototype.forumBonusMovement = function(tile){
+	tile.position.x = 346;
+	tile.position.y = 1657;
+}
+Game.prototype.senateBonusMovement = function(tile){
+	tile.position.x = 530;
+	tile.position.y = 1657;
+}
+Game.prototype.militaryBonusMovement = function(tile){
+	tile.position.x = 397;
+	tile.position.y = 1657;
+}
+Game.prototype.trajanBonusMovement = function(tile){
+	tile.position.x = 501;
+	tile.position.y = 1657;
+}
+Game.prototype.constructionBonusMovement = function(tile){
+	tile.position.x = 554;
+	tile.position.y = 1657;
+}
 
-	/////////////////////////////////   RESOURCES MOVEMENT
+	//RESOURCES MOVEMENT
 Game.prototype.gamesMovement = function(tile){
 	tile.position.x = 530;
 	tile.position.y = 1402;
@@ -517,7 +641,7 @@ Game.prototype.religionMovement = function(tile){
 	tile.position.y = 1402;
 }
 
-	//////////////////////////////////////   WILD CARD MOVEMENT
+	// WILD CARD MOVEMENT
 Game.prototype.yellowWildMovement = function(tile){
 	tile.position.x = 382;
 	tile.position.y = 1482;
@@ -537,6 +661,8 @@ Game.prototype.redWildMovement = function(tile){
 	tile.position.x = 448;
 	tile.position.y = 1545;
 }
+
+
 
 Game.prototype.militaryLogic = function()
 {
@@ -652,4 +778,107 @@ Game.prototype.checkAdj = function(){
 				}
 			}
 		}
+}
+
+Game.prototype.constructionAction = function(){
+	G.phaser.textAction.text = "Select a little dude to move to camp or click on a tile followed by a worker in camp to gain tile";
+	G.phaser.cTiles.forEach(G.makeActive, this, true);
+	G.phaser.littlePeople.forEach(G.makeLPActive, this, true);
+}
+
+Game.prototype.makeActive = function(tile){
+	tile.inputEnabled = true;
+	tile.events.onInputDown.add(G.moveConstructTile, tile);
+}
+
+Game.prototype.makeLPActive = function(littleDude){
+	littleDude.inputEnabled = true;
+	littleDude.events.onInputDown.add(G.moveWorker, this);
+}
+
+Game.prototype.moveConstructTile = function(tile){ //move game piece to correct location
+	if(G.phaser.gameState != "construction"){
+		return;
+	}
+	var validAction = false;
+	G.phaser.littlePeople.forEach(function(dude){
+		if(G.phaser.constructionCamp.contains(dude.position.x, dude.position.y)){
+			validAction = true;
+		}
+	}, this, true);
+
+	if(validAction == true){
+		G.phaser.lastPositionX = tile.position.x;
+		G.phaser.lastPositionY = tile.position.y;
+		//Place Tile Correctly on Player Board
+		if(tile.type == "Stairs"){
+			tile.position.x = 285;
+			tile.position.y = 1325;
+		}
+		else if(tile.type == "Door"){
+			tile.position.x = 285;
+			tile.position.y = 1395;
+		}
+		else if(tile.type == "Fountain"){
+			tile.position.x = 285;
+			tile.position.y = 1450;
+		}
+		else if(tile.type == "Roof"){
+			tile.position.x = 285;
+			tile.position.y = 1510;
+		}
+		else if(tile.type == "Window"){
+			tile.position.x = 285;
+			tile.position.y = 1575;
+		}
+		var firstTile = true; //check if tile added is first tile on player board of that kind
+		G.phaser.cTiles.forEach(function(allTiles){
+			if(allTiles.position.x == tile.position.x && allTiles.position.y == tile.position.y && allTiles != tile){
+				firstTile = false;
+			}
+		}, this, true);
+		if(firstTile == true){
+			if(tile.type == "Stairs"){
+				G.phaser.gameState = "forum";
+				G.phaser.textAction.text = "Bonus Forum Action!";
+			}
+			else if(tile.type == "Door"){
+				G.phaser.gameState = "senate";
+				G.phaser.textAction.text = "Bonus Senate Action!";
+				G.senateSpaces(G.phaser.currentPlayerMarker);
+			}
+			else if(tile.type == "Roof"){
+				G.phaser.gameState = "trajan";
+				G.phaser.textAction.text = "Bonus Trajan Action!";
+			}
+			else if(tile.type == "Fountain"){
+				G.phaser.gameState = "seaport";
+				G.phaser.textAction.text = "Bonus Seaport Action!";
+			}
+			else if(tile.type == "Window"){
+				G.phaser.gameState = "military";
+				G.phaser.textAction.text = "Bonus Military Action!";
+				G.militaryLogic();
+			}
+		}
+		G.phaser.textAction.text = "Select the worker you wish to move to that space";
+		G.phaser.gameState = "moveWorker";
+	}
+	else{
+		G.phaser.textAction.text = "Please move a worker to your camp";
+		G.phaser.gameState = "moveToWorkerCamp";
+	}
+}
+
+Game.prototype.moveWorker = function(littleDude){ //move game piece to correct location
+	if(G.phaser.lpStartBox.contains(littleDude.position.x, littleDude.position.y) && G.phaser.gameState == "moveToWorkerCamp" || G.phaser.gameState == "construction"){
+		littleDude.position.x = 580;
+		littleDude.position.y = 600;
+		G.phaser.gameState = "bonusAction";
+	}
+	else if(G.phaser.gameState == "moveWorker"){
+		littleDude.position.x = G.phaser.lastPositionX;
+		littleDude.position.y = G.phaser.lastPositionY;
+		G.phaser.gameState = "bonusAction";
+	}
 }

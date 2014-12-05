@@ -25,7 +25,7 @@ Route::post('/register', array('uses'=> 'UserController@doRegister'));
 // Route::get('/', array('uses'=> 'HomeController@welcome'));
 Route::get('/createpublic', array('uses'=> 'GameController@createPublic'));
 Route::get('/createprivate', array('uses'=> 'GameController@createPrivate'));
-Route::get('/gamepage', array('uses'=> 'GameController@gamePage'));
+Route::get('/gamePage', array('uses'=> 'GameController@gamePage'));
 
 
 // Routes for actions

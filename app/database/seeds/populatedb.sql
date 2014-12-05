@@ -55,7 +55,7 @@ VALUES ('games demand', 'green', 'green', 1, 1);
 INSERT INTO TrajanTile (action, color1, color2, vp, TileTypeid)
 VALUES ('bread demand', 'green', 'green', 1, 1);
 INSERT INTO TrajanTile (action, color1, color2, vp, TileTypeid)
-VALUES ('religion demands', 'white', 'white', 1, 1);
+VALUES ('religion demand', 'white', 'white', 1, 1);
 INSERT INTO TrajanTile (action, color1, color2, vp, TileTypeid)
 VALUES ('draw 2 cards', 'white', 'blue', 3, 1);
 INSERT INTO TrajanTile (action, color1, color2, vp, TileTypeid)
