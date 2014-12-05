@@ -1,6 +1,6 @@
 var linespot = 640;
 var busy = 'selectTray';
-
+//var vp = 0;
 function turnLogic(){
 
   if(busy == 'selectTray'){
@@ -13,7 +13,10 @@ function turnLogic(){
     aMarks.forEach(placeMarkers, this, true);
   }
   if(busy == 'seaport'){
-    text.text = "Seaport Action";
+    text.text = "Click a draw pile or Click a ship";
+    ships.forEach(shipsActive, this, true);
+    cards.forEach(cardsActive, this, true);
+    busy = 'selectTray';
     //call senate logic
   }
   if(busy == 'forum'){
@@ -45,7 +48,7 @@ function turnLogic(){
   bTiles.forEach(makeActive, this, true);
   //mTiles.forEach(makeActive, this, true);
   tTiles.forEach(makeActive, this, true);
-  fTiles.forEach(makeActive, this, true);
+  fTiles.forEach(forumActive, this, true);
 
 }
 
@@ -58,6 +61,7 @@ function senateListener(senateTile){
   senateTile.inputEnabled = true;
   senateTile.events.onInputDown.add(this.senateSpaces, this);
 }
+
 function listener(tile){ //this is how you add a callback to move a piece!
   tile.position.x = 800;
   tile.position.y = 300;

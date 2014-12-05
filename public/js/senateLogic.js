@@ -38,5 +38,4 @@ Senate.prototype.senateSpaces = function(currentPlayer){
       break;
     };
   };
-
 }
