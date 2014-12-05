@@ -70,50 +70,84 @@ function createSprites(){
   var raetia = mTiles.create(780, game.world.height - 1614, 'forum');
   var noricum = mTiles.create(960, game.world.height - 1596, 'forum');
 
-  bTiles = game.add.group();
+  bTiles = game.add.group(); // gold things
 
   var bTile0 = bTiles.create(850, game.world.height - 750, 'bonus');
-  var bTile1 = bTiles.create(960, game.world.height - 750, 'bonus');
+  var bTile1 = bTiles.create(960, game.world.height - 750, 'bonus2');
+
+  ships = game.add.group();
+
+  var ship0 = ships.create(290, game.world.height - 1310, 'ship1');
 
   aMarks = game.add.group();
 
+  // Tray 2 markers
   var aMark0 = aMarks.create(775, game.world.height-375, 'actionMarkO');
-  var aMark1 = aMarks.create(810, game.world.height-375, 'actionMarkO');
-  var aMark2 = aMarks.create(775, game.world.height-340, 'actionMarkG');
+  var aMark1 = aMarks.create(810, game.world.height-175, 'actionMarkO');
+  var aMark2 = aMarks.create(660, game.world.height-175, 'actionMarkG');
   var aMark3 = aMarks.create(810, game.world.height-340, 'actionMarkG');
-  var aMark4 = aMarks.create(675, game.world.height-375, 'actionMarkO');
-  var aMark5 = aMarks.create(675, game.world.height-345, 'actionMarkG');
-  var aMark6 = aMarks.create(705, game.world.height-375, 'actionMarkO');
-  var aMark6 = aMarks.create(705, game.world.height-345, 'actionMarkG');
+  var aMark4 = aMarks.create(675, game.world.height-375, 'actionMarkY');
+  var aMark5 = aMarks.create(775, game.world.height-175, 'actionMarkY');
+  var aMark6 = aMarks.create(705, game.world.height-375, 'actionMarkB');
+  var aMark7 = aMarks.create(705, game.world.height-175, 'actionMarkB');
+  var aMark8 = aMarks.create(825, game.world.height-260, 'actionMarkW');
+  var aMark9 = aMarks.create(645, game.world.height-280, 'actionMarkW');
+  var aMark10 = aMarks.create(620, game.world.height-280, 'actionMarkP');
+  var aMark11 = aMarks.create(845, game.world.height-280, 'actionMarkP');
+
+  cards = game.add.group();
+
+  var cCard0 = cards.create(1000, game.world.height-500, 'card');
+  var cCard1 = cards.create(1125, game.world.height-500, 'card');
+  var cCard2 = cards.create(1250, game.world.height-500, 'card');
 
   pMarks = game.add.group();
 
   var pMarkGreen = pMarks.create(253, game.world.height-700, 'playerMark');
+  var pMarkRed = pMarks.create(303, game.world.height-700, 'playerMark');
 
-  tray1 = game.add.group();
-  tray2 = game.add.group();
-  tray3 = game.add.group();
-  tray4 = game.add.group();
-  tray5 = game.add.group();
-  tray6 = game.add.group();
+  seaportTrayGroup = game.add.group();
+  forumTrayGroup = game.add.group();
+  militaryTrayGroup = game.add.group();
+  senateTrayGroup = game.add.group();
+  trajanTrayGroup = game.add.group();
+  constructionTrayGroup = game.add.group();
 
-  t1 = new Phaser.Circle(695, game.world.height-350, 75);
-  t2 = new Phaser.Circle(802, game.world.height-350, 75);
-  t3 = new Phaser.Circle(860, game.world.height-255, 75);
-  t4 = new Phaser.Circle(805, game.world.height-160, 75);
-  t5 = new Phaser.Circle(695, game.world.height-160, 75);
-  t6 = new Phaser.Circle(640, game.world.height-255, 75);
+  seaportTray = new Phaser.Circle(695, game.world.height-350, 75);
+  forumTray = new Phaser.Circle(802, game.world.height-350, 75);
+  militaryTray = new Phaser.Circle(860, game.world.height-255, 75);
+  senateTray = new Phaser.Circle(805, game.world.height-160, 75);
+  trajanTray = new Phaser.Circle(695, game.world.height-160, 75);
+  constructionTray = new Phaser.Circle(640, game.world.height-255, 75);
   markerBounds = new Phaser.Rectangle(630, game.world.height-510, 300, 30);
 
   littlePeople = game.add.group();
 
-  var lp0 = littlePeople.create(925, game.world.height-390, 'actionMarkO'); //make this be a dude later
+  var lp0 = littlePeople.create(925, game.world.height-450, 'actionMarkG'); //make this be a dude later
+  var lp1 = littlePeople.create(925, game.world.height-430, 'actionMarkG'); //make this be a dude later
+  var lp2 = littlePeople.create(925, game.world.height-410, 'actionMarkG'); //make this be a dude later
+  var lp3 = littlePeople.create(925, game.world.height-390, 'actionMarkG'); //make this be a dude later
+  var lp4 = littlePeople.create(925, game.world.height-370, 'actionMarkG'); //make this be a dude later
+  var lp5 = littlePeople.create(925, game.world.height-350, 'actionMarkG'); //make this be a dude later
+  var lp6 = littlePeople.create(945, game.world.height-450, 'actionMarkG'); //make this be a dude later
+  var lp7 = littlePeople.create(945, game.world.height-430, 'actionMarkG'); //make this be a dude later
+  var lp8 = littlePeople.create(945, game.world.height-410, 'actionMarkG'); //make this be a dude later
+  var lp9 = littlePeople.create(945, game.world.height-390, 'actionMarkG'); //make this be a dude later
+  var lp10 = littlePeople.create(945, game.world.height-370, 'actionMarkG'); //make this be a dude later
+  var lp11 = littlePeople.create(945, game.world.height-350, 'actionMarkG'); //make this be a dude later
+  var lp12 = littlePeople.create(905, game.world.height-410, 'actionMarkG'); //make this be a dude later
+  var lp13 = littlePeople.create(905, game.world.height-390, 'actionMarkG'); //make this be a dude later
+  var lp14 = littlePeople.create(905, game.world.height-370, 'actionMarkG'); //make this be a dude later
+
   lpStartBox = new Phaser.Rectangle(890, game.world.height-475, 100, 180);
   legionairreCamp = new Phaser.Rectangle(705,game.world.height-1520, 200, 100);
   constructionCamp = new Phaser.Rectangle(500,game.world.height-1210, 200, 100);
-  
+
+
+  leader = game.add.group();
+  var bigTree = leader.create(725, game.world.height - 1520, 'bigTree');
+
   trajan = game.add.group();
   var arch = trajan.create(605, game.world.height-435, 'tArch');
   arch.angle = -28;
-
 }

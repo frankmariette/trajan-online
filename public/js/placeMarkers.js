@@ -1,4 +1,5 @@
 var currentTray;
+var i = 0;
 function placeMarkers(marker){
   if(busy != 'placeMarkers'){
     return;
@@ -12,36 +13,37 @@ function placeMarkers(marker){
 
     if(marker.input.pointerOver()){ //get if pointer is over marker
       if(markerBounds.contains(mx, my)){ //make sure marker is part of source tray group
-        if(currentTray == t1){ //add marker to next tray
-          marker.position.x = t2.x;
-          marker.position.y = t2.y;
-          currentTray = t2;
+        if(currentTray == seaportTray){ //add marker to next tray
+          marker.position.x = forumTray.x;
+          marker.position.y = forumTray.y;
+          currentTray = forumTray;
         }
-        else if(currentTray == t2){
-          marker.position.x = t3.x;
-          marker.position.y = t3.y;
-          currentTray = t3;
+        else if(currentTray == forumTray){
+          marker.position.x = militaryTray.x;
+          marker.position.y = militaryTray.y;
+          currentTray = militaryTray;
         }
-        else if(currentTray == t3){
-          marker.position.x = t4.x;
-          marker.position.y = t4.y;
-          currentTray = t4;
+        else if(currentTray == militaryTray){
+          marker.position.x = senateTray.x;
+          marker.position.y = senateTray.y;
+          currentTray = senateTray;
         }
-        else if(currentTray == t4){
-          marker.position.x = t5.x;
-          marker.position.y = t5.y;
-          currentTray = t5;
+        else if(currentTray == senateTray){
+          marker.position.x = trajanTray.x;
+          marker.position.y = trajanTray.y;
+          currentTray = trajanTray;
         }
-        else if(currentTray == t5){
-          marker.position.x = t6.x;
-          marker.position.y = t6.y;
-          currentTray = t6;
+        else if(currentTray == trajanTray){
+          marker.position.x = constructionTray.x;
+          marker.position.y = constructionTray.y;
+          currentTray = constructionTray;
         }
         else{
-          marker.position.x = t1.x;
-          marker.position.y = t1.y;
-          currentTray = t1;
+          marker.position.x = seaportTray.x;
+          marker.position.y = seaportTray.y;
+          currentTray = seaportTray;
         }
+        i += 5;
       }
     }
   }
@@ -52,22 +54,22 @@ function placeMarkers(marker){
     }
   }, this, true);
   if(boxEmpty){ //set game state to correct action for next phase of turn logic
-    if(currentTray == t1){
+    if(currentTray == seaportTray){
       busy = 'seaport';
     }
-    else if(currentTray == t2){
+    else if(currentTray == forumTray){
       busy = 'forum';
     }
-    else if(currentTray == t3){
+    else if(currentTray == militaryTray){
       busy = 'military';
     }
-    else if(currentTray == t4){
+    else if(currentTray == senateTray){
       busy = 'senate';
     }
-    else if(currentTray == t5){
+    else if(currentTray == trajanTray){
       busy = 'trajan';
     }
-    else{
+    else if(currentTray == t6){
       busy = 'construction';
     }
   }
