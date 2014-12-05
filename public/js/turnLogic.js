@@ -49,7 +49,6 @@ function turnLogic(){
   tTiles.forEach(makeActive, this, true);
   fTiles.forEach(makeActive, this, true);
 
-//  littlePeople.forEach(makeActive, this, true);
 
 }
 
