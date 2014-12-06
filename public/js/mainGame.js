@@ -5,6 +5,7 @@ function Game(){
 	this.turn = 0;
 	this.quarter = 0;
 	this.pause = false;
+	this.VPs;
 
 	this.cTiles;
 	this.tTiles;
@@ -34,6 +35,11 @@ function Game(){
 	this.graphics;
 	this.lastPositionX;
 	this.lastPositionY;
+	this.incX;
+	this.incY;
+	this.incX2;
+	this.incY2;
+	this.leaderLoc;
 
 	// Phaser bootstrapping
 	this.phaser = new Phaser.Game(1600, 1800, Phaser.AUTO, 'gameboard', {preload: this.phaserPreload, create: this.phaserCreate, update: this.phaserUpdate});
@@ -154,11 +160,8 @@ Game.prototype.phaserCreate = function() {
   var player = G.phaser.add.sprite(275, G.phaser.world.height-500, 'playerBoard');
   graphics = G.phaser.add.graphics(0, 0);
 
-  G.phaser.textAction = G.phaser.add.text(350, G.phaser.world.height - 550, '', {fill : '#ffffff'});
-	G.phaser.textAction.text = "stuff";
+  //CONSTRUCTION TILES
   G.phaser.cTiles = G.phaser.add.group();
-
-
   var cTile0 = G.phaser.cTiles.create(710, G.phaser.world.height - 1395, 'cDoorTile');
 	cTile0.type = "Door";
   var cTile1 = G.phaser.cTiles.create(790, G.phaser.world.height - 1395, 'cDoorTile');
@@ -300,8 +303,12 @@ Game.prototype.phaserCreate = function() {
   constructionTray = new Phaser.Circle(640, G.phaser.world.height-255, 75);
   markerBounds = new Phaser.Rectangle(630, G.phaser.world.height-510, 300, 30);
 
+	G.phaser.leader = G.phaser.add.group();
+	var bigTree = G.phaser.leader.create(725, G.phaser.world.height - 1520, 'bigTree');
+
   // Al about that village lyfe
   G.phaser.littlePeople = G.phaser.add.group();
+	var lp000 = G.phaser.littlePeople.create(750, G.phaser.world.height - 1500, 'actionMarkG');
 	var lp00 = G.phaser.littlePeople.create(580, 600, 'actionMarkG');
   var lp0 = G.phaser.littlePeople.create(925, G.phaser.world.height-450, 'actionMarkG'); //make this be a dude later
 	var lp1 = G.phaser.littlePeople.create(925, G.phaser.world.height-430, 'actionMarkG'); //make this be a dude later
@@ -322,23 +329,28 @@ Game.prototype.phaserCreate = function() {
   G.phaser.legionairreCamp = new Phaser.Rectangle(705,G.phaser.world.height-1520, 200, 100);
   G.phaser.constructionCamp = new Phaser.Rectangle(500,G.phaser.world.height-1210, 200, 100);
 
-  G.phaser.leader = G.phaser.add.group();
-  var bigTree = G.phaser.leader.create(725, G.phaser.world.height - 1520, 'bigTree');
-
   G.phaser.trajan = G.phaser.add.group();
   var arch = G.phaser.trajan.create(605, G.phaser.world.height-435, 'tArch');
   arch.angle = -28;
+
+	G.phaser.textAction = G.phaser.add.text(350, G.phaser.world.height - 550, '', {fill : '#ffffff'});
+	G.phaser.textAction.text = "stuff";
 
 	G.phaser.gameState = "selectTray";
 	G.phaser.linespot = 640;
 	G.phaser.displace = 0;
 	G.phaser.lastPositionX =580;
 	G.phaser.lastPositionY=600;
+	G.phaser.incX=0;
+	G.phaser.incY=0;
+	G.phaser.incX2=0;
+	G.phaser.incY2=0;
+	G.phaser.leaderLoc = G.phaser.legionairreCamp;
 
 }
 
 Game.prototype.phaserUpdate = function() {
-	console.log(G.phaser.input.activePointer.positionDown.x, G.phaser.input.activePointer.positionDown.y);
+	//console.log(G.phaser.input.activePointer.positionDown.x, G.phaser.input.activePointer.positionDown.y);
 }
 
 Game.prototype.turnLogic = function() {
@@ -666,79 +678,40 @@ Game.prototype.redWildMovement = function(tile){
 
 Game.prototype.militaryLogic = function()
 {
-	//game.paused=true;
-	var victory_points = 0;
-	var actionInput = 0;
-	//console.log("military logic call");
-	if(G.phaser.gameState == "military")
-	{
-		G.phaser.textAction.text = "Military Action";
-		G.phaser.textAction.text= G.phaser.textAction.text + "\nLeft- Move Token to Camp \nUp- Move Troop to Leader \nRight- Move leader to Adj Providence";
-	}
-	var keys = G.phaser.input.keyboard.createCursorKeys();
-	keys.left.onPressCallback = G.moveTokenToMilitaryCamp;
-	keys.up.onPressCallback = G.moveTokenToLeader;	//move a token to the leader's location
-	keys.right.onPressCallback = G.moveLeader;	//move your leader to an adjacent space
-	return victory_points;
+	G.phaser.textAction.text = "Military Action";
+	G.phaser.textAction.text= G.phaser.textAction.text + "\nDouble-click on little dude to move to camp \nDouble-click on legionairre in camp to move to leader \nOr click the leader and then an adjacent provence to move leader";
+
+	G.phaser.input.onUp.add(G.getClick);
 }
 
-Game.prototype.moveTokenToMilitaryCamp = function() {
-	console.log("hit");
-	var incX = 0;
-	var incY = 0;
-	//move tokens from player's token board to the military camp
-	//add a token to the military camp
-	for(i=0;i<littlePeople.length;i++)
-	{
-		if(lpStartBox.contains(littlePeople.getAt(i).position.x,littlePeople.getAt(i).position.y))
-		{
-			littlePeople.getAt(i).position.x = 750+incX;
-			littlePeople.getAt(i).position.y = 280+incY;
-			//game.world.bringToTop(littlePeople.getAt(i));
-			incX=incX+10;
-			if(incX>40)
-			{
-				incX=0;
-				incY=incY+10;
-			}
-			break;
-		}
+Game.prototype.getClick = function(){
+	if(G.phaser.gameState != "military"){
+		return;
+	}
+	if(G.phaser.lpStartBox.contains(G.phaser.input.activePointer.positionDown.x, G.phaser.input.activePointer.positionDown.y)){
+		G.phaser.gameState = "moveLittleDudeToCamp";
+		G.phaser.littlePeople.forEach(G.makeLPActive, this, true);
+	}
+	else{
+		G.phaser.leader.forEach(G.makeLeaderActive, this, true);
+		G.phaser.littlePeople.forEach(G.makeLPActive, this, true);
 	}
 }
 
-Game.prototype.moveTokenToLeader = function() {
-	var incX2 = 0;
-	var incY2 = 0;
-	//move a token from the military camp to the current leader's position
-	for(i=0;i<littlePeople.length;i++)
-	{
-		if(legionairreCamp.contains(littlePeople.getAt(i).position.x,littlePeople.getAt(i).position.y))
-		{
-			littlePeople.getAt(i).position.x = leader.getAt(0).position.x+incX2;
-			littlePeople.getAt(i).position.y = leader.getAt(0).position.y+incY2;
-			console.log("You get "+leaderLocVPPts + " Vp Points!");
-			//game.world.bringToTop(littlePeople.getAt(i));
-			incX2 = incX2+10;
-			if(incX2>40)
-			{
-				incX2=0;
-				incY2=incY2+15;
-			}
-			break;
-		}
-	}
+Game.prototype.makeLeaderActive = function(leader) {
+	leader.inputEnabled = true;
+	leader.events.onInputDown.add(G.moveLeader, this);
 }
 
-Game.prototype.moveLeader = function() {
-	//move the current player's leader to an adjacent
-	//milCheck = true;
+Game.prototype.moveLeader = function(leader){
 	G.phaser.textAction.text="Select an adjacent providence to move your leader. (click the middle)";
-	//game.paused = true;
-
-	G.phaser.input.onUp.add(checkAdj);
+	G.phaser.input.onUp.add(G.checkAdj);
 }
 
 Game.prototype.checkAdj = function(){
+	if(G.phaser.gameState != "military"){
+		return;
+	}
 	var countries = [
 	new Phaser.Rectangle(615,248,350,120), //base
 	new Phaser.Rectangle(885,210,150,100), //noricum
@@ -748,36 +721,33 @@ Game.prototype.checkAdj = function(){
 	new Phaser.Rectangle(465,73,300,150), //belgica
 	new Phaser.Rectangle(325,94,220,200), //lugudunensis
 	new Phaser.Rectangle(220,2,420,125), //britannia
-	new Phaser.Rectangle(150,162,160,110), //aquitania
+	new Phaser.Rectangle(150,162,225,110), //aquitania
 	new Phaser.Rectangle(202,236,250,120), //narbonensis
 	new Phaser.Rectangle(440,194,280,130) //aepes
 	]
+
 	var vpPts = [
 		0,5,3,6,10,6,6,10,10,6,3
 	]
-	var leaderLoc = countries[0]
-	var leaderLocVPPts = 0;
 	var xInput = G.phaser.input.activePointer.positionDown.x;
 	var yInput = G.phaser.input.activePointer.positionDown.y;
 
-	leader.inputEnabled=true;
-	for(i=0;i<countries.length;i++)
-		{
-			if(countries[i].contains(xInput,yInput))
-			{
-				if(leaderLoc.intersects(countries[i]))
-				{
-					leader.getAt(0).position.x = countries[i].x + 100;
-					leader.getAt(0).position.y = countries[i].y -50;
-					incX = 0;
-					incY = 0;
-					leaderLoc = countries[i];
-					leaderLocVPPts = vpPts[i];
-					milCheck = false;
-					leader.inputEnabled=false;
-				}
+	for(i=0;i<countries.length;i++){
+		if(countries[i].contains(xInput,yInput)){
+			if(G.phaser.leaderLoc.intersects(countries[i])){
+				G.phaser.leader.getAt(0).position.x = countries[i].x + 100;
+				G.phaser.leader.getAt(0).position.y = countries[i].y ;
+				G.phaser.incX = 0;
+				G.phaser.incY = 0;
+				G.phaser.leaderLoc = countries[i];
+				G.phaser.VPs += vpPts[i];
 			}
 		}
+	}
+
+	if(G.phaser.leaderLoc != countries[0]){
+		G.phaser.gameState = "bonusAction";
+	}
 }
 
 Game.prototype.constructionAction = function(){
@@ -871,7 +841,21 @@ Game.prototype.moveConstructTile = function(tile){ //move game piece to correct 
 }
 
 Game.prototype.moveWorker = function(littleDude){ //move game piece to correct location
-	if(G.phaser.lpStartBox.contains(littleDude.position.x, littleDude.position.y) && G.phaser.gameState == "moveToWorkerCamp" || G.phaser.gameState == "construction"){
+	if(G.phaser.gameState == "bonusAction"){
+		return;
+	}
+	if(G.phaser.gameState == "moveLittleDudeToCamp"){
+		console.log("move dude to camp");
+		littleDude.position.x = 750 + G.phaser.incX;
+		littleDude.position.y = 280 + G.phaser.incY;
+		G.phaser.incX +=10;
+		if(G.phaser.incX > 40){
+			G.phaser.incX=0;
+			G.phaser.incY+=10;
+		}
+		G.phaser.gameState = "bonusAction";
+	}
+	else if(G.phaser.lpStartBox.contains(littleDude.position.x, littleDude.position.y) && G.phaser.gameState == "moveToWorkerCamp" || G.phaser.gameState == "construction"){
 		littleDude.position.x = 580;
 		littleDude.position.y = 600;
 		G.phaser.gameState = "bonusAction";
@@ -879,6 +863,11 @@ Game.prototype.moveWorker = function(littleDude){ //move game piece to correct l
 	else if(G.phaser.gameState == "moveWorker"){
 		littleDude.position.x = G.phaser.lastPositionX;
 		littleDude.position.y = G.phaser.lastPositionY;
+		G.phaser.gameState = "bonusAction";
+	}
+	else {
+		littleDude.position.x = G.phaser.leader.getAt(0).position.x + 25;
+		littleDude.position.y = G.phaser.leader.getAt(0).position.y + 35;
 		G.phaser.gameState = "bonusAction";
 	}
 }
