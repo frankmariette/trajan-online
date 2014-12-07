@@ -1,15 +1,5 @@
 function trajanLogic(currentTile, arch){
-	
-	
-//	var tSpace1 = tTiles.create(900, game.world.height - 300, 'trajan')
-//	tSpace1.angle = 0;
-
-//	var trajan = game.add.group();
-//  	var arch = trajan.create(605, game.world.height-435, 'tArch');
-//  	arch.angle = -28;
-	
-	
- 	var trajan_Spaces = [	
+ 	var trajan_Spaces = [
 		new Phaser.Rectangle(603, game.world.height-480, 100, 100),
  		new Phaser.Rectangle(830, game.world.height-470, 100, 100),
 		new Phaser.Rectangle(900, game.world.height-300, 100, 100),
@@ -19,18 +9,18 @@ function trajanLogic(currentTile, arch){
 		new Phaser.Rectangle(709, game.world.height-300, 100, 100)
 
 	]
-	
-	
+
+
 	var spaces = [0,0,0,0,0,0];
 	var index = 0;
 	//check if arch is in the middle. If so then don't do anything else.
-	if (trajan_Spaces[6].contains(trajan.getAt(0).position.x, trajan.getAt(0).position.y)){
+	if (trajan_Spaces[6].contains(G.phaser.trajan.getAt(0).position.x, G.phaser.trajan.getAt(0).position.y)){
 		console.log("Can't do the Trajan Action.");
 		return 0;
 	}
-	//check spaces to see if they are occupied.	
+	//check spaces to see if they are occupied.
 	for (i=0;i<6;i++) {
-		if (trajan_Spaces[i].contains(trajan.getAt(0).position.x, trajan.getAt(0).position.y)) {
+		if (trajan_Spaces[i].contains(G.phaser.trajan.getAt(0).position.x, G.phaser.trajan.getAt(0).position.y)) {
 			spaces[i] = 2;
 			index = i;
 		}
@@ -41,9 +31,9 @@ function trajanLogic(currentTile, arch){
 	//OK THIS LOGIC IS TO MOVE THE "TILE" TO THE ARCH POSITION AND MOVE THE ARCH TO THE
 	//NEXT SPOT!!
 	if (spaces[index] = 2) {
-		if (moveTile(currentTile, trajan.getAt(0), spaces)) {
-				moveArch(trajan.getAt(0), trajan_Spaces, spaces, index);
-				
+		if (moveTile(currentTile, G.phaser.trajan.getAt(0), spaces)) {
+				moveArch(G.phaser.trajan.getAt(0), trajan_Spaces, spaces, index);
+
 		}
 	}
 }
@@ -68,7 +58,3 @@ function moveArch(arch, trajanSpaces, spaces, index) {
 	}
 	spaces[index] = 2;
 }
-
-
-
-

@@ -39,9 +39,15 @@ function turnLogic(){
     
   }
   if(busy == 'construction'){
-    text.text = "Construction Action";
-    //call construct logic
+    text.text = "Construction Action \n Press left arrow to move to constructioncamp\n Press right arrow to choose a tile";
+    keys = this.game.input.keyboard.createCursorKeys();
+    if (keys.left.isDown){
+      constructionLogic(0);
+    } else if (keys.right.isDown){
+      constructionLogic(1);
+    }
   }
+    //call construct logic
 
 
   //check which tile is clicked
@@ -52,6 +58,7 @@ function turnLogic(){
   //mTiles.forEach(makeActive, this, true);
   tTiles.forEach(makeActive, this, true);
   fTiles.forEach(forumActive, this, true);
+
 
 }
 
