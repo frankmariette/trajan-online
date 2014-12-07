@@ -303,17 +303,29 @@ Game.prototype.phaserCreate = function() {
 
   // Tray 2 markers
   var aMark0 = G.phaser.aMarks.create(775, G.phaser.world.height-375, 'actionMarkO');
+	aMark0.color = "orange";
   var aMark1 = G.phaser.aMarks.create(810, G.phaser.world.height-175, 'actionMarkO');
+	aMark1.color = "orange";
   var aMark2 = G.phaser.aMarks.create(660, G.phaser.world.height-175, 'actionMarkG');
+	aMark2.color = "green";
   var aMark3 = G.phaser.aMarks.create(810, G.phaser.world.height-340, 'actionMarkG');
+	aMark3.color = "green";
   var aMark4 = G.phaser.aMarks.create(675, G.phaser.world.height-375, 'actionMarkY');
+	aMark4.color = "yellow";
   var aMark5 = G.phaser.aMarks.create(775, G.phaser.world.height-175, 'actionMarkY');
+	aMark5.color = "yellow";
   var aMark6 = G.phaser.aMarks.create(705, G.phaser.world.height-375, 'actionMarkB');
+	aMark6.color = "blue";
   var aMark7 = G.phaser.aMarks.create(705, G.phaser.world.height-175, 'actionMarkB');
+	aMark7.color = "blue";
   var aMark8 = G.phaser.aMarks.create(825, G.phaser.world.height-260, 'actionMarkW');
+	aMark8.color = "white";
   var aMark9 = G.phaser.aMarks.create(645, G.phaser.world.height-280, 'actionMarkW');
+	aMark9.color = "white";
   var aMark10 = G.phaser.aMarks.create(620, G.phaser.world.height-280, 'actionMarkP');
+	aMark10.color = "pink";
   var aMark11 = G.phaser.aMarks.create(845, G.phaser.world.height-280, 'actionMarkP');
+	aMark11.color = "pink";
 
   G.phaser.cards = G.phaser.add.group();
 
@@ -370,7 +382,7 @@ Game.prototype.phaserCreate = function() {
 
 	G.phaser.gameState = "selectTray";
 	G.phaser.linespot = 640;
-	G.phaser.displace = 0;
+	G.phaser.displace = -30;
 	G.phaser.lastPositionX =580;
 	G.phaser.lastPositionY=600;
 	G.phaser.incX=0;
@@ -387,6 +399,7 @@ Game.prototype.phaserUpdate = function() {
 
 Game.prototype.turnLogic = function() {
 	//console.log("turn logic function");
+	G.phaser.linespot = 640;
 	if(G.phaser.gameState == "selectTray"){
   	G.phaser.textAction.text = "Select a Tray";
   	G.phaser.input.onUp.add(G.getTray);
@@ -519,30 +532,99 @@ Game.prototype.getAction = function(){
 		if(boxEmpty){ //set game state to correct action for next phase of turn logic
 			if(currentTray == seaportTray){
 				G.phaser.gameState = 'seaport';
+				G.checkTrajanTile(0, seaportTray);
+
+				G.phaser.gameState = "selectTray";
+				G.turnLogic();
 			}
 			else if(currentTray == forumTray){
 				G.phaser.gameState = 'forum';
+				G.checkTrajanTile(1, forumTray);
 				G.getForumTile();
 			}
 			else if(currentTray == militaryTray){
 				G.phaser.gameState = 'military';
+				G.checkTrajanTile(2, militaryTray);
 				G.militaryLogic();
 			}
 			else if(currentTray == senateTray){
 				G.phaser.gameState = 'senate';
+				G.checkTrajanTile(3, senateTray);
 				G.senateSpaces(G.phaser.currentPlayerMarker);
 			}
 			else if(currentTray == trajanTray){
 				G.phaser.gameState = 'trajan';
+				G.checkTrajanTile(4, trajanTray);
 				G.getTrajanTile();
 			}
 			else if(currentTray == constructionTray){
 				G.phaser.gameState = 'construction';
+				G.checkTrajanTile(5, constructionTray);
 				G.constructionAction();
 			}
 		}
 }
 
+Game.prototype.checkTrajanTile = function(trayIndex, currentTray){
+	var trayBoxes = [
+		new Phaser.Rectangle(603, G.phaser.world.height-480, 100, 100),
+		new Phaser.Rectangle(830, G.phaser.world.height-470, 100, 100),
+		new Phaser.Rectangle(900, G.phaser.world.height-300, 100, 100),
+		new Phaser.Rectangle(795, G.phaser.world.height-100, 100, 100),
+		new Phaser.Rectangle(630, G.phaser.world.height-139, 100, 100),
+		new Phaser.Rectangle(515, G.phaser.world.height-300, 100, 100),
+		new Phaser.Rectangle(709, G.phaser.world.height-300, 100, 100)
+	];
+	var firstColor;
+	var secondColor;
+	var action;
+	var firstCheck = false;
+	var secondCheck = false;
+	var usedTile;
+
+	G.phaser.tTiles.forEach(function(tile){
+		if(trayBoxes[trayIndex].contains(tile.position.x, tile.position.y)){
+			firstColor = tile.colorOne;
+			secondColor = tile.colorTwo;
+			action = tile.type;
+			usedTile = tile;
+		}
+	}, this, true);
+	G.phaser.aMarks.forEach(function(marker){
+		if(currentTray.contains(marker.position.x, marker.position.y)){
+			if(marker.color == firstColor && firstCheck == false)
+				firstCheck = true;
+			else if(marker.color == secondColor)
+				secondCheck = true;
+		}
+	}, this, true);
+
+	if(firstCheck == true && secondCheck == true){
+		if(action == "VP"){
+			G.phaser.textAction.text = "You recieved 9 additional Victory Points";
+			usedTile.position.x = 1700;
+		}
+		else if(action == "bread"){
+			G.phaser.textAction.text = "This tile can be used to meet one demand for the remainder of the game";
+			usedTile.position.x = 377;
+			usedTile.position.y = 1335;
+			usedTile.angle = 0;
+		}
+		else if(action == "religion"){
+			G.phaser.textAction.text = "This tile can be used to meet one demand for the remainder of the game";
+			usedTile.position.x = 453;
+			usedTile.position.y = 1335;
+			usedTile.angle = 0;
+		}
+		else if(action == "games"){
+			G.phaser.textAction.text = "This tile can be used to meet one demand for the remainder of the game";
+			usedTile.position.x = 530;
+			usedTile.position.y = 1335;
+			usedTile.angle = 0;
+		}
+	}
+
+}
 
 Game.prototype.movePlayerSenatePiece = function(currentPlayer, nextSpace) {
   currentPlayer.x = nextSpace.x -20;
@@ -570,6 +652,9 @@ Game.prototype.senateSpaces = function(currentPlayer){
       break;
     };
   };
+
+	G.phaser.gameState = "selectTray";
+	G.turnLogic();
 }
 
 Game.prototype.bonusAction = function(){
@@ -642,69 +727,118 @@ Game.prototype.sPlusMovement = function(tile){
 		tile.position.x = 935;
 		tile.position.y = 1710;
 	}
+
+	G.phaser.gameState = "selectTray";
+	G.turnLogic();
 }
 
 	//EXTRA ACTION TILE MOVEMENT
 Game.prototype.seaBonusMovement = function(tile){
 	tile.position.x = 293;
 	tile.position.y = 1657;
+
+
+	G.phaser.gameState = "selectTray";
+	G.turnLogic();
 }
 Game.prototype.forumBonusMovement = function(tile){
 	tile.position.x = 346;
 	tile.position.y = 1657;
+
+
+	G.phaser.gameState = "selectTray";
+	G.turnLogic();
 }
 Game.prototype.senateBonusMovement = function(tile){
 	tile.position.x = 530;
 	tile.position.y = 1657;
+
+
+	G.phaser.gameState = "selectTray";
+	G.turnLogic();
 }
 Game.prototype.militaryBonusMovement = function(tile){
 	tile.position.x = 397;
 	tile.position.y = 1657;
+
+
+	G.phaser.gameState = "selectTray";
+	G.turnLogic();
 }
 Game.prototype.trajanBonusMovement = function(tile){
 	tile.position.x = 501;
 	tile.position.y = 1657;
+
+
+	G.phaser.gameState = "selectTray";
+	G.turnLogic();
 }
 Game.prototype.constructionBonusMovement = function(tile){
 	tile.position.x = 554;
 	tile.position.y = 1657;
+
+
+	G.phaser.gameState = "selectTray";
+	G.turnLogic();
 }
 
 	//RESOURCES MOVEMENT
 Game.prototype.gamesMovement = function(tile){
 	tile.position.x = 530;
 	tile.position.y = 1402;
+
+
+	G.phaser.gameState = "selectTray";
+	G.turnLogic();
 }
 
 Game.prototype.breadMovement = function(tile){
 	tile.position.x = 375;
 	tile.position.y = 1402;
+
+	G.phaser.gameState = "selectTray";
+	G.turnLogic();
 }
 
 Game.prototype.religionMovement = function(tile){
 	tile.position.x = 452;
 	tile.position.y = 1402;
+
+	G.phaser.gameState = "selectTray";
+	G.turnLogic();
 }
 
 	// WILD CARD MOVEMENT
 Game.prototype.yellowWildMovement = function(tile){
 	tile.position.x = 382;
 	tile.position.y = 1482;
+
+	G.phaser.gameState = "selectTray";
+	G.turnLogic();
 }
 
 Game.prototype.orangeWildMovement = function(tile){
 	tile.position.x = 448;
 	tile.position.y = 1482;
+
+	G.phaser.gameState = "selectTray";
+	G.turnLogic();
 }
 
 Game.prototype.greenWildMovement = function(tile){
 	tile.position.x = 382;
 	tile.position.y = 1545;
+
+	G.phaser.gameState = "selectTray";
+	G.turnLogic();
 }
 
 Game.prototype.redWildMovement = function(tile){
 	tile.position.x = 448;
 	tile.position.y = 1545;
+
+	G.phaser.gameState = "selectTray";
+	G.turnLogic();
 }
 
 
@@ -723,11 +857,11 @@ Game.prototype.getClick = function(){
 	}
 	if(G.phaser.lpStartBox.contains(G.phaser.input.activePointer.positionDown.x, G.phaser.input.activePointer.positionDown.y)){
 		G.phaser.gameState = "moveLittleDudeToCamp";
-		G.phaser.littlePeople.forEach(G.makeLPActive, this, true);
+		G.phaser.littlePeople.forEach(G.makeLittleDudeActive, this, true);
 	}
 	else{
 		G.phaser.leader.forEach(G.makeLeaderActive, this, true);
-		G.phaser.littlePeople.forEach(G.makeLPActive, this, true);
+		G.phaser.littlePeople.forEach(G.makeLittleDudeActive, this, true);
 	}
 }
 
@@ -739,6 +873,33 @@ Game.prototype.makeLeaderActive = function(leader) {
 Game.prototype.moveLeader = function(leader){
 	G.phaser.textAction.text="Select an adjacent providence to move your leader. (click the middle)";
 	G.phaser.input.onUp.add(G.checkAdj);
+}
+
+Game.prototype.makeLittleDudeActive = function(littleDude){
+	littleDude.inputEnabled = true;
+	littleDude.events.onInputDown.add(G.moveLegionairre, this);
+}
+
+Game.prototype.moveLegionairre = function(littleDude){
+	if(G.phaser.gameState == "moveLittleDudeToCamp"){
+		console.log("move dude to camp");
+		littleDude.position.x = 750 + G.phaser.incX;
+		littleDude.position.y = 280 + G.phaser.incY;
+		G.phaser.incX +=10;
+		if(G.phaser.incX > 40){
+			G.phaser.incX=0;
+			G.phaser.incY+=10;
+		}
+		G.phaser.gameState = "bonusAction";
+	}
+	else if(G.phaser.gameState == "military"){
+		littleDude.position.x = G.phaser.leader.getAt(0).position.x + 25;
+		littleDude.position.y = G.phaser.leader.getAt(0).position.y + 35;
+		G.phaser.gameState = "bonusAction";
+	}
+
+	G.phaser.gameState = "selectTray";
+	G.turnLogic();
 }
 
 Game.prototype.checkAdj = function(){
@@ -781,10 +942,14 @@ Game.prototype.checkAdj = function(){
 	if(G.phaser.leaderLoc != countries[0]){
 		G.phaser.gameState = "bonusAction";
 	}
+
+
+	G.phaser.gameState = "selectTray";
+	G.turnLogic();
 }
 
 Game.prototype.constructionAction = function(){
-	G.phaser.textAction.text = "Select a little dude to move to camp or click on a tile followed by a worker in camp to gain tile";
+	G.phaser.textAction.text = "Select a little dude to move to camp or click on a tile to gain tile and move a worker to that spot";
 	G.phaser.cTiles.forEach(G.makeActive, this, true);
 	G.phaser.littlePeople.forEach(G.makeLPActive, this, true);
 }
@@ -804,15 +969,19 @@ Game.prototype.moveConstructTile = function(tile){ //move game piece to correct 
 		return;
 	}
 	var validAction = false;
+	var worker;
 	G.phaser.littlePeople.forEach(function(dude){
 		if(G.phaser.constructionCamp.contains(dude.position.x, dude.position.y)){
 			validAction = true;
+			worker = dude;
 		}
 	}, this, true);
 
 	if(validAction == true){
 		G.phaser.lastPositionX = tile.position.x;
 		G.phaser.lastPositionY = tile.position.y;
+		worker.position.x = tile.position.x + 10;
+		worker.position.y = tile.position.y + 10;
 		//Place Tile Correctly on Player Board
 		if(tile.type == "Stairs"){
 			tile.position.x = 285;
@@ -843,24 +1012,21 @@ Game.prototype.moveConstructTile = function(tile){ //move game piece to correct 
 		if(firstTile == true){
 			if(tile.type == "Stairs"){
 				G.phaser.gameState = "forum";
-				G.phaser.textAction.text = "Bonus Forum Action!";
+				G.getForumTile();
 			}
 			else if(tile.type == "Door"){
 				G.phaser.gameState = "senate";
-				G.phaser.textAction.text = "Bonus Senate Action!";
 				G.senateSpaces(G.phaser.currentPlayerMarker);
 			}
 			else if(tile.type == "Roof"){
 				G.phaser.gameState = "trajan";
-				G.phaser.textAction.text = "Bonus Trajan Action!";
+				G.getTrajanTile();
 			}
 			else if(tile.type == "Fountain"){
 				G.phaser.gameState = "seaport";
-				G.phaser.textAction.text = "Bonus Seaport Action!";
 			}
 			else if(tile.type == "Window"){
 				G.phaser.gameState = "military";
-				G.phaser.textAction.text = "Bonus Military Action!";
 				G.militaryLogic();
 			}
 		}
@@ -871,24 +1037,17 @@ Game.prototype.moveConstructTile = function(tile){ //move game piece to correct 
 		G.phaser.textAction.text = "Please move a worker to your camp";
 		G.phaser.gameState = "moveToWorkerCamp";
 	}
+
+
+	G.phaser.gameState = "selectTray";
+	G.turnLogic();
 }
 
 Game.prototype.moveWorker = function(littleDude){ //move game piece to correct location
 	if(G.phaser.gameState == "bonusAction"){
 		return;
 	}
-	if(G.phaser.gameState == "moveLittleDudeToCamp"){
-		console.log("move dude to camp");
-		littleDude.position.x = 750 + G.phaser.incX;
-		littleDude.position.y = 280 + G.phaser.incY;
-		G.phaser.incX +=10;
-		if(G.phaser.incX > 40){
-			G.phaser.incX=0;
-			G.phaser.incY+=10;
-		}
-		G.phaser.gameState = "bonusAction";
-	}
-	else if(G.phaser.lpStartBox.contains(littleDude.position.x, littleDude.position.y) && G.phaser.gameState == "moveToWorkerCamp" || G.phaser.gameState == "construction"){
+	if(G.phaser.lpStartBox.contains(littleDude.position.x, littleDude.position.y) && G.phaser.gameState == "moveToWorkerCamp" || G.phaser.gameState == "construction"){
 		littleDude.position.x = 580;
 		littleDude.position.y = 600;
 		G.phaser.gameState = "bonusAction";
@@ -898,11 +1057,9 @@ Game.prototype.moveWorker = function(littleDude){ //move game piece to correct l
 		littleDude.position.y = G.phaser.lastPositionY;
 		G.phaser.gameState = "bonusAction";
 	}
-	else {
-		littleDude.position.x = G.phaser.leader.getAt(0).position.x + 25;
-		littleDude.position.y = G.phaser.leader.getAt(0).position.y + 35;
-		G.phaser.gameState = "bonusAction";
-	}
+
+	G.phaser.gameState = "selectTray";
+	G.turnLogic();
 }
 
 Game.prototype.getTrajanTile = function(){
@@ -953,6 +1110,10 @@ Game.prototype.trajanLogic = function(currentTile, arch){
 			G.moveArch(G.phaser.trajan.getAt(0), trajan_Spaces, spaces, index);
 		}
 	}
+
+
+	G.phaser.gameState = "selectTray";
+	G.turnLogic();
 }
 
 Game.prototype.moveTile = function(tile, arch, spaces) {
