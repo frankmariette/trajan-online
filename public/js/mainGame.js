@@ -53,6 +53,17 @@ Game.prototype.phaserPreload = function() {
 
     G.phaser.load.image('tile', '/assets/cDoorTile.png');
     G.phaser.load.image('card', '/assets/cCardWheat.png');
+
+		G.phaser.load.image('redBigTree', '/assets/redBigTree.png');
+		G.phaser.load.image('blueBigTree', '/assets/blueBigTree.png');
+		G.phaser.load.image('grayBigTree', '/assets/grayBigTree.png');
+		G.phaser.load.image('greenBigTree', '/assets/greenBigTree.png');
+		G.phaser.load.image('blueLittleDude', '/assets/blueLittleDude.png');
+		G.phaser.load.image('redLittleDude', '/assets/redLittleDude.png');
+		G.phaser.load.image('grayLittleDude', '/assets/grayLittleDude.png');
+		G.phaser.load.image('greenLittleDude', '/assets/greenLittleDude.png');
+
+
 		//TRAJAN TILES
     G.phaser.load.image('tt_VP_yellow_white', '/assets/trajanTiles/tTile00.png');
     G.phaser.load.image('tt_VP_yellow_yellow', '/assets/trajanTiles/tTile04.png');
@@ -348,27 +359,27 @@ Game.prototype.phaserCreate = function() {
   markerBounds = new Phaser.Rectangle(630, G.phaser.world.height-510, 300, 30);
 
 	G.phaser.leader = G.phaser.add.group();
-	var bigTree = G.phaser.leader.create(725, G.phaser.world.height - 1520, 'bigTree');
+	var bigTree = G.phaser.leader.create(725, G.phaser.world.height - 1520, 'greenBigTree');
 
   // Al about that village lyfe
   G.phaser.littlePeople = G.phaser.add.group();
-	var lp000 = G.phaser.littlePeople.create(750, G.phaser.world.height - 1500, 'actionMarkG');
-	var lp00 = G.phaser.littlePeople.create(580, 600, 'actionMarkG');
-  var lp0 = G.phaser.littlePeople.create(925, G.phaser.world.height-450, 'actionMarkG'); //make this be a dude later
-	var lp1 = G.phaser.littlePeople.create(925, G.phaser.world.height-430, 'actionMarkG'); //make this be a dude later
-	var lp2 = G.phaser.littlePeople.create(925, G.phaser.world.height-410, 'actionMarkG'); //make this be a dude later
-	var lp3 = G.phaser.littlePeople.create(925, G.phaser.world.height-390, 'actionMarkG'); //make this be a dude later
-	var lp4 = G.phaser.littlePeople.create(925, G.phaser.world.height-370, 'actionMarkG'); //make this be a dude later
-	var lp5 = G.phaser.littlePeople.create(925, G.phaser.world.height-350, 'actionMarkG'); //make this be a dude later
-	var lp6 = G.phaser.littlePeople.create(945, G.phaser.world.height-450, 'actionMarkG'); //make this be a dude later
-	var lp7 = G.phaser.littlePeople.create(945, G.phaser.world.height-430, 'actionMarkG'); //make this be a dude later
-	var lp8 = G.phaser.littlePeople.create(945, G.phaser.world.height-410, 'actionMarkG'); //make this be a dude later
-	var lp9 = G.phaser.littlePeople.create(945, G.phaser.world.height-390, 'actionMarkG'); //make this be a dude later
-	var lp10 = G.phaser.littlePeople.create(945, G.phaser.world.height-370, 'actionMarkG'); //make this be a dude later
-	var lp11 = G.phaser.littlePeople.create(945, G.phaser.world.height-350, 'actionMarkG'); //make this be a dude later
-	var lp12 = G.phaser.littlePeople.create(905, G.phaser.world.height-410, 'actionMarkG'); //make this be a dude later
-	var lp13 = G.phaser.littlePeople.create(905, G.phaser.world.height-390, 'actionMarkG'); //make this be a dude later
-	var lp14 = G.phaser.littlePeople.create(905, G.phaser.world.height-370, 'actionMarkG');
+	var lp000 = G.phaser.littlePeople.create(750, G.phaser.world.height - 1500, 'greenLittleDude');
+	var lp00 = G.phaser.littlePeople.create(580, 600, 'greenLittleDude');
+  var lp0 = G.phaser.littlePeople.create(925, G.phaser.world.height-450, 'greenLittleDude'); //make this be a dude later
+	var lp1 = G.phaser.littlePeople.create(925, G.phaser.world.height-430, 'greenLittleDude'); //make this be a dude later
+	var lp2 = G.phaser.littlePeople.create(925, G.phaser.world.height-410, 'greenLittleDude'); //make this be a dude later
+	var lp3 = G.phaser.littlePeople.create(925, G.phaser.world.height-390, 'greenLittleDude'); //make this be a dude later
+	var lp4 = G.phaser.littlePeople.create(925, G.phaser.world.height-370, 'greenLittleDude'); //make this be a dude later
+	var lp5 = G.phaser.littlePeople.create(925, G.phaser.world.height-350, 'greenLittleDude'); //make this be a dude later
+	var lp6 = G.phaser.littlePeople.create(945, G.phaser.world.height-450, 'greenLittleDude'); //make this be a dude later
+	var lp7 = G.phaser.littlePeople.create(945, G.phaser.world.height-430, 'greenLittleDude'); //make this be a dude later
+	var lp8 = G.phaser.littlePeople.create(945, G.phaser.world.height-410, 'greenLittleDude'); //make this be a dude later
+	var lp9 = G.phaser.littlePeople.create(945, G.phaser.world.height-390, 'greenLittleDude'); //make this be a dude later
+	var lp10 = G.phaser.littlePeople.create(945, G.phaser.world.height-370, 'greenLittleDude'); //make this be a dude later
+	var lp11 = G.phaser.littlePeople.create(945, G.phaser.world.height-350, 'greenLittleDude'); //make this be a dude later
+	var lp12 = G.phaser.littlePeople.create(905, G.phaser.world.height-410, 'greenLittleDude'); //make this be a dude later
+	var lp13 = G.phaser.littlePeople.create(905, G.phaser.world.height-390, 'greenLittleDude'); //make this be a dude later
+	var lp14 = G.phaser.littlePeople.create(905, G.phaser.world.height-370, 'greenLittleDude');
   G.phaser.lpStartBox = new Phaser.Rectangle(890, G.phaser.world.height-475, 100, 180);
   G.phaser.legionairreCamp = new Phaser.Rectangle(705,G.phaser.world.height-1520, 200, 100);
   G.phaser.constructionCamp = new Phaser.Rectangle(500,G.phaser.world.height-1210, 200, 100);
@@ -378,7 +389,7 @@ Game.prototype.phaserCreate = function() {
   arch.angle = -28;
 
 	G.phaser.textAction = G.phaser.add.text(350, G.phaser.world.height - 550, '', {fill : '#ffffff'});
-	G.phaser.textAction.text = "stuff";
+	G.phaser.textAction.text = "Loading...";
 
 	G.phaser.gameState = "selectTray";
 	G.phaser.linespot = 640;
@@ -420,7 +431,7 @@ Game.prototype.getTray = function(){
 	if(G.phaser.gameState != "selectTray"){
 		return;
 	}
-	G.phaser.displace = 0;
+	G.phaser.displace = -30;
 	var x = G.phaser.input.activePointer.positionDown.x;
     var y = G.phaser.input.activePointer.positionDown.y;
     //Get which tray the user selected!
@@ -653,8 +664,7 @@ Game.prototype.senateSpaces = function(currentPlayer){
     };
   };
 
-	G.phaser.gameState = "selectTray";
-	G.turnLogic();
+	G.bonusAction();
 }
 
 Game.prototype.bonusAction = function(){
@@ -728,8 +738,7 @@ Game.prototype.sPlusMovement = function(tile){
 		tile.position.y = 1710;
 	}
 
-	G.phaser.gameState = "selectTray";
-	G.turnLogic();
+	G.bonusAction();
 }
 
 	//EXTRA ACTION TILE MOVEMENT
@@ -738,48 +747,42 @@ Game.prototype.seaBonusMovement = function(tile){
 	tile.position.y = 1657;
 
 
-	G.phaser.gameState = "selectTray";
-	G.turnLogic();
+	G.bonusAction();
 }
 Game.prototype.forumBonusMovement = function(tile){
 	tile.position.x = 346;
 	tile.position.y = 1657;
 
 
-	G.phaser.gameState = "selectTray";
-	G.turnLogic();
+	G.bonusAction();
 }
 Game.prototype.senateBonusMovement = function(tile){
 	tile.position.x = 530;
 	tile.position.y = 1657;
 
 
-	G.phaser.gameState = "selectTray";
-	G.turnLogic();
+	G.bonusAction();
 }
 Game.prototype.militaryBonusMovement = function(tile){
 	tile.position.x = 397;
 	tile.position.y = 1657;
 
 
-	G.phaser.gameState = "selectTray";
-	G.turnLogic();
+	G.bonusAction();
 }
 Game.prototype.trajanBonusMovement = function(tile){
 	tile.position.x = 501;
 	tile.position.y = 1657;
 
 
-	G.phaser.gameState = "selectTray";
-	G.turnLogic();
+	G.bonusAction();
 }
 Game.prototype.constructionBonusMovement = function(tile){
 	tile.position.x = 554;
 	tile.position.y = 1657;
 
 
-	G.phaser.gameState = "selectTray";
-	G.turnLogic();
+	G.bonusAction();
 }
 
 	//RESOURCES MOVEMENT
@@ -788,24 +791,21 @@ Game.prototype.gamesMovement = function(tile){
 	tile.position.y = 1402;
 
 
-	G.phaser.gameState = "selectTray";
-	G.turnLogic();
+	G.bonusAction();
 }
 
 Game.prototype.breadMovement = function(tile){
 	tile.position.x = 375;
 	tile.position.y = 1402;
 
-	G.phaser.gameState = "selectTray";
-	G.turnLogic();
+	G.bonusAction();
 }
 
 Game.prototype.religionMovement = function(tile){
 	tile.position.x = 452;
 	tile.position.y = 1402;
 
-	G.phaser.gameState = "selectTray";
-	G.turnLogic();
+	G.bonusAction();
 }
 
 	// WILD CARD MOVEMENT
@@ -813,32 +813,28 @@ Game.prototype.yellowWildMovement = function(tile){
 	tile.position.x = 382;
 	tile.position.y = 1482;
 
-	G.phaser.gameState = "selectTray";
-	G.turnLogic();
+	G.bonusAction();
 }
 
 Game.prototype.orangeWildMovement = function(tile){
 	tile.position.x = 448;
 	tile.position.y = 1482;
 
-	G.phaser.gameState = "selectTray";
-	G.turnLogic();
+	G.bonusAction();
 }
 
 Game.prototype.greenWildMovement = function(tile){
 	tile.position.x = 382;
 	tile.position.y = 1545;
 
-	G.phaser.gameState = "selectTray";
-	G.turnLogic();
+	G.bonusAction();
 }
 
 Game.prototype.redWildMovement = function(tile){
 	tile.position.x = 448;
 	tile.position.y = 1545;
 
-	G.phaser.gameState = "selectTray";
-	G.turnLogic();
+	G.bonusAction();
 }
 
 
@@ -898,8 +894,7 @@ Game.prototype.moveLegionairre = function(littleDude){
 		G.phaser.gameState = "bonusAction";
 	}
 
-	G.phaser.gameState = "selectTray";
-	G.turnLogic();
+	G.bonusAction();
 }
 
 Game.prototype.checkAdj = function(){
@@ -925,6 +920,8 @@ Game.prototype.checkAdj = function(){
 	]
 	var xInput = G.phaser.input.activePointer.positionDown.x;
 	var yInput = G.phaser.input.activePointer.positionDown.y;
+	var lastLeaderPositionX = G.phaser.leader.getAt(0).position.x;
+	var lastLeaderPositionY = G.phaser.leader.getAt(0).position.y;
 
 	for(i=0;i<countries.length;i++){
 		if(countries[i].contains(xInput,yInput)){
@@ -939,13 +936,13 @@ Game.prototype.checkAdj = function(){
 		}
 	}
 
-	if(G.phaser.leaderLoc != countries[0]){
+	if(G.phaser.leaderLoc != countries[0] && lastLeaderPositionX != G.phaser.leader.getAt(0).position.x && lastLeaderPositionY != G.phaser.leader.getAt(0).position.y){
 		G.phaser.gameState = "bonusAction";
+		G.bonusAction();
 	}
 
 
-	G.phaser.gameState = "selectTray";
-	G.turnLogic();
+
 }
 
 Game.prototype.constructionAction = function(){
@@ -1039,8 +1036,7 @@ Game.prototype.moveConstructTile = function(tile){ //move game piece to correct 
 	}
 
 
-	G.phaser.gameState = "selectTray";
-	G.turnLogic();
+	G.bonusAction();
 }
 
 Game.prototype.moveWorker = function(littleDude){ //move game piece to correct location
@@ -1058,8 +1054,7 @@ Game.prototype.moveWorker = function(littleDude){ //move game piece to correct l
 		G.phaser.gameState = "bonusAction";
 	}
 
-	G.phaser.gameState = "selectTray";
-	G.turnLogic();
+	G.bonusAction();
 }
 
 Game.prototype.getTrajanTile = function(){
@@ -1112,8 +1107,7 @@ Game.prototype.trajanLogic = function(currentTile, arch){
 	}
 
 
-	G.phaser.gameState = "selectTray";
-	G.turnLogic();
+	G.bonusAction();
 }
 
 Game.prototype.moveTile = function(tile, arch, spaces) {
