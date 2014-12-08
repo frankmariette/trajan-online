@@ -40,6 +40,7 @@ function Game(){
 	this.incX2;
 	this.incY2;
 	this.leaderLoc;
+	this.hand;
 
 	// Phaser bootstrapping
 	this.phaser = new Phaser.Game(1600, 1800, Phaser.AUTO, 'gameboard', {preload: this.phaserPreload, create: this.phaserCreate, update: this.phaserUpdate});
@@ -63,6 +64,14 @@ Game.prototype.phaserPreload = function() {
 		G.phaser.load.image('grayLittleDude', '/assets/grayLittleDude.png');
 		G.phaser.load.image('greenLittleDude', '/assets/greenLittleDude.png');
 
+		//CARDS
+		G.phaser.load.image('wheat', '/assets/cards/cWheat.png');
+		G.phaser.load.image('bearSkin', '/assets/cards/cBearSkin.png');
+		G.phaser.load.image('bling', '/assets/cards/cBling.png');
+		G.phaser.load.image('lamp', '/assets/cards/cAladdinsLamp.png');
+		G.phaser.load.image('bull', '/assets/cards/cBull.png');
+		G.phaser.load.image('fish', '/assets/cards/cFish.png');
+		G.phaser.load.image('scroll', '/assets/cards/cScroll.png');
 
 		//TRAJAN TILES
     G.phaser.load.image('tt_VP_yellow_white', '/assets/trajanTiles/tTile00.png');
@@ -306,9 +315,10 @@ Game.prototype.phaserCreate = function() {
   var bTile0 = G.phaser.bTiles.create(850, G.phaser.world.height - 750, 'bonus');
   var bTile1 = G.phaser.bTiles.create(960, G.phaser.world.height - 750, 'bonus2');
 
-  ships = G.phaser.add.group();
+  G.phaser.ships = G.phaser.add.group();
 
-  var ship0 = ships.create(290, G.phaser.world.height - 1310, 'ship1');
+  var ship0 = G.phaser.ships.create(290, G.phaser.world.height - 1310, 'ship1');
+	ship0.side = "color";
 
   G.phaser.aMarks = G.phaser.add.group();
 
@@ -339,10 +349,22 @@ Game.prototype.phaserCreate = function() {
 	aMark11.color = "pink";
 
   G.phaser.cards = G.phaser.add.group();
-
-  var cCard0 = G.phaser.cards.create(1000, G.phaser.world.height-500, 'card');
-  var cCard1 = G.phaser.cards.create(1125, G.phaser.world.height-500, 'card');
-  var cCard2 = G.phaser.cards.create(1250, G.phaser.world.height-500, 'card');
+	G.phaser.hand = [true, true, true, true];
+  var cCard0 = G.phaser.cards.create(1000, G.phaser.world.height-500, 'wheat');
+  var cCard1 = G.phaser.cards.create(1125, G.phaser.world.height-500, 'bull');
+  var cCard2 = G.phaser.cards.create(1250, G.phaser.world.height-500, 'bling');
+	var cCard3 = G.phaser.cards.create(1000, G.phaser.world.height-500, 'lamp');
+	var cCard4 = G.phaser.cards.create(1125, G.phaser.world.height-500, 'bearSkin');
+	var cCard5 = G.phaser.cards.create(1250, G.phaser.world.height-500, 'bling');
+	var cCard6 = G.phaser.cards.create(1000, G.phaser.world.height-500, 'fish');
+	var cCard7 = G.phaser.cards.create(1125, G.phaser.world.height-500, 'scroll');
+	var cCard8 = G.phaser.cards.create(1250, G.phaser.world.height-500, 'bull');
+	var cCard9 = G.phaser.cards.create(1000, G.phaser.world.height-500, 'wheat');
+	var cCard10 = G.phaser.cards.create(1125, G.phaser.world.height-500, 'bearSkin');
+	var cCard11 = G.phaser.cards.create(1250, G.phaser.world.height-500, 'bling');
+	var cCard12 = G.phaser.cards.create(1000, G.phaser.world.height-500, 'scroll');
+	var cCard13 = G.phaser.cards.create(1125, G.phaser.world.height-500, 'fish');
+	var cCard14 = G.phaser.cards.create(1250, G.phaser.world.height-500, 'lamp');
 
   G.phaser.pMarks = G.phaser.add.group();
 
@@ -354,7 +376,7 @@ Game.prototype.phaserCreate = function() {
   forumTray = new Phaser.Circle(802, G.phaser.world.height-350, 75);
   militaryTray = new Phaser.Circle(860, G.phaser.world.height-255, 75);
   senateTray = new Phaser.Circle(805, G.phaser.world.height-160, 75);
-  trajanTray = new Phaser.Circle(695, G.phaser.world.height-160, 75);
+  trajanTray = new Phaser.Circle(695, G.phaser.world.height-160, 80);
   constructionTray = new Phaser.Circle(640, G.phaser.world.height-255, 75);
   markerBounds = new Phaser.Rectangle(630, G.phaser.world.height-510, 300, 30);
 
@@ -393,7 +415,7 @@ Game.prototype.phaserCreate = function() {
 
 	G.phaser.gameState = "selectTray";
 	G.phaser.linespot = 640;
-	G.phaser.displace = -30;
+	G.phaser.displace = -20;
 	G.phaser.lastPositionX =580;
 	G.phaser.lastPositionY=600;
 	G.phaser.incX=0;
@@ -405,7 +427,7 @@ Game.prototype.phaserCreate = function() {
 }
 
 Game.prototype.phaserUpdate = function() {
-	//console.log(G.phaser.input.activePointer.positionDown.x, G.phaser.input.activePointer.positionDown.y);
+	console.log(G.phaser.input.activePointer.positionDown.x, G.phaser.input.activePointer.positionDown.y);
 }
 
 Game.prototype.turnLogic = function() {
@@ -431,7 +453,7 @@ Game.prototype.getTray = function(){
 	if(G.phaser.gameState != "selectTray"){
 		return;
 	}
-	G.phaser.displace = -30;
+	G.phaser.displace = -20;
 	var x = G.phaser.input.activePointer.positionDown.x;
     var y = G.phaser.input.activePointer.positionDown.y;
     //Get which tray the user selected!
@@ -544,9 +566,7 @@ Game.prototype.getAction = function(){
 			if(currentTray == seaportTray){
 				G.phaser.gameState = 'seaport';
 				G.checkTrajanTile(0, seaportTray);
-
-				G.phaser.gameState = "selectTray";
-				G.turnLogic();
+				G.seaportLogic();
 			}
 			else if(currentTray == forumTray){
 				G.phaser.gameState = 'forum';
@@ -646,18 +666,18 @@ Game.prototype.movePlayerSenatePiece = function(currentPlayer, nextSpace) {
 
 Game.prototype.senateSpaces = function(currentPlayer){
 	var senate_spaces = [
-		new Phaser.Circle(300, G.phaser.world.height-680, 175),
-		new Phaser.Circle(393, G.phaser.world.height-680, 25),
-		new Phaser.Circle(456, G.phaser.world.height-680, 25),
-		new Phaser.Circle(522, G.phaser.world.height-680, 25),
-		new Phaser.Circle(585, G.phaser.world.height-680, 25),
-		new Phaser.Circle(649, G.phaser.world.height-680, 25),
-		new Phaser.Circle(715, G.phaser.world.height-680, 25),
-		new Phaser.Circle(778, G.phaser.world.height-680, 25)
+		new Phaser.Circle(300, G.phaser.world.height-680, 125),
+		new Phaser.Circle(393, G.phaser.world.height-680, 75),
+		new Phaser.Circle(456, G.phaser.world.height-680, 75),
+		new Phaser.Circle(522, G.phaser.world.height-680, 75),
+		new Phaser.Circle(585, G.phaser.world.height-680, 75),
+		new Phaser.Circle(649, G.phaser.world.height-680, 75),
+		new Phaser.Circle(715, G.phaser.world.height-680, 75),
+		new Phaser.Circle(778, G.phaser.world.height-680, 75)
 	]
 
   for (var i = 0; i < senate_spaces.length-1; i++) {
-    if (senate_spaces[i].contains(currentPlayer.x-10, currentPlayer.y-10)) {
+    if (senate_spaces[i].contains(currentPlayer.x, currentPlayer.y)) {
       currentPlayer = G.movePlayerSenatePiece(currentPlayer, senate_spaces[i+1]);
       victory_points = i+2;
       break;
@@ -1130,4 +1150,72 @@ Game.prototype.moveArch = function(arch, trajanSpaces, spaces, index) {
 		arch.angle = 0;
 	}
 	spaces[index] = 2;
+}
+
+Game.prototype.seaportLogic = function(){
+	G.phaser.textAction.text = "Select a Card to add it to your hand, click a ship to trade cards for points, or click cards in hand to play them";
+	G.phaser.ships.forEach(G.shipsActive, this, true);
+	G.phaser.cards.forEach(G.cardsActive, this, true);
+}
+
+Game.prototype.cardsActive = function(card){
+	if(G.phaser.gameState != 'seaport'){return;}
+	card.inputEnabled = true;
+	card.events.onInputDown.add(G.move, this);
+
+}
+Game.prototype.move = function(card){
+	if(G.phaser.hand[0]){
+		card.position.x = 25;
+		card.position.y = 1300;
+		G.phaser.hand[0] = false;
+	}
+	else if(G.phaser.hand[1]){
+		card.position.x = 135;
+		card.position.y = 1300;
+		G.phaser.hand[1] = false;
+	}
+	else if(G.phaser.hand[2]){
+		card.position.x = 25;
+		card.position.y = 1500;
+		G.phaser.hand[2] = false;
+	}
+	else if(G.phaser.hand[3]){
+		card.position.x = 135;
+		card.position.y = 1500;
+		G.phaser.hand[3] = false;
+	}
+
+	G.phaser.gameState = "selectTray";
+	G.turnLogic();
+
+}
+Game.prototype.shipsActive = function(ship){
+	if(G.phaser.gameState != 'seaport'){
+		return;
+	}
+	ship.inputEnabled = true;
+	ship.animations.add("flip", [1], 1, true);
+	ship.animations.add("flipBack", [0], 1, true);
+	ship.events.onInputDown.add(G.flip, this); //if this piece is clicked, flip
+
+}
+
+Game.prototype.flip = function(ship){
+	var vp=0;
+	if(ship.side == "color"){
+		ship.play("flip");
+		ship.side = "grey";
+		vp += 5;
+		console.log(vp);
+	}
+	else{
+		ship.play("flipBack");
+		ship.side = "color";
+		vp += 2;
+		console.log(vp);
+	}
+
+	G.phaser.gameState = "selectTray";
+	G.turnLogic();
 }
