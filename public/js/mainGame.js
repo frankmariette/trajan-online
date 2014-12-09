@@ -345,7 +345,7 @@ Game.prototype.phaserCreate = function() {
   fTile9.player = "none";
 	var fTile10 = G.phaser.fTiles.create(708, G.phaser.world.height - 901, 'ftSenatePlus4');
 	fTile10.type = "sPlus4";
-  fTile9.player = "none";
+  fTile10.player = "none";
 	var fTile11 = G.phaser.fTiles.create(778, G.phaser.world.height - 901, 'ftDoubleWC');
 	fTile11.type = "yellow";
   fTile11.player = "none";
@@ -654,7 +654,7 @@ Game.prototype.phaserCreate = function() {
 }
 
 Game.prototype.phaserUpdate = function() {
-	console.log(G.phaser.input.activePointer.positionDown.x, G.phaser.input.activePointer.positionDown.y);
+	//console.log(G.phaser.input.activePointer.positionDown.x, G.phaser.input.activePointer.positionDown.y);
 }
 
 Game.prototype.loadPlayersData = function(){
@@ -662,8 +662,15 @@ Game.prototype.loadPlayersData = function(){
 	var lpStartPosition;
 	for(var i=0; i<G.phaser.pMarks.length; i++){
 		if(G.phaser.currentPlayerMarker == G.phaser.pMarks.getAt(i)){
-			G.phaser.currentPlayerMarker = G.phaser.pMarks.getAt(i+1);
-			G.phaser.playerID = i+1;
+			if(i == 3){
+				i = 0;
+				G.phaser.currentPlayerMarker = G.phaser.pMarks.getAt(i);
+			}
+			else{
+				G.phaser.currentPlayerMarker = G.phaser.pMarks.getAt(i+1);
+				i = i+1;
+			}
+			G.phaser.playerID = i;
 			break;
 		}
 	}
@@ -683,9 +690,9 @@ Game.prototype.loadPlayersData = function(){
 		aMarkStartPosition = 36;
 		lpStartPosition = 51;
 	}
-
+	console.log(G.phaser.playerID);
 	G.phaser.aMarks.forEach(function(marker){
-		if(G.phaser.aMarks.getChildIndex(marker) < aMarkStartPosition || G.phaser.aMarks.getChildIndex(marker) >= (aMarkStartPosition+12)){
+		if(G.phaser.aMarks.getIndex(marker) < aMarkStartPosition || G.phaser.aMarks.getIndex(marker) >= (aMarkStartPosition+12)){
 			marker.exists = false;
 		}
 		else{
@@ -693,7 +700,7 @@ Game.prototype.loadPlayersData = function(){
 		}
 	}, this, true);
 	G.phaser.littlePeople.forEach(function(dude){
-		if(G.phaser.littlePeople.getChildIndex(dude) < lpStartPosition || G.phaser.littlePeople.getChildIndex(dude) >= (lpStartPosition+17)){
+		if(G.phaser.littlePeople.getIndex(dude) < lpStartPosition || G.phaser.littlePeople.getIndex(dude) >= (lpStartPosition+17)){
 			dude.exists = false;
 		}
 		else{
