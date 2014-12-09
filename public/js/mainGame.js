@@ -6,6 +6,7 @@ function Game(){
 	this.quarter = 0;
 	this.pause = false;
 	this.VPs;
+
 	this.cTiles;
 	this.tTiles;
 	this.bTiles;
@@ -395,110 +396,106 @@ Game.prototype.phaserCreate = function() {
 	ship2.side = "color";
 
 	// Tray markers
-  G.phaser.aMarks1 = G.phaser.add.group();
-  var aMark0 = G.phaser.aMarks1.create(775, G.phaser.world.height-375, 'actionMarkO');
+  G.phaser.aMarks = G.phaser.add.group();
+  var aMark0 = G.phaser.aMarks.create(775, G.phaser.world.height-375, 'actionMarkO');
 	aMark0.color = "orange";
-  var aMark1 = G.phaser.aMarks1.create(810, G.phaser.world.height-175, 'actionMarkO');
+  var aMark1 = G.phaser.aMarks.create(810, G.phaser.world.height-175, 'actionMarkO');
 	aMark1.color = "orange";
-  var aMark2 = G.phaser.aMarks1.create(660, G.phaser.world.height-175, 'actionMarkG');
+  var aMark2 = G.phaser.aMarks.create(660, G.phaser.world.height-175, 'actionMarkG');
 	aMark2.color = "green";
-  var aMark3 = G.phaser.aMarks1.create(810, G.phaser.world.height-340, 'actionMarkG');
+  var aMark3 = G.phaser.aMarks.create(810, G.phaser.world.height-340, 'actionMarkG');
 	aMark3.color = "green";
-  var aMark4 = G.phaser.aMarks1.create(675, G.phaser.world.height-375, 'actionMarkY');
+  var aMark4 = G.phaser.aMarks.create(675, G.phaser.world.height-375, 'actionMarkY');
 	aMark4.color = "yellow";
-  var aMark5 = G.phaser.aMarks1.create(775, G.phaser.world.height-175, 'actionMarkY');
+  var aMark5 = G.phaser.aMarks.create(775, G.phaser.world.height-175, 'actionMarkY');
 	aMark5.color = "yellow";
-  var aMark6 = G.phaser.aMarks1.create(705, G.phaser.world.height-375, 'actionMarkB');
+  var aMark6 = G.phaser.aMarks.create(705, G.phaser.world.height-375, 'actionMarkB');
 	aMark6.color = "blue";
-  var aMark7 = G.phaser.aMarks1.create(705, G.phaser.world.height-175, 'actionMarkB');
+  var aMark7 = G.phaser.aMarks.create(705, G.phaser.world.height-175, 'actionMarkB');
 	aMark7.color = "blue";
-  var aMark8 = G.phaser.aMarks1.create(825, G.phaser.world.height-260, 'actionMarkW');
+  var aMark8 = G.phaser.aMarks.create(825, G.phaser.world.height-260, 'actionMarkW');
 	aMark8.color = "white";
-  var aMark9 = G.phaser.aMarks1.create(645, G.phaser.world.height-280, 'actionMarkW');
+  var aMark9 = G.phaser.aMarks.create(645, G.phaser.world.height-280, 'actionMarkW');
 	aMark9.color = "white";
-  var aMark10 = G.phaser.aMarks1.create(620, G.phaser.world.height-280, 'actionMarkP');
+  var aMark10 = G.phaser.aMarks.create(620, G.phaser.world.height-280, 'actionMarkP');
 	aMark10.color = "pink";
-  var aMark11 = G.phaser.aMarks1.create(845, G.phaser.world.height-280, 'actionMarkP');
+  var aMark11 = G.phaser.aMarks.create(845, G.phaser.world.height-280, 'actionMarkP');
 	aMark11.color = "pink";
 
-  G.phaser.aMarks2 = G.phaser.add.group();
-	var aMark12 = G.phaser.aMarks2.create(775, G.phaser.world.height-375, 'actionMarkO');
+	var aMark12 = G.phaser.aMarks.create(775, G.phaser.world.height-375, 'actionMarkO');
 	aMark12.color = "orange";
-	var aMark13 = G.phaser.aMarks2.create(810, G.phaser.world.height-175, 'actionMarkO');
+	var aMark13 = G.phaser.aMarks.create(810, G.phaser.world.height-175, 'actionMarkO');
 	aMark13.color = "orange";
-	var aMark14 = G.phaser.aMarks2.create(660, G.phaser.world.height-175, 'actionMarkG');
+	var aMark14 = G.phaser.aMarks.create(660, G.phaser.world.height-175, 'actionMarkG');
 	aMark14.color = "green";
-	var aMark15 = G.phaser.aMarks2.create(810, G.phaser.world.height-340, 'actionMarkG');
+	var aMark15 = G.phaser.aMarks.create(810, G.phaser.world.height-340, 'actionMarkG');
 	aMark15.color = "green";
-	var aMark16 = G.phaser.aMarks2.create(675, G.phaser.world.height-375, 'actionMarkY');
+	var aMark16 = G.phaser.aMarks.create(675, G.phaser.world.height-375, 'actionMarkY');
 	aMark16.color = "yellow";
-	var aMark17 = G.phaser.aMarks2.create(775, G.phaser.world.height-175, 'actionMarkY');
+	var aMark17 = G.phaser.aMarks.create(775, G.phaser.world.height-175, 'actionMarkY');
 	aMark17.color = "yellow";
-	var aMark18 = G.phaser.aMarks2.create(705, G.phaser.world.height-375, 'actionMarkB');
+	var aMark18 = G.phaser.aMarks.create(705, G.phaser.world.height-375, 'actionMarkB');
 	aMark18.color = "blue";
-	var aMark19 = G.phaser.aMarks2.create(705, G.phaser.world.height-175, 'actionMarkB');
+	var aMark19 = G.phaser.aMarks.create(705, G.phaser.world.height-175, 'actionMarkB');
 	aMark19.color = "blue";
-	var aMark20 = G.phaser.aMarks2.create(825, G.phaser.world.height-260, 'actionMarkW');
+	var aMark20 = G.phaser.aMarks.create(825, G.phaser.world.height-260, 'actionMarkW');
 	aMark20.color = "white";
-	var aMark21 = G.phaser.aMarks2.create(645, G.phaser.world.height-280, 'actionMarkW');
+	var aMark21 = G.phaser.aMarks.create(645, G.phaser.world.height-280, 'actionMarkW');
 	aMark21.color = "white";
-	var aMark22 = G.phaser.aMarks2.create(620, G.phaser.world.height-280, 'actionMarkP');
+	var aMark22 = G.phaser.aMarks.create(620, G.phaser.world.height-280, 'actionMarkP');
 	aMark22.color = "pink";
-	var aMark23 = G.phaser.aMarks2.create(845, G.phaser.world.height-280, 'actionMarkP');
+	var aMark23 = G.phaser.aMarks.create(845, G.phaser.world.height-280, 'actionMarkP');
 	aMark23.color = "pink";
 
-  G.phaser.aMarks3 = G.phaser.add.group();
-	var aMark24 = G.phaser.aMarks3.create(775, G.phaser.world.height-375, 'actionMarkO');
+	var aMark24 = G.phaser.aMarks.create(775, G.phaser.world.height-375, 'actionMarkO');
 	aMark24.color = "orange";
-	var aMark25 = G.phaser.aMarks3.create(810, G.phaser.world.height-175, 'actionMarkO');
+	var aMark25 = G.phaser.aMarks.create(810, G.phaser.world.height-175, 'actionMarkO');
 	aMark25.color = "orange";
-	var aMark26 = G.phaser.aMarks3.create(660, G.phaser.world.height-175, 'actionMarkG');
+	var aMark26 = G.phaser.aMarks.create(660, G.phaser.world.height-175, 'actionMarkG');
 	aMark26.color = "green";
-	var aMark27 = G.phaser.aMarks3.create(810, G.phaser.world.height-340, 'actionMarkG');
+	var aMark27 = G.phaser.aMarks.create(810, G.phaser.world.height-340, 'actionMarkG');
 	aMark27.color = "green";
-	var aMark28 = G.phaser.aMarks3.create(675, G.phaser.world.height-375, 'actionMarkY');
+	var aMark28 = G.phaser.aMarks.create(675, G.phaser.world.height-375, 'actionMarkY');
 	aMark28.color = "yellow";
-	var aMark29 = G.phaser.aMarks3.create(775, G.phaser.world.height-175, 'actionMarkY');
+	var aMark29 = G.phaser.aMarks.create(775, G.phaser.world.height-175, 'actionMarkY');
 	aMark29.color = "yellow";
-	var aMark30 = G.phaser.aMarks3.create(705, G.phaser.world.height-375, 'actionMarkB');
+	var aMark30 = G.phaser.aMarks.create(705, G.phaser.world.height-375, 'actionMarkB');
 	aMark30.color = "blue";
-	var aMark31 = G.phaser.aMarks3.create(705, G.phaser.world.height-175, 'actionMarkB');
+	var aMark31 = G.phaser.aMarks.create(705, G.phaser.world.height-175, 'actionMarkB');
 	aMark31.color = "blue";
-	var aMark32 = G.phaser.aMarks3.create(825, G.phaser.world.height-260, 'actionMarkW');
+	var aMark32 = G.phaser.aMarks.create(825, G.phaser.world.height-260, 'actionMarkW');
 	aMark32.color = "white";
-	var aMark33 = G.phaser.aMarks3.create(645, G.phaser.world.height-280, 'actionMarkW');
+	var aMark33 = G.phaser.aMarks.create(645, G.phaser.world.height-280, 'actionMarkW');
 	aMark33.color = "white";
-	var aMark34 = G.phaser.aMarks3.create(620, G.phaser.world.height-280, 'actionMarkP');
+	var aMark34 = G.phaser.aMarks.create(620, G.phaser.world.height-280, 'actionMarkP');
 	aMark34.color = "pink";
-	var aMark35 = G.phaser.aMarks3.create(845, G.phaser.world.height-280, 'actionMarkP');
+	var aMark35 = G.phaser.aMarks.create(845, G.phaser.world.height-280, 'actionMarkP');
 	aMark35.color = "pink";
 
-  G.phaser.aMarks4 = G.phaser.add.group();
-	var aMark36 = G.phaser.aMarks4.create(775, G.phaser.world.height-375, 'actionMarkO');
+	var aMark36 = G.phaser.aMarks.create(775, G.phaser.world.height-375, 'actionMarkO');
 	aMark36.color = "orange";
-	var aMark37 = G.phaser.aMarks4.create(810, G.phaser.world.height-175, 'actionMarkO');
+	var aMark37 = G.phaser.aMarks.create(810, G.phaser.world.height-175, 'actionMarkO');
 	aMark37.color = "orange";
-	var aMark38 = G.phaser.aMarks4.create(660, G.phaser.world.height-175, 'actionMarkG');
+	var aMark38 = G.phaser.aMarks.create(660, G.phaser.world.height-175, 'actionMarkG');
 	aMark38.color = "green";
-	var aMark39 = G.phaser.aMarks4.create(810, G.phaser.world.height-340, 'actionMarkG');
+	var aMark39 = G.phaser.aMarks.create(810, G.phaser.world.height-340, 'actionMarkG');
 	aMark39.color = "green";
-	var aMark40 = G.phaser.aMarks4.create(675, G.phaser.world.height-375, 'actionMarkY');
+	var aMark40 = G.phaser.aMarks.create(675, G.phaser.world.height-375, 'actionMarkY');
 	aMark40.color = "yellow";
-	var aMark41 = G.phaser.aMarks4.create(775, G.phaser.world.height-175, 'actionMarkY');
+	var aMark41 = G.phaser.aMarks.create(775, G.phaser.world.height-175, 'actionMarkY');
 	aMark41.color = "yellow";
-	var aMark42 = G.phaser.aMarks4.create(705, G.phaser.world.height-375, 'actionMarkB');
+	var aMark42 = G.phaser.aMarks.create(705, G.phaser.world.height-375, 'actionMarkB');
 	aMark42.color = "blue";
-	var aMark43 = G.phaser.aMarks4.create(705, G.phaser.world.height-175, 'actionMarkB');
+	var aMark43 = G.phaser.aMarks.create(705, G.phaser.world.height-175, 'actionMarkB');
 	aMark43.color = "blue";
-	var aMark44 = G.phaser.aMarks4.create(825, G.phaser.world.height-260, 'actionMarkW');
+	var aMark44 = G.phaser.aMarks.create(825, G.phaser.world.height-260, 'actionMarkW');
 	aMark44.color = "white";
-	var aMark45 = G.phaser.aMarks4.create(645, G.phaser.world.height-280, 'actionMarkW');
+	var aMark45 = G.phaser.aMarks.create(645, G.phaser.world.height-280, 'actionMarkW');
 	aMark45.color = "white";
-	var aMark46 = G.phaser.aMarks4.create(620, G.phaser.world.height-280, 'actionMarkP');
+	var aMark46 = G.phaser.aMarks.create(620, G.phaser.world.height-280, 'actionMarkP');
 	aMark46.color = "pink";
-	var aMark47 = G.phaser.aMarks4.create(845, G.phaser.world.height-280, 'actionMarkP');
+	var aMark47 = G.phaser.aMarks.create(845, G.phaser.world.height-280, 'actionMarkP');
 	aMark47.color = "pink";
-  G.phaser.aMarks = G.phaser.add.group();
 
   G.phaser.cards = G.phaser.add.group();
 	G.phaser.hand = [true, true, true, true];
@@ -550,12 +547,7 @@ Game.prototype.phaserCreate = function() {
   markerBounds = new Phaser.Rectangle(630, G.phaser.world.height-510, 300, 30);
 
 	G.phaser.leader = G.phaser.add.group();
-	var bigTreeGreen = G.phaser.leader.create(725, G.phaser.world.height - 1520, 'greenBigTree');
-  var bigTreeRed = G.phaser.leader.create(745, G.phaser.world.height - 1520, 'redBigTree');
-  var bigTreeBlue = G.phaser.leader.create(765, G.phaser.world.height - 1520, 'blueBigTree');
-  var bigTreeGray = G.phaser.leader.create(785, G.phaser.world.height - 1520, 'grayBigTree');
-  G.phaser.currentLeader = G.phaser.leader.getAt(3);
-
+	var bigTree = G.phaser.leader.create(725, G.phaser.world.height - 1520, 'greenBigTree');
 
   // Al about that village lyfe
   G.phaser.littlePeople = G.phaser.add.group();
@@ -635,19 +627,15 @@ Game.prototype.phaserCreate = function() {
   G.phaser.legionairreCamp = new Phaser.Rectangle(705,G.phaser.world.height-1520, 200, 100);
   G.phaser.constructionCamp = new Phaser.Rectangle(500,G.phaser.world.height-1210, 200, 100);
 
-  G.phaser.trajan1 = G.phaser.add.group();
-  G.phaser.trajan2 = G.phaser.add.group();
-  G.phaser.trajan3 = G.phaser.add.group();
-  G.phaser.trajan4 = G.phaser.add.group();
-  var arch1 = G.phaser.trajan1.create(605, G.phaser.world.height-435, 'tArch');
-  var arch2 = G.phaser.trajan2.create(605, G.phaser.world.height-435, 'tArch');
-	var arch3 = G.phaser.trajan3.create(605, G.phaser.world.height-435, 'tArch');
-	var arch4 = G.phaser.trajan4.create(605, G.phaser.world.height-435, 'tArch');
+  G.phaser.trajan = G.phaser.add.group();
+  var arch1 = G.phaser.trajan.create(605, G.phaser.world.height-435, 'tArch');
+  var arch2 = G.phaser.trajan.create(605, G.phaser.world.height-435, 'tArch');
+	var arch3 = G.phaser.trajan.create(605, G.phaser.world.height-435, 'tArch');
+	var arch4 = G.phaser.trajan.create(605, G.phaser.world.height-435, 'tArch');
 	arch1.angle = -28;
 	arch2.angle = -28;
 	arch3.angle = -28;
 	arch4.angle = -28;
-  G.phaser.currentArch = G.phaser.trajan1;
 
 	G.phaser.textAction = G.phaser.add.text(350, G.phaser.world.height - 550, '', {fill : '#ffffff'});
 	G.phaser.textAction.text = "Loading...";
@@ -672,91 +660,51 @@ Game.prototype.phaserUpdate = function() {
 Game.prototype.loadPlayersData = function(){
 	var aMarkStartPosition;
 	var lpStartPosition;
-  var idIndex;
-		if(G.phaser.currentPlayerMarker == G.phaser.pMarks.getAt(0)){
-      idIndex = 1;
-			G.phaser.currentPlayerMarker = G.phaser.pMarks.getAt(idIndex);
-      G.phaser.currentLeader = G.phaser.leader.getAt(idIndex);
-      G.phaser.currentArch = G.phaser.trajan2;
-      G.phaser.currentArch.visible = true;
-      G.phaser.trajan1.visible = false;
-      G.phaser.trajan3.visible = false;
-      G.phaser.trajan4.visible = false;
-      G.phaser.currentArch.visible = true;
-      G.phaser.aMarks = G.phaser.aMarks2;
-      G.phaser.aMarks.visible = true;
-      G.phaser.aMarks1.visible = false;
-      G.phaser.aMarks3.visible = false;
-      G.phaser.aMarks4.visible = false;
+	for(var i=0; i<G.phaser.pMarks.length; i++){
+		if(G.phaser.currentPlayerMarker == G.phaser.pMarks.getAt(i)){
+			if(i == 3){
+				i = 0;
+				G.phaser.currentPlayerMarker = G.phaser.pMarks.getAt(i);
+			}
+			else{
+				G.phaser.currentPlayerMarker = G.phaser.pMarks.getAt(i+1);
+				i = i+1;
+			}
+			G.phaser.playerID = i;
+			break;
 		}
-		else if(G.phaser.currentPlayerMarker == G.phaser.pMarks.getAt(1)){
-     idIndex = 2;
-	   G.phaser.currentPlayerMarker = G.phaser.pMarks.getAt(idIndex);
-     G.phaser.currentLeader = G.phaser.leader.getAt(idIndex);
-     G.phaser.currentArch = G.phaser.trajan3;
-     G.phaser.currentArch.visible = true;
-     G.phaser.trajan1.visible = false;
-     G.phaser.trajan2.visible = false;
-     G.phaser.trajan4.visible = false;
-     G.phaser.aMarks = G.phaser.aMarks3;
-     G.phaser.aMarks.visible = true;
-     G.phaser.aMarks1.visible = false;
-     G.phaser.aMarks2.visible = false;
-     G.phaser.aMarks4.visible = false;
-		}
-    else if(G.phaser.currentPlayerMarker == G.phaser.pMarks.getAt(2)){
-		  idIndex = 3;
-      G.phaser.currentPlayerMarker = G.phaser.pMarks.getAt(idIndex);
-      G.phaser.currentLeader = G.phaser.leader.getAt(idIndex);
-      G.phaser.currentArch = G.phaser.trajan4;
-      G.phaser.currentArch.visible = true;
-      G.phaser.trajan1.visible = false;
-      G.phaser.trajan2.visible = false;
-      G.phaser.trajan3.visible = false;
-      G.phaser.aMarks = G.phaser.aMarks4;
-      G.phaser.aMarks.visible = true;
-      G.phaser.aMarks1.visible = false;
-      G.phaser.aMarks2.visible = false;
-      G.phaser.aMarks3.visible = false;
-    }
-    else{
-      idIndex = 0;
-      G.phaser.currentPlayerMarker = G.phaser.pMarks.getAt(idIndex);
-      G.phaser.currentLeader = G.phaser.leader.getAt(idIndex);
-      G.phaser.currentArch = G.phaser.trajan1;
-      G.phaser.currentArch.visible = true;
-      G.phaser.trajan3.visible = false;
-      G.phaser.trajan2.visible = false;
-      G.phaser.trajan4.visible = false;
-      G.phaser.aMarks = G.phaser.aMarks1;
-      G.phaser.aMarks.visible = true;
-      G.phaser.aMarks4.visible = false;
-      G.phaser.aMarks2.visible = false;
-      G.phaser.aMarks3.visible = false;
-    }
-    G.phaser.playerID = idIndex;
-		
+	}
 	if(G.phaser.playerID == 0){
+		aMarkStartPosition = 0;
 		lpStartPosition = 0;
 	}
 	else if(G.phaser.playerID == 1){
+		aMarkStartPosition = 12;
 		lpStartPosition = 17;
 	}
 	else if(G.phaser.playerID == 2){
+		aMarkStartPosition = 24;
 		lpStartPosition = 34;
 	}
 	else{
+		aMarkStartPosition = 36;
 		lpStartPosition = 51;
 	}
-	
-	G.phaser.littlePeople.forEach(function(dude){
-		if(G.phaser.littlePeople.getIndex(dude) < lpStartPosition || G.phaser.littlePeople.getIndex(dude) >= (lpStartPosition+17)){
-			dude.alive = false;
-      dude.visible = false;
+	console.log(G.phaser.playerID);
+	G.phaser.aMarks.forEach(function(marker){
+		if(G.phaser.aMarks.getIndex(marker) < aMarkStartPosition || G.phaser.aMarks.getIndex(marker) >= (aMarkStartPosition+12)){
+			marker.exists = false;
 		}
 		else{
-			dude.alive = true;
-      dude.visible = true;
+			marker.exists = true;
+		}
+	}, this, true);
+	G.phaser.littlePeople.forEach(function(dude){
+		if(G.phaser.littlePeople.getIndex(dude) < lpStartPosition || G.phaser.littlePeople.getIndex(dude) >= (lpStartPosition+17)){
+			dude.exists = false;
+		}
+		else{
+			dude.exists = true;
 		}
 	}, this, true);
 
@@ -769,10 +717,10 @@ Game.prototype.loadPlayersData = function(){
 
 Game.prototype.belongs = function(tile, player){
 	if(tile.player == "none" || tile.player == player){
-		tile.visible = true;
+		tile.exists = true;
 	}
 	else{
-		tile.visible = false;
+		tile.exists = false;
 	}
 }
 
@@ -1280,14 +1228,14 @@ Game.prototype.checkAdj = function(){
 	]
 	var xInput = G.phaser.input.activePointer.positionDown.x;
 	var yInput = G.phaser.input.activePointer.positionDown.y;
-	var lastLeaderPositionX = G.phaser.currentLeader.position.x;
-	var lastLeaderPositionY = G.phaser.currentLeader.position.y;
+	var lastLeaderPositionX = G.phaser.leader.getAt(G.phaser.playerID).position.x;
+	var lastLeaderPositionY = G.phaser.leader.getAt(G.phaser.playerID).position.y;
 
 	for(i=0;i<countries.length;i++){
 		if(countries[i].contains(xInput,yInput)){
 			if(G.phaser.leaderLoc.intersects(countries[i])){
-				G.phaser.currentLeader.position.x = countries[i].x + 100;
-				G.phaser.currentLeader.position.y = countries[i].y ;
+				G.phaser.leader.getAt(G.phaser.playerID).position.x = countries[i].x + 100;
+				G.phaser.leader.getAt(G.phaser.playerID).position.y = countries[i].y ;
 				G.phaser.incX = 0;
 				G.phaser.incY = 0;
 				G.phaser.leaderLoc = countries[i];
@@ -1296,7 +1244,7 @@ Game.prototype.checkAdj = function(){
 		}
 	}
 
-	if(G.phaser.leaderLoc != countries[0] && lastLeaderPositionX != G.phaser.currentLeader.position.x && lastLeaderPositionY != G.phaser.currentLeader.position.y){
+	if(G.phaser.leaderLoc != countries[0] && lastLeaderPositionX != G.phaser.leader.getAt(0).position.x && lastLeaderPositionY != G.phaser.leader.getAt(0).position.y){
 		G.phaser.gameState = "bonusAction";
 		G.bonusAction();
 	}
@@ -1422,7 +1370,7 @@ Game.prototype.getTrajanTile = function(){
 	G.phaser.textAction.text = "Please Select a Trajan Tile";
 	G.phaser.tTiles.forEach(function(tile){
 		tile.inputEnabled = true;
-		tile.events.onInputDown.add(G.trajanLogic, this, G.phaser.currentArch);
+		tile.events.onInputDown.add(G.trajanLogic, this, G.phaser.trajan.getAt(0));
 	}, this, true);
 }
 
@@ -1445,13 +1393,13 @@ Game.prototype.trajanLogic = function(currentTile, arch){
 	var spaces = [0,0,0,0,0,0];
 	var index = 0;
 	//check if arch is in the middle. If so then don't do anything else.
-	if (trajan_Spaces[6].contains(G.phaser.currentArch.position.x, G.phaser.currentArch.position.y)){
+	if (trajan_Spaces[6].contains(G.phaser.trajan.getAt(0).position.x, G.phaser.trajan.getAt(0).position.y)){
 		console.log("Can't do the Trajan Action.");
 		return 0;
 	}
 	//check spaces to see if they are occupied.
 	for (i=0;i<6;i++) {
-		if (trajan_Spaces[i].contains(G.phaser.currentArch.position.x, G.phaser.currentArch.position.y)) {
+		if (trajan_Spaces[i].contains(G.phaser.trajan.getAt(0).position.x, G.phaser.trajan.getAt(0).position.y)) {
 			spaces[i] = 2;
 			index = i;
 		}
@@ -1462,8 +1410,8 @@ Game.prototype.trajanLogic = function(currentTile, arch){
 	//OK THIS LOGIC IS TO MOVE THE "TILE" TO THE ARCH POSITION AND MOVE THE ARCH TO THE
 	//NEXT SPOT!!
 	if (spaces[index] = 2) {
-		if (G.moveTile(currentTile, G.phaser.currentArch, spaces)) {
-			G.moveArch(G.phaser.currentArch, trajan_Spaces, spaces, index);
+		if (G.moveTile(currentTile, G.phaser.trajan.getAt(G.phaser.playerID), spaces)) {
+			G.moveArch(G.phaser.trajan.getAt(G.phaser.playerID), trajan_Spaces, spaces, index);
 		}
 	}
 
