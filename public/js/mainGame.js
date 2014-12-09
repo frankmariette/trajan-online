@@ -77,6 +77,8 @@ Game.prototype.phaserPreload = function() {
 		G.phaser.load.image('bull', '/assets/cards/cBull.png');
 		G.phaser.load.image('fish', '/assets/cards/cFish.png');
 		G.phaser.load.image('scroll', '/assets/cards/cScroll.png');
+		G.phaser.load.image('gin', '/assets/cards/JinAndJuice.png');
+		G.phaser.load.image('pillar', '/assets/cards/PillerOfLove.png');
 
 		//TRAJAN TILES
     G.phaser.load.image('tt_VP_yellow_white', '/assets/trajanTiles/tTile00.png');
@@ -120,14 +122,28 @@ Game.prototype.phaserPreload = function() {
 		G.phaser.load.image('ftSenateBonus','/assets/forumTiles/senateForumTile.png');
 		G.phaser.load.image('ftTrajanBonus','/assets/forumTiles/trajanForumTile.png');
 
-    // Other random shitakis
+    // BONUS CARDS
     G.phaser.load.spritesheet('bonus', '/assets/bonusTiles/bonus00.png', 100, 156);
     G.phaser.load.spritesheet('bonus2', '/assets/bonusTiles/bonus01.png', 100, 156);
+		G.phaser.load.spritesheet('bonus3', '/assets/bonusTiles/bonus02.png', 100, 156);
+		G.phaser.load.spritesheet('bonus4', '/assets/bonusTiles/bonus03.png', 100, 156);
+		G.phaser.load.spritesheet('bonus5', '/assets/bonusTiles/bonus04.png', 100, 156);
+		G.phaser.load.spritesheet('bonus6', '/assets/bonusTiles/bonus05.png', 100, 156);
+		G.phaser.load.spritesheet('bonus7', '/assets/bonusTiles/bonus06.png', 100, 156);
+		G.phaser.load.spritesheet('bonus8', '/assets/bonusTiles/bonus07.png', 100, 156);
+		G.phaser.load.spritesheet('bonus9', '/assets/bonusTiles/bonus08.png', 100, 156);
+		G.phaser.load.spritesheet('bonus10', '/assets/bonusTiles/bonus09.png', 100, 156);
+		G.phaser.load.spritesheet('bonus11', '/assets/bonusTiles/bonus10.png', 100, 156);
+		G.phaser.load.spritesheet('bonus12', '/assets/bonusTiles/bonus11.png', 100, 156);
+		G.phaser.load.spritesheet('bonus13', '/assets/bonusTiles/bonus12.png', 100, 156);
+		G.phaser.load.spritesheet('bonus14', '/assets/bonusTiles/bonus13.png', 100, 156);
 
+		//SHIP TILES
     G.phaser.load.spritesheet('ship1', '/assets/ship01.png', 174, 116);
 		G.phaser.load.spritesheet('ship2', '/assets/seaportAssets/2ndBoatSpriteSheet.png', 174, 116);
 		G.phaser.load.spritesheet('ship3', '/assets/seaportAssets/3rdShipSpriteSheet.png', 174, 116);
 
+		//ACTION MARKERS and ARCH
     G.phaser.load.image('actionMarkO', '/assets/actionMarkers/actionMarkerOrange.png');
     G.phaser.load.image('actionMarkG', '/assets/actionMarkers/actionMarkerGreen.png');
     G.phaser.load.image('actionMarkP', '/assets/actionMarkers/actionMarkerPink.png');
@@ -135,8 +151,6 @@ Game.prototype.phaserPreload = function() {
     G.phaser.load.image('actionMarkW', '/assets/actionMarkers/actionMarkerWhite.png');
     G.phaser.load.image('actionMarkY', '/assets/actionMarkers/actionMarkerYellow.png');
     G.phaser.load.image('tArch', '/assets/tArch.png');
-    G.phaser.load.image('playerMark', '/assets/playerMarkGreen.png');
-    G.phaser.load.image('bigTree', '/assets/bigTree.png');
 }
 
 Game.prototype.phaserCreate = function() {
@@ -511,11 +525,11 @@ Game.prototype.phaserCreate = function() {
 	cCard2.player = "none";
 	var cCard3 = G.phaser.cards.create(1000, G.phaser.world.height-500, 'lamp');
 	cCard3.player = "none";
-	var cCard4 = G.phaser.cards.create(1125, G.phaser.world.height-500, 'bearSkin');
+	var cCard4 = G.phaser.cards.create(1125, G.phaser.world.height-500, 'gin');
 	cCard4.player = "none";
 	var cCard5 = G.phaser.cards.create(1250, G.phaser.world.height-500, 'bling');
 	cCard5.player = "none";
-	var cCard6 = G.phaser.cards.create(1000, G.phaser.world.height-500, 'fish');
+	var cCard6 = G.phaser.cards.create(1000, G.phaser.world.height-500, 'pillar');
 	cCard6.player = "none";
 	var cCard7 = G.phaser.cards.create(1125, G.phaser.world.height-500, 'scroll');
 	cCard7.player = "none";
@@ -533,6 +547,12 @@ Game.prototype.phaserCreate = function() {
 	cCard13.player = "none";
 	var cCard14 = G.phaser.cards.create(1250, G.phaser.world.height-500, 'lamp');
 	cCard14.player = "none";
+	var cCard15 = G.phaser.cards.create(1000, G.phaser.world.height-500, 'pillar');
+	cCard15.player = "none";
+	var cCard16 = G.phaser.cards.create(1125, G.phaser.world.height-500, 'bearSkin');
+	cCard16.player = "none";
+	var cCard17 = G.phaser.cards.create(1250, G.phaser.world.height-500, 'gin');
+	cCard17.player = "none";
 
 
 	G.phaser.pMarks = G.phaser.add.group();
