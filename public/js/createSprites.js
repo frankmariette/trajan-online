@@ -1,6 +1,6 @@
 function createSprites(){
   var background = game.add.sprite(150, 0, 'gameBoard');
-  
+
   var player = game.add.sprite(275, game.world.height-500, 'playerBoard');
   graphics = game.add.graphics(0, 0);
 
@@ -135,7 +135,6 @@ function createSprites(){
 
   littlePeople = game.add.group();
 
-<<<<<<< HEAD
   var lp0 = littlePeople.create(925, game.world.height-450, 'actionMarkG'); //make this be a dude later
   var lp1 = littlePeople.create(925, game.world.height-430, 'actionMarkG'); //make this be a dude later
   var lp2 = littlePeople.create(925, game.world.height-410, 'actionMarkG'); //make this be a dude later
@@ -152,11 +151,6 @@ function createSprites(){
   var lp13 = littlePeople.create(905, game.world.height-390, 'actionMarkG'); //make this be a dude later
   var lp14 = littlePeople.create(905, game.world.height-370, 'actionMarkG'); //make this be a dude later
 
-=======
-  var lp0 = littlePeople.create(925, game.world.height-390, 'actionMarkO'); //make this be a dude later
-  var lp1 = littlePeople.create(925, game.world.height-410, 'actionMarkO'); //make this be a dude later
-  var lp2 = littlePeople.create(925, game.world.height-370, 'actionMarkO'); //make this be a dude later
->>>>>>> mcbdn2/sprint3
   lpStartBox = new Phaser.Rectangle(890, game.world.height-475, 100, 180);
   legionairreCamp = new Phaser.Rectangle(705,game.world.height-1520, 200, 100);
   constructionCamp = new Phaser.Rectangle(500,game.world.height-1210, 200, 100);
