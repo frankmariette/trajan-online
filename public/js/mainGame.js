@@ -41,6 +41,7 @@ function Game(){
 	this.incY2;
 	this.leaderLoc;
 	this.hand;
+	this.playerID;
 
 	// Phaser bootstrapping
 	this.phaser = new Phaser.Game(1600, 1800, Phaser.AUTO, 'gameboard', {preload: this.phaserPreload, create: this.phaserCreate, update: this.phaserUpdate});
@@ -52,9 +53,7 @@ Game.prototype.phaserPreload = function() {
 		G.phaser.load.image('gameBoard', '/assets/gameBoardFinal.png');
     G.phaser.load.image('playerBoard', '/assets/pBoard.png');
 
-    G.phaser.load.image('tile', '/assets/cDoorTile.png');
-    G.phaser.load.image('card', '/assets/cCardWheat.png');
-
+		//PLAYER PIECES
 		G.phaser.load.image('redBigTree', '/assets/redBigTree.png');
 		G.phaser.load.image('blueBigTree', '/assets/blueBigTree.png');
 		G.phaser.load.image('grayBigTree', '/assets/grayBigTree.png');
@@ -63,6 +62,12 @@ Game.prototype.phaserPreload = function() {
 		G.phaser.load.image('redLittleDude', '/assets/redLittleDude.png');
 		G.phaser.load.image('grayLittleDude', '/assets/grayLittleDude.png');
 		G.phaser.load.image('greenLittleDude', '/assets/greenLittleDude.png');
+		G.phaser.load.image('pMarkBlue', '/assets/playerMarkBlue.png');
+		G.phaser.load.image('pMarkGreen', '/assets/playerMarkGreen.png');
+		G.phaser.load.image('pMarkGray', '/assets/playerMarkGray.png');
+		G.phaser.load.image('pMarkRed', '/assets/playerMarkRed.png');
+
+
 
 		//CARDS
 		G.phaser.load.image('wheat', '/assets/cards/cWheat.png');
@@ -118,7 +123,11 @@ Game.prototype.phaserPreload = function() {
     // Other random shitakis
     G.phaser.load.spritesheet('bonus', '/assets/bonusTiles/bonus00.png', 100, 156);
     G.phaser.load.spritesheet('bonus2', '/assets/bonusTiles/bonus01.png', 100, 156);
+
     G.phaser.load.spritesheet('ship1', '/assets/ship01.png', 174, 116);
+		G.phaser.load.spritesheet('ship2', '/assets/seaportAssets/2ndBoatSpriteSheet.png', 174, 116);
+		G.phaser.load.spritesheet('ship3', '/assets/seaportAssets/3rdShipSpriteSheet.png', 174, 116);
+
     G.phaser.load.image('actionMarkO', '/assets/actionMarkers/actionMarkerOrange.png');
     G.phaser.load.image('actionMarkG', '/assets/actionMarkers/actionMarkerGreen.png');
     G.phaser.load.image('actionMarkP', '/assets/actionMarkers/actionMarkerPink.png');
@@ -150,44 +159,64 @@ Game.prototype.phaserCreate = function() {
   G.phaser.cTiles = G.phaser.add.group();
   var cTile0 = G.phaser.cTiles.create(710, G.phaser.world.height - 1395, 'cDoorTile');
 	cTile0.type = "Door";
-  var cTile1 = G.phaser.cTiles.create(790, G.phaser.world.height - 1395, 'cDoorTile');
+  cTile0.player = "none";
+	var cTile1 = G.phaser.cTiles.create(790, G.phaser.world.height - 1395, 'cDoorTile');
 	cTile1.type = "Door";
-  var cTile2 = G.phaser.cTiles.create(865, G.phaser.world.height - 1395, 'cDoorTile');
+  cTile1.player = "none";
+	var cTile2 = G.phaser.cTiles.create(865, G.phaser.world.height - 1395, 'cDoorTile');
 	cTile2.type = "Door";
-  var cTile3 = G.phaser.cTiles.create(945, G.phaser.world.height - 1395, 'cDoorTile');
+  cTile2.player = "none";
+	var cTile3 = G.phaser.cTiles.create(945, G.phaser.world.height - 1395, 'cDoorTile');
 	cTile3.type = "Door";
-  var cTile4 = G.phaser.cTiles.create(1020, G.phaser.world.height - 1395, 'cTileRoof5');
+  cTile3.player = "none";
+	var cTile4 = G.phaser.cTiles.create(1020, G.phaser.world.height - 1395, 'cTileRoof5');
 	cTile4.type = "Roof";
-  var cTile5 = G.phaser.cTiles.create(710, G.phaser.world.height - 1318, 'cTileRoof4');
+  cTile4.player = "none";
+	var cTile5 = G.phaser.cTiles.create(710, G.phaser.world.height - 1318, 'cTileRoof4');
 	cTile5.type = "Roof";
-  var cTile6 = G.phaser.cTiles.create(790, G.phaser.world.height - 1318, 'cTileRoof5');
+  cTile5.player = "none";
+	var cTile6 = G.phaser.cTiles.create(790, G.phaser.world.height - 1318, 'cTileRoof5');
 	cTile6.type = "Roof";
-  var cTile7 = G.phaser.cTiles.create(865, G.phaser.world.height - 1318, 'cTileRoof3');
+  cTile6.player = "none";
+	var cTile7 = G.phaser.cTiles.create(865, G.phaser.world.height - 1318, 'cTileRoof3');
 	cTile7.type = "Roof";
-  var cTile8 = G.phaser.cTiles.create(945, G.phaser.world.height - 1318, 'cTileRoof4');
+  cTile7.player = "none";
+	var cTile8 = G.phaser.cTiles.create(945, G.phaser.world.height - 1318, 'cTileRoof4');
 	cTile8.type = "Roof";
-  var cTile9 = G.phaser.cTiles.create(1020, G.phaser.world.height - 1318, 'cTileRoof5');
+  cTile8.player = "none";
+	var cTile9 = G.phaser.cTiles.create(1020, G.phaser.world.height - 1318, 'cTileRoof5');
 	cTile9.type = "Roof";
-  var cTile10 = G.phaser.cTiles.create(710, G.phaser.world.height - 1241, 'cTileRoof3');
+  cTile9.player = "none";
+	var cTile10 = G.phaser.cTiles.create(710, G.phaser.world.height - 1241, 'cTileRoof3');
 	cTile10.type = "Roof";
-  var cTile11 = G.phaser.cTiles.create(790, G.phaser.world.height - 1241, 'cTileRoof2');
+  cTile10.player = "none";
+	var cTile11 = G.phaser.cTiles.create(790, G.phaser.world.height - 1241, 'cTileRoof2');
 	cTile11.type = "Roof";
-  var cTile12 = G.phaser.cTiles.create(865, G.phaser.world.height - 1241, 'cTileRoof5');
+  cTile11.player = "none";
+	var cTile12 = G.phaser.cTiles.create(865, G.phaser.world.height - 1241, 'cTileRoof5');
 	cTile12.type = "Roof";
-  var cTile13 = G.phaser.cTiles.create(945, G.phaser.world.height - 1241, 'cTileRoof4');
+  cTile12.player = "none";
+	var cTile13 = G.phaser.cTiles.create(945, G.phaser.world.height - 1241, 'cTileRoof4');
 	cTile13.type = "Roof";
-  var cTile14 = G.phaser.cTiles.create(1020, G.phaser.world.height - 1241, 'cTileRoof5');
+  cTile13.player = "none";
+	var cTile14 = G.phaser.cTiles.create(1020, G.phaser.world.height - 1241, 'cTileRoof5');
 	cTile14.type = "Roof";
-  var cTile15 = G.phaser.cTiles.create(710, G.phaser.world.height - 1166, 'cTileRoof5');
+  cTile14.player = "none";
+	var cTile15 = G.phaser.cTiles.create(710, G.phaser.world.height - 1166, 'cTileRoof5');
 	cTile15.type = "Roof";
-  var cTile16 = G.phaser.cTiles.create(790, G.phaser.world.height - 1166, 'cTileRoof3');
+  cTile15.player = "none";
+	var cTile16 = G.phaser.cTiles.create(790, G.phaser.world.height - 1166, 'cTileRoof3');
 	cTile16.type = "Roof";
-  var cTile17 = G.phaser.cTiles.create(865, G.phaser.world.height - 1166, 'cTileRoof2');
+  cTile16.player = "none";
+	var cTile17 = G.phaser.cTiles.create(865, G.phaser.world.height - 1166, 'cTileRoof2');
 	cTile17.type = "Roof";
-  var cTile18 = G.phaser.cTiles.create(945, G.phaser.world.height - 1166, 'cTileRoof3');
+  cTile17.player = "none";
+	var cTile18 = G.phaser.cTiles.create(945, G.phaser.world.height - 1166, 'cTileRoof3');
 	cTile18.type = "Roof";
-  var cTile19 = G.phaser.cTiles.create(1020, G.phaser.world.height - 1166, 'cTileRoof5');
+  cTile18.player = "none";
+	var cTile19 = G.phaser.cTiles.create(1020, G.phaser.world.height - 1166, 'cTileRoof5');
 	cTile19.type = "Roof";
+	cTile19.player = "none";
 
   G.phaser.tTiles = G.phaser.add.group();
 
@@ -195,120 +224,162 @@ Game.prototype.phaserCreate = function() {
 	tTile0.colorOne = "yellow";
 	tTile0.colorTwo = "white";
 	tTile0.type = "VP";
+	tTile0.player = "none";
   var tTile1 = G.phaser.tTiles.create(422, G.phaser.world.height - 1058, 'tt_bread_pink_pink');
 	tTile1.colorOne = "pink";
 	tTile1.colorTwo = "pink";
 	tTile1.type = "bread";
-  var tTile2 = G.phaser.tTiles.create(253, G.phaser.world.height - 968, 'tt_religion_white_white');
+  tTile1.player = "none";
+	var tTile2 = G.phaser.tTiles.create(253, G.phaser.world.height - 968, 'tt_religion_white_white');
 	tTile2.colorOne = "white";
 	tTile2.colorTwo = "white";
 	tTile2.type = "religion";
+	tTile2.player = "none";
 	var tTile3 = G.phaser.tTiles.create(422, G.phaser.world.height - 968, 'tt_games_green_green');
 	tTile3.colorOne = "green";
 	tTile3.colorTwo = "green";
 	tTile3.type = "games";
-  var tTile4 = G.phaser.tTiles.create(253, G.phaser.world.height - 884, 'tt_VP_yellow_yellow');
+  tTile3.player = "none";
+	var tTile4 = G.phaser.tTiles.create(253, G.phaser.world.height - 884, 'tt_VP_yellow_yellow');
 	tTile4.colorOne = "yellow";
 	tTile4.colorTwo = "yellow";
 	tTile4.type = "VP";
-  var tTile5 = G.phaser.tTiles.create(422, G.phaser.world.height - 884, 'tt_religion_white_green');
+  tTile4.player = "none";
+	var tTile5 = G.phaser.tTiles.create(422, G.phaser.world.height - 884, 'tt_religion_white_green');
 	tTile5.colorOne = "green";
 	tTile5.colorTwo = "white";
 	tTile5.type = "religion";
+	tTile5.player = "none";
 	var tTile6 = G.phaser.tTiles.create(253, G.phaser.world.height - 1058, 'tt_VP_orange_white');
 	tTile6.colorOne = "orange";
 	tTile6.colorTwo = "white";
 	tTile6.type = "VP";
+	tTile6.player = "none";
 	var tTile7 = G.phaser.tTiles.create(422, G.phaser.world.height - 1058, 'tt_religion_blue_orange');
 	tTile7.colorOne = "blue";
 	tTile7.colorTwo = "orange";
 	tTile7.type = "religion";
+	tTile7.player = "none";
 	var tTile8 = G.phaser.tTiles.create(253, G.phaser.world.height - 968, 'tt_bread_green_green');
 	tTile8.colorOne = "green";
 	tTile8.colorTwo = "green";
 	tTile8.type = "bread";
+	tTile8.player = "none";
 	var tTile9 = G.phaser.tTiles.create(422, G.phaser.world.height - 968, 'tt_VP_orange_white');
 	tTile9.colorOne = "orange";
 	tTile9.colorTwo = "white";
 	tTile9.type = "VP";
+	tTile9.player = "none";
 	var tTile10 = G.phaser.tTiles.create(253, G.phaser.world.height - 884, 'tt_games_pink_green');
 	tTile10.colorOne = "pink";
 	tTile10.colorTwo = "green";
 	tTile10.type = "games";
+	tTile10.player = "none";
 	var tTile11 = G.phaser.tTiles.create(422, G.phaser.world.height - 884, 'tt_VP_orange_orange');
 	tTile11.colorOne = "orange";
 	tTile11.colorTwo = "orange";
 	tTile11.type = "VP";
+	tTile11.player = "none";
 	var tTile12 = G.phaser.tTiles.create(253, G.phaser.world.height - 1058, 'tt_games_yellow_green');
 	tTile12.colorOne = "yellow";
 	tTile12.colorTwo = "green";
 	tTile12.type = "games";
+	tTile12.player = "none";
 	var tTile13 = G.phaser.tTiles.create(422, G.phaser.world.height - 1058, 'tt_bread_orange_green');
 	tTile13.colorOne = "orange";
 	tTile13.colorTwo = "green";
 	tTile13.type = "bread";
+	tTile13.player = "none";
 	var tTile14 = G.phaser.tTiles.create(253, G.phaser.world.height - 968, 'tt_VP_blue_white');
 	tTile14.colorOne = "blue";
 	tTile14.colorTwo = "white";
 	tTile14.type = "VP";
+	tTile14.player = "none";
 	var tTile15 = G.phaser.tTiles.create(422, G.phaser.world.height - 968, 'tt_VP_pink_pink');
 	tTile15.colorOne = "pink";
 	tTile15.colorTwo = "pink";
 	tTile15.type = "VP";
+	tTile15.player = "none";
 	var tTile16 = G.phaser.tTiles.create(253, G.phaser.world.height - 884, 'tt_religion_white_green');
 	tTile16.colorOne = "white";
 	tTile16.colorTwo = "green";
 	tTile16.type = "religion";
+	tTile16.player = "none";
 	var tTile17 = G.phaser.tTiles.create(422, G.phaser.world.height - 884, 'tt_VP_yellow_white');
 	tTile17.colorOne = "yellow";
 	tTile17.colorTwo = "white";
 	tTile17.type = "VP";
+	tTile17.player = "none";
 
   G.phaser.fTiles = G.phaser.add.group();
 
   var fTile0 = G.phaser.fTiles.create(708, G.phaser.world.height - 1035, 'ftGames');
 	fTile0.type = "games";
+	fTile0.player = "none";
   var fTile1 = G.phaser.fTiles.create(778, G.phaser.world.height - 1035, 'ftComWC');
 	fTile1.type = "orange";
+	fTile1.player = "none";
   var fTile2 = G.phaser.fTiles.create(843, G.phaser.world.height - 1035, 'ftSeaBonus');
 	fTile2.type = "seaBonus";
+	fTile2.player = "none";
   var fTile3 = G.phaser.fTiles.create(910, G.phaser.world.height - 1035, 'ftForumBonus');
 	fTile3.type = "forumBonus";
+	fTile3.player = "none";
   var fTile4 = G.phaser.fTiles.create(977, G.phaser.world.height - 1035, 'ftSenateBonus');
 	fTile4.type = "senateBonus";
+	fTile4.player = "none";
   var fTile5 = G.phaser.fTiles.create(708, G.phaser.world.height - 968, 'ftResourceWC');
 	fTile5.type = "green";
+	fTile5.player = "none";
   var fTile6 = G.phaser.fTiles.create(778, G.phaser.world.height - 968, 'ftBread');
 	fTile6.type = "bread";
+	fTile6.player = "none";
   var fTile7 = G.phaser.fTiles.create(843, G.phaser.world.height - 968, 'ftConstBonus');
 	fTile7.type = "conBonus";
+	fTile7.player = "none";
   var fTile8 = G.phaser.fTiles.create(910, G.phaser.world.height - 968, 'ftSenatePlus2');
 	fTile8.type = "sPlus2";
+	fTile8.player = "none";
   var fTile9 = G.phaser.fTiles.create(977, G.phaser.world.height - 968, 'ftMilitaryBonus');
 	fTile9.type = "militaryBonus";
-  var fTile10 = G.phaser.fTiles.create(708, G.phaser.world.height - 901, 'ftSenatePlus4');
+  fTile9.player = "none";
+	var fTile10 = G.phaser.fTiles.create(708, G.phaser.world.height - 901, 'ftSenatePlus4');
 	fTile10.type = "sPlus4";
-  var fTile11 = G.phaser.fTiles.create(778, G.phaser.world.height - 901, 'ftDoubleWC');
+  fTile9.player = "none";
+	var fTile11 = G.phaser.fTiles.create(778, G.phaser.world.height - 901, 'ftDoubleWC');
 	fTile11.type = "yellow";
-  var fTile12 = G.phaser.fTiles.create(843, G.phaser.world.height - 901, 'ftTrajanBonus');
+  fTile11.player = "none";
+	var fTile12 = G.phaser.fTiles.create(843, G.phaser.world.height - 901, 'ftTrajanBonus');
 	fTile12.type = "trajanBonus";
-  var fTile13 = G.phaser.fTiles.create(910, G.phaser.world.height - 901, 'ftSenatePlus3');
+  fTile12.player = "none";
+	var fTile13 = G.phaser.fTiles.create(910, G.phaser.world.height - 901, 'ftSenatePlus3');
 	fTile13.type = "sPlus3";
-  var fTile14 = G.phaser.fTiles.create(977, G.phaser.world.height - 901, 'ftReligion');
+  fTile13.player = "none";
+	var fTile14 = G.phaser.fTiles.create(977, G.phaser.world.height - 901, 'ftReligion');
 	fTile14.type = "religion";
-
+	fTile14.player = "none";
   G.phaser.mTiles = G.phaser.add.group();
 
   var britannia = G.phaser.mTiles.create(380, G.phaser.world.height - 1783, 'ftGames');
+	britannia.player = "none";
   var germaniaInferior = G.phaser.mTiles.create(725, G.phaser.world.height - 1735, 'ftGames');
+	germaniaInferior.player = "none";
   var germaniaSuperior = G.phaser.mTiles.create(910, G.phaser.world.height - 1700, 'ftGames');
+	germaniaSuperior.player = "none";
   var belgica = G.phaser.mTiles.create(553, G.phaser.world.height - 1676, 'ftGames');
+	belgica.player = "none";
   var lugudunensis = G.phaser.mTiles.create(388, G.phaser.world.height - 1650, 'ftGames');
+	lugudunensis.player = "none";
   var aquitania = G.phaser.mTiles.create(220, G.phaser.world.height - 1598, 'ftGames');
+	aquitania.player = "none";
   var narbonensis = G.phaser.mTiles.create(280, G.phaser.world.height - 1485, 'ftGames');
+	narbonensis.player = "none";
   var alpes = G.phaser.mTiles.create(490, G.phaser.world.height - 1555, 'ftGames');
+	alpes.player = "none";
   var raetia = G.phaser.mTiles.create(780, G.phaser.world.height - 1614, 'ftGames');
+	raetia.player = "none";
   var noricum = G.phaser.mTiles.create(960, G.phaser.world.height - 1596, 'ftGames');
+	noricum.player = "none";
 
   G.phaser.bTiles = G.phaser.add.group(); // gold things
 
@@ -319,10 +390,13 @@ Game.prototype.phaserCreate = function() {
 
   var ship0 = G.phaser.ships.create(290, G.phaser.world.height - 1310, 'ship1');
 	ship0.side = "color";
+	var ship1 = G.phaser.ships.create(165, G.phaser.world.height - 1225, 'ship2');
+	ship1.side = "color";
+	var ship2 = G.phaser.ships.create(435, G.phaser.world.height - 1390, 'ship3');
+	ship2.side = "color";
 
+	// Tray markers
   G.phaser.aMarks = G.phaser.add.group();
-
-  // Tray 2 markers
   var aMark0 = G.phaser.aMarks.create(775, G.phaser.world.height-375, 'actionMarkO');
 	aMark0.color = "orange";
   var aMark1 = G.phaser.aMarks.create(810, G.phaser.world.height-175, 'actionMarkO');
@@ -348,29 +422,121 @@ Game.prototype.phaserCreate = function() {
   var aMark11 = G.phaser.aMarks.create(845, G.phaser.world.height-280, 'actionMarkP');
 	aMark11.color = "pink";
 
+	var aMark12 = G.phaser.aMarks.create(775, G.phaser.world.height-375, 'actionMarkO');
+	aMark12.color = "orange";
+	var aMark13 = G.phaser.aMarks.create(810, G.phaser.world.height-175, 'actionMarkO');
+	aMark13.color = "orange";
+	var aMark14 = G.phaser.aMarks.create(660, G.phaser.world.height-175, 'actionMarkG');
+	aMark14.color = "green";
+	var aMark15 = G.phaser.aMarks.create(810, G.phaser.world.height-340, 'actionMarkG');
+	aMark15.color = "green";
+	var aMark16 = G.phaser.aMarks.create(675, G.phaser.world.height-375, 'actionMarkY');
+	aMark16.color = "yellow";
+	var aMark17 = G.phaser.aMarks.create(775, G.phaser.world.height-175, 'actionMarkY');
+	aMark17.color = "yellow";
+	var aMark18 = G.phaser.aMarks.create(705, G.phaser.world.height-375, 'actionMarkB');
+	aMark18.color = "blue";
+	var aMark19 = G.phaser.aMarks.create(705, G.phaser.world.height-175, 'actionMarkB');
+	aMark19.color = "blue";
+	var aMark20 = G.phaser.aMarks.create(825, G.phaser.world.height-260, 'actionMarkW');
+	aMark20.color = "white";
+	var aMark21 = G.phaser.aMarks.create(645, G.phaser.world.height-280, 'actionMarkW');
+	aMark21.color = "white";
+	var aMark22 = G.phaser.aMarks.create(620, G.phaser.world.height-280, 'actionMarkP');
+	aMark22.color = "pink";
+	var aMark23 = G.phaser.aMarks.create(845, G.phaser.world.height-280, 'actionMarkP');
+	aMark23.color = "pink";
+
+	var aMark24 = G.phaser.aMarks.create(775, G.phaser.world.height-375, 'actionMarkO');
+	aMark24.color = "orange";
+	var aMark25 = G.phaser.aMarks.create(810, G.phaser.world.height-175, 'actionMarkO');
+	aMark25.color = "orange";
+	var aMark26 = G.phaser.aMarks.create(660, G.phaser.world.height-175, 'actionMarkG');
+	aMark26.color = "green";
+	var aMark27 = G.phaser.aMarks.create(810, G.phaser.world.height-340, 'actionMarkG');
+	aMark27.color = "green";
+	var aMark28 = G.phaser.aMarks.create(675, G.phaser.world.height-375, 'actionMarkY');
+	aMark28.color = "yellow";
+	var aMark29 = G.phaser.aMarks.create(775, G.phaser.world.height-175, 'actionMarkY');
+	aMark29.color = "yellow";
+	var aMark30 = G.phaser.aMarks.create(705, G.phaser.world.height-375, 'actionMarkB');
+	aMark30.color = "blue";
+	var aMark31 = G.phaser.aMarks.create(705, G.phaser.world.height-175, 'actionMarkB');
+	aMark31.color = "blue";
+	var aMark32 = G.phaser.aMarks.create(825, G.phaser.world.height-260, 'actionMarkW');
+	aMark32.color = "white";
+	var aMark33 = G.phaser.aMarks.create(645, G.phaser.world.height-280, 'actionMarkW');
+	aMark33.color = "white";
+	var aMark34 = G.phaser.aMarks.create(620, G.phaser.world.height-280, 'actionMarkP');
+	aMark34.color = "pink";
+	var aMark35 = G.phaser.aMarks.create(845, G.phaser.world.height-280, 'actionMarkP');
+	aMark35.color = "pink";
+
+	var aMark36 = G.phaser.aMarks.create(775, G.phaser.world.height-375, 'actionMarkO');
+	aMark36.color = "orange";
+	var aMark37 = G.phaser.aMarks.create(810, G.phaser.world.height-175, 'actionMarkO');
+	aMark37.color = "orange";
+	var aMark38 = G.phaser.aMarks.create(660, G.phaser.world.height-175, 'actionMarkG');
+	aMark38.color = "green";
+	var aMark39 = G.phaser.aMarks.create(810, G.phaser.world.height-340, 'actionMarkG');
+	aMark39.color = "green";
+	var aMark40 = G.phaser.aMarks.create(675, G.phaser.world.height-375, 'actionMarkY');
+	aMark40.color = "yellow";
+	var aMark41 = G.phaser.aMarks.create(775, G.phaser.world.height-175, 'actionMarkY');
+	aMark41.color = "yellow";
+	var aMark42 = G.phaser.aMarks.create(705, G.phaser.world.height-375, 'actionMarkB');
+	aMark42.color = "blue";
+	var aMark43 = G.phaser.aMarks.create(705, G.phaser.world.height-175, 'actionMarkB');
+	aMark43.color = "blue";
+	var aMark44 = G.phaser.aMarks.create(825, G.phaser.world.height-260, 'actionMarkW');
+	aMark44.color = "white";
+	var aMark45 = G.phaser.aMarks.create(645, G.phaser.world.height-280, 'actionMarkW');
+	aMark45.color = "white";
+	var aMark46 = G.phaser.aMarks.create(620, G.phaser.world.height-280, 'actionMarkP');
+	aMark46.color = "pink";
+	var aMark47 = G.phaser.aMarks.create(845, G.phaser.world.height-280, 'actionMarkP');
+	aMark47.color = "pink";
+
   G.phaser.cards = G.phaser.add.group();
 	G.phaser.hand = [true, true, true, true];
   var cCard0 = G.phaser.cards.create(1000, G.phaser.world.height-500, 'wheat');
+	cCard0.player = "none";
   var cCard1 = G.phaser.cards.create(1125, G.phaser.world.height-500, 'bull');
+	cCard1.player = "none";
   var cCard2 = G.phaser.cards.create(1250, G.phaser.world.height-500, 'bling');
+	cCard2.player = "none";
 	var cCard3 = G.phaser.cards.create(1000, G.phaser.world.height-500, 'lamp');
+	cCard3.player = "none";
 	var cCard4 = G.phaser.cards.create(1125, G.phaser.world.height-500, 'bearSkin');
+	cCard4.player = "none";
 	var cCard5 = G.phaser.cards.create(1250, G.phaser.world.height-500, 'bling');
+	cCard5.player = "none";
 	var cCard6 = G.phaser.cards.create(1000, G.phaser.world.height-500, 'fish');
+	cCard6.player = "none";
 	var cCard7 = G.phaser.cards.create(1125, G.phaser.world.height-500, 'scroll');
+	cCard7.player = "none";
 	var cCard8 = G.phaser.cards.create(1250, G.phaser.world.height-500, 'bull');
+	cCard8.player = "none";
 	var cCard9 = G.phaser.cards.create(1000, G.phaser.world.height-500, 'wheat');
+	cCard9.player = "none";
 	var cCard10 = G.phaser.cards.create(1125, G.phaser.world.height-500, 'bearSkin');
+	cCard10.player = "none";
 	var cCard11 = G.phaser.cards.create(1250, G.phaser.world.height-500, 'bling');
+	cCard11.player = "none";
 	var cCard12 = G.phaser.cards.create(1000, G.phaser.world.height-500, 'scroll');
+	cCard12.player = "none";
 	var cCard13 = G.phaser.cards.create(1125, G.phaser.world.height-500, 'fish');
+	cCard13.player = "none";
 	var cCard14 = G.phaser.cards.create(1250, G.phaser.world.height-500, 'lamp');
+	cCard14.player = "none";
 
-  G.phaser.pMarks = G.phaser.add.group();
 
-  var pMarkGreen = G.phaser.pMarks.create(253, G.phaser.world.height-700, 'playerMark');
-  var pMarkRed = G.phaser.pMarks.create(303, G.phaser.world.height-700, 'playerMark');
-	G.phaser.currentPlayerMarker = pMarkGreen;
+	G.phaser.pMarks = G.phaser.add.group();
+  var pMarkGreen = G.phaser.pMarks.create(253, G.phaser.world.height-700, 'pMarkGreen');
+	var pMarkRed = G.phaser.pMarks.create(303, G.phaser.world.height-700, 'pMarkRed');
+	var pMarkBlue = G.phaser.pMarks.create(284, G.phaser.world.height-725, 'pMarkBlue');
+	var pMarkGray = G.phaser.pMarks.create(282, G.phaser.world.height-675, 'pMarkGray');
+	G.phaser.currentPlayerMarker = G.phaser.pMarks.getAt(3);
 
   seaportTray = new Phaser.Circle(695, G.phaser.world.height-350, 75);
   forumTray = new Phaser.Circle(802, G.phaser.world.height-350, 75);
@@ -385,30 +551,91 @@ Game.prototype.phaserCreate = function() {
 
   // Al about that village lyfe
   G.phaser.littlePeople = G.phaser.add.group();
-	var lp000 = G.phaser.littlePeople.create(750, G.phaser.world.height - 1500, 'greenLittleDude');
-	var lp00 = G.phaser.littlePeople.create(580, 600, 'greenLittleDude');
-  var lp0 = G.phaser.littlePeople.create(925, G.phaser.world.height-450, 'greenLittleDude'); //make this be a dude later
-	var lp1 = G.phaser.littlePeople.create(925, G.phaser.world.height-430, 'greenLittleDude'); //make this be a dude later
-	var lp2 = G.phaser.littlePeople.create(925, G.phaser.world.height-410, 'greenLittleDude'); //make this be a dude later
-	var lp3 = G.phaser.littlePeople.create(925, G.phaser.world.height-390, 'greenLittleDude'); //make this be a dude later
-	var lp4 = G.phaser.littlePeople.create(925, G.phaser.world.height-370, 'greenLittleDude'); //make this be a dude later
-	var lp5 = G.phaser.littlePeople.create(925, G.phaser.world.height-350, 'greenLittleDude'); //make this be a dude later
-	var lp6 = G.phaser.littlePeople.create(945, G.phaser.world.height-450, 'greenLittleDude'); //make this be a dude later
-	var lp7 = G.phaser.littlePeople.create(945, G.phaser.world.height-430, 'greenLittleDude'); //make this be a dude later
-	var lp8 = G.phaser.littlePeople.create(945, G.phaser.world.height-410, 'greenLittleDude'); //make this be a dude later
-	var lp9 = G.phaser.littlePeople.create(945, G.phaser.world.height-390, 'greenLittleDude'); //make this be a dude later
-	var lp10 = G.phaser.littlePeople.create(945, G.phaser.world.height-370, 'greenLittleDude'); //make this be a dude later
-	var lp11 = G.phaser.littlePeople.create(945, G.phaser.world.height-350, 'greenLittleDude'); //make this be a dude later
-	var lp12 = G.phaser.littlePeople.create(905, G.phaser.world.height-410, 'greenLittleDude'); //make this be a dude later
-	var lp13 = G.phaser.littlePeople.create(905, G.phaser.world.height-390, 'greenLittleDude'); //make this be a dude later
+  var lp0 = G.phaser.littlePeople.create(925, G.phaser.world.height-450, 'greenLittleDude');
+	var lp1 = G.phaser.littlePeople.create(925, G.phaser.world.height-430, 'greenLittleDude');
+	var lp2 = G.phaser.littlePeople.create(925, G.phaser.world.height-410, 'greenLittleDude');
+	var lp3 = G.phaser.littlePeople.create(925, G.phaser.world.height-390, 'greenLittleDude');
+	var lp4 = G.phaser.littlePeople.create(925, G.phaser.world.height-370, 'greenLittleDude');
+	var lp5 = G.phaser.littlePeople.create(925, G.phaser.world.height-350, 'greenLittleDude');
+	var lp6 = G.phaser.littlePeople.create(945, G.phaser.world.height-450, 'greenLittleDude');
+	var lp7 = G.phaser.littlePeople.create(945, G.phaser.world.height-430, 'greenLittleDude');
+	var lp8 = G.phaser.littlePeople.create(945, G.phaser.world.height-410, 'greenLittleDude');
+	var lp9 = G.phaser.littlePeople.create(945, G.phaser.world.height-390, 'greenLittleDude');
+	var lp10 = G.phaser.littlePeople.create(945, G.phaser.world.height-370, 'greenLittleDude');
+	var lp11 = G.phaser.littlePeople.create(945, G.phaser.world.height-350, 'greenLittleDude');
+	var lp12 = G.phaser.littlePeople.create(905, G.phaser.world.height-410, 'greenLittleDude');
+	var lp13 = G.phaser.littlePeople.create(905, G.phaser.world.height-390, 'greenLittleDude');
 	var lp14 = G.phaser.littlePeople.create(905, G.phaser.world.height-370, 'greenLittleDude');
+	var lp15 = G.phaser.littlePeople.create(750, G.phaser.world.height - 1500, 'greenLittleDude');
+	var lp16 = G.phaser.littlePeople.create(580, 600, 'greenLittleDude');
+
+	var lp17 = G.phaser.littlePeople.create(925, G.phaser.world.height-450, 'redLittleDude');
+	var lp18 = G.phaser.littlePeople.create(925, G.phaser.world.height-430, 'redLittleDude');
+	var lp19 = G.phaser.littlePeople.create(925, G.phaser.world.height-410, 'redLittleDude');
+	var lp20 = G.phaser.littlePeople.create(925, G.phaser.world.height-390, 'redLittleDude');
+	var lp21 = G.phaser.littlePeople.create(925, G.phaser.world.height-370, 'redLittleDude');
+	var lp22 = G.phaser.littlePeople.create(925, G.phaser.world.height-350, 'redLittleDude');
+	var lp23 = G.phaser.littlePeople.create(945, G.phaser.world.height-450, 'redLittleDude');
+	var lp24 = G.phaser.littlePeople.create(945, G.phaser.world.height-430, 'redLittleDude');
+	var lp25 = G.phaser.littlePeople.create(945, G.phaser.world.height-410, 'redLittleDude');
+	var lp26 = G.phaser.littlePeople.create(945, G.phaser.world.height-390, 'redLittleDude');
+	var lp27 = G.phaser.littlePeople.create(945, G.phaser.world.height-370, 'redLittleDude');
+	var lp28 = G.phaser.littlePeople.create(945, G.phaser.world.height-350, 'redLittleDude');
+	var lp29 = G.phaser.littlePeople.create(905, G.phaser.world.height-410, 'redLittleDude');
+	var lp30 = G.phaser.littlePeople.create(905, G.phaser.world.height-390, 'redLittleDude');
+	var lp31 = G.phaser.littlePeople.create(905, G.phaser.world.height-370, 'redLittleDude');
+	var lp32 = G.phaser.littlePeople.create(750, G.phaser.world.height - 1500, 'redLittleDude');
+	var lp33 = G.phaser.littlePeople.create(580, 600, 'redLittleDude');
+
+	var lp34 = G.phaser.littlePeople.create(925, G.phaser.world.height-450, 'blueLittleDude');
+	var lp35 = G.phaser.littlePeople.create(925, G.phaser.world.height-430, 'blueLittleDude');
+	var lp36 = G.phaser.littlePeople.create(925, G.phaser.world.height-410, 'blueLittleDude');
+	var lp37 = G.phaser.littlePeople.create(925, G.phaser.world.height-390, 'blueLittleDude');
+	var lp38 = G.phaser.littlePeople.create(925, G.phaser.world.height-370, 'blueLittleDude');
+	var lp39 = G.phaser.littlePeople.create(925, G.phaser.world.height-350, 'blueLittleDude');
+	var lp40 = G.phaser.littlePeople.create(945, G.phaser.world.height-450, 'blueLittleDude');
+	var lp41 = G.phaser.littlePeople.create(945, G.phaser.world.height-430, 'blueLittleDude');
+	var lp42 = G.phaser.littlePeople.create(945, G.phaser.world.height-410, 'blueLittleDude');
+	var lp43 = G.phaser.littlePeople.create(945, G.phaser.world.height-390, 'blueLittleDude');
+	var lp44 = G.phaser.littlePeople.create(945, G.phaser.world.height-370, 'blueLittleDude');
+	var lp45 = G.phaser.littlePeople.create(945, G.phaser.world.height-350, 'blueLittleDude');
+	var lp46 = G.phaser.littlePeople.create(905, G.phaser.world.height-410, 'blueLittleDude');
+	var lp47 = G.phaser.littlePeople.create(905, G.phaser.world.height-390, 'blueLittleDude');
+	var lp48 = G.phaser.littlePeople.create(905, G.phaser.world.height-370, 'blueLittleDude');
+	var lp49 = G.phaser.littlePeople.create(750, G.phaser.world.height - 1500, 'blueLittleDude');
+	var lp50 = G.phaser.littlePeople.create(580, 600, 'blueLittleDude');
+
+	var lp51 = G.phaser.littlePeople.create(925, G.phaser.world.height-450, 'grayLittleDude');
+	var lp52 = G.phaser.littlePeople.create(925, G.phaser.world.height-430, 'grayLittleDude');
+	var lp53 = G.phaser.littlePeople.create(925, G.phaser.world.height-410, 'grayLittleDude');
+	var lp54 = G.phaser.littlePeople.create(925, G.phaser.world.height-390, 'grayLittleDude');
+	var lp55 = G.phaser.littlePeople.create(925, G.phaser.world.height-370, 'grayLittleDude');
+	var lp56 = G.phaser.littlePeople.create(925, G.phaser.world.height-350, 'grayLittleDude');
+	var lp57 = G.phaser.littlePeople.create(945, G.phaser.world.height-450, 'grayLittleDude');
+	var lp58 = G.phaser.littlePeople.create(945, G.phaser.world.height-430, 'grayLittleDude');
+	var lp59 = G.phaser.littlePeople.create(945, G.phaser.world.height-410, 'grayLittleDude');
+	var lp60 = G.phaser.littlePeople.create(945, G.phaser.world.height-390, 'grayLittleDude');
+	var lp61 = G.phaser.littlePeople.create(945, G.phaser.world.height-370, 'grayLittleDude');
+	var lp62 = G.phaser.littlePeople.create(945, G.phaser.world.height-350, 'grayLittleDude');
+	var lp63 = G.phaser.littlePeople.create(905, G.phaser.world.height-410, 'grayLittleDude');
+	var lp64 = G.phaser.littlePeople.create(905, G.phaser.world.height-390, 'grayLittleDude');
+	var lp65 = G.phaser.littlePeople.create(905, G.phaser.world.height-370, 'grayLittleDude');
+	var lp66 = G.phaser.littlePeople.create(750, G.phaser.world.height - 1500, 'grayLittleDude');
+	var lp67 = G.phaser.littlePeople.create(580, 600, 'grayLittleDude');
+
   G.phaser.lpStartBox = new Phaser.Rectangle(890, G.phaser.world.height-475, 100, 180);
   G.phaser.legionairreCamp = new Phaser.Rectangle(705,G.phaser.world.height-1520, 200, 100);
   G.phaser.constructionCamp = new Phaser.Rectangle(500,G.phaser.world.height-1210, 200, 100);
 
   G.phaser.trajan = G.phaser.add.group();
-  var arch = G.phaser.trajan.create(605, G.phaser.world.height-435, 'tArch');
-  arch.angle = -28;
+  var arch1 = G.phaser.trajan.create(605, G.phaser.world.height-435, 'tArch');
+  var arch2 = G.phaser.trajan.create(605, G.phaser.world.height-435, 'tArch');
+	var arch3 = G.phaser.trajan.create(605, G.phaser.world.height-435, 'tArch');
+	var arch4 = G.phaser.trajan.create(605, G.phaser.world.height-435, 'tArch');
+	arch1.angle = -28;
+	arch2.angle = -28;
+	arch3.angle = -28;
+	arch4.angle = -28;
 
 	G.phaser.textAction = G.phaser.add.text(350, G.phaser.world.height - 550, '', {fill : '#ffffff'});
 	G.phaser.textAction.text = "Loading...";
@@ -430,8 +657,68 @@ Game.prototype.phaserUpdate = function() {
 	console.log(G.phaser.input.activePointer.positionDown.x, G.phaser.input.activePointer.positionDown.y);
 }
 
+Game.prototype.loadPlayersData = function(){
+	var aMarkStartPosition;
+	var lpStartPosition;
+	for(var i=0; i<G.phaser.pMarks.length; i++){
+		if(G.phaser.currentPlayerMarker == G.phaser.pMarks.getAt(i)){
+			G.phaser.currentPlayerMarker = G.phaser.pMarks.getAt(i+1);
+			G.phaser.playerID = i+1;
+			break;
+		}
+	}
+	if(G.phaser.playerID == 0){
+		aMarkStartPosition = 0;
+		lpStartPosition = 0;
+	}
+	else if(G.phaser.playerID == 1){
+		aMarkStartPosition = 12;
+		lpStartPosition = 17;
+	}
+	else if(G.phaser.playerID == 2){
+		aMarkStartPosition = 24;
+		lpStartPosition = 34;
+	}
+	else{
+		aMarkStartPosition = 36;
+		lpStartPosition = 51;
+	}
+
+	G.phaser.aMarks.forEach(function(marker){
+		if(G.phaser.aMarks.getChildIndex(marker) < aMarkStartPosition || G.phaser.aMarks.getChildIndex(marker) >= (aMarkStartPosition+12)){
+			marker.exists = false;
+		}
+		else{
+			marker.exists = true;
+		}
+	}, this, true);
+	G.phaser.littlePeople.forEach(function(dude){
+		if(G.phaser.littlePeople.getChildIndex(dude) < lpStartPosition || G.phaser.littlePeople.getChildIndex(dude) >= (lpStartPosition+17)){
+			dude.exists = false;
+		}
+		else{
+			dude.exists = true;
+		}
+	}, this, true);
+
+	G.phaser.mTiles.forEach(G.belongs, this, true, G.phaser.playerID);
+	G.phaser.tTiles.forEach(G.belongs, this, true, G.phaser.playerID);
+	G.phaser.fTiles.forEach(G.belongs, this, true, G.phaser.playerID);
+	G.phaser.cTiles.forEach(G.belongs, this, true, G.phaser.playerID);
+	G.phaser.cards.forEach(G.belongs, this, true, G.phaser.playerID);
+}
+
+Game.prototype.belongs = function(tile, player){
+	if(tile.player == "none" || tile.player == player){
+		tile.exists = true;
+	}
+	else{
+		tile.exists = false;
+	}
+}
+
 Game.prototype.turnLogic = function() {
-	//console.log("turn logic function");
+	G.loadPlayersData();
 	G.phaser.linespot = 640;
 	if(G.phaser.gameState == "selectTray"){
   	G.phaser.textAction.text = "Select a Tray";
@@ -735,6 +1022,7 @@ Game.prototype.stackTiles = function(tile){
 }
   //SENATE BONUS MOVEMENT
 Game.prototype.sPlusMovement = function(tile){
+	tile.player = G.phaser.playerID;
 	var firstSpotTaken = false;
 	var secSpotTaken = false;
 	G.phaser.fTiles.forEach(function(allTiles){
@@ -763,97 +1051,90 @@ Game.prototype.sPlusMovement = function(tile){
 
 	//EXTRA ACTION TILE MOVEMENT
 Game.prototype.seaBonusMovement = function(tile){
+	tile.player = G.phaser.playerID;
 	tile.position.x = 293;
 	tile.position.y = 1657;
-
-
 	G.bonusAction();
 }
 Game.prototype.forumBonusMovement = function(tile){
+	tile.player = G.phaser.playerID;
 	tile.position.x = 346;
 	tile.position.y = 1657;
-
-
 	G.bonusAction();
 }
 Game.prototype.senateBonusMovement = function(tile){
+	tile.player = G.phaser.playerID;
 	tile.position.x = 530;
 	tile.position.y = 1657;
-
-
 	G.bonusAction();
 }
 Game.prototype.militaryBonusMovement = function(tile){
+	tile.player = G.phaser.playerID;
 	tile.position.x = 397;
 	tile.position.y = 1657;
-
-
 	G.bonusAction();
 }
 Game.prototype.trajanBonusMovement = function(tile){
+	tile.player = G.phaser.playerID;
 	tile.position.x = 501;
 	tile.position.y = 1657;
-
-
 	G.bonusAction();
 }
 Game.prototype.constructionBonusMovement = function(tile){
+	tile.player = G.phaser.playerID;
 	tile.position.x = 554;
 	tile.position.y = 1657;
-
-
 	G.bonusAction();
 }
 
 	//RESOURCES MOVEMENT
 Game.prototype.gamesMovement = function(tile){
+	tile.player = G.phaser.playerID;
 	tile.position.x = 530;
 	tile.position.y = 1402;
-
-
 	G.bonusAction();
 }
 
 Game.prototype.breadMovement = function(tile){
+	tile.player = G.phaser.playerID;
 	tile.position.x = 375;
 	tile.position.y = 1402;
-
 	G.bonusAction();
 }
 
 Game.prototype.religionMovement = function(tile){
+	tile.player = G.phaser.playerID;
 	tile.position.x = 452;
 	tile.position.y = 1402;
-
 	G.bonusAction();
 }
 
 	// WILD CARD MOVEMENT
 Game.prototype.yellowWildMovement = function(tile){
+	tile.player = G.phaser.playerID;
 	tile.position.x = 382;
 	tile.position.y = 1482;
-
 	G.bonusAction();
 }
 
 Game.prototype.orangeWildMovement = function(tile){
+	tile.player = G.phaser.playerID;
 	tile.position.x = 448;
 	tile.position.y = 1482;
-
 	G.bonusAction();
 }
 
 Game.prototype.greenWildMovement = function(tile){
+	tile.player = G.phaser.playerID;
 	tile.position.x = 382;
 	tile.position.y = 1545;
-
 	G.bonusAction();
 }
 
 Game.prototype.redWildMovement = function(tile){
+	tile.player = G.phaser.playerID;
 	tile.position.x = 448;
 	tile.position.y = 1545;
-
 	G.bonusAction();
 }
 
@@ -940,14 +1221,14 @@ Game.prototype.checkAdj = function(){
 	]
 	var xInput = G.phaser.input.activePointer.positionDown.x;
 	var yInput = G.phaser.input.activePointer.positionDown.y;
-	var lastLeaderPositionX = G.phaser.leader.getAt(0).position.x;
-	var lastLeaderPositionY = G.phaser.leader.getAt(0).position.y;
+	var lastLeaderPositionX = G.phaser.leader.getAt(G.phaser.playerID).position.x;
+	var lastLeaderPositionY = G.phaser.leader.getAt(G.phaser.playerID).position.y;
 
 	for(i=0;i<countries.length;i++){
 		if(countries[i].contains(xInput,yInput)){
 			if(G.phaser.leaderLoc.intersects(countries[i])){
-				G.phaser.leader.getAt(0).position.x = countries[i].x + 100;
-				G.phaser.leader.getAt(0).position.y = countries[i].y ;
+				G.phaser.leader.getAt(G.phaser.playerID).position.x = countries[i].x + 100;
+				G.phaser.leader.getAt(G.phaser.playerID).position.y = countries[i].y ;
 				G.phaser.incX = 0;
 				G.phaser.incY = 0;
 				G.phaser.leaderLoc = countries[i];
@@ -995,6 +1276,7 @@ Game.prototype.moveConstructTile = function(tile){ //move game piece to correct 
 	}, this, true);
 
 	if(validAction == true){
+		tile.player = G.phaser.playerID;
 		G.phaser.lastPositionX = tile.position.x;
 		G.phaser.lastPositionY = tile.position.y;
 		worker.position.x = tile.position.x + 10;
@@ -1121,8 +1403,8 @@ Game.prototype.trajanLogic = function(currentTile, arch){
 	//OK THIS LOGIC IS TO MOVE THE "TILE" TO THE ARCH POSITION AND MOVE THE ARCH TO THE
 	//NEXT SPOT!!
 	if (spaces[index] = 2) {
-		if (G.moveTile(currentTile, G.phaser.trajan.getAt(0), spaces)) {
-			G.moveArch(G.phaser.trajan.getAt(0), trajan_Spaces, spaces, index);
+		if (G.moveTile(currentTile, G.phaser.trajan.getAt(G.phaser.playerID), spaces)) {
+			G.moveArch(G.phaser.trajan.getAt(G.phaser.playerID), trajan_Spaces, spaces, index);
 		}
 	}
 
@@ -1131,6 +1413,7 @@ Game.prototype.trajanLogic = function(currentTile, arch){
 }
 
 Game.prototype.moveTile = function(tile, arch, spaces) {
+	tile.player = G.phaser.playerID;
 	tile.position.x = arch.position.x;
 	tile.position.y = arch.position.y;
 	tile.angle = arch.angle;
@@ -1165,6 +1448,7 @@ Game.prototype.cardsActive = function(card){
 
 }
 Game.prototype.move = function(card){
+	card.player = G.phaser.playerID;
 	if(G.phaser.hand[0]){
 		card.position.x = 25;
 		card.position.y = 1300;
