@@ -48,6 +48,10 @@ function Game(){
 	this.leaderLoc;
 	this.hand;
 	this.playerID;
+	this.greenDemandsMet;
+	this.blueDemandsMet;
+	this.redDemandsMet;
+	this.grayDemandsMet;
 
 	// Phaser bootstrapping
 	this.phaser = new Phaser.Game(1600, 1800, Phaser.AUTO, 'gameboard', {preload: this.phaserPreload, create: this.phaserCreate, update: this.phaserUpdate});
@@ -379,11 +383,11 @@ Game.prototype.phaserCreate = function() {
   var fTile1 = G.phaser.fTiles.create(778, G.phaser.world.height - 1035, 'ftComWC');
 	fTile1.type = "orange";
 	fTile1.player = "none";
-  var fTile2 = G.phaser.fTiles.create(843, G.phaser.world.height - 1035, 'ftSeaBonus');
-	fTile2.type = "seaBonus";
+  var fTile2 = G.phaser.fTiles.create(843, G.phaser.world.height - 1035, 'ftBread');
+	fTile2.type = "bread";
 	fTile2.player = "none";
-  var fTile3 = G.phaser.fTiles.create(910, G.phaser.world.height - 1035, 'ftForumBonus');
-	fTile3.type = "forumBonus";
+  var fTile3 = G.phaser.fTiles.create(910, G.phaser.world.height - 1035, 'ftReligion');
+	fTile3.type = "religion";
 	fTile3.player = "none";
   var fTile4 = G.phaser.fTiles.create(977, G.phaser.world.height - 1035, 'ftSenateBonus');
 	fTile4.type = "senateBonus";
@@ -400,17 +404,17 @@ Game.prototype.phaserCreate = function() {
   var fTile8 = G.phaser.fTiles.create(910, G.phaser.world.height - 968, 'ftSenatePlus2');
 	fTile8.type = "sPlus2";
 	fTile8.player = "none";
-  var fTile9 = G.phaser.fTiles.create(977, G.phaser.world.height - 968, 'ftMilitaryBonus');
-	fTile9.type = "militaryBonus";
+  var fTile9 = G.phaser.fTiles.create(977, G.phaser.world.height - 968, 'ftReligion');
+	fTile9.type = "religion";
   fTile9.player = "none";
 	var fTile10 = G.phaser.fTiles.create(708, G.phaser.world.height - 901, 'ftSenatePlus4');
 	fTile10.type = "sPlus4";
   fTile10.player = "none";
-	var fTile11 = G.phaser.fTiles.create(778, G.phaser.world.height - 901, 'ftDoubleWC');
-	fTile11.type = "yellow";
+	var fTile11 = G.phaser.fTiles.create(778, G.phaser.world.height - 901, 'ftGames');
+	fTile11.type = "games";
   fTile11.player = "none";
-	var fTile12 = G.phaser.fTiles.create(843, G.phaser.world.height - 901, 'ftTrajanBonus');
-	fTile12.type = "trajanBonus";
+	var fTile12 = G.phaser.fTiles.create(843, G.phaser.world.height - 901, 'ftBread');
+	fTile12.type = "bread";
   fTile12.player = "none";
 	var fTile13 = G.phaser.fTiles.create(910, G.phaser.world.height - 901, 'ftSenatePlus3');
 	fTile13.type = "sPlus3";
@@ -418,28 +422,39 @@ Game.prototype.phaserCreate = function() {
 	var fTile14 = G.phaser.fTiles.create(977, G.phaser.world.height - 901, 'ftReligion');
 	fTile14.type = "religion";
 	fTile14.player = "none";
+
   G.phaser.mTiles = G.phaser.add.group();
 
   var britannia = G.phaser.mTiles.create(380, G.phaser.world.height - 1783, 'ftGames');
 	britannia.player = "none";
-  var germaniaInferior = G.phaser.mTiles.create(725, G.phaser.world.height - 1735, 'ftGames');
+	britannia.type = "games";
+  var germaniaInferior = G.phaser.mTiles.create(725, G.phaser.world.height - 1735, 'ftReligion');
 	germaniaInferior.player = "none";
+	germaniaInferior.type = "religion";
   var germaniaSuperior = G.phaser.mTiles.create(910, G.phaser.world.height - 1700, 'ftGames');
 	germaniaSuperior.player = "none";
-  var belgica = G.phaser.mTiles.create(553, G.phaser.world.height - 1676, 'ftGames');
+	germaniaSuperior.type = "games";
+  var belgica = G.phaser.mTiles.create(553, G.phaser.world.height - 1676, 'ftBread');
 	belgica.player = "none";
-  var lugudunensis = G.phaser.mTiles.create(388, G.phaser.world.height - 1650, 'ftGames');
+	belgica.type = "bread";
+  var lugudunensis = G.phaser.mTiles.create(388, G.phaser.world.height - 1650, 'ftBread');
 	lugudunensis.player = "none";
+	lugudunensis.type = "bread";
   var aquitania = G.phaser.mTiles.create(220, G.phaser.world.height - 1598, 'ftGames');
 	aquitania.player = "none";
-  var narbonensis = G.phaser.mTiles.create(280, G.phaser.world.height - 1485, 'ftGames');
+	aquitania.type = "games";
+  var narbonensis = G.phaser.mTiles.create(280, G.phaser.world.height - 1485, 'ftReligion');
 	narbonensis.player = "none";
-  var alpes = G.phaser.mTiles.create(490, G.phaser.world.height - 1555, 'ftGames');
+	narbonensis.type = "religion";
+  var alpes = G.phaser.mTiles.create(490, G.phaser.world.height - 1555, 'ftBread');
 	alpes.player = "none";
+	alpes.type = "bread";
   var raetia = G.phaser.mTiles.create(780, G.phaser.world.height - 1614, 'ftGames');
 	raetia.player = "none";
-  var noricum = G.phaser.mTiles.create(960, G.phaser.world.height - 1596, 'ftGames');
+	raetia.type = "games";
+  var noricum = G.phaser.mTiles.create(960, G.phaser.world.height - 1596, 'ftReligion');
 	noricum.player = "none";
+	noricum.type = "religion";
 
   G.phaser.bTiles = G.phaser.add.group(); // gold things
 
@@ -450,7 +465,7 @@ Game.prototype.phaserCreate = function() {
 
   var ship0 = G.phaser.ships.create(290, G.phaser.world.height - 1310, 'ship1');
 	ship0.side = "color";
-	var ship1 = G.phaser.ships.create(165, G.phaser.world.height - 1225, 'ship2');
+	var ship1 = G.phaser.ships.create(160, G.phaser.world.height - 1225, 'ship3');
 	ship1.side = "color";
 	var ship2 = G.phaser.ships.create(435, G.phaser.world.height - 1390, 'ship3');
 	ship2.side = "color";
@@ -565,40 +580,58 @@ Game.prototype.phaserCreate = function() {
 	G.phaser.hand = [true, true, true, true];
   var cCard0 = G.phaser.cards.create(1000, G.phaser.world.height-500, 'wheat');
 	cCard0.player = "none";
+	cCard0.type = "wheat";
   var cCard1 = G.phaser.cards.create(1125, G.phaser.world.height-500, 'bull');
 	cCard1.player = "none";
+	cCard1.type = "bull";
   var cCard2 = G.phaser.cards.create(1250, G.phaser.world.height-500, 'bling');
 	cCard2.player = "none";
+	cCard2.type = "bling";
 	var cCard3 = G.phaser.cards.create(1000, G.phaser.world.height-500, 'lamp');
 	cCard3.player = "none";
+	cCard3.type = "lamp";
 	var cCard4 = G.phaser.cards.create(1125, G.phaser.world.height-500, 'gin');
 	cCard4.player = "none";
+	cCard4.type = "gin";
 	var cCard5 = G.phaser.cards.create(1250, G.phaser.world.height-500, 'bling');
 	cCard5.player = "none";
+	cCard5.type = "bling";
 	var cCard6 = G.phaser.cards.create(1000, G.phaser.world.height-500, 'pillar');
 	cCard6.player = "none";
+	cCard6.type = "pillar";
 	var cCard7 = G.phaser.cards.create(1125, G.phaser.world.height-500, 'scroll');
 	cCard7.player = "none";
+	cCard7.type = "scroll";
 	var cCard8 = G.phaser.cards.create(1250, G.phaser.world.height-500, 'bull');
 	cCard8.player = "none";
+	cCard8.type = "bull";
 	var cCard9 = G.phaser.cards.create(1000, G.phaser.world.height-500, 'wheat');
 	cCard9.player = "none";
+	cCard9.type = "wheat";
 	var cCard10 = G.phaser.cards.create(1125, G.phaser.world.height-500, 'bearSkin');
 	cCard10.player = "none";
+	cCard10.type = "bearSkin";
 	var cCard11 = G.phaser.cards.create(1250, G.phaser.world.height-500, 'bling');
 	cCard11.player = "none";
+	cCard11.type = "bling";
 	var cCard12 = G.phaser.cards.create(1000, G.phaser.world.height-500, 'scroll');
 	cCard12.player = "none";
+	cCard12.type = "scroll";
 	var cCard13 = G.phaser.cards.create(1125, G.phaser.world.height-500, 'fish');
 	cCard13.player = "none";
+	cCard13.type = "fish";
 	var cCard14 = G.phaser.cards.create(1250, G.phaser.world.height-500, 'lamp');
 	cCard14.player = "none";
+	cCard14.type = "lamp";
 	var cCard15 = G.phaser.cards.create(1000, G.phaser.world.height-500, 'pillar');
 	cCard15.player = "none";
+	cCard15.type = "pillar";
 	var cCard16 = G.phaser.cards.create(1125, G.phaser.world.height-500, 'bearSkin');
 	cCard16.player = "none";
+	cCard16.type = "bearSkin";
 	var cCard17 = G.phaser.cards.create(1250, G.phaser.world.height-500, 'gin');
 	cCard17.player = "none";
+	cCard17.type = "gin";
 
 
 	G.phaser.pMarks = G.phaser.add.group();
@@ -704,22 +737,31 @@ Game.prototype.phaserCreate = function() {
 	G.phaser.demands = G.phaser.add.group();
 	var demand1 = G.phaser.demands.create(250, G.phaser.world.height - 70, 'cookieDemand');
 	demand1.visible = false;
+	demand1.type = "bread";
 	var demand2 = G.phaser.demands.create(325, G.phaser.world.height - 70, 'fireDemand');
 	demand2.visible = false;
+	demand2.type = "religion";
 	var demand3 = G.phaser.demands.create(400, G.phaser.world.height - 70, 'gamesDemand');
 	demand3.visible = false;
+	demand3.type = "games";
 	var demand4 = G.phaser.demands.create(250, G.phaser.world.height - 70, 'cookieDemand');
 	demand4.visible = false;
+	demand4.type = "bread";
 	var demand5 = G.phaser.demands.create(325, G.phaser.world.height - 70, 'fireDemand');
 	demand5.visible = false;
+	demand5.type = "religion";
 	var demand6 = G.phaser.demands.create(400, G.phaser.world.height - 70, 'gamesDemand');
 	demand6.visible = false;
+	demand6.type = "games";
 	var demand7 = G.phaser.demands.create(250, G.phaser.world.height - 70, 'cookieDemand');
 	demand7.visible = false;
+	demand7.type = "bread";
 	var demand8 = G.phaser.demands.create(325, G.phaser.world.height - 70, 'fireDemand');
 	demand8.visible = false;
+	demand8.type = "religion";
 	var demand9 = G.phaser.demands.create(400, G.phaser.world.height - 70, 'gamesDemand');
 	demand9.visible = false;
+	demand9.type = "games";
 
   G.phaser.trajan = G.phaser.add.group();
   var arch1 = G.phaser.trajan.create(605, G.phaser.world.height-435, 'tArch');
@@ -752,6 +794,11 @@ Game.prototype.phaserCreate = function() {
 	G.phaser.playerRedVP = 0;
 	G.phaser.playerBlueVP = 0;
 	G.phaser.playerGrayVP = 0;
+
+	G.phaser.greenDemandsMet = [false, false, false];
+	G.phaser.redDemandsMet = [false, false, false];
+	G.phaser.blueDemandsMet = [false, false, false];
+	G.phaser.grayDemandsMet = [false, false, false];
 }
 
 Game.prototype.phaserUpdate = function() {
@@ -1394,6 +1441,20 @@ Game.prototype.checkAdj = function(){
 				G.phaser.currentLeader.position.y = countries[i].y ;
 				G.phaser.incX = 0;
 				G.phaser.incY = 0;
+				G.phaser.mTiles.forEach(function(milTile){
+					if(countries[i].contains(milTile.position.x, milTile.position.y)){
+						milTile.player = G.phaser.playerID;
+						if(milTile.type == "games"){
+							G.gamesMovement();
+						}
+						else if(milTile.type == "religion"){
+							G.religionMovement();
+						}
+						else{
+							G.breadMovement();
+						}
+					}
+				}, this, true);
 				G.phaser.leaderLoc = countries[i];
 				if(G.phaser.currentPlayerMarker == G.phaser.pMarks.getAt(0)){
 					G.phaser.playerGreenVP += vpPts[i];
@@ -1623,7 +1684,7 @@ Game.prototype.moveArch = function(arch, trajanSpaces, spaces, index) {
 }
 
 Game.prototype.seaportLogic = function(){
-	G.phaser.textAction.text = "Select a Card to add it to your hand, click a ship to trade cards for points, or click cards in hand to play them";
+	G.phaser.textAction.text = "Select a Card to add it to your hand, click a ship to trade cards for points";
 	G.phaser.ships.forEach(G.shipsActive, this, true);
 	G.phaser.cards.forEach(G.cardsActive, this, true);
 }
@@ -1636,25 +1697,45 @@ Game.prototype.cardsActive = function(card){
 }
 Game.prototype.move = function(card){
 	card.player = G.phaser.playerID;
-	if(G.phaser.hand[0]){
+	G.phaser.hand = [
+		new Phaser.Rectangle(20, 1250, 125, 200),
+		new Phaser.Rectangle(130, 1250, 125, 200),
+		new Phaser.Rectangle(20, 1450, 125, 200),
+		new Phaser.Rectangle(130, 1450, 125, 200)
+	];
+	var one = true;
+	var two = true;
+	var three = true;
+	var four = true;
+	G.phaser.cards.forEach(function(currentCard){
+		if(G.phaser.hand[0].contains(currentCard.position.x, currentCard.position.y) && currentCard.player == G.phaser.playerID){
+			one = false;
+		}
+		if(G.phaser.hand[1].contains(currentCard.position.x, currentCard.position.y) && currentCard.player == G.phaser.playerID){
+			two = false;
+		}
+		if(G.phaser.hand[2].contains(currentCard.position.x, currentCard.position.y) && currentCard.player == G.phaser.playerID){
+			three = false;
+		}
+		if(G.phaser.hand[3].contains(currentCard.position.x, currentCard.position.y) && currentCard.player == G.phaser.playerID){
+			four = false;
+		}
+	}, this, true);
+	if(one){
 		card.position.x = 25;
 		card.position.y = 1300;
-		G.phaser.hand[0] = false;
 	}
-	else if(G.phaser.hand[1]){
+	else if(two){
 		card.position.x = 135;
 		card.position.y = 1300;
-		G.phaser.hand[1] = false;
 	}
-	else if(G.phaser.hand[2]){
+	else if(three){
 		card.position.x = 25;
 		card.position.y = 1500;
-		G.phaser.hand[2] = false;
 	}
-	else if(G.phaser.hand[3]){
+	else if(four){
 		card.position.x = 135;
 		card.position.y = 1500;
-		G.phaser.hand[3] = false;
 	}
 
 	G.phaser.gameState = "selectTray";
@@ -1673,18 +1754,419 @@ Game.prototype.shipsActive = function(ship){
 }
 
 Game.prototype.flip = function(ship){
-	var vp=0;
+	if(G.phaser.gameState != "seaport"){
+		return;
+	}
+	var card1 = null;
+	var card2 = null;
+	var card3 = null;
+	var card4 = null;
+	var vp = 0;
+	if(ship == G.phaser.ships.getAt(0)){
+		G.phaser.cards.forEach(function(card){
+			if(card.player == G.phaser.playerID){
+				if(card1 == null)
+					card1 = card;
+				else if(card2 == null)
+					card2 = card;
+				else if(card3 == null)
+					card3 = card;
+				else
+					card4 = card;
+			}
+		}, this, true);
+		if(card1 != null && ship.side == "color"){
+			if(card2 != null && card3 != null && card4 != null && card1.type == card2.type == card3.type == card4.type){
+				vp = 20;
+				card1.position.x = 1800;
+				card1.player = "none";
+				card2.position.x = 1800;
+				card2.player = "none";
+				card3.position.x = 1800;
+				card3.player = "none";
+				card4.position.x = 1800;
+				card4.player = "none";
+			}
+			else if(card2 != null && card3 != null && card1.type == card2.type == card3.type){
+				vp = 12;
+				card1.position.x = 1800;
+				card1.player = "none";
+				card2.position.x = 1800;
+				card2.player = "none";
+				card3.position.x = 1800;
+				card3.player = "none";
+			}
+			else if(card2 != null && card4 != null && card1.type == card2.type == card4.type){
+				vp = 12;
+				card1.position.x = 1800;
+				card1.player = "none";
+				card2.position.x = 1800;
+				card2.player = "none";
+				card4.position.x = 1800;
+				card4.player = "none";
+			}
+			else if(card4 != null && card3 != null && card1.type == card3.type == card4.type){
+				vp = 12;
+				card1.position.x = 1800;
+				card1.player = "none";
+				card3.position.x = 1800;
+				card3.player = "none";
+				card4.position.x = 1800;
+				card4.player = "none";
+			}
+			else if(card2 != null && card3 != null && card4 != null && card2.type == card3.type == card4.type){
+				vp = 12;
+				card2.position.x = 1800;
+				card2.player = "none";
+				card3.position.x = 1800;
+				card3.player = "none";
+				card4.position.x = 1800;
+				card4.player = "none";
+			}
+			else if(card2 != null && card1.type == card2.type){
+				vp = 6;
+				card1.position.x = 1800;
+				card1.player = "none";
+				card2.position.x = 1800;
+				card2.player = "none";
+			}
+			else if(card3 != null && card1.type == card3.type ){
+				vp = 6;
+				card1.position.x = 1800;
+				card1.player = "none";
+				card3.position.x = 1800;
+				card3.player = "none";
+			}
+			else if( card4!= null && card1.type == card4.type){
+				vp = 6;
+				card1.position.x = 1800;
+				card1.player = "none";
+				card4.position.x = 1800;
+				card4.player = "none";
+			}
+			else if(card2 != null && card3 != null && card2.type == card3.type ){
+				vp = 6;
+				card2.position.x = 1800;
+				card2.player = "none";
+				card3.position.x = 1800;
+				card3.player = "none";
+			}
+			else if(card2 != null && card4 != null && card2.type == card4.type ){
+				vp = 6;
+				card2.position.x = 1800;
+				card2.player = "none";
+				card4.position.x = 1800;
+				card4.player = "none";
+			}
+			else if(card4 != null && card3 != null && card3.type == card4.type){
+				vp = 6;
+				card3.position.x = 1800;
+				card3.player = "none";
+				card4.position.x = 1800;
+				card4.player = "none";
+			}
+			else{
+				vp = 2;
+				card1.position.x = 1800;
+				card1.player = "none";
+			}
+		}
+		if(card1 != null && ship.side == "gray"){
+			if(card2 != null && card3 != null && card4 != null && card1.type == card2.type == card3.type == card4.type){
+				vp = 15;
+				card1.position.x = 1800;
+				card1.player = "none";
+				card2.position.x = 1800;
+				card2.player = "none";
+				card3.position.x = 1800;
+				card3.player = "none";
+				card4.position.x = 1800;
+				card4.player = "none";
+			}
+			else if(card2 != null && card3 != null && card1.type == card2.type == card3.type){
+				vp = 7;
+				card1.position.x = 1800;
+				card1.player = "none";
+				card2.position.x = 1800;
+				card2.player = "none";
+				card3.position.x = 1800;
+				card3.player = "none";
+			}
+			else if(card2 != null && card4 != null && card1.type == card2.type == card4.type){
+				vp = 7;
+				card1.position.x = 1800;
+				card1.player = "none";
+				card2.position.x = 1800;
+				card2.player = "none";
+				card4.position.x = 1800;
+				card4.player = "none";
+			}
+			else if(card4 != null && card3 != null && card1.type == card3.type == card4.type){
+				vp = 7;
+				card1.position.x = 1800;
+				card1.player = "none";
+				card3.position.x = 1800;
+				card3.player = "none";
+				card4.position.x = 1800;
+				card4.player = "none";
+			}
+			else if(card2 != null && card3 != null && card4 != null && card2.type == card3.type == card4.type){
+				vp = 7;
+				card2.position.x = 1800;
+				card2.player = "none";
+				card3.position.x = 1800;
+				card3.player = "none";
+				card4.position.x = 1800;
+				card4.player = "none";
+			}
+			else if(card2 != null && card1.type == card2.type){
+				vp = 1;
+				card1.position.x = 1800;
+				card1.player = "none";
+				card2.position.x = 1800;
+				card2.player = "none";
+			}
+			else if(card3 != null && card1.type == card3.type){
+				vp = 1;
+				card1.position.x = 1800;
+				card1.player = "none";
+				card3.position.x = 1800;
+				card3.player = "none";
+			}
+			else if(card4 != null && card1.type == card4.type){
+				vp = 1;
+				card1.position.x = 1800;
+				card1.player = "none";
+				card4.position.x = 1800;
+				card4.player = "none";
+			}
+			else if(card2 != null && card3 != null && card2.type == card3.type){
+				vp = 1;
+				card2.position.x = 1800;
+				card2.player = "none";
+				card3.position.x = 1800;
+				card3.player = "none";
+			}
+			else if(card2 != null && card4 != null && card2.type == card4.type){
+				vp = 1;
+				card2.position.x = 1800;
+				card2.player = "none";
+				card4.position.x = 1800;
+				card4.player = "none";
+			}
+			else if(card3 != null && card4 != null && card3.type == card4.type){
+				vp = 1;
+				card3.position.x = 1800;
+				card3.player = "none";
+				card4.position.x = 1800;
+				card4.player = "none";
+			}
+			else{
+				vp = 0;
+				card1.position.x = 1800;
+				card1.player = "none";
+			}
+		}
+	}
+	else if(ship == G.phaser.ships.getAt(2) || ship == G.phaser.ship.getAt(1)){
+		if(card1 != null && ship.side == "color"){
+			if(card2 != null && card3 != null && card4 != null && card1.type != card2.type != card3.type != card4.type){
+				vp = 8;
+				card1.position.x = 1800;
+				card1.player = "none";
+				card2.position.x = 1800;
+				card2.player = "none";
+				card3.position.x = 1800;
+				card3.player = "none";
+				card4.position.x = 1800;
+				card4.player = "none";
+			}
+			else if(card2 != null && card3 != null && card1.type != card2.type != card3.type){
+				vp = 6;
+				card1.position.x = 1800;
+				card1.player = "none";
+				card2.position.x = 1800;
+				card2.player = "none";
+				card3.position.x = 1800;
+				card3.player = "none";
+			}
+			else if(card2 != null && card4 != null && card1.type != card2.type != card4.type){
+				vp = 6;
+				card1.position.x = 1800;
+				card1.player = "none";
+				card2.position.x = 1800;
+				card2.player = "none";
+				card4.position.x = 1800;
+				card4.player = "none";
+			}
+			else if(card2 != null && card3 != null && card4 != null && card2.type != card3.type != card4.type){
+				vp = 6;
+				card2.position.x = 1800;
+				card2.player = "none";
+				card3.position.x = 1800;
+				card3.player = "none";
+				card4.position.x = 1800;
+				card4.player = "none";
+			}
+			else if(card2 != null && card1.type != card2.type){
+				vp = 4;
+				card1.position.x = 1800;
+				card1.player = "none";
+				card2.position.x = 1800;
+				card2.player = "none";
+			}
+			else if(card3 != null && card1.type != card3.type){
+				vp = 4;
+				card1.position.x = 1800;
+				card1.player = "none";
+				card3.position.x = 1800;
+				card3.player = "none";
+			}
+			else if(card4 != null && card1.type != card4.type){
+				vp = 4;
+				card1.position.x = 1800;
+				card1.player = "none";
+				card4.position.x = 1800;
+				card4.player = "none";
+			}
+			else if(card2 != null && card3 != null && card2.type != card3.type){
+				vp = 4;
+				card2.position.x = 1800;
+				card2.player = "none";
+				card3.position.x = 1800;
+				card3.player = "none";
+			}
+			else if(card2 != null && card4 != null && card2.type != card4.type){
+				vp = 4;
+				card2.position.x = 1800;
+				card2.player = "none";
+				card4.position.x = 1800;
+				card4.player = "none";
+			}
+			else if(card3 != null && card4 != null && card3.type != card4.type){
+				vp = 4;
+				card3.position.x = 1800;
+				card3.player = "none";
+				card4.position.x = 1800;
+				card4.player = "none";
+			}
+			else{
+				vp = 2;
+				card1.position.x = 1800;
+				card1.player = "none";
+			}
+		}
+		else if(card1 != null && ship.side == "gray"){
+			if(card2 != null && card3 != null && card4 != null && card1.type != card2.type != card3.type != card4.type){
+				vp = 5;
+				card1.position.x = 1800;
+				card1.player = "none";
+				card2.position.x = 1800;
+				card2.player = "none";
+				card3.position.x = 1800;
+				card3.player = "none";
+				card4.position.x = 1800;
+				card4.player = "none";
+			}
+			else if(card2 != null && card3 != null && card1.type != card2.type != card3.type){
+				vp = 3;
+				card1.position.x = 1800;
+				card1.player = "none";
+				card2.position.x = 1800;
+				card2.player = "none";
+				card3.position.x = 1800;
+				card3.player = "none";
+			}
+			else if(card2 != null && card4 != null && card1.type != card2.type != card4.type){
+				vp = 3;
+				card1.position.x = 1800;
+				card1.player = "none";
+				card2.position.x = 1800;
+				card2.player = "none";
+				card4.position.x = 1800;
+				card4.player = "none";
+			}
+			else if(card2 != null && card3 != null && car4 != null && card2.type != card3.type != card4.type){
+				vp = 3;
+				card2.position.x = 1800;
+				card2.player = "none";
+				card3.position.x = 1800;
+				card3.player = "none";
+				card4.position.x = 1800;
+				card4.player = "none";
+			}
+			else if(card2 != null && card1.type != card2.type){
+				vp = 1;
+				card1.position.x = 1800;
+				card1.player = "none";
+				card2.position.x = 1800;
+				card2.player = "none";
+			}
+			else if(card3 != null && card1.type != card3.type){
+				vp = 1;
+				card1.position.x = 1800;
+				card1.player = "none";
+				card3.position.x = 1800;
+				card3.player = "none";
+			}
+			else if(card4 != null && card1.type != card4.type){
+				vp = 1;
+				card1.position.x = 1800;
+				card1.player = "none";
+				card4.position.x = 1800;
+				card4.player = "none";
+			}
+			else if(card2 != null && card3 != null && card2.type != card3.type){
+				vp = 1;
+				card2.position.x = 1800;
+				card2.player = "none";
+				card3.position.x = 1800;
+				card3.player = "none";
+			}
+			else if(card2 != null && card4 != null && card2.type != card4.type){
+				vp = 1;
+				card2.position.x = 1800;
+				card2.player = "none";
+				card4.position.x = 1800;
+				card4.player = "none";
+			}
+			else if(card3 != null && card4 != null && card3.type != card4.type){
+				vp = 1;
+				card3.position.x = 1800;
+				card3.player = "none";
+				card4.position.x = 1800;
+				card4.player = "none";
+			}
+			else{
+				vp = 0;
+				card1.position.x = 1800;
+				card1.player = "none";
+			}
+		}
+		if(G.phaser.currentPlayerMarker == G.phaser.pMarks.getAt(0)){
+			G.phaser.playerGreenVP += vp;
+		}
+		else if(G.phaser.currentPlayerMarker == G.phaser.pMarks.getAt(1)){
+			G.phaser.playerRedVP += vp;
+		}
+		else if(G.phaser.currentPlayerMarker == G.phaser.pMarks.getAt(2)){
+			G.phaser.playerBlueVP += vp;
+		}
+		else{
+			G.phaser.playerGrayVP += vp;
+		}
+
+	}
+	else{
+		return;
+	}
 	if(ship.side == "color"){
 		ship.play("flip");
-		ship.side = "grey";
-		vp += 5;
-		console.log(vp);
+		ship.side = "gray";
 	}
 	else{
 		ship.play("flipBack");
 		ship.side = "color";
-		vp += 2;
-		console.log(vp);
 	}
 
 	G.bonusAction();
@@ -1728,8 +2210,74 @@ Game.prototype.endQuarter = function(){
 }
 
 Game.prototype.endGame = function(){
-	//meet demands
+	G.phaser.tTiles.forEach(G.meetDemand, this, true);
+	G.phaser.mTiles.forEach(G.meetDemand, this, true);
+	G.phaser.fTiles.forEach(G.meetDemand, this, true);
+	console.log(G.phaser.playerGreenVP);
+	G.losePoints(G.phaser.greenDemandsMet, G.phaser.playerGreenVP);
+	console.log(G.phaser.playerGreenVP);
+	G.losePoints(G.phaser.redDemandsMet, G.phaser.playerRedVP);
+	G.losePoints(G.phaser.blueDemandsMet, G.phaser.playerBlueVP);
+	G.losePoints(G.phaser.grayDemandsMet, G.phaser.playerGrayVP);
+
 	G.finalScores();
+}
+
+Game.prototype.losePoints = function(demandsMet, playerPoints){
+	if(demandsMet[0] == false && demandsMet[1] == false && demandsMet[2] == false){
+		playerPoints -= 15;
+	}
+	else if(demandsMet[0] == false && demandsMet[1] == false || demandsMet[0] == false && demandsMet[2] == false || demandsMet[2] == false && demandsMet[1] == false){
+		playerPoints -= 9;
+	}
+	else if(demandsMet[0] == false || demandsMet[1] == false || demandsMet[2] == false){
+		playerPoints -= 4;
+	}
+}
+
+Game.prototype.meetDemand = function(tile){
+	if(tile.type == G.phaser.demandOne.type){
+		if(tile.player == 0){
+			G.phaser.greenDemandsMet[0] = true;
+		}
+		else if(tile.player == 1){
+			G.phaser.redDemandsMet[0] = true;
+		}
+		else if(tile.player == 2){
+			G.phaser.blueDemandsMet[0] = true;
+		}
+		else if(tile.player == 3){
+			G.phaser.grayDemandsMet[0] = true;
+		}
+	}
+	else if(tile.type == G.phaser.demandTwo.type){
+		if(tile.player == 0){
+			G.phaser.greenDemandsMet[1] = true;
+		}
+		else if(tile.player == 1){
+			G.phaser.redDemandsMet[1] = true;
+		}
+		else if(tile.player == 2){
+			G.phaser.blueDemandsMet[1] = true;
+		}
+		else if(tile.player == 3){
+			G.phaser.grayDemandsMet[1] = true;
+		}
+	}
+	else if(tile.type == G.phaser.demandThree.type){
+		if(tile.player == 0){
+			G.phaser.greenDemandsMet[2] = true;
+		}
+		else if(tile.player == 1){
+			G.phaser.redDemandsMet[2] = true;
+		}
+		else if(tile.player == 2){
+			G.phaser.blueDemandsMet[2] = true;
+		}
+		else if(tile.player == 3){
+			G.phaser.grayDemandsMet[2] = true;
+		}
+	}
 }
 
 Game.prototype.finalScores = function(){
