@@ -431,7 +431,7 @@ Game.prototype.phaserCreate = function() {
   var germaniaInferior = G.phaser.mTiles.create(725, G.phaser.world.height - 1735, 'ftReligion');
 	germaniaInferior.player = "none";
 	germaniaInferior.type = "religion";
-  var germaniaSuperior = G.phaser.mTiles.create(910, G.phaser.world.height - 1700, 'ftGames');
+  var germaniaSuperior = G.phaser.mTiles.create(910, G.phaser.world.height - 1690, 'ftGames');
 	germaniaSuperior.player = "none";
 	germaniaSuperior.type = "games";
   var belgica = G.phaser.mTiles.create(553, G.phaser.world.height - 1676, 'ftBread');
@@ -452,7 +452,7 @@ Game.prototype.phaserCreate = function() {
   var raetia = G.phaser.mTiles.create(780, G.phaser.world.height - 1614, 'ftGames');
 	raetia.player = "none";
 	raetia.type = "games";
-  var noricum = G.phaser.mTiles.create(960, G.phaser.world.height - 1596, 'ftReligion');
+  var noricum = G.phaser.mTiles.create(960, G.phaser.world.height - 1589, 'ftReligion');
 	noricum.player = "none";
 	noricum.type = "religion";
 
@@ -659,76 +659,144 @@ Game.prototype.phaserCreate = function() {
   // Al about that village lyfe
   G.phaser.littlePeople = G.phaser.add.group();
   var lp0 = G.phaser.littlePeople.create(925, G.phaser.world.height-450, 'greenLittleDude');
+	lp0.player = 0;
 	var lp1 = G.phaser.littlePeople.create(925, G.phaser.world.height-430, 'greenLittleDude');
+	lp1.player = 0;
 	var lp2 = G.phaser.littlePeople.create(925, G.phaser.world.height-410, 'greenLittleDude');
+	lp2.player = 0;
 	var lp3 = G.phaser.littlePeople.create(925, G.phaser.world.height-390, 'greenLittleDude');
+	lp3.player = 0;
 	var lp4 = G.phaser.littlePeople.create(925, G.phaser.world.height-370, 'greenLittleDude');
+	lp4.player = 0;
 	var lp5 = G.phaser.littlePeople.create(925, G.phaser.world.height-350, 'greenLittleDude');
+	lp5.player = 0;
 	var lp6 = G.phaser.littlePeople.create(945, G.phaser.world.height-450, 'greenLittleDude');
+	lp6.player = 0;
 	var lp7 = G.phaser.littlePeople.create(945, G.phaser.world.height-430, 'greenLittleDude');
+	lp7.player = 0;
 	var lp8 = G.phaser.littlePeople.create(945, G.phaser.world.height-410, 'greenLittleDude');
+	lp8.player = 0;
 	var lp9 = G.phaser.littlePeople.create(945, G.phaser.world.height-390, 'greenLittleDude');
+	lp9.player = 0;
 	var lp10 = G.phaser.littlePeople.create(945, G.phaser.world.height-370, 'greenLittleDude');
+	lp10.player = 0;
 	var lp11 = G.phaser.littlePeople.create(945, G.phaser.world.height-350, 'greenLittleDude');
+	lp11.player = 0;
 	var lp12 = G.phaser.littlePeople.create(905, G.phaser.world.height-410, 'greenLittleDude');
+	lp12.player = 0;
 	var lp13 = G.phaser.littlePeople.create(905, G.phaser.world.height-390, 'greenLittleDude');
+	lp13.player = 0;
 	var lp14 = G.phaser.littlePeople.create(905, G.phaser.world.height-370, 'greenLittleDude');
+	lp14.player = 0;
 	var lp15 = G.phaser.littlePeople.create(750, G.phaser.world.height - 1500, 'greenLittleDude');
+	lp15.player = 0;
 	var lp16 = G.phaser.littlePeople.create(580, 600, 'greenLittleDude');
+	lp16.player = 0;
 
 	var lp17 = G.phaser.littlePeople.create(925, G.phaser.world.height-450, 'redLittleDude');
+	lp17.player = 1;
 	var lp18 = G.phaser.littlePeople.create(925, G.phaser.world.height-430, 'redLittleDude');
+	lp18.player = 1;
 	var lp19 = G.phaser.littlePeople.create(925, G.phaser.world.height-410, 'redLittleDude');
+	lp19.player = 1;
 	var lp20 = G.phaser.littlePeople.create(925, G.phaser.world.height-390, 'redLittleDude');
+	lp20.player = 1;
 	var lp21 = G.phaser.littlePeople.create(925, G.phaser.world.height-370, 'redLittleDude');
+	lp21.player = 1;
 	var lp22 = G.phaser.littlePeople.create(925, G.phaser.world.height-350, 'redLittleDude');
+	lp22.player = 1;
 	var lp23 = G.phaser.littlePeople.create(945, G.phaser.world.height-450, 'redLittleDude');
+	lp23.player = 1;
 	var lp24 = G.phaser.littlePeople.create(945, G.phaser.world.height-430, 'redLittleDude');
+	lp24.player = 1;
 	var lp25 = G.phaser.littlePeople.create(945, G.phaser.world.height-410, 'redLittleDude');
+	lp25.player = 1;
 	var lp26 = G.phaser.littlePeople.create(945, G.phaser.world.height-390, 'redLittleDude');
+	lp26.player = 1;
 	var lp27 = G.phaser.littlePeople.create(945, G.phaser.world.height-370, 'redLittleDude');
+	lp27.player = 1;
 	var lp28 = G.phaser.littlePeople.create(945, G.phaser.world.height-350, 'redLittleDude');
+	lp28.player = 1;
 	var lp29 = G.phaser.littlePeople.create(905, G.phaser.world.height-410, 'redLittleDude');
+	lp29.player = 1;
 	var lp30 = G.phaser.littlePeople.create(905, G.phaser.world.height-390, 'redLittleDude');
+	lp30.player = 1;
 	var lp31 = G.phaser.littlePeople.create(905, G.phaser.world.height-370, 'redLittleDude');
+	lp31.player = 1;
 	var lp32 = G.phaser.littlePeople.create(750, G.phaser.world.height - 1500, 'redLittleDude');
+	lp32.player = 1;
 	var lp33 = G.phaser.littlePeople.create(580, 600, 'redLittleDude');
+	lp33.player = 1;
 
 	var lp34 = G.phaser.littlePeople.create(925, G.phaser.world.height-450, 'blueLittleDude');
+	lp34.player = 2;
 	var lp35 = G.phaser.littlePeople.create(925, G.phaser.world.height-430, 'blueLittleDude');
+	lp35.player = 2;
 	var lp36 = G.phaser.littlePeople.create(925, G.phaser.world.height-410, 'blueLittleDude');
+	lp36.player = 2;
 	var lp37 = G.phaser.littlePeople.create(925, G.phaser.world.height-390, 'blueLittleDude');
+	lp37.player = 2;
 	var lp38 = G.phaser.littlePeople.create(925, G.phaser.world.height-370, 'blueLittleDude');
+	lp38.player = 2;
 	var lp39 = G.phaser.littlePeople.create(925, G.phaser.world.height-350, 'blueLittleDude');
+	lp39.player = 2;
 	var lp40 = G.phaser.littlePeople.create(945, G.phaser.world.height-450, 'blueLittleDude');
+	lp40.player = 2;
 	var lp41 = G.phaser.littlePeople.create(945, G.phaser.world.height-430, 'blueLittleDude');
+	lp41.player = 2;
 	var lp42 = G.phaser.littlePeople.create(945, G.phaser.world.height-410, 'blueLittleDude');
+	lp42.player = 2;
 	var lp43 = G.phaser.littlePeople.create(945, G.phaser.world.height-390, 'blueLittleDude');
+	lp43.player = 2;
 	var lp44 = G.phaser.littlePeople.create(945, G.phaser.world.height-370, 'blueLittleDude');
+	lp44.player = 2;
 	var lp45 = G.phaser.littlePeople.create(945, G.phaser.world.height-350, 'blueLittleDude');
+	lp45.player = 2;
 	var lp46 = G.phaser.littlePeople.create(905, G.phaser.world.height-410, 'blueLittleDude');
+	lp46.player = 2;
 	var lp47 = G.phaser.littlePeople.create(905, G.phaser.world.height-390, 'blueLittleDude');
+	lp47.player = 2;
 	var lp48 = G.phaser.littlePeople.create(905, G.phaser.world.height-370, 'blueLittleDude');
+	lp48.player = 2;
 	var lp49 = G.phaser.littlePeople.create(750, G.phaser.world.height - 1500, 'blueLittleDude');
+	lp49.player = 2;
 	var lp50 = G.phaser.littlePeople.create(580, 600, 'blueLittleDude');
+	lp50.player = 2;
 
 	var lp51 = G.phaser.littlePeople.create(925, G.phaser.world.height-450, 'grayLittleDude');
+	lp51.player = 3;
 	var lp52 = G.phaser.littlePeople.create(925, G.phaser.world.height-430, 'grayLittleDude');
+	lp52.player = 3;
 	var lp53 = G.phaser.littlePeople.create(925, G.phaser.world.height-410, 'grayLittleDude');
+	lp53.player = 3;
 	var lp54 = G.phaser.littlePeople.create(925, G.phaser.world.height-390, 'grayLittleDude');
+	lp54.player = 3;
 	var lp55 = G.phaser.littlePeople.create(925, G.phaser.world.height-370, 'grayLittleDude');
+	lp55.player = 3;
 	var lp56 = G.phaser.littlePeople.create(925, G.phaser.world.height-350, 'grayLittleDude');
+	lp56.player = 3;
 	var lp57 = G.phaser.littlePeople.create(945, G.phaser.world.height-450, 'grayLittleDude');
+	lp57.player = 3;
 	var lp58 = G.phaser.littlePeople.create(945, G.phaser.world.height-430, 'grayLittleDude');
+	lp58.player = 3;
 	var lp59 = G.phaser.littlePeople.create(945, G.phaser.world.height-410, 'grayLittleDude');
+	lp59.player = 3;
 	var lp60 = G.phaser.littlePeople.create(945, G.phaser.world.height-390, 'grayLittleDude');
+	lp60.player = 3;
 	var lp61 = G.phaser.littlePeople.create(945, G.phaser.world.height-370, 'grayLittleDude');
+	lp61.player = 3;
 	var lp62 = G.phaser.littlePeople.create(945, G.phaser.world.height-350, 'grayLittleDude');
+	lp62.player = 3;
 	var lp63 = G.phaser.littlePeople.create(905, G.phaser.world.height-410, 'grayLittleDude');
+	lp63.player = 3;
 	var lp64 = G.phaser.littlePeople.create(905, G.phaser.world.height-390, 'grayLittleDude');
+	lp64.player = 3;
 	var lp65 = G.phaser.littlePeople.create(905, G.phaser.world.height-370, 'grayLittleDude');
+	lp65.player = 3;
 	var lp66 = G.phaser.littlePeople.create(750, G.phaser.world.height - 1500, 'grayLittleDude');
+	lp66.player = 3;
 	var lp67 = G.phaser.littlePeople.create(580, 600, 'grayLittleDude');
+	lp67.player = 3;
 
   G.phaser.lpStartBox = new Phaser.Rectangle(890, G.phaser.world.height-475, 100, 180);
   G.phaser.legionairreCamp = new Phaser.Rectangle(705,G.phaser.world.height-1520, 200, 100);
@@ -1089,7 +1157,7 @@ Game.prototype.checkTrajanTile = function(trayIndex, currentTray){
 	var usedTile;
 
 	G.phaser.tTiles.forEach(function(tile){
-		if(trayBoxes[trayIndex].contains(tile.position.x, tile.position.y)){
+		if(trayBoxes[trayIndex].contains(tile.position.x, tile.position.y) && tile.player == G.phaser.playerID){
 			firstColor = tile.colorOne;
 			secondColor = tile.colorTwo;
 			action = tile.type;
@@ -1098,10 +1166,14 @@ Game.prototype.checkTrajanTile = function(trayIndex, currentTray){
 	}, this, true);
 	G.phaser.aMarks.forEach(function(marker){
 		if(currentTray.contains(marker.position.x, marker.position.y)){
-			if(marker.color == firstColor && firstCheck == false)
+			if(marker.color == firstColor && firstCheck == false){
 				firstCheck = true;
-			else if(marker.color == secondColor)
+				console.log("true one");
+			}
+			else if(marker.color == secondColor){
 				secondCheck = true;
+				console.log("true two");
+			}
 		}
 	}, this, true);
 
@@ -1123,6 +1195,7 @@ Game.prototype.checkTrajanTile = function(trayIndex, currentTray){
 			}
 		}
 		else if(action == "bread"){
+			console.log("BREAD");
 			G.phaser.textAction.text = "This tile can be used to meet one demand for the remainder of the game";
 			usedTile.position.x = 377;
 			usedTile.position.y = 1335;
@@ -1301,21 +1374,24 @@ Game.prototype.gamesMovement = function(tile){
 	tile.player = G.phaser.playerID;
 	tile.position.x = 530;
 	tile.position.y = 1402;
-	G.bonusAction();
+	if(G.phaser.gameState != "military")
+		G.bonusAction();
 }
 
 Game.prototype.breadMovement = function(tile){
 	tile.player = G.phaser.playerID;
 	tile.position.x = 375;
 	tile.position.y = 1402;
-	G.bonusAction();
+	if(G.phaser.gameState != "military")
+		G.bonusAction();
 }
 
 Game.prototype.religionMovement = function(tile){
 	tile.player = G.phaser.playerID;
 	tile.position.x = 452;
 	tile.position.y = 1402;
-	G.bonusAction();
+	if(G.phaser.gameState != "military")
+		G.bonusAction();
 }
 
 	// WILD CARD MOVEMENT
@@ -1445,13 +1521,13 @@ Game.prototype.checkAdj = function(){
 					if(countries[i].contains(milTile.position.x, milTile.position.y)){
 						milTile.player = G.phaser.playerID;
 						if(milTile.type == "games"){
-							G.gamesMovement();
+							G.gamesMovement(milTile);
 						}
 						else if(milTile.type == "religion"){
-							G.religionMovement();
+							G.religionMovement(milTile);
 						}
 						else{
-							G.breadMovement();
+							G.breadMovement(milTile);
 						}
 					}
 				}, this, true);
@@ -1502,7 +1578,7 @@ Game.prototype.moveConstructTile = function(tile){ //move game piece to correct 
 	var validAction = false;
 	var worker;
 	G.phaser.littlePeople.forEach(function(dude){
-		if(G.phaser.constructionCamp.contains(dude.position.x, dude.position.y)){
+		if(G.phaser.constructionCamp.contains(dude.position.x, dude.position.y) && dude.player == G.phaser.playerID){
 			validAction = true;
 			worker = dude;
 		}
@@ -2214,24 +2290,37 @@ Game.prototype.endGame = function(){
 	G.phaser.mTiles.forEach(G.meetDemand, this, true);
 	G.phaser.fTiles.forEach(G.meetDemand, this, true);
 	console.log(G.phaser.playerGreenVP);
-	G.losePoints(G.phaser.greenDemandsMet, G.phaser.playerGreenVP);
+	G.losePoints(G.phaser.greenDemandsMet);
 	console.log(G.phaser.playerGreenVP);
-	G.losePoints(G.phaser.redDemandsMet, G.phaser.playerRedVP);
-	G.losePoints(G.phaser.blueDemandsMet, G.phaser.playerBlueVP);
-	G.losePoints(G.phaser.grayDemandsMet, G.phaser.playerGrayVP);
+	G.losePoints(G.phaser.redDemandsMet);
+	G.losePoints(G.phaser.blueDemandsMet);
+	G.losePoints(G.phaser.grayDemandsMet);
 
 	G.finalScores();
 }
 
-Game.prototype.losePoints = function(demandsMet, playerPoints){
+Game.prototype.losePoints = function(demandsMet){
+	var loss;
 	if(demandsMet[0] == false && demandsMet[1] == false && demandsMet[2] == false){
-		playerPoints -= 15;
+		loss= -15;
 	}
 	else if(demandsMet[0] == false && demandsMet[1] == false || demandsMet[0] == false && demandsMet[2] == false || demandsMet[2] == false && demandsMet[1] == false){
-		playerPoints -= 9;
+		loss = -9;
 	}
 	else if(demandsMet[0] == false || demandsMet[1] == false || demandsMet[2] == false){
-		playerPoints -= 4;
+		loss = -4;
+	}
+	if(G.phaser.currentPlayerMarker == G.phaser.pMarks.getAt(0)){
+		G.phaser.playerGreenVP += loss;
+	}
+	else if(G.phaser.currentPlayerMarker == G.phaser.pMarks.getAt(1)){
+		G.phaser.playerRedVP += loss;
+	}
+	else if(G.phaser.currentPlayerMarker == G.phaser.pMarks.getAt(2)){
+		G.phaser.playerBlueVP += loss;
+	}
+	else{
+		G.phaser.playerGrayVP += loss;
 	}
 }
 
