@@ -2,11 +2,17 @@ function Game(){
 
 	// Attribrutes for the game to manage
 	this.players = [];
-	this.turn = 0;
-	this.quarter = 0;
+	this.quarter;
+	this.actionMarkerCount;
 	this.pause = false;
-	this.VPs;
+	this.playerGreenVP;
+	this.playerRedVP;
+	this.playerBlueVP;
+	this.playerGrayVP;
 
+	this.demandOne;
+	this.demandTwo;
+	this.demandThree;
 	this.cTiles;
 	this.tTiles;
 	this.bTiles;
@@ -42,6 +48,10 @@ function Game(){
 	this.leaderLoc;
 	this.hand;
 	this.playerID;
+	this.greenDemandsMet;
+	this.blueDemandsMet;
+	this.redDemandsMet;
+	this.grayDemandsMet;
 
 	// Phaser bootstrapping
 	this.phaser = new Phaser.Game(1600, 1800, Phaser.AUTO, 'gameboard', {preload: this.phaserPreload, create: this.phaserCreate, update: this.phaserUpdate});
@@ -98,11 +108,26 @@ Game.prototype.phaserPreload = function() {
     G.phaser.load.image('tt_VP_blue_white', '/assets/trajanTiles/tTile46.png');
     G.phaser.load.image('tt_VP_pink_pink', '/assets/trajanTiles/tTile51.png');
 		//CONSTRUCTION TILES
-		G.phaser.load.image('cDoorTile', '/assets/cDoorTile.png');
-		G.phaser.load.image('cTileRoof2', '/assets/constructionTiles/cTileRoof2.png');
-		G.phaser.load.image('cTileRoof3', '/assets/constructionTiles/cTileRoof3.png');
-		G.phaser.load.image('cTileRoof4', '/assets/constructionTiles/cTileRoof4.png');
-		G.phaser.load.image('cTileRoof5', '/assets/constructionTiles/cTileRoof5.png');
+		G.phaser.load.image('cDoorTile2', '/assets/constructionTiles/ConstructionTileDoor2.png');
+		G.phaser.load.image('cDoorTile3', '/assets/constructionTiles/ConstructionTileDoor3.png');
+		G.phaser.load.image('cDoorTile4', '/assets/constructionTiles/ConstructionTileDoor4.png');
+		G.phaser.load.image('cDoorTile5', '/assets/constructionTiles/ConstructionTileDoor5.png');
+		G.phaser.load.image('cFountTile2', '/assets/constructionTiles/ConstructionTileFountain2.png');
+		G.phaser.load.image('cFountTile3', '/assets/constructionTiles/ConstructionTileFountain3.png');
+		G.phaser.load.image('cFountTile4', '/assets/constructionTiles/ConstructionTileFountain4.png');
+		G.phaser.load.image('cFountTile5', '/assets/constructionTiles/ConstructionTileFountain5.png');
+		G.phaser.load.image('cStairsTile2', '/assets/constructionTiles/ConstructionTileStairs2.png');
+		G.phaser.load.image('cStairsTile3', '/assets/constructionTiles/ConstructionTileStairs3.png');
+		G.phaser.load.image('cStairsTile4', '/assets/constructionTiles/ConstructionTileStairs4.png');
+		G.phaser.load.image('cStairsTile5', '/assets/constructionTiles/ConstructionTileStairs5.png');
+		G.phaser.load.image('cWindowTile2', '/assets/constructionTiles/ConstructionTileWindow2.png');
+		G.phaser.load.image('cWindowTile3', '/assets/constructionTiles/ConstructionTileWindow3.png');
+		G.phaser.load.image('cWindowTile4', '/assets/constructionTiles/ConstructionTileWindow4.png');
+		G.phaser.load.image('cWindowTile5', '/assets/constructionTiles/ConstructionTileWindow5.png');
+		G.phaser.load.image('cRoofTile2', '/assets/constructionTiles/cTileRoof2.png');
+		G.phaser.load.image('cRoofTile3', '/assets/constructionTiles/cTileRoof3.png');
+		G.phaser.load.image('cRoofTile4', '/assets/constructionTiles/cTileRoof4.png');
+		G.phaser.load.image('cRoofTile5', '/assets/constructionTiles/cTileRoof5.png');
 
 		//FORUM TILES
 		G.phaser.load.image('ftBread', '/assets/forumTiles/breadForumTile.png');
@@ -151,6 +176,11 @@ Game.prototype.phaserPreload = function() {
     G.phaser.load.image('actionMarkW', '/assets/actionMarkers/actionMarkerWhite.png');
     G.phaser.load.image('actionMarkY', '/assets/actionMarkers/actionMarkerYellow.png');
     G.phaser.load.image('tArch', '/assets/tArch.png');
+
+		//DEMAND TILES
+		G.phaser.load.image('cookieDemand', '/assets/cookie.png');
+		G.phaser.load.image('fireDemand', '/assets/fire.png');
+		G.phaser.load.image('gamesDemand', '/assets/games.png');
 }
 
 Game.prototype.phaserCreate = function() {
@@ -171,66 +201,86 @@ Game.prototype.phaserCreate = function() {
 
   //CONSTRUCTION TILES
   G.phaser.cTiles = G.phaser.add.group();
-  var cTile0 = G.phaser.cTiles.create(710, G.phaser.world.height - 1395, 'cDoorTile');
+  var cTile0 = G.phaser.cTiles.create(710, G.phaser.world.height - 1395, 'cDoorTile2');
 	cTile0.type = "Door";
   cTile0.player = "none";
-	var cTile1 = G.phaser.cTiles.create(790, G.phaser.world.height - 1395, 'cDoorTile');
-	cTile1.type = "Door";
+	cTile0.points = 2;
+	var cTile1 = G.phaser.cTiles.create(790, G.phaser.world.height - 1395, 'cFountTile5');
+	cTile1.type = "Fountain";
   cTile1.player = "none";
-	var cTile2 = G.phaser.cTiles.create(865, G.phaser.world.height - 1395, 'cDoorTile');
-	cTile2.type = "Door";
+	cTile1.points = 5;
+	var cTile2 = G.phaser.cTiles.create(865, G.phaser.world.height - 1395, 'cWindowTile4');
+	cTile2.type = "Window";
   cTile2.player = "none";
-	var cTile3 = G.phaser.cTiles.create(945, G.phaser.world.height - 1395, 'cDoorTile');
-	cTile3.type = "Door";
+	cTile2.points = 4;
+	var cTile3 = G.phaser.cTiles.create(945, G.phaser.world.height - 1395, 'cStairsTile4');
+	cTile3.type = "Stairs";
   cTile3.player = "none";
-	var cTile4 = G.phaser.cTiles.create(1020, G.phaser.world.height - 1395, 'cTileRoof5');
+	cTile3.points = 4;
+	var cTile4 = G.phaser.cTiles.create(1020, G.phaser.world.height - 1395, 'cRoofTile2');
 	cTile4.type = "Roof";
   cTile4.player = "none";
-	var cTile5 = G.phaser.cTiles.create(710, G.phaser.world.height - 1318, 'cTileRoof4');
-	cTile5.type = "Roof";
+	cTile4.points = 2;
+	var cTile5 = G.phaser.cTiles.create(710, G.phaser.world.height - 1318, 'cDoorTile3');
+	cTile5.type = "Door";
   cTile5.player = "none";
-	var cTile6 = G.phaser.cTiles.create(790, G.phaser.world.height - 1318, 'cTileRoof5');
-	cTile6.type = "Roof";
+	cTile5.points = 3;
+	var cTile6 = G.phaser.cTiles.create(790, G.phaser.world.height - 1318, 'cStairsTile2');
+	cTile6.type = "Stairs";
   cTile6.player = "none";
-	var cTile7 = G.phaser.cTiles.create(865, G.phaser.world.height - 1318, 'cTileRoof3');
-	cTile7.type = "Roof";
+	cTile6.points = 2;
+	var cTile7 = G.phaser.cTiles.create(865, G.phaser.world.height - 1318, 'cWindowTile5');
+	cTile7.type = "Window";
   cTile7.player = "none";
-	var cTile8 = G.phaser.cTiles.create(945, G.phaser.world.height - 1318, 'cTileRoof4');
-	cTile8.type = "Roof";
+	cTile7.points = 5;
+	var cTile8 = G.phaser.cTiles.create(945, G.phaser.world.height - 1318, 'cDoorTile4');
+	cTile8.type = "Door";
   cTile8.player = "none";
-	var cTile9 = G.phaser.cTiles.create(1020, G.phaser.world.height - 1318, 'cTileRoof5');
-	cTile9.type = "Roof";
+	cTile8.points = 4;
+	var cTile9 = G.phaser.cTiles.create(1020, G.phaser.world.height - 1318, 'cStairsTile3');
+	cTile9.type = "Stairs";
   cTile9.player = "none";
-	var cTile10 = G.phaser.cTiles.create(710, G.phaser.world.height - 1241, 'cTileRoof3');
+	cTile9.points = 3;
+	var cTile10 = G.phaser.cTiles.create(710, G.phaser.world.height - 1241, 'cRoofTile3');
 	cTile10.type = "Roof";
   cTile10.player = "none";
-	var cTile11 = G.phaser.cTiles.create(790, G.phaser.world.height - 1241, 'cTileRoof2');
-	cTile11.type = "Roof";
+	cTile10.points = 3;
+	var cTile11 = G.phaser.cTiles.create(790, G.phaser.world.height - 1241, 'cFountTile2');
+	cTile11.type = "Fountain";
   cTile11.player = "none";
-	var cTile12 = G.phaser.cTiles.create(865, G.phaser.world.height - 1241, 'cTileRoof5');
+	cTile11.points = 2;
+	var cTile12 = G.phaser.cTiles.create(865, G.phaser.world.height - 1241, 'cRoofTile5');
 	cTile12.type = "Roof";
   cTile12.player = "none";
-	var cTile13 = G.phaser.cTiles.create(945, G.phaser.world.height - 1241, 'cTileRoof4');
-	cTile13.type = "Roof";
+	cTile12.points = 5;
+	var cTile13 = G.phaser.cTiles.create(945, G.phaser.world.height - 1241, 'cStairsTile5');
+	cTile13.type = "Stairs";
   cTile13.player = "none";
-	var cTile14 = G.phaser.cTiles.create(1020, G.phaser.world.height - 1241, 'cTileRoof5');
-	cTile14.type = "Roof";
+	cTile13.points = 5;
+	var cTile14 = G.phaser.cTiles.create(1020, G.phaser.world.height - 1241, 'cDoorTile5');
+	cTile14.type = "Door";
   cTile14.player = "none";
-	var cTile15 = G.phaser.cTiles.create(710, G.phaser.world.height - 1166, 'cTileRoof5');
+	cTile14.points = 5;
+	var cTile15 = G.phaser.cTiles.create(710, G.phaser.world.height - 1166, 'cRoofTile4');
 	cTile15.type = "Roof";
   cTile15.player = "none";
-	var cTile16 = G.phaser.cTiles.create(790, G.phaser.world.height - 1166, 'cTileRoof3');
-	cTile16.type = "Roof";
+	cTile15.points = 4;
+	var cTile16 = G.phaser.cTiles.create(790, G.phaser.world.height - 1166, 'cFountTile3');
+	cTile16.type = "Fountain";
   cTile16.player = "none";
-	var cTile17 = G.phaser.cTiles.create(865, G.phaser.world.height - 1166, 'cTileRoof2');
-	cTile17.type = "Roof";
+	cTile16.points = 3;
+	var cTile17 = G.phaser.cTiles.create(865, G.phaser.world.height - 1166, 'cWindowTile3');
+	cTile17.type = "Window";
   cTile17.player = "none";
-	var cTile18 = G.phaser.cTiles.create(945, G.phaser.world.height - 1166, 'cTileRoof3');
-	cTile18.type = "Roof";
+	cTile17.points = 3;
+	var cTile18 = G.phaser.cTiles.create(945, G.phaser.world.height - 1166, 'cFountTile4');
+	cTile18.type = "Fountain";
   cTile18.player = "none";
-	var cTile19 = G.phaser.cTiles.create(1020, G.phaser.world.height - 1166, 'cTileRoof5');
-	cTile19.type = "Roof";
+	cTile18.points = 4;
+	var cTile19 = G.phaser.cTiles.create(1020, G.phaser.world.height - 1166, 'cWindowTile2');
+	cTile19.type = "Window";
 	cTile19.player = "none";
+	cTile19.points = 2;
 
   G.phaser.tTiles = G.phaser.add.group();
 
@@ -333,11 +383,11 @@ Game.prototype.phaserCreate = function() {
   var fTile1 = G.phaser.fTiles.create(778, G.phaser.world.height - 1035, 'ftComWC');
 	fTile1.type = "orange";
 	fTile1.player = "none";
-  var fTile2 = G.phaser.fTiles.create(843, G.phaser.world.height - 1035, 'ftSeaBonus');
-	fTile2.type = "seaBonus";
+  var fTile2 = G.phaser.fTiles.create(843, G.phaser.world.height - 1035, 'ftBread');
+	fTile2.type = "bread";
 	fTile2.player = "none";
-  var fTile3 = G.phaser.fTiles.create(910, G.phaser.world.height - 1035, 'ftForumBonus');
-	fTile3.type = "forumBonus";
+  var fTile3 = G.phaser.fTiles.create(910, G.phaser.world.height - 1035, 'ftReligion');
+	fTile3.type = "religion";
 	fTile3.player = "none";
   var fTile4 = G.phaser.fTiles.create(977, G.phaser.world.height - 1035, 'ftSenateBonus');
 	fTile4.type = "senateBonus";
@@ -354,17 +404,17 @@ Game.prototype.phaserCreate = function() {
   var fTile8 = G.phaser.fTiles.create(910, G.phaser.world.height - 968, 'ftSenatePlus2');
 	fTile8.type = "sPlus2";
 	fTile8.player = "none";
-  var fTile9 = G.phaser.fTiles.create(977, G.phaser.world.height - 968, 'ftMilitaryBonus');
-	fTile9.type = "militaryBonus";
+  var fTile9 = G.phaser.fTiles.create(977, G.phaser.world.height - 968, 'ftReligion');
+	fTile9.type = "religion";
   fTile9.player = "none";
 	var fTile10 = G.phaser.fTiles.create(708, G.phaser.world.height - 901, 'ftSenatePlus4');
 	fTile10.type = "sPlus4";
   fTile10.player = "none";
-	var fTile11 = G.phaser.fTiles.create(778, G.phaser.world.height - 901, 'ftDoubleWC');
-	fTile11.type = "yellow";
+	var fTile11 = G.phaser.fTiles.create(778, G.phaser.world.height - 901, 'ftGames');
+	fTile11.type = "games";
   fTile11.player = "none";
-	var fTile12 = G.phaser.fTiles.create(843, G.phaser.world.height - 901, 'ftTrajanBonus');
-	fTile12.type = "trajanBonus";
+	var fTile12 = G.phaser.fTiles.create(843, G.phaser.world.height - 901, 'ftBread');
+	fTile12.type = "bread";
   fTile12.player = "none";
 	var fTile13 = G.phaser.fTiles.create(910, G.phaser.world.height - 901, 'ftSenatePlus3');
 	fTile13.type = "sPlus3";
@@ -372,28 +422,39 @@ Game.prototype.phaserCreate = function() {
 	var fTile14 = G.phaser.fTiles.create(977, G.phaser.world.height - 901, 'ftReligion');
 	fTile14.type = "religion";
 	fTile14.player = "none";
+
   G.phaser.mTiles = G.phaser.add.group();
 
   var britannia = G.phaser.mTiles.create(380, G.phaser.world.height - 1783, 'ftGames');
 	britannia.player = "none";
-  var germaniaInferior = G.phaser.mTiles.create(725, G.phaser.world.height - 1735, 'ftGames');
+	britannia.type = "games";
+  var germaniaInferior = G.phaser.mTiles.create(725, G.phaser.world.height - 1735, 'ftReligion');
 	germaniaInferior.player = "none";
-  var germaniaSuperior = G.phaser.mTiles.create(910, G.phaser.world.height - 1700, 'ftGames');
+	germaniaInferior.type = "religion";
+  var germaniaSuperior = G.phaser.mTiles.create(910, G.phaser.world.height - 1690, 'ftGames');
 	germaniaSuperior.player = "none";
-  var belgica = G.phaser.mTiles.create(553, G.phaser.world.height - 1676, 'ftGames');
+	germaniaSuperior.type = "games";
+  var belgica = G.phaser.mTiles.create(553, G.phaser.world.height - 1676, 'ftBread');
 	belgica.player = "none";
-  var lugudunensis = G.phaser.mTiles.create(388, G.phaser.world.height - 1650, 'ftGames');
+	belgica.type = "bread";
+  var lugudunensis = G.phaser.mTiles.create(388, G.phaser.world.height - 1650, 'ftBread');
 	lugudunensis.player = "none";
+	lugudunensis.type = "bread";
   var aquitania = G.phaser.mTiles.create(220, G.phaser.world.height - 1598, 'ftGames');
 	aquitania.player = "none";
-  var narbonensis = G.phaser.mTiles.create(280, G.phaser.world.height - 1485, 'ftGames');
+	aquitania.type = "games";
+  var narbonensis = G.phaser.mTiles.create(280, G.phaser.world.height - 1485, 'ftReligion');
 	narbonensis.player = "none";
-  var alpes = G.phaser.mTiles.create(490, G.phaser.world.height - 1555, 'ftGames');
+	narbonensis.type = "religion";
+  var alpes = G.phaser.mTiles.create(490, G.phaser.world.height - 1555, 'ftBread');
 	alpes.player = "none";
+	alpes.type = "bread";
   var raetia = G.phaser.mTiles.create(780, G.phaser.world.height - 1614, 'ftGames');
 	raetia.player = "none";
-  var noricum = G.phaser.mTiles.create(960, G.phaser.world.height - 1596, 'ftGames');
+	raetia.type = "games";
+  var noricum = G.phaser.mTiles.create(960, G.phaser.world.height - 1589, 'ftReligion');
 	noricum.player = "none";
+	noricum.type = "religion";
 
   G.phaser.bTiles = G.phaser.add.group(); // gold things
 
@@ -404,7 +465,7 @@ Game.prototype.phaserCreate = function() {
 
   var ship0 = G.phaser.ships.create(290, G.phaser.world.height - 1310, 'ship1');
 	ship0.side = "color";
-	var ship1 = G.phaser.ships.create(165, G.phaser.world.height - 1225, 'ship2');
+	var ship1 = G.phaser.ships.create(160, G.phaser.world.height - 1225, 'ship3');
 	ship1.side = "color";
 	var ship2 = G.phaser.ships.create(435, G.phaser.world.height - 1390, 'ship3');
 	ship2.side = "color";
@@ -519,40 +580,58 @@ Game.prototype.phaserCreate = function() {
 	G.phaser.hand = [true, true, true, true];
   var cCard0 = G.phaser.cards.create(1000, G.phaser.world.height-500, 'wheat');
 	cCard0.player = "none";
+	cCard0.type = "wheat";
   var cCard1 = G.phaser.cards.create(1125, G.phaser.world.height-500, 'bull');
 	cCard1.player = "none";
+	cCard1.type = "bull";
   var cCard2 = G.phaser.cards.create(1250, G.phaser.world.height-500, 'bling');
 	cCard2.player = "none";
+	cCard2.type = "bling";
 	var cCard3 = G.phaser.cards.create(1000, G.phaser.world.height-500, 'lamp');
 	cCard3.player = "none";
+	cCard3.type = "lamp";
 	var cCard4 = G.phaser.cards.create(1125, G.phaser.world.height-500, 'gin');
 	cCard4.player = "none";
+	cCard4.type = "gin";
 	var cCard5 = G.phaser.cards.create(1250, G.phaser.world.height-500, 'bling');
 	cCard5.player = "none";
+	cCard5.type = "bling";
 	var cCard6 = G.phaser.cards.create(1000, G.phaser.world.height-500, 'pillar');
 	cCard6.player = "none";
+	cCard6.type = "pillar";
 	var cCard7 = G.phaser.cards.create(1125, G.phaser.world.height-500, 'scroll');
 	cCard7.player = "none";
+	cCard7.type = "scroll";
 	var cCard8 = G.phaser.cards.create(1250, G.phaser.world.height-500, 'bull');
 	cCard8.player = "none";
+	cCard8.type = "bull";
 	var cCard9 = G.phaser.cards.create(1000, G.phaser.world.height-500, 'wheat');
 	cCard9.player = "none";
+	cCard9.type = "wheat";
 	var cCard10 = G.phaser.cards.create(1125, G.phaser.world.height-500, 'bearSkin');
 	cCard10.player = "none";
+	cCard10.type = "bearSkin";
 	var cCard11 = G.phaser.cards.create(1250, G.phaser.world.height-500, 'bling');
 	cCard11.player = "none";
+	cCard11.type = "bling";
 	var cCard12 = G.phaser.cards.create(1000, G.phaser.world.height-500, 'scroll');
 	cCard12.player = "none";
+	cCard12.type = "scroll";
 	var cCard13 = G.phaser.cards.create(1125, G.phaser.world.height-500, 'fish');
 	cCard13.player = "none";
+	cCard13.type = "fish";
 	var cCard14 = G.phaser.cards.create(1250, G.phaser.world.height-500, 'lamp');
 	cCard14.player = "none";
+	cCard14.type = "lamp";
 	var cCard15 = G.phaser.cards.create(1000, G.phaser.world.height-500, 'pillar');
 	cCard15.player = "none";
+	cCard15.type = "pillar";
 	var cCard16 = G.phaser.cards.create(1125, G.phaser.world.height-500, 'bearSkin');
 	cCard16.player = "none";
+	cCard16.type = "bearSkin";
 	var cCard17 = G.phaser.cards.create(1250, G.phaser.world.height-500, 'gin');
 	cCard17.player = "none";
+	cCard17.type = "gin";
 
 
 	G.phaser.pMarks = G.phaser.add.group();
@@ -580,80 +659,177 @@ Game.prototype.phaserCreate = function() {
   // Al about that village lyfe
   G.phaser.littlePeople = G.phaser.add.group();
   var lp0 = G.phaser.littlePeople.create(925, G.phaser.world.height-450, 'greenLittleDude');
+	lp0.player = 0;
 	var lp1 = G.phaser.littlePeople.create(925, G.phaser.world.height-430, 'greenLittleDude');
+	lp1.player = 0;
 	var lp2 = G.phaser.littlePeople.create(925, G.phaser.world.height-410, 'greenLittleDude');
+	lp2.player = 0;
 	var lp3 = G.phaser.littlePeople.create(925, G.phaser.world.height-390, 'greenLittleDude');
+	lp3.player = 0;
 	var lp4 = G.phaser.littlePeople.create(925, G.phaser.world.height-370, 'greenLittleDude');
+	lp4.player = 0;
 	var lp5 = G.phaser.littlePeople.create(925, G.phaser.world.height-350, 'greenLittleDude');
+	lp5.player = 0;
 	var lp6 = G.phaser.littlePeople.create(945, G.phaser.world.height-450, 'greenLittleDude');
+	lp6.player = 0;
 	var lp7 = G.phaser.littlePeople.create(945, G.phaser.world.height-430, 'greenLittleDude');
+	lp7.player = 0;
 	var lp8 = G.phaser.littlePeople.create(945, G.phaser.world.height-410, 'greenLittleDude');
+	lp8.player = 0;
 	var lp9 = G.phaser.littlePeople.create(945, G.phaser.world.height-390, 'greenLittleDude');
+	lp9.player = 0;
 	var lp10 = G.phaser.littlePeople.create(945, G.phaser.world.height-370, 'greenLittleDude');
+	lp10.player = 0;
 	var lp11 = G.phaser.littlePeople.create(945, G.phaser.world.height-350, 'greenLittleDude');
+	lp11.player = 0;
 	var lp12 = G.phaser.littlePeople.create(905, G.phaser.world.height-410, 'greenLittleDude');
+	lp12.player = 0;
 	var lp13 = G.phaser.littlePeople.create(905, G.phaser.world.height-390, 'greenLittleDude');
+	lp13.player = 0;
 	var lp14 = G.phaser.littlePeople.create(905, G.phaser.world.height-370, 'greenLittleDude');
+	lp14.player = 0;
 	var lp15 = G.phaser.littlePeople.create(750, G.phaser.world.height - 1500, 'greenLittleDude');
+	lp15.player = 0;
 	var lp16 = G.phaser.littlePeople.create(580, 600, 'greenLittleDude');
+	lp16.player = 0;
 
 	var lp17 = G.phaser.littlePeople.create(925, G.phaser.world.height-450, 'redLittleDude');
+	lp17.player = 1;
 	var lp18 = G.phaser.littlePeople.create(925, G.phaser.world.height-430, 'redLittleDude');
+	lp18.player = 1;
 	var lp19 = G.phaser.littlePeople.create(925, G.phaser.world.height-410, 'redLittleDude');
+	lp19.player = 1;
 	var lp20 = G.phaser.littlePeople.create(925, G.phaser.world.height-390, 'redLittleDude');
+	lp20.player = 1;
 	var lp21 = G.phaser.littlePeople.create(925, G.phaser.world.height-370, 'redLittleDude');
+	lp21.player = 1;
 	var lp22 = G.phaser.littlePeople.create(925, G.phaser.world.height-350, 'redLittleDude');
+	lp22.player = 1;
 	var lp23 = G.phaser.littlePeople.create(945, G.phaser.world.height-450, 'redLittleDude');
+	lp23.player = 1;
 	var lp24 = G.phaser.littlePeople.create(945, G.phaser.world.height-430, 'redLittleDude');
+	lp24.player = 1;
 	var lp25 = G.phaser.littlePeople.create(945, G.phaser.world.height-410, 'redLittleDude');
+	lp25.player = 1;
 	var lp26 = G.phaser.littlePeople.create(945, G.phaser.world.height-390, 'redLittleDude');
+	lp26.player = 1;
 	var lp27 = G.phaser.littlePeople.create(945, G.phaser.world.height-370, 'redLittleDude');
+	lp27.player = 1;
 	var lp28 = G.phaser.littlePeople.create(945, G.phaser.world.height-350, 'redLittleDude');
+	lp28.player = 1;
 	var lp29 = G.phaser.littlePeople.create(905, G.phaser.world.height-410, 'redLittleDude');
+	lp29.player = 1;
 	var lp30 = G.phaser.littlePeople.create(905, G.phaser.world.height-390, 'redLittleDude');
+	lp30.player = 1;
 	var lp31 = G.phaser.littlePeople.create(905, G.phaser.world.height-370, 'redLittleDude');
+	lp31.player = 1;
 	var lp32 = G.phaser.littlePeople.create(750, G.phaser.world.height - 1500, 'redLittleDude');
+	lp32.player = 1;
 	var lp33 = G.phaser.littlePeople.create(580, 600, 'redLittleDude');
+	lp33.player = 1;
 
 	var lp34 = G.phaser.littlePeople.create(925, G.phaser.world.height-450, 'blueLittleDude');
+	lp34.player = 2;
 	var lp35 = G.phaser.littlePeople.create(925, G.phaser.world.height-430, 'blueLittleDude');
+	lp35.player = 2;
 	var lp36 = G.phaser.littlePeople.create(925, G.phaser.world.height-410, 'blueLittleDude');
+	lp36.player = 2;
 	var lp37 = G.phaser.littlePeople.create(925, G.phaser.world.height-390, 'blueLittleDude');
+	lp37.player = 2;
 	var lp38 = G.phaser.littlePeople.create(925, G.phaser.world.height-370, 'blueLittleDude');
+	lp38.player = 2;
 	var lp39 = G.phaser.littlePeople.create(925, G.phaser.world.height-350, 'blueLittleDude');
+	lp39.player = 2;
 	var lp40 = G.phaser.littlePeople.create(945, G.phaser.world.height-450, 'blueLittleDude');
+	lp40.player = 2;
 	var lp41 = G.phaser.littlePeople.create(945, G.phaser.world.height-430, 'blueLittleDude');
+	lp41.player = 2;
 	var lp42 = G.phaser.littlePeople.create(945, G.phaser.world.height-410, 'blueLittleDude');
+	lp42.player = 2;
 	var lp43 = G.phaser.littlePeople.create(945, G.phaser.world.height-390, 'blueLittleDude');
+	lp43.player = 2;
 	var lp44 = G.phaser.littlePeople.create(945, G.phaser.world.height-370, 'blueLittleDude');
+	lp44.player = 2;
 	var lp45 = G.phaser.littlePeople.create(945, G.phaser.world.height-350, 'blueLittleDude');
+	lp45.player = 2;
 	var lp46 = G.phaser.littlePeople.create(905, G.phaser.world.height-410, 'blueLittleDude');
+	lp46.player = 2;
 	var lp47 = G.phaser.littlePeople.create(905, G.phaser.world.height-390, 'blueLittleDude');
+	lp47.player = 2;
 	var lp48 = G.phaser.littlePeople.create(905, G.phaser.world.height-370, 'blueLittleDude');
+	lp48.player = 2;
 	var lp49 = G.phaser.littlePeople.create(750, G.phaser.world.height - 1500, 'blueLittleDude');
+	lp49.player = 2;
 	var lp50 = G.phaser.littlePeople.create(580, 600, 'blueLittleDude');
+	lp50.player = 2;
 
 	var lp51 = G.phaser.littlePeople.create(925, G.phaser.world.height-450, 'grayLittleDude');
+	lp51.player = 3;
 	var lp52 = G.phaser.littlePeople.create(925, G.phaser.world.height-430, 'grayLittleDude');
+	lp52.player = 3;
 	var lp53 = G.phaser.littlePeople.create(925, G.phaser.world.height-410, 'grayLittleDude');
+	lp53.player = 3;
 	var lp54 = G.phaser.littlePeople.create(925, G.phaser.world.height-390, 'grayLittleDude');
+	lp54.player = 3;
 	var lp55 = G.phaser.littlePeople.create(925, G.phaser.world.height-370, 'grayLittleDude');
+	lp55.player = 3;
 	var lp56 = G.phaser.littlePeople.create(925, G.phaser.world.height-350, 'grayLittleDude');
+	lp56.player = 3;
 	var lp57 = G.phaser.littlePeople.create(945, G.phaser.world.height-450, 'grayLittleDude');
+	lp57.player = 3;
 	var lp58 = G.phaser.littlePeople.create(945, G.phaser.world.height-430, 'grayLittleDude');
+	lp58.player = 3;
 	var lp59 = G.phaser.littlePeople.create(945, G.phaser.world.height-410, 'grayLittleDude');
+	lp59.player = 3;
 	var lp60 = G.phaser.littlePeople.create(945, G.phaser.world.height-390, 'grayLittleDude');
+	lp60.player = 3;
 	var lp61 = G.phaser.littlePeople.create(945, G.phaser.world.height-370, 'grayLittleDude');
+	lp61.player = 3;
 	var lp62 = G.phaser.littlePeople.create(945, G.phaser.world.height-350, 'grayLittleDude');
+	lp62.player = 3;
 	var lp63 = G.phaser.littlePeople.create(905, G.phaser.world.height-410, 'grayLittleDude');
+	lp63.player = 3;
 	var lp64 = G.phaser.littlePeople.create(905, G.phaser.world.height-390, 'grayLittleDude');
+	lp64.player = 3;
 	var lp65 = G.phaser.littlePeople.create(905, G.phaser.world.height-370, 'grayLittleDude');
+	lp65.player = 3;
 	var lp66 = G.phaser.littlePeople.create(750, G.phaser.world.height - 1500, 'grayLittleDude');
+	lp66.player = 3;
 	var lp67 = G.phaser.littlePeople.create(580, 600, 'grayLittleDude');
+	lp67.player = 3;
 
   G.phaser.lpStartBox = new Phaser.Rectangle(890, G.phaser.world.height-475, 100, 180);
   G.phaser.legionairreCamp = new Phaser.Rectangle(705,G.phaser.world.height-1520, 200, 100);
   G.phaser.constructionCamp = new Phaser.Rectangle(500,G.phaser.world.height-1210, 200, 100);
+
+	G.phaser.demands = G.phaser.add.group();
+	var demand1 = G.phaser.demands.create(250, G.phaser.world.height - 70, 'cookieDemand');
+	demand1.visible = false;
+	demand1.type = "bread";
+	var demand2 = G.phaser.demands.create(325, G.phaser.world.height - 70, 'fireDemand');
+	demand2.visible = false;
+	demand2.type = "religion";
+	var demand3 = G.phaser.demands.create(400, G.phaser.world.height - 70, 'gamesDemand');
+	demand3.visible = false;
+	demand3.type = "games";
+	var demand4 = G.phaser.demands.create(250, G.phaser.world.height - 70, 'cookieDemand');
+	demand4.visible = false;
+	demand4.type = "bread";
+	var demand5 = G.phaser.demands.create(325, G.phaser.world.height - 70, 'fireDemand');
+	demand5.visible = false;
+	demand5.type = "religion";
+	var demand6 = G.phaser.demands.create(400, G.phaser.world.height - 70, 'gamesDemand');
+	demand6.visible = false;
+	demand6.type = "games";
+	var demand7 = G.phaser.demands.create(250, G.phaser.world.height - 70, 'cookieDemand');
+	demand7.visible = false;
+	demand7.type = "bread";
+	var demand8 = G.phaser.demands.create(325, G.phaser.world.height - 70, 'fireDemand');
+	demand8.visible = false;
+	demand8.type = "religion";
+	var demand9 = G.phaser.demands.create(400, G.phaser.world.height - 70, 'gamesDemand');
+	demand9.visible = false;
+	demand9.type = "games";
 
   G.phaser.trajan = G.phaser.add.group();
   var arch1 = G.phaser.trajan.create(605, G.phaser.world.height-435, 'tArch');
@@ -680,6 +856,17 @@ Game.prototype.phaserCreate = function() {
 	G.phaser.incY2=0;
 	G.phaser.leaderLoc = G.phaser.legionairreCamp;
 
+	G.phaser.actionMarkerCount = 0;
+	G.phaser.quarter = 1;
+	G.phaser.playerGreenVP = 0;
+	G.phaser.playerRedVP = 0;
+	G.phaser.playerBlueVP = 0;
+	G.phaser.playerGrayVP = 0;
+
+	G.phaser.greenDemandsMet = [false, false, false];
+	G.phaser.redDemandsMet = [false, false, false];
+	G.phaser.blueDemandsMet = [false, false, false];
+	G.phaser.grayDemandsMet = [false, false, false];
 }
 
 Game.prototype.phaserUpdate = function() {
@@ -781,27 +968,25 @@ Game.prototype.belongs = function(tile, player){
 		tile.visible = true;
 	}
 	else{
-		//tile.alive = false;
 		tile.visible = false;
 	}
-
 }
 
 Game.prototype.turnLogic = function() {
-	G.loadPlayersData();
-	G.phaser.linespot = 640;
-	if(G.phaser.gameState == "selectTray"){
-  	G.phaser.textAction.text = "Select a Tray";
-  	G.phaser.input.onUp.add(G.getTray);
+	if(G.phaser.actionMarkerCount >= 21){
+		if(G.phaser.quarter == 4){
+			G.endGame();
+		}
+		else{
+			G.endQuarter();
+		}
 	}
-}
-
-Game.prototype.sleep = function(milliseconds){
-	console.log("sleep");
-	var start = new Date().getTime();
-	for(var i = 0; i< 1e7; i++){
-		if((new Date().getTime() - start) > milliseconds){
-			break;
+	else{
+		G.loadPlayersData();
+		G.phaser.linespot = 640;
+		if(G.phaser.gameState == "selectTray"){
+			G.phaser.textAction.text = "Select a Tray";
+			G.phaser.input.onUp.add(G.getTray);
 		}
 	}
 }
@@ -865,6 +1050,7 @@ Game.prototype.lineUp = function(marker, sourceTray) {
     marker.position.x = G.phaser.linespot;
     marker.position.y = G.phaser.world.height-500;
     G.phaser.linespot += 35;
+		G.phaser.actionMarkerCount += 1;
   }
 }
 
@@ -971,7 +1157,7 @@ Game.prototype.checkTrajanTile = function(trayIndex, currentTray){
 	var usedTile;
 
 	G.phaser.tTiles.forEach(function(tile){
-		if(trayBoxes[trayIndex].contains(tile.position.x, tile.position.y)){
+		if(trayBoxes[trayIndex].contains(tile.position.x, tile.position.y) && tile.player == G.phaser.playerID){
 			firstColor = tile.colorOne;
 			secondColor = tile.colorTwo;
 			action = tile.type;
@@ -980,10 +1166,14 @@ Game.prototype.checkTrajanTile = function(trayIndex, currentTray){
 	}, this, true);
 	G.phaser.aMarks.forEach(function(marker){
 		if(currentTray.contains(marker.position.x, marker.position.y)){
-			if(marker.color == firstColor && firstCheck == false)
+			if(marker.color == firstColor && firstCheck == false){
 				firstCheck = true;
-			else if(marker.color == secondColor)
+				console.log("true one");
+			}
+			else if(marker.color == secondColor){
 				secondCheck = true;
+				console.log("true two");
+			}
 		}
 	}, this, true);
 
@@ -991,8 +1181,21 @@ Game.prototype.checkTrajanTile = function(trayIndex, currentTray){
 		if(action == "VP"){
 			G.phaser.textAction.text = "You recieved 9 additional Victory Points";
 			usedTile.position.x = 1700;
+			if(G.phaser.currentPlayerMarker == G.phaser.pMarks.getAt(0)){
+				G.phaser.playerGreenVP += 9;
+			}
+			else if(G.phaser.currentPlayerMarker == G.phaser.pMarks.getAt(1)){
+				G.phaser.playerRedVP += 9;
+			}
+			else if(G.phaser.currentPlayerMarker == G.phaser.pMarks.getAt(2)){
+				G.phaser.playerBlueVP += 9;
+			}
+			else{
+				G.phaser.playerGrayVP += 9;
+			}
 		}
 		else if(action == "bread"){
+			console.log("BREAD");
 			G.phaser.textAction.text = "This tile can be used to meet one demand for the remainder of the game";
 			usedTile.position.x = 377;
 			usedTile.position.y = 1335;
@@ -1017,7 +1220,6 @@ Game.prototype.checkTrajanTile = function(trayIndex, currentTray){
 Game.prototype.movePlayerSenatePiece = function(currentPlayer, nextSpace) {
   currentPlayer.x = nextSpace.x -20;
   currentPlayer.y = nextSpace.y -20;
-	G.bonusAction();
   return currentPlayer;
 }
 
@@ -1036,11 +1238,22 @@ Game.prototype.senateSpaces = function(currentPlayer){
   for (var i = 0; i < senate_spaces.length-1; i++) {
     if (senate_spaces[i].contains(currentPlayer.x, currentPlayer.y)) {
       currentPlayer = G.movePlayerSenatePiece(currentPlayer, senate_spaces[i+1]);
-      victory_points = i+2;
+			if(G.phaser.currentPlayerMarker == G.phaser.pMarks.getAt(0)){
+				G.phaser.playerGreenVP += i+2;
+			}
+			else if(G.phaser.currentPlayerMarker == G.phaser.pMarks.getAt(1)){
+				G.phaser.playerRedVP += i+2;
+			}
+			else if(G.phaser.currentPlayerMarker == G.phaser.pMarks.getAt(2)){
+				G.phaser.playerBlueVP += i+2;
+			}
+			else{
+				G.phaser.playerGrayVP += i+2;
+			}
       break;
     };
   };
-
+	G.bonusAction();
 }
 
 Game.prototype.bonusAction = function(){
@@ -1161,21 +1374,24 @@ Game.prototype.gamesMovement = function(tile){
 	tile.player = G.phaser.playerID;
 	tile.position.x = 530;
 	tile.position.y = 1402;
-	G.bonusAction();
+	if(G.phaser.gameState != "military")
+		G.bonusAction();
 }
 
 Game.prototype.breadMovement = function(tile){
 	tile.player = G.phaser.playerID;
 	tile.position.x = 375;
 	tile.position.y = 1402;
-	G.bonusAction();
+	if(G.phaser.gameState != "military")
+		G.bonusAction();
 }
 
 Game.prototype.religionMovement = function(tile){
 	tile.player = G.phaser.playerID;
 	tile.position.x = 452;
 	tile.position.y = 1402;
-	G.bonusAction();
+	if(G.phaser.gameState != "military")
+		G.bonusAction();
 }
 
 	// WILD CARD MOVEMENT
@@ -1301,8 +1517,33 @@ Game.prototype.checkAdj = function(){
 				G.phaser.currentLeader.position.y = countries[i].y ;
 				G.phaser.incX = 0;
 				G.phaser.incY = 0;
+				G.phaser.mTiles.forEach(function(milTile){
+					if(countries[i].contains(milTile.position.x, milTile.position.y)){
+						milTile.player = G.phaser.playerID;
+						if(milTile.type == "games"){
+							G.gamesMovement(milTile);
+						}
+						else if(milTile.type == "religion"){
+							G.religionMovement(milTile);
+						}
+						else{
+							G.breadMovement(milTile);
+						}
+					}
+				}, this, true);
 				G.phaser.leaderLoc = countries[i];
-				G.phaser.VPs += vpPts[i];
+				if(G.phaser.currentPlayerMarker == G.phaser.pMarks.getAt(0)){
+					G.phaser.playerGreenVP += vpPts[i];
+				}
+				else if(G.phaser.currentPlayerMarker == G.phaser.pMarks.getAt(1)){
+					G.phaser.playerRedVP += vpPts[i];
+				}
+				else if(G.phaser.currentPlayerMarker == G.phaser.pMarks.getAt(2)){
+					G.phaser.playerBlueVP += vpPts[i];
+				}
+				else{
+					G.phaser.playerGrayVP += vpPts[i];
+				}
 			}
 		}
 	}
@@ -1337,7 +1578,7 @@ Game.prototype.moveConstructTile = function(tile){ //move game piece to correct 
 	var validAction = false;
 	var worker;
 	G.phaser.littlePeople.forEach(function(dude){
-		if(G.phaser.constructionCamp.contains(dude.position.x, dude.position.y)){
+		if(G.phaser.constructionCamp.contains(dude.position.x, dude.position.y) && dude.player == G.phaser.playerID){
 			validAction = true;
 			worker = dude;
 		}
@@ -1376,7 +1617,21 @@ Game.prototype.moveConstructTile = function(tile){ //move game piece to correct 
 				firstTile = false;
 			}
 		}, this, true);
-		if(firstTile == true){
+
+		if(G.phaser.currentPlayerMarker == G.phaser.pMarks.getAt(0)){
+			G.phaser.playerGreenVP += tile.points;
+		}
+		else if(G.phaser.currentPlayerMarker == G.phaser.pMarks.getAt(1)){
+			G.phaser.playerRedVP += tile.points;
+		}
+		else if(G.phaser.currentPlayerMarker == G.phaser.pMarks.getAt(2)){
+			G.phaser.playerBlueVP += tile.points;
+		}
+		else{
+			G.phaser.playerGrayVP += tile.points;
+		}
+
+/*		if(firstTile == true){
 			if(tile.type == "Stairs"){
 				G.phaser.gameState = "forum";
 				G.getForumTile();
@@ -1396,7 +1651,7 @@ Game.prototype.moveConstructTile = function(tile){ //move game piece to correct 
 				G.phaser.gameState = "military";
 				G.militaryLogic();
 			}
-		}
+		} */
 		G.phaser.textAction.text = "Select the worker you wish to move to that space";
 		G.phaser.gameState = "moveWorker";
 	}
@@ -1505,7 +1760,7 @@ Game.prototype.moveArch = function(arch, trajanSpaces, spaces, index) {
 }
 
 Game.prototype.seaportLogic = function(){
-	G.phaser.textAction.text = "Select a Card to add it to your hand, click a ship to trade cards for points, or click cards in hand to play them";
+	G.phaser.textAction.text = "Select a Card to add it to your hand, click a ship to trade cards for points";
 	G.phaser.ships.forEach(G.shipsActive, this, true);
 	G.phaser.cards.forEach(G.cardsActive, this, true);
 }
@@ -1518,25 +1773,45 @@ Game.prototype.cardsActive = function(card){
 }
 Game.prototype.move = function(card){
 	card.player = G.phaser.playerID;
-	if(G.phaser.hand[0]){
+	G.phaser.hand = [
+		new Phaser.Rectangle(20, 1250, 125, 200),
+		new Phaser.Rectangle(130, 1250, 125, 200),
+		new Phaser.Rectangle(20, 1450, 125, 200),
+		new Phaser.Rectangle(130, 1450, 125, 200)
+	];
+	var one = true;
+	var two = true;
+	var three = true;
+	var four = true;
+	G.phaser.cards.forEach(function(currentCard){
+		if(G.phaser.hand[0].contains(currentCard.position.x, currentCard.position.y) && currentCard.player == G.phaser.playerID){
+			one = false;
+		}
+		if(G.phaser.hand[1].contains(currentCard.position.x, currentCard.position.y) && currentCard.player == G.phaser.playerID){
+			two = false;
+		}
+		if(G.phaser.hand[2].contains(currentCard.position.x, currentCard.position.y) && currentCard.player == G.phaser.playerID){
+			three = false;
+		}
+		if(G.phaser.hand[3].contains(currentCard.position.x, currentCard.position.y) && currentCard.player == G.phaser.playerID){
+			four = false;
+		}
+	}, this, true);
+	if(one){
 		card.position.x = 25;
 		card.position.y = 1300;
-		G.phaser.hand[0] = false;
 	}
-	else if(G.phaser.hand[1]){
+	else if(two){
 		card.position.x = 135;
 		card.position.y = 1300;
-		G.phaser.hand[1] = false;
 	}
-	else if(G.phaser.hand[2]){
+	else if(three){
 		card.position.x = 25;
 		card.position.y = 1500;
-		G.phaser.hand[2] = false;
 	}
-	else if(G.phaser.hand[3]){
+	else if(four){
 		card.position.x = 135;
 		card.position.y = 1500;
-		G.phaser.hand[3] = false;
 	}
 
 	G.phaser.gameState = "selectTray";
@@ -1555,19 +1830,579 @@ Game.prototype.shipsActive = function(ship){
 }
 
 Game.prototype.flip = function(ship){
-	var vp=0;
+	if(G.phaser.gameState != "seaport"){
+		return;
+	}
+	var card1 = null;
+	var card2 = null;
+	var card3 = null;
+	var card4 = null;
+	var vp = 0;
+	if(ship == G.phaser.ships.getAt(0)){
+		G.phaser.cards.forEach(function(card){
+			if(card.player == G.phaser.playerID){
+				if(card1 == null)
+					card1 = card;
+				else if(card2 == null)
+					card2 = card;
+				else if(card3 == null)
+					card3 = card;
+				else
+					card4 = card;
+			}
+		}, this, true);
+		if(card1 != null && ship.side == "color"){
+			if(card2 != null && card3 != null && card4 != null && card1.type == card2.type == card3.type == card4.type){
+				vp = 20;
+				card1.position.x = 1800;
+				card1.player = "none";
+				card2.position.x = 1800;
+				card2.player = "none";
+				card3.position.x = 1800;
+				card3.player = "none";
+				card4.position.x = 1800;
+				card4.player = "none";
+			}
+			else if(card2 != null && card3 != null && card1.type == card2.type == card3.type){
+				vp = 12;
+				card1.position.x = 1800;
+				card1.player = "none";
+				card2.position.x = 1800;
+				card2.player = "none";
+				card3.position.x = 1800;
+				card3.player = "none";
+			}
+			else if(card2 != null && card4 != null && card1.type == card2.type == card4.type){
+				vp = 12;
+				card1.position.x = 1800;
+				card1.player = "none";
+				card2.position.x = 1800;
+				card2.player = "none";
+				card4.position.x = 1800;
+				card4.player = "none";
+			}
+			else if(card4 != null && card3 != null && card1.type == card3.type == card4.type){
+				vp = 12;
+				card1.position.x = 1800;
+				card1.player = "none";
+				card3.position.x = 1800;
+				card3.player = "none";
+				card4.position.x = 1800;
+				card4.player = "none";
+			}
+			else if(card2 != null && card3 != null && card4 != null && card2.type == card3.type == card4.type){
+				vp = 12;
+				card2.position.x = 1800;
+				card2.player = "none";
+				card3.position.x = 1800;
+				card3.player = "none";
+				card4.position.x = 1800;
+				card4.player = "none";
+			}
+			else if(card2 != null && card1.type == card2.type){
+				vp = 6;
+				card1.position.x = 1800;
+				card1.player = "none";
+				card2.position.x = 1800;
+				card2.player = "none";
+			}
+			else if(card3 != null && card1.type == card3.type ){
+				vp = 6;
+				card1.position.x = 1800;
+				card1.player = "none";
+				card3.position.x = 1800;
+				card3.player = "none";
+			}
+			else if( card4!= null && card1.type == card4.type){
+				vp = 6;
+				card1.position.x = 1800;
+				card1.player = "none";
+				card4.position.x = 1800;
+				card4.player = "none";
+			}
+			else if(card2 != null && card3 != null && card2.type == card3.type ){
+				vp = 6;
+				card2.position.x = 1800;
+				card2.player = "none";
+				card3.position.x = 1800;
+				card3.player = "none";
+			}
+			else if(card2 != null && card4 != null && card2.type == card4.type ){
+				vp = 6;
+				card2.position.x = 1800;
+				card2.player = "none";
+				card4.position.x = 1800;
+				card4.player = "none";
+			}
+			else if(card4 != null && card3 != null && card3.type == card4.type){
+				vp = 6;
+				card3.position.x = 1800;
+				card3.player = "none";
+				card4.position.x = 1800;
+				card4.player = "none";
+			}
+			else{
+				vp = 2;
+				card1.position.x = 1800;
+				card1.player = "none";
+			}
+		}
+		if(card1 != null && ship.side == "gray"){
+			if(card2 != null && card3 != null && card4 != null && card1.type == card2.type == card3.type == card4.type){
+				vp = 15;
+				card1.position.x = 1800;
+				card1.player = "none";
+				card2.position.x = 1800;
+				card2.player = "none";
+				card3.position.x = 1800;
+				card3.player = "none";
+				card4.position.x = 1800;
+				card4.player = "none";
+			}
+			else if(card2 != null && card3 != null && card1.type == card2.type == card3.type){
+				vp = 7;
+				card1.position.x = 1800;
+				card1.player = "none";
+				card2.position.x = 1800;
+				card2.player = "none";
+				card3.position.x = 1800;
+				card3.player = "none";
+			}
+			else if(card2 != null && card4 != null && card1.type == card2.type == card4.type){
+				vp = 7;
+				card1.position.x = 1800;
+				card1.player = "none";
+				card2.position.x = 1800;
+				card2.player = "none";
+				card4.position.x = 1800;
+				card4.player = "none";
+			}
+			else if(card4 != null && card3 != null && card1.type == card3.type == card4.type){
+				vp = 7;
+				card1.position.x = 1800;
+				card1.player = "none";
+				card3.position.x = 1800;
+				card3.player = "none";
+				card4.position.x = 1800;
+				card4.player = "none";
+			}
+			else if(card2 != null && card3 != null && card4 != null && card2.type == card3.type == card4.type){
+				vp = 7;
+				card2.position.x = 1800;
+				card2.player = "none";
+				card3.position.x = 1800;
+				card3.player = "none";
+				card4.position.x = 1800;
+				card4.player = "none";
+			}
+			else if(card2 != null && card1.type == card2.type){
+				vp = 1;
+				card1.position.x = 1800;
+				card1.player = "none";
+				card2.position.x = 1800;
+				card2.player = "none";
+			}
+			else if(card3 != null && card1.type == card3.type){
+				vp = 1;
+				card1.position.x = 1800;
+				card1.player = "none";
+				card3.position.x = 1800;
+				card3.player = "none";
+			}
+			else if(card4 != null && card1.type == card4.type){
+				vp = 1;
+				card1.position.x = 1800;
+				card1.player = "none";
+				card4.position.x = 1800;
+				card4.player = "none";
+			}
+			else if(card2 != null && card3 != null && card2.type == card3.type){
+				vp = 1;
+				card2.position.x = 1800;
+				card2.player = "none";
+				card3.position.x = 1800;
+				card3.player = "none";
+			}
+			else if(card2 != null && card4 != null && card2.type == card4.type){
+				vp = 1;
+				card2.position.x = 1800;
+				card2.player = "none";
+				card4.position.x = 1800;
+				card4.player = "none";
+			}
+			else if(card3 != null && card4 != null && card3.type == card4.type){
+				vp = 1;
+				card3.position.x = 1800;
+				card3.player = "none";
+				card4.position.x = 1800;
+				card4.player = "none";
+			}
+			else{
+				vp = 0;
+				card1.position.x = 1800;
+				card1.player = "none";
+			}
+		}
+	}
+	else if(ship == G.phaser.ships.getAt(2) || ship == G.phaser.ship.getAt(1)){
+		if(card1 != null && ship.side == "color"){
+			if(card2 != null && card3 != null && card4 != null && card1.type != card2.type != card3.type != card4.type){
+				vp = 8;
+				card1.position.x = 1800;
+				card1.player = "none";
+				card2.position.x = 1800;
+				card2.player = "none";
+				card3.position.x = 1800;
+				card3.player = "none";
+				card4.position.x = 1800;
+				card4.player = "none";
+			}
+			else if(card2 != null && card3 != null && card1.type != card2.type != card3.type){
+				vp = 6;
+				card1.position.x = 1800;
+				card1.player = "none";
+				card2.position.x = 1800;
+				card2.player = "none";
+				card3.position.x = 1800;
+				card3.player = "none";
+			}
+			else if(card2 != null && card4 != null && card1.type != card2.type != card4.type){
+				vp = 6;
+				card1.position.x = 1800;
+				card1.player = "none";
+				card2.position.x = 1800;
+				card2.player = "none";
+				card4.position.x = 1800;
+				card4.player = "none";
+			}
+			else if(card2 != null && card3 != null && card4 != null && card2.type != card3.type != card4.type){
+				vp = 6;
+				card2.position.x = 1800;
+				card2.player = "none";
+				card3.position.x = 1800;
+				card3.player = "none";
+				card4.position.x = 1800;
+				card4.player = "none";
+			}
+			else if(card2 != null && card1.type != card2.type){
+				vp = 4;
+				card1.position.x = 1800;
+				card1.player = "none";
+				card2.position.x = 1800;
+				card2.player = "none";
+			}
+			else if(card3 != null && card1.type != card3.type){
+				vp = 4;
+				card1.position.x = 1800;
+				card1.player = "none";
+				card3.position.x = 1800;
+				card3.player = "none";
+			}
+			else if(card4 != null && card1.type != card4.type){
+				vp = 4;
+				card1.position.x = 1800;
+				card1.player = "none";
+				card4.position.x = 1800;
+				card4.player = "none";
+			}
+			else if(card2 != null && card3 != null && card2.type != card3.type){
+				vp = 4;
+				card2.position.x = 1800;
+				card2.player = "none";
+				card3.position.x = 1800;
+				card3.player = "none";
+			}
+			else if(card2 != null && card4 != null && card2.type != card4.type){
+				vp = 4;
+				card2.position.x = 1800;
+				card2.player = "none";
+				card4.position.x = 1800;
+				card4.player = "none";
+			}
+			else if(card3 != null && card4 != null && card3.type != card4.type){
+				vp = 4;
+				card3.position.x = 1800;
+				card3.player = "none";
+				card4.position.x = 1800;
+				card4.player = "none";
+			}
+			else{
+				vp = 2;
+				card1.position.x = 1800;
+				card1.player = "none";
+			}
+		}
+		else if(card1 != null && ship.side == "gray"){
+			if(card2 != null && card3 != null && card4 != null && card1.type != card2.type != card3.type != card4.type){
+				vp = 5;
+				card1.position.x = 1800;
+				card1.player = "none";
+				card2.position.x = 1800;
+				card2.player = "none";
+				card3.position.x = 1800;
+				card3.player = "none";
+				card4.position.x = 1800;
+				card4.player = "none";
+			}
+			else if(card2 != null && card3 != null && card1.type != card2.type != card3.type){
+				vp = 3;
+				card1.position.x = 1800;
+				card1.player = "none";
+				card2.position.x = 1800;
+				card2.player = "none";
+				card3.position.x = 1800;
+				card3.player = "none";
+			}
+			else if(card2 != null && card4 != null && card1.type != card2.type != card4.type){
+				vp = 3;
+				card1.position.x = 1800;
+				card1.player = "none";
+				card2.position.x = 1800;
+				card2.player = "none";
+				card4.position.x = 1800;
+				card4.player = "none";
+			}
+			else if(card2 != null && card3 != null && car4 != null && card2.type != card3.type != card4.type){
+				vp = 3;
+				card2.position.x = 1800;
+				card2.player = "none";
+				card3.position.x = 1800;
+				card3.player = "none";
+				card4.position.x = 1800;
+				card4.player = "none";
+			}
+			else if(card2 != null && card1.type != card2.type){
+				vp = 1;
+				card1.position.x = 1800;
+				card1.player = "none";
+				card2.position.x = 1800;
+				card2.player = "none";
+			}
+			else if(card3 != null && card1.type != card3.type){
+				vp = 1;
+				card1.position.x = 1800;
+				card1.player = "none";
+				card3.position.x = 1800;
+				card3.player = "none";
+			}
+			else if(card4 != null && card1.type != card4.type){
+				vp = 1;
+				card1.position.x = 1800;
+				card1.player = "none";
+				card4.position.x = 1800;
+				card4.player = "none";
+			}
+			else if(card2 != null && card3 != null && card2.type != card3.type){
+				vp = 1;
+				card2.position.x = 1800;
+				card2.player = "none";
+				card3.position.x = 1800;
+				card3.player = "none";
+			}
+			else if(card2 != null && card4 != null && card2.type != card4.type){
+				vp = 1;
+				card2.position.x = 1800;
+				card2.player = "none";
+				card4.position.x = 1800;
+				card4.player = "none";
+			}
+			else if(card3 != null && card4 != null && card3.type != card4.type){
+				vp = 1;
+				card3.position.x = 1800;
+				card3.player = "none";
+				card4.position.x = 1800;
+				card4.player = "none";
+			}
+			else{
+				vp = 0;
+				card1.position.x = 1800;
+				card1.player = "none";
+			}
+		}
+		if(G.phaser.currentPlayerMarker == G.phaser.pMarks.getAt(0)){
+			G.phaser.playerGreenVP += vp;
+		}
+		else if(G.phaser.currentPlayerMarker == G.phaser.pMarks.getAt(1)){
+			G.phaser.playerRedVP += vp;
+		}
+		else if(G.phaser.currentPlayerMarker == G.phaser.pMarks.getAt(2)){
+			G.phaser.playerBlueVP += vp;
+		}
+		else{
+			G.phaser.playerGrayVP += vp;
+		}
+
+	}
+	else{
+		return;
+	}
 	if(ship.side == "color"){
 		ship.play("flip");
-		ship.side = "grey";
-		vp += 5;
-		console.log(vp);
+		ship.side = "gray";
 	}
 	else{
 		ship.play("flipBack");
 		ship.side = "color";
-		vp += 2;
-		console.log(vp);
 	}
 
 	G.bonusAction();
+}
+
+Game.prototype.endQuarter = function(){
+	var index = 0;
+	if(G.phaser.quarter == 1){
+		index = Math.floor((Math.random() * 3));
+		G.phaser.demandOne = G.phaser.demands.getAt(index);
+		G.phaser.demandOne.visible = true;
+		G.phaser.demandOne.position.x = 250;
+		G.phaser.demandOne.position.y = G.phaser.world.height - 70;
+	}
+	else if(G.phaser.quarter == 2){
+		index = Math.floor((Math.random() * 6));
+		if(index < 3){
+			index += 3;
+		}
+		G.phaser.demandTwo = G.phaser.demands.getAt(index);
+		G.phaser.demandTwo.visible = true;
+		G.phaser.demandTwo.position.x = 325;
+		G.phaser.demandTwo.position.y = G.phaser.world.height - 70;
+	}
+	else if(G.phaser.quarter == 3){
+		index = Math.floor((Math.random() * 9));
+		if(index < 3){
+			index += 6;
+		}
+		if(index < 6){
+			index += 3;
+		}
+		G.phaser.demandThree = G.phaser.demands.getAt(index);
+		G.phaser.demandThree.visible = true;
+		G.phaser.demandThree.position.x = 400;
+		G.phaser.demandThree.position.y = G.phaser.world.height - 70;
+	}
+	G.phaser.quarter += 1;
+	G.phaser.actionMarkerCount = 0;
+	G.turnLogic();
+}
+
+Game.prototype.endGame = function(){
+	G.phaser.tTiles.forEach(G.meetDemand, this, true);
+	G.phaser.mTiles.forEach(G.meetDemand, this, true);
+	G.phaser.fTiles.forEach(G.meetDemand, this, true);
+	console.log(G.phaser.playerGreenVP);
+	G.losePoints(G.phaser.greenDemandsMet);
+	console.log(G.phaser.playerGreenVP);
+	G.losePoints(G.phaser.redDemandsMet);
+	G.losePoints(G.phaser.blueDemandsMet);
+	G.losePoints(G.phaser.grayDemandsMet);
+
+	G.finalScores();
+}
+
+Game.prototype.losePoints = function(demandsMet){
+	var loss;
+	if(demandsMet[0] == false && demandsMet[1] == false && demandsMet[2] == false){
+		loss= -15;
+	}
+	else if(demandsMet[0] == false && demandsMet[1] == false || demandsMet[0] == false && demandsMet[2] == false || demandsMet[2] == false && demandsMet[1] == false){
+		loss = -9;
+	}
+	else if(demandsMet[0] == false || demandsMet[1] == false || demandsMet[2] == false){
+		loss = -4;
+	}
+	if(G.phaser.currentPlayerMarker == G.phaser.pMarks.getAt(0)){
+		G.phaser.playerGreenVP += loss;
+	}
+	else if(G.phaser.currentPlayerMarker == G.phaser.pMarks.getAt(1)){
+		G.phaser.playerRedVP += loss;
+	}
+	else if(G.phaser.currentPlayerMarker == G.phaser.pMarks.getAt(2)){
+		G.phaser.playerBlueVP += loss;
+	}
+	else{
+		G.phaser.playerGrayVP += loss;
+	}
+}
+
+Game.prototype.meetDemand = function(tile){
+	if(tile.type == G.phaser.demandOne.type){
+		if(tile.player == 0){
+			G.phaser.greenDemandsMet[0] = true;
+		}
+		else if(tile.player == 1){
+			G.phaser.redDemandsMet[0] = true;
+		}
+		else if(tile.player == 2){
+			G.phaser.blueDemandsMet[0] = true;
+		}
+		else if(tile.player == 3){
+			G.phaser.grayDemandsMet[0] = true;
+		}
+	}
+	else if(tile.type == G.phaser.demandTwo.type){
+		if(tile.player == 0){
+			G.phaser.greenDemandsMet[1] = true;
+		}
+		else if(tile.player == 1){
+			G.phaser.redDemandsMet[1] = true;
+		}
+		else if(tile.player == 2){
+			G.phaser.blueDemandsMet[1] = true;
+		}
+		else if(tile.player == 3){
+			G.phaser.grayDemandsMet[1] = true;
+		}
+	}
+	else if(tile.type == G.phaser.demandThree.type){
+		if(tile.player == 0){
+			G.phaser.greenDemandsMet[2] = true;
+		}
+		else if(tile.player == 1){
+			G.phaser.redDemandsMet[2] = true;
+		}
+		else if(tile.player == 2){
+			G.phaser.blueDemandsMet[2] = true;
+		}
+		else if(tile.player == 3){
+			G.phaser.grayDemandsMet[2] = true;
+		}
+	}
+}
+
+Game.prototype.finalScores = function(){
+	if(G.phaser.playerGreenVP > G.phaser.playerRedVP && G.phaser.playerGreenVP > G.phaser.playerBlueVP && G.phaser.playerGreenVP > G.phaser.playerGrayVP){
+		G.phaser.textAction.text = "Green Player Wins! Final Scores:";
+		G.phaser.textAction.text += "\nGreen Player Score: "+G.phaser.playerGreenVP;
+		G.phaser.textAction.text += "\nRed Player Score: "+G.phaser.playerRedVP;
+		G.phaser.textAction.text += "\nBlue Player Score: "+G.phaser.playerBlueVP;
+		G.phaser.textAction.text += "\nGray Player Score: "+G.phaser.playerGrayVP;
+	}
+	else if(G.phaser.playerRedVP > G.phaser.playerGreenVP && G.phaser.playerRedVP > G.phaser.playerBlueVP && G.phaser.playerRedVP > G.phaser.playerGrayVP){
+		G.phaser.textAction.text = "Red Player Wins! Final Scores:";
+		G.phaser.textAction.text += "\nGreen Player Score: "+G.phaser.playerGreenVP;
+		G.phaser.textAction.text += "\nRed Player Score: "+G.phaser.playerRedVP;
+		G.phaser.textAction.text += "\nBlue Player Score: "+G.phaser.playerBlueVP;
+		G.phaser.textAction.text += "\nGray Player Score: "+G.phaser.playerGrayVP;
+	}
+	else if(G.phaser.playerBlueVP > G.phaser.playerRedVP && G.phaser.playerBlueVP > G.phaser.playerGreenVP && G.phaser.playerBlueVP > G.phaser.playerGrayVP){
+		G.phaser.textAction.text = "Blue Player Wins! Final Scores:";
+		G.phaser.textAction.text += "\nGreen Player Score: "+G.phaser.playerGreenVP;
+		G.phaser.textAction.text += "\nRed Player Score: "+G.phaser.playerRedVP;
+		G.phaser.textAction.text += "\nBlue Player Score: "+G.phaser.playerBlueVP;
+		G.phaser.textAction.text += "\nGray Player Score: "+G.phaser.playerGrayVP;
+	}
+	else if(G.phaser.playerGrayVP > G.phaser.playerRedVP && G.phaser.playerGrayVP > G.phaser.playerBlueVP && G.phaser.playerGrayVP > G.phaser.playerGreenVP){
+		G.phaser.textAction.text = "Gray Player Wins! Final Scores:";
+		G.phaser.textAction.text += "\nGreen Player Score: "+G.phaser.playerGreenVP;
+		G.phaser.textAction.text += "\nRed Player Score: "+G.phaser.playerRedVP;
+		G.phaser.textAction.text += "\nBlue Player Score: "+G.phaser.playerBlueVP;
+		G.phaser.textAction.text += "\nGray Player Score: "+G.phaser.playerGrayVP;
+	}
+	else{
+		G.phaser.textAction.text = "We had a tie! Final Scores:";
+		G.phaser.textAction.text += "\nGreen Player Score: "+G.phaser.playerGreenVP;
+		G.phaser.textAction.text += "\nRed Player Score: "+G.phaser.playerRedVP;
+		G.phaser.textAction.text += "\nBlue Player Score: "+G.phaser.playerBlueVP;
+		G.phaser.textAction.text += "\nGray Player Score: "+G.phaser.playerGrayVP;
+	}
 }
